@@ -38,7 +38,7 @@ NSString *WDFontAddedNotification = @"WDFontAddedNotification";
     return sharedInstance_;
 }
 
-- (id)init
+- (instancetype) init
 {
     self = [super init];
 

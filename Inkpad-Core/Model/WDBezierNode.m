@@ -115,7 +115,7 @@ NSString *WDPointArrayKey = @"WDPointArrayKey";
     [coder encodeBytes:(const uint8_t *)swapped length:(6 * sizeof(CFSwappedFloat32)) forKey:WDPointArrayKey];
 }
 
-- (id)initWithCoder:(NSCoder *)coder
+- (instancetype) initWithCoder:(NSCoder *)coder
 {
     self = [super init];
     

@@ -23,7 +23,7 @@ NSString *WDPaletteMovedNotification = @"WDPaletteMovedNotification";
 
 @synthesize defaultsName = defaultsName_;
 
-- (id)initWithFrame:(CGRect)frame
+- (instancetype) initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     

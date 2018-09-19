@@ -63,7 +63,7 @@ NSString *WDAlignmentKey = @"WDAlignmentKey";
     [coder encodeInt32:alignment_ forKey:WDAlignmentKey];
 }
 
-- (id)initWithCoder:(NSCoder *)coder
+- (instancetype) initWithCoder:(NSCoder *)coder
 {
     self = [super initWithCoder:coder];
     

@@ -40,7 +40,7 @@ NSString *WDSubpathsKey = @"WDSubpathsKey";
     [coder encodeObject:subpaths_ forKey:WDSubpathsKey];
 }
 
-- (id)initWithCoder:(NSCoder *)coder
+- (instancetype) initWithCoder:(NSCoder *)coder
 {
     self = [super initWithCoder:coder];
     

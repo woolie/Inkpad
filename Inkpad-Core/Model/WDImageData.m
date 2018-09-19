@@ -53,7 +53,7 @@ NSString *WDDataKey = @"WDDataKey";
     [coder encodeObject:imageData_ forKey:WDDataKey];
 }
 
-- (id)initWithCoder:(NSCoder *)coder
+- (instancetype) initWithCoder:(NSCoder *)coder
 {
     self = [super init];
     

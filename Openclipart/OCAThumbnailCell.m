@@ -26,7 +26,7 @@
 @synthesize imageView = imageView_;
 @synthesize titleLabel = titleLabel_;
 
-- (id)initWithFrame:(CGRect)frame
+- (instancetype) initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     

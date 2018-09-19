@@ -130,7 +130,7 @@ NSString * WDSVGStringForCGLineCap(CGLineCap cap)
     }
 }
 
-- (id)initWithCoder:(NSCoder *)coder
+- (instancetype) initWithCoder:(NSCoder *)coder
 {
     self = [super init];
     

@@ -80,7 +80,7 @@ static NSMutableDictionary *registeredUnits_ = nil;
     return registeredUnits_;
 }
 
-- (id)initWithFrame:(CGRect)frame
+- (instancetype) initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
 
@@ -292,7 +292,7 @@ static NSMutableDictionary *registeredUnits_ = nil;
 
 @implementation WDRulerCornerView
 
-- (id)initWithFrame:(CGRect)frame
+- (instancetype) initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     

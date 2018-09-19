@@ -84,7 +84,7 @@ NSString *WDAlphaKey = @"WDAlphaKey";
     [coder encodeFloat:alpha_ forKey:WDAlphaKey]; 
 }
 
-- (id)initWithCoder:(NSCoder *)coder
+- (instancetype) initWithCoder:(NSCoder *)coder
 {
     self = [super init];
     

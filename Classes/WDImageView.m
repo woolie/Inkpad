@@ -17,7 +17,7 @@
 @synthesize image = image_;
 @synthesize maximumDimension = maximumDimension_;
 
-- (id)initWithImage:(UIImage *)image maxDimension:(float)maxDimension
+- (instancetype) initWithImage:(UIImage *)image maxDimension:(float)maxDimension
 {
     self = [super initWithFrame:WDRectFromSize(image.size)];
     

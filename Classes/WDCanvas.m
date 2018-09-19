@@ -47,74 +47,73 @@ NSString *WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
 @implementation WDCanvas
 
 @synthesize canvasTransform = transform_;
-@synthesize drawing = drawing_;
 @synthesize controller = controller_;
-@synthesize toolPalette = toolPalette_;
 @synthesize horizontalRuler = horizontalRuler_;
 @synthesize verticalRuler = verticalRuler_;
 @synthesize toolOptionsView = toolOptionsView_;
 @synthesize activityView = activityView_;
 @synthesize dynamicGuides = dynamicGuides_;
 
-- (id)initWithFrame:(CGRect)frame
+- (instancetype) initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
-    
-    if (!self) {
-        return nil;
+    if (self != nil)
+    {
+        _selectionView = [[WDSelectionView alloc] initWithFrame:self.bounds];
+        [self addSubview:_selectionView];
+        _selectionView.canvas = self;
+
+        self.multipleTouchEnabled = YES;
+        self.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        self.contentMode = UIViewContentModeCenter;
+        self.exclusiveTouch = YES;
+        self.clearsContextBeforeDrawing = YES;
+
+        _selectionTransform = CGAffineTransformIdentity;
+        transform_ = CGAffineTransformIdentity;
+
+        self.backgroundColor = [UIColor whiteColor];
+
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(keyboardWillShow:)
+                                                     name:UIKeyboardWillShowNotification
+                                                   object:nil];
     }
-    
-    _selectionView = [[WDSelectionView alloc] initWithFrame:self.bounds];
-    [self addSubview:_selectionView];
-    _selectionView.canvas = self;
-    
-    self.multipleTouchEnabled = YES;
-    self.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    self.contentMode = UIViewContentModeCenter;
-    self.exclusiveTouch = YES;
-    self.clearsContextBeforeDrawing = YES;
-    
-    _selectionTransform = CGAffineTransformIdentity;
-    transform_ = CGAffineTransformIdentity;
-    
-    self.backgroundColor = [UIColor whiteColor];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillShow:)
-                                                 name:UIKeyboardWillShowNotification
-                                               object:nil];
 
     return self;
 }
 
 - (void) registerInvalidateNotifications:(NSArray *)array
 {
-    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
     
-    for (NSString *name in array) {
+    for (NSString *name in array)
+    {
         [nc addObserver:self
                selector:@selector(invalidateFromNotification:)
                    name:name
-                 object:drawing_];
+                 object:_drawing];
     }
 }
 
 - (void) setDrawing:(WDDrawing *)drawing
 {
-    if (drawing_ == drawing) {
+    if (_drawing == drawing)
+    {
         return;
     }
     
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     
-    if (drawing_) {
+    if (_drawing)
+    {
         // stop listening to old drawing
-        [nc removeObserver:self name:nil object:drawing_];
+        [nc removeObserver:self name:nil object:_drawing];
         [nc removeObserver:self name:WDSelectionChangedNotification object:nil];
     }
     
     // assign the new drawing
-    drawing_ = drawing;
+    _drawing = drawing;
     
     // register for notifications
     NSArray *invalidations = @[WDElementChanged,
@@ -133,24 +132,24 @@ NSString *WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
     [nc addObserver:self
            selector:@selector(unitsChanged:)
                name:WDUnitsChangedNotification
-             object:drawing_];
+             object:_drawing];
     
     [nc addObserver:self
            selector:@selector(drawingDimensionsChanged:)
                name:WDDrawingDimensionsChanged
-             object:drawing_];
+             object:_drawing];
     
     [nc addObserver:self
            selector:@selector(gridSpacingChanged:)
                name:WDGridSpacingChangedNotification
-             object:drawing_];
+             object:_drawing];
     
     [nc addObserver:self
            selector:@selector(selectionChanged:)
                name:WDSelectionChangedNotification
              object:self.drawingController];
     
-    [self showRulers:drawing_.rulersVisible];
+    [self showRulers:_drawing.rulersVisible];
     [self showTools];
     
     [self scaleDocumentToFit];
@@ -168,8 +167,8 @@ NSString *WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
 
 - (void) unitsChanged:(NSNotification *)aNotification
 {
-    horizontalRuler_.units = drawing_.units;
-    verticalRuler_.units = drawing_.units;
+    horizontalRuler_.units = _drawing.units;
+    verticalRuler_.units = _drawing.units;
     
     [controller_ updateTitle];
 }
@@ -193,7 +192,8 @@ NSString *WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
 
 - (void) showRulers:(BOOL)flag animated:(BOOL)animated
 {
-    if (flag && !horizontalRuler_) {
+    if (flag && !horizontalRuler_)
+    {
         CGRect horizontalFrame = self.frame;
         horizontalFrame.origin.y = 0;
         horizontalFrame.size.height = kWDRulerThickness;
@@ -202,7 +202,7 @@ NSString *WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
         horizontalRuler_ = [[WDRulerView alloc] initWithFrame:horizontalFrame];
         horizontalRuler_.clientView = self;
         horizontalRuler_.orientation = WDHorizontalRuler;
-        horizontalRuler_.units = drawing_.units;
+        horizontalRuler_.units = _drawing.units;
         
         if (toolPalette_) {
             [self insertSubview:horizontalRuler_ belowSubview:toolPalette_];
@@ -218,7 +218,7 @@ NSString *WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
         verticalRuler_ = [[WDRulerView alloc] initWithFrame:verticalFrame];
         verticalRuler_.clientView = self;
         verticalRuler_.orientation = WDVerticalRuler;
-        verticalRuler_.units = drawing_.units;
+        verticalRuler_.units = _drawing.units;
         
         if (toolPalette_) {
             [self insertSubview:verticalRuler_ belowSubview:toolPalette_];
@@ -276,7 +276,7 @@ NSString *WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
     _eyedropper.center = WDRoundPoint(pt);
     [_eyedropper setBorderWidth:20];
     
-    [self insertSubview:_eyedropper belowSubview:toolPalette_];
+    [self insertSubview:_eyedropper belowSubview:_toolPalette];
 }
 
 - (void) moveEyedropperToPoint:(CGPoint)pt
@@ -303,26 +303,26 @@ NSString *WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
 
 - (void) scaleDocumentToFit
 {
-    if (!drawing_) {
+    if (!_drawing) {
         return;
     }
     
-    float   documentAspect = drawing_.dimensions.width / drawing_.dimensions.height;
+    float   documentAspect = _drawing.dimensions.width / _drawing.dimensions.height;
     float   boundsAspect = CGRectGetWidth(self.bounds) / CGRectGetHeight(self.bounds);
     float   scale;
     
     if (documentAspect > boundsAspect)
     {
-        scale = (CGRectGetWidth(self.bounds) - (kFitBuffer * 2)) / drawing_.dimensions.width;
+        scale = (CGRectGetWidth(self.bounds) - (kFitBuffer * 2)) / _drawing.dimensions.width;
     }
     else
     {
-        scale = (CGRectGetHeight(self.bounds) - (kFitBuffer * 2)) / drawing_.dimensions.height;
+        scale = (CGRectGetHeight(self.bounds) - (kFitBuffer * 2)) / _drawing.dimensions.height;
     }
 
     [self setTrueViewScale:scale];
     
-    _userSpacePivot = CGPointMake(drawing_.dimensions.width / 2, drawing_.dimensions.height / 2);
+    _userSpacePivot = CGPointMake(_drawing.dimensions.width / 2, _drawing.dimensions.height / 2);
     _deviceSpacePivot = WDCenterOfRect(self.bounds);
     
     [self rebuildViewTransform_];
@@ -336,7 +336,7 @@ NSString *WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
 
 - (CGSize) documentSize
 {
-    return drawing_.dimensions;
+    return _drawing.dimensions;
 }
 
 - (CGRect) visibleRect
@@ -369,7 +369,7 @@ NSString *WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
 - (void) drawDocumentBorder:(CGContextRef)ctx
 {
     // draw the document border
-    CGRect docBounds = CGRectMake(0, 0, drawing_.dimensions.width, drawing_.dimensions.height);
+    CGRect docBounds = CGRectMake(0, 0, _drawing.dimensions.width, _drawing.dimensions.height);
     docBounds = CGContextConvertRectToDeviceSpace(ctx, docBounds);
     docBounds = CGRectIntegral(docBounds);
     docBounds = CGRectInset(docBounds, 0.5f, 0.5f);
@@ -388,7 +388,7 @@ NSString *WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
 // don't draw gridlines too close together
 - (float) effectiveGridSpacing:(CGContextRef)ctx
 {
-    float   gridSpacing = drawing_.gridSpacing;
+    float   gridSpacing = _drawing.gridSpacing;
     CGRect  testRect = CGRectMake(0, 0, gridSpacing, gridSpacing);
     float   adjustmentFactor = 1;
     
@@ -402,7 +402,7 @@ NSString *WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
 
 - (void) drawGrid:(CGContextRef)ctx
 {
-    CGRect      docBounds = CGRectMake(0, 0, drawing_.dimensions.width, drawing_.dimensions.height);
+    CGRect      docBounds = CGRectMake(0, 0, _drawing.dimensions.width, _drawing.dimensions.height);
     CGRect      visibleRect = self.visibleRect;
     float       gridSpacing = [self effectiveGridSpacing:ctx];
     CGPoint     pt;
@@ -462,7 +462,7 @@ NSString *WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
 
 - (void)drawRect:(CGRect)rect
 {
-    if (!drawing_)
+    if (!_drawing)
     {
         CGContextRef    ctx = UIGraphicsGetCurrentContext();
         
@@ -479,8 +479,8 @@ NSString *WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
     }
     
     CGContextRef    ctx = UIGraphicsGetCurrentContext();
-    BOOL            drawingIsolatedLayer = (!_controlGesture && drawing_.isolateActiveLayer);
-    BOOL            outlineMode = drawing_.outlineMode;
+    BOOL            drawingIsolatedLayer = (!_controlGesture && _drawing.isolateActiveLayer);
+    BOOL            outlineMode = _drawing.outlineMode;
     
 #ifdef WD_DEBUG
     NSDate          *date = [NSDate date];
@@ -499,7 +499,7 @@ NSString *WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
     CGContextSaveGState(ctx);
     CGContextConcatCTM(ctx, transform_);
     
-    if (drawing_.showGrid && !drawingIsolatedLayer) {
+    if (_drawing.showGrid && !drawingIsolatedLayer) {
         [self drawGrid:ctx];
     }
     
@@ -508,7 +508,7 @@ NSString *WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
         CGContextSetLineWidth(ctx, self.thinWidth);
     }
     
-    WDLayer *activeLayer = drawing_.activeLayer;
+    WDLayer *activeLayer = _drawing.activeLayer;
     
     if (!_controlGesture) {
         CGContextSaveGState(ctx);
@@ -518,7 +518,7 @@ NSString *WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
             CGContextBeginTransparencyLayer(ctx, NULL);
         }
         
-        for (WDLayer *layer in drawing_.layers) {
+        for (WDLayer *layer in _drawing.layers) {
             if (layer.hidden || (drawingIsolatedLayer && (layer == activeLayer))) {
                 continue;
             }
@@ -532,7 +532,7 @@ NSString *WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
             // gray out lower contents
             [self drawIsolationInContext:ctx rect:rect];
             
-            if (drawing_.showGrid) {
+            if (_drawing.showGrid) {
                 [self drawGrid:ctx];
             }
             
@@ -620,7 +620,7 @@ NSString *WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
 
 - (float) displayableScale
 {    
-    float printSizeFactor = [drawing_.units isEqualToString:@"Pixels"] ? 1.0f : kPrintSizeFactor;
+    float printSizeFactor = [_drawing.units isEqualToString:@"Pixels"] ? 1.0f : kPrintSizeFactor;
   
     return round(self.viewScale * 100 * printSizeFactor);
 }
@@ -629,7 +629,7 @@ NSString *WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
 {
     _trueViewScale = scale;
     
-    float hundredPercentScale = [drawing_.units isEqualToString:@"Pixels"] ? 1.0f : kHundredPercentScale;
+    float hundredPercentScale = [_drawing.units isEqualToString:@"Pixels"] ? 1.0f : kHundredPercentScale;
     
     if (_trueViewScale > (hundredPercentScale * 0.95f) && _trueViewScale < (hundredPercentScale * 1.05))
     {
@@ -711,8 +711,8 @@ NSString *WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
 - (BOOL) canSendTouchToActiveTool
 {
     WDTool *activeTool = [WDToolManager sharedInstance].activeTool;
-    BOOL    locked = drawing_.activeLayer.locked;
-    BOOL    hidden = drawing_.activeLayer.hidden;
+    BOOL    locked = _drawing.activeLayer.locked;
+    BOOL    hidden = _drawing.activeLayer.hidden;
     
     if (activeTool.createsObject && (locked || hidden)) {
         if (locked && hidden) {
@@ -850,17 +850,19 @@ NSString *WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
 
 - (void) hideTools
 {
-    if (!toolPalette_) {
+    if (!_toolPalette)
+    {
         return;
     }
     
-    toolPalette_.hidden = YES;
+    _toolPalette.hidden = YES;
 }
 
 - (void) showTools
 {
-    if (toolPalette_) {
-        toolPalette_.hidden = NO;
+    if (_toolPalette)
+    {
+        _toolPalette.hidden = NO;
         return;
     }
     
@@ -889,8 +891,8 @@ NSString *WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
     deleteButton_.enabled = NO;
     [paletteView addSubview:deleteButton_];
     
-    toolPalette_ = [WDPalette paletteWithBaseView:paletteView defaultsName:@"tools palette"];
-    [self addSubview:toolPalette_];
+    _toolPalette = [WDPalette paletteWithBaseView:paletteView defaultsName:@"tools palette"];
+    [self addSubview:_toolPalette];
     
     [self ensureToolPaletteIsOnScreen];
 }
@@ -928,7 +930,7 @@ NSString *WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
         if (!CGRectEqualToRect(dirtyRect, CGRectNull))
         {
             dirtyRect = CGRectApplyAffineTransform(dirtyRect, self.canvasTransform);
-            if (drawing_.outlineMode)
+            if (_drawing.outlineMode)
             {
                 dirtyRect = CGRectInset(dirtyRect, fudge, fudge);
             }
@@ -944,7 +946,7 @@ NSString *WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
             if (!CGRectEqualToRect(dirtyRect, CGRectNull))
             {
                 dirtyRect = CGRectApplyAffineTransform(dirtyRect, self.canvasTransform);
-                if (drawing_.outlineMode)
+                if (_drawing.outlineMode)
                 {
                     dirtyRect = CGRectInset(dirtyRect, fudge, fudge);
                 }
@@ -1011,7 +1013,7 @@ NSString *WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
     toolOptionsView_ = toolOptionsView;
     [self positionToolOptionsView];
     
-    [self insertSubview:toolOptionsView_ belowSubview:toolPalette_];
+    [self insertSubview:toolOptionsView_ belowSubview:_toolPalette];
 }
 
 - (void) setMarquee:(NSValue *)marquee
@@ -1030,7 +1032,7 @@ NSString *WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
 {
     _shapeUnderConstruction = path;
     
-    path.layer = drawing_.activeLayer;
+    path.layer = _drawing.activeLayer;
     [self invalidateSelectionView];
 }
 
@@ -1088,7 +1090,7 @@ NSString *WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
 
 - (void) ensureToolPaletteIsOnScreen
 {
-    [toolPalette_ bringOnScreen];
+    [_toolPalette bringOnScreen];
 }
 
 - (void) keyboardWillShow:(NSNotification *)aNotification
@@ -1156,8 +1158,9 @@ NSString *WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
     
     messageLabel_.sharpCenter = WDCenterOfRect(self.bounds);
     
-    if (messageLabel_.superview != self) {
-        [self insertSubview:messageLabel_ belowSubview:toolPalette_];
+    if (messageLabel_.superview != self)
+    {
+        [self insertSubview:messageLabel_ belowSubview:_toolPalette];
     }
     
     // start message dismissal timer

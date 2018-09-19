@@ -25,7 +25,7 @@ NSString *WDActivityProgressChangedNotification = @"WDActivityProgressChangedNot
 
 @synthesize activities;
 
-- (id)init
+- (instancetype) init
 {
     self = [super init];
     if (!self) {

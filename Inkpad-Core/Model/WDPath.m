@@ -96,7 +96,7 @@ NSString *WDClosedKey = @"WDClosedKey";
     }
 }
 
-- (id)initWithCoder:(NSCoder *)coder
+- (instancetype) initWithCoder:(NSCoder *)coder
 {
     self = [super initWithCoder:coder];
     

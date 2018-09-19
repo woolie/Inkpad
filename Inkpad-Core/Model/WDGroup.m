@@ -24,7 +24,7 @@ NSString *WDGroupElements = @"WDGroupElements";
     [coder encodeObject:elements_ forKey:WDGroupElements];
 }
 
-- (id)initWithCoder:(NSCoder *)coder
+- (instancetype) initWithCoder:(NSCoder *)coder
 {
     self = [super initWithCoder:coder];
     

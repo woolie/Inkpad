@@ -25,7 +25,7 @@
 @synthesize gradientStopMode = gradientStopMode_;
 @synthesize shadowMode = shadowMode_;
 
-- (id)initWithFrame:(CGRect)frame {
+- (instancetype) initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     
     if (!self) {

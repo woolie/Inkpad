@@ -19,7 +19,7 @@ const float kColorRectInset = 10;
 @implementation WDGradientStopOverlay
 @synthesize indicator;
 
-- (id)initWithFrame:(CGRect)frame
+- (instancetype) initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     
@@ -82,7 +82,7 @@ const float kColorRectInset = 10;
 @synthesize selected = selected_;
 @synthesize overlay = overlay_;
 
-- (id)initWithFrame:(CGRect)frame
+- (instancetype) initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     

@@ -44,7 +44,7 @@
     return item;
 }
 
-- (id)initWithTitle:(NSString *)aString image:(UIImage *)image action:(SEL)aSelector target:(id)target
+- (instancetype) initWithTitle:(NSString *)aString image:(UIImage *)image action:(SEL)aSelector target:(id)target
 {
     self = [super init];
     

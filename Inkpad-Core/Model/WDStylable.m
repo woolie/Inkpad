@@ -56,7 +56,7 @@ NSString *WDMaskedElementsKey = @"WDMaskedElementsKey";
     [coder encodeObject:maskedElements_ forKey:WDMaskedElementsKey];
 }
 
-- (id)initWithCoder:(NSCoder *)coder
+- (instancetype) initWithCoder:(NSCoder *)coder
 {
     self = [super initWithCoder:coder];
     

@@ -35,7 +35,7 @@ NSString *WDFillRuleKey = @"WDFillRuleKey";
     [coder encodeInteger:fillRule_ forKey:WDFillRuleKey];
 }
 
-- (id)initWithCoder:(NSCoder *)coder
+- (instancetype) initWithCoder:(NSCoder *)coder
 {
     self = [super initWithCoder:coder];
     

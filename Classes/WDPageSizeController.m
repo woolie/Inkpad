@@ -33,7 +33,7 @@ static NSString *orientations_[] = { @"Portrait", @"Landscape" };
 @synthesize target = target_;
 @synthesize action = action_;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (instancetype) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     

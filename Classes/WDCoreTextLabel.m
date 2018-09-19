@@ -16,7 +16,7 @@
 @synthesize fontRef;
 @synthesize text;
 
-- (id)initWithFrame:(CGRect)frame
+- (instancetype) initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     

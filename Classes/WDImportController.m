@@ -69,7 +69,7 @@ static NSString * const WDDropboxSubdirectoryMissingNotification = @"WDDropboxSu
 
 #pragma mark -
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil 
+- (instancetype) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil 
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (!self) {

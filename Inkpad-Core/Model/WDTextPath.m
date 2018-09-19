@@ -98,7 +98,7 @@ NSString *WDTextPathAlignmentKey = @"WDTextPathAlignmentKey";
     [coder encodeCGAffineTransform:transform_ forKey:WDTransformKey];
 }
 
-- (id)initWithCoder:(NSCoder *)coder
+- (instancetype) initWithCoder:(NSCoder *)coder
 {
     self = [super initWithCoder:coder];
     

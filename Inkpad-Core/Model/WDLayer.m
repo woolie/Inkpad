@@ -89,7 +89,7 @@ NSString *WDOpacityKey = @"WDOpacityKey";
     }
 }
 
-- (id)initWithCoder:(NSCoder *)coder
+- (instancetype) initWithCoder:(NSCoder *)coder
 {
     self = [super init];
     

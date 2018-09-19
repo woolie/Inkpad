@@ -17,7 +17,7 @@
 
 @synthesize canvas = canvas_;
 
-- (id)initWithFrame:(CGRect)frame
+- (instancetype) initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     

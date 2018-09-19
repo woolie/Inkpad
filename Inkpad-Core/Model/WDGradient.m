@@ -247,7 +247,7 @@ NSString *WDGradientStopsKey = @"WDGradientStopsKey";
     [coder encodeObject:stops_ forKey:WDGradientStopsKey];
 }
 
-- (id)initWithCoder:(NSCoder *)coder
+- (instancetype) initWithCoder:(NSCoder *)coder
 {
     self = [super init];
     

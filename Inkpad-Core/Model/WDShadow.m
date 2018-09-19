@@ -56,7 +56,7 @@ NSString *WDShadowAngleKey = @"WDShadowAngleKey";
     [coder encodeFloat:angle_ forKey:WDShadowAngleKey];
 }
 
-- (id)initWithCoder:(NSCoder *)coder
+- (instancetype) initWithCoder:(NSCoder *)coder
 {
     self = [super init];
     

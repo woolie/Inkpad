@@ -71,7 +71,7 @@ NSString *WDStopColorKey = @"WDStopColorKey";
     [coder encodeObject:color_ forKey:WDStopColorKey];
 }
 
-- (id)initWithCoder:(NSCoder *)coder
+- (instancetype) initWithCoder:(NSCoder *)coder
 {
     self = [super init];
     

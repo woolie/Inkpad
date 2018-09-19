@@ -59,7 +59,7 @@ NSString *WDFillTransformTransformKey = @"WDFillTransformTransformKey";
     [coder encodeCGAffineTransform:transform_ forKey:WDFillTransformTransformKey];
 }
 
-- (id)initWithCoder:(NSCoder *)coder
+- (instancetype) initWithCoder:(NSCoder *)coder
 {
     self = [super init];
     

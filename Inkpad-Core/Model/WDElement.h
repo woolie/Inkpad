@@ -44,7 +44,7 @@ typedef enum {
 @class WDXMLElement;
 
 @interface WDElement : NSObject <NSCoding, NSCopying> {
-    CGRect      dirtyBounds_;
+    CGRect      _dirtyBounds;
 }
 
 @property (nonatomic, weak) WDLayer *layer;
@@ -126,17 +126,17 @@ typedef enum {
 
 @end
 
-extern NSString *WDElementChanged;
-extern NSString *WDPropertyChangedNotification;
-extern NSString *WDPropertiesChangedNotification;
+extern NSString* const WDElementChanged;
+extern NSString* const WDPropertyChangedNotification;
+extern NSString* const WDPropertiesChangedNotification;
 
-extern NSString *WDPropertyKey;
-extern NSString *WDPropertiesKey;
-extern NSString *WDTransformKey;
-extern NSString *WDFillKey;
-extern NSString *WDFillTransformKey;
-extern NSString *WDStrokeKey;
+extern NSString* const WDPropertyKey;
+extern NSString* const WDPropertiesKey;
+extern NSString* const WDTransformKey;
+extern NSString* const WDFillKey;
+extern NSString* const WDFillTransformKey;
+extern NSString* const WDStrokeKey;
 
-extern NSString *WDTextKey;
-extern NSString *WDFontNameKey;
-extern NSString *WDFontSizeKey;
+extern NSString* const WDTextKey;
+extern NSString* const WDFontNameKey;
+extern NSString* const WDFontSizeKey;

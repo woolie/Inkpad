@@ -66,7 +66,7 @@ NSString *WDTextPathAlignmentKey = @"WDTextPathAlignmentKey";
     return typePath;
 }
 
-- (id) init
+- (instancetype) init
 {
     self = [super init];
     
@@ -977,7 +977,7 @@ done:
     [textPath setValue:[text_ stringByEscapingEntities]];
     [text addChild:textPath];
     
-    if (self.maskedElements && [self.maskedElements count] > 0) {
+    if (self.maskedElements && self.maskedElements.count > 0) {
         // Produces an element such as:
         // <defs>
         //   <path id="TextPathN" d="..."/>

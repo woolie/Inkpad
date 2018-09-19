@@ -23,7 +23,7 @@
 @property (nonatomic, readonly) WDImageData *imageData;
 
 + (WDImage *) imageWithUIImage:(UIImage *)image inDrawing:(WDDrawing *)drawing;
-- (id) initWithUIImage:(UIImage *)image inDrawing:(WDDrawing *)drawing;
+- (instancetype) initWithUIImage:(UIImage *)image inDrawing:(WDDrawing *)drawing;
 
 - (CGRect) naturalBounds;
 - (void) useTrackedImageData;

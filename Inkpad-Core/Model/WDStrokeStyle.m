@@ -71,7 +71,7 @@ NSString * WDSVGStringForCGLineCap(CGLineCap cap)
     return style;
 }
 
-- (id) init
+- (instancetype) init
 {
     self = [super init];
     
@@ -90,7 +90,7 @@ NSString * WDSVGStringForCGLineCap(CGLineCap cap)
     return self;
 }
 
-- (id) initWithWidth:(float)width cap:(CGLineCap)cap join:(CGLineJoin)join color:(WDColor *)color
+- (instancetype) initWithWidth:(float)width cap:(CGLineCap)cap join:(CGLineJoin)join color:(WDColor *)color
          dashPattern:(NSArray *)dashPattern startArrow:(NSString *)startArrow endArrow:(NSString *)endArrow
 {
     self = [super init];

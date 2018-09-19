@@ -29,7 +29,7 @@ NSString *WDStopColorKey = @"WDStopColorKey";
     return stop;
 }
 
-- (id) initWithColor:(WDColor *)color andRatio:(float)ratio
+- (instancetype) initWithColor:(WDColor *)color andRatio:(float)ratio
 {
     self = [super init];
     

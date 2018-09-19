@@ -31,7 +31,7 @@
     return loader_;
 }
 
-- (id) init
+- (instancetype) init
 {
     self = [super init];
     

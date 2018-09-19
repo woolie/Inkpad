@@ -96,7 +96,7 @@ const float kColorRectInset = 10;
     return self;
 }
 
-- (id) initWithStop:(WDGradientStop *)stop
+- (instancetype) initWithStop:(WDGradientStop *)stop
 {
     self = [self initWithFrame:CGRectMake(0,0,39,39)];
     

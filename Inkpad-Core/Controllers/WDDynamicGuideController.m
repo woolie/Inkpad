@@ -20,7 +20,7 @@ const float kDynamicGuideSnappingTolerance = 10.0f;
 
 @implementation WDDynamicGuideController
 
-- (id) initWithDrawingController:(WDDrawingController *)drawingController
+- (instancetype) initWithDrawingController:(WDDrawingController *)drawingController
 {
     self = [super init];
     

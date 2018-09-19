@@ -51,8 +51,8 @@ typedef enum {
 + (WDBezierNode *) bezierNodeWithAnchorPoint:(CGPoint)pt;
 + (WDBezierNode *) bezierNodeWithInPoint:(CGPoint)inPoint anchorPoint:(CGPoint)pt outPoint:(CGPoint)outPoint;
 
-- (id) initWithAnchorPoint:(CGPoint)pt;
-- (id) initWithInPoint:(CGPoint)inPoint anchorPoint:(CGPoint)pt outPoint:(CGPoint)outPoint;
+- (instancetype) initWithAnchorPoint:(CGPoint)pt;
+- (instancetype) initWithInPoint:(CGPoint)inPoint anchorPoint:(CGPoint)pt outPoint:(CGPoint)outPoint;
 
 - (WDBezierNode *) transform:(CGAffineTransform)transform;
 - (WDBezierNode *) chopHandles;

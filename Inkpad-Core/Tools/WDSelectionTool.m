@@ -26,7 +26,7 @@
 
 @synthesize groupSelect = groupSelect_;
 
-- (id) init
+- (instancetype) init
 {
     self = [super init];
     

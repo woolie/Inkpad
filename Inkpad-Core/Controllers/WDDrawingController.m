@@ -51,7 +51,7 @@ NSString *WDSelectionChangedNotification = @"WDSelectionChangedNotification";
 @synthesize redoSelectionStack = redoSelectionStack_;
 @synthesize dynamicGuideController = dynamicGuideController_;
 
-- (id) init
+- (instancetype) init
 {
     self = [super init];
     
@@ -207,8 +207,7 @@ NSString *WDSelectionChangedNotification = @"WDSelectionChangedNotification";
     [redoSelectionStack_ removeLastObject];
 }
 
-#pragma mark -
-#pragma mark Drawing Notifications
+#pragma mark - Drawing Notifications
 
 - (void) layerDeleted:(NSNotification *)aNotification
 {

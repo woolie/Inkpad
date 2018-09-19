@@ -209,12 +209,12 @@
 - (NSInteger)tableView:(UITableView *)table numberOfRowsInSection:(NSInteger)section
 {
     if (table == familyTable_) {
-        return [[[WDFontManager sharedInstance] supportedFamilies] count];
+        return WDFontManager.sharedInstance.supportedFamilies.count;
     }
     
     NSString *familyName = [self defaultFontFamilyName];
     
-    return [[[WDFontManager sharedInstance] fontsInFamily:familyName] count];
+    return [[WDFontManager sharedInstance] fontsInFamily:familyName].count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

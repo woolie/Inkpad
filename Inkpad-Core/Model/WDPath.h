@@ -58,11 +58,11 @@
 + (WDPath *) pathWithOvalInRect:(CGRect)rect;
 + (WDPath *) pathWithStart:(CGPoint)start end:(CGPoint)end;
 
-- (id) initWithRect:(CGRect)rect;
-- (id) initWithRoundedRect:(CGRect)rect cornerRadius:(float)radius;
-- (id) initWithOvalInRect:(CGRect)rect;
-- (id) initWithStart:(CGPoint)start end:(CGPoint)end;
-- (id) initWithNode:(WDBezierNode *)node;
+- (instancetype) initWithRect:(CGRect)rect;
+- (instancetype) initWithRoundedRect:(CGRect)rect cornerRadius:(float)radius;
+- (instancetype) initWithOvalInRect:(CGRect)rect;
+- (instancetype) initWithStart:(CGPoint)start end:(CGPoint)end;
+- (instancetype) initWithNode:(WDBezierNode *)node;
 
 - (void) invalidatePath;
 - (void) reversePathDirection;

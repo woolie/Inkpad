@@ -46,7 +46,7 @@ NSString *WDImageDataKey = @"WDImageDataKey";
     corner_[3] = CGPointMake(0, CGRectGetMaxY(bounds));
 }
 
-- (id) initWithUIImage:(UIImage *)image inDrawing:(WDDrawing *)drawing
+- (instancetype) initWithUIImage:(UIImage *)image inDrawing:(WDDrawing *)drawing
 {
     self = [super init];
     

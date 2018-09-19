@@ -298,7 +298,7 @@ NSString *WDSwatchPanelModeKey = @"WDSwatchPanelModeKey";
 {
     if (self.isEditing) {
         [selectedSwatches_ removeObject:indexPath];
-        self.navigationItem.rightBarButtonItem.enabled = [selectedSwatches_ count] == 0 ? NO : YES;
+        self.navigationItem.rightBarButtonItem.enabled = selectedSwatches_.count == 0 ? NO : YES;
     }
 }
 

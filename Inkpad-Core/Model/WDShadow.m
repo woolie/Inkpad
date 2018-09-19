@@ -32,7 +32,7 @@ NSString *WDShadowAngleKey = @"WDShadowAngleKey";
     return shadow;
 }
 
-- (id) initWithColor:(WDColor *)color radius:(float)radius offset:(float)offset angle:(float)angle
+- (instancetype) initWithColor:(WDColor *)color radius:(float)radius offset:(float)offset angle:(float)angle
 {
     self = [super init];
     

@@ -112,7 +112,7 @@ NSString *WDFillRuleKey = @"WDFillRuleKey";
 
 - (WDXMLElement *) SVGElement
 {
-    BOOL isMask = (self.maskedElements && [self.maskedElements count] > 0);
+    BOOL isMask = (self.maskedElements && self.maskedElements.count > 0);
     BOOL hasArrow = self.strokeStyle && [self.strokeStyle hasArrow] && !CGPathEqualToPath(self.pathRef, self.strokePathRef);
 
     WDXMLElement *basePath = [WDXMLElement elementWithName:@"path"];

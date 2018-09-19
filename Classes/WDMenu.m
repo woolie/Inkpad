@@ -34,7 +34,7 @@
 @synthesize popover = popover_;
 @synthesize delegate = delegate_;
 
-- (id) initWithItems:(NSArray *)items
+- (instancetype) initWithItems:(NSArray *)items
 {
     float   maxWidth = 0;
     float   height = 0;

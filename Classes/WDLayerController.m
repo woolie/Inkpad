@@ -26,12 +26,9 @@
 
 @implementation WDLayerController
 
-@synthesize drawing = drawing_;
-@synthesize layerCell = layerCell_;
-
 - (CGSize) preferredContentSize
 {
-    NSUInteger layerSlots = MIN(12, MAX(8, [drawing_.layers count]));
+    NSUInteger layerSlots = MIN(12, MAX(8, _drawing.layers.count));
     
     // add half the cell height so that it's clear when there are more cells to which to scroll
     return CGSizeMake(400, layerSlots * 60 + 30);
@@ -66,7 +63,7 @@
 
 - (void) setDrawing:(WDDrawing *)drawing
 {
-    drawing_ = drawing;
+    _drawing = drawing;
     [layerTable_ reloadData];
     
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
@@ -74,14 +71,14 @@
     // stop listening to old drawing
     [nc removeObserver:self];
     
-    [nc addObserver:self selector:@selector(activeLayerChanged:) name:WDActiveLayerChanged object:drawing_];
-    [nc addObserver:self selector:@selector(layerAdded:) name:WDLayerAddedNotification object:drawing_];
-    [nc addObserver:self selector:@selector(layerDeleted:) name:WDLayerDeletedNotification object:drawing_];
-    [nc addObserver:self selector:@selector(layerVisibilityChanged:) name:WDLayerVisibilityChanged object:drawing_];
-    [nc addObserver:self selector:@selector(layerOpacityChanged:) name:WDLayerOpacityChanged object:drawing_];
-    [nc addObserver:self selector:@selector(layerLockedStatusChanged:) name:WDLayerLockedStatusChanged object:drawing_];
-    [nc addObserver:self selector:@selector(layerNameChanged:) name:WDLayerNameChanged object:drawing_];
-    [nc addObserver:self selector:@selector(layerThumbnailChanged:) name:WDLayerThumbnailChangedNotification object:drawing_];
+    [nc addObserver:self selector:@selector(activeLayerChanged:) name:WDActiveLayerChanged object:_drawing];
+    [nc addObserver:self selector:@selector(layerAdded:) name:WDLayerAddedNotification object:_drawing];
+    [nc addObserver:self selector:@selector(layerDeleted:) name:WDLayerDeletedNotification object:_drawing];
+    [nc addObserver:self selector:@selector(layerVisibilityChanged:) name:WDLayerVisibilityChanged object:_drawing];
+    [nc addObserver:self selector:@selector(layerOpacityChanged:) name:WDLayerOpacityChanged object:_drawing];
+    [nc addObserver:self selector:@selector(layerLockedStatusChanged:) name:WDLayerLockedStatusChanged object:_drawing];
+    [nc addObserver:self selector:@selector(layerNameChanged:) name:WDLayerNameChanged object:_drawing];
+    [nc addObserver:self selector:@selector(layerThumbnailChanged:) name:WDLayerThumbnailChangedNotification object:_drawing];
 }
 
 - (void)dealloc
@@ -91,7 +88,7 @@
 
 - (void) deselectSelectedRow
 {
-    NSUInteger      row = [self flipIndex_:drawing_.indexOfActiveLayer];
+    NSUInteger      row = [self flipIndex_:_drawing.indexOfActiveLayer];
     NSIndexPath     *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
     
     [layerTable_ deselectRowAtIndexPath:indexPath animated:NO];
@@ -99,17 +96,17 @@
 
 - (void) deleteLayer:(id)sender
 {
-    [drawing_ deleteActiveLayer];
+    [_drawing deleteActiveLayer];
 }
 
 - (void) addLayer:(id)sender
 {
-    [drawing_ addLayer:[WDLayer layer]];
+    [_drawing addLayer:[WDLayer layer]];
 }
 
 - (NSInteger)tableView:(UITableView *)table numberOfRowsInSection:(NSInteger)section
 {
-    return drawing_.layers.count;
+    return _drawing.layers.count;
 }
 
 - (void) layerAdded:(NSNotification *)aNotification
@@ -119,13 +116,13 @@
     }
     
     WDLayer *addedLayer = [aNotification userInfo][@"layer"];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[self flipIndex_:[drawing_.layers indexOfObject:addedLayer]] inSection:0];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[self flipIndex_:[_drawing.layers indexOfObject:addedLayer]] inSection:0];
     
     [layerTable_ beginUpdates];
     [layerTable_ insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     [layerTable_ endUpdates];
     
-    self.navigationItem.leftBarButtonItem.enabled = [drawing_ canDeleteLayer];
+    self.navigationItem.leftBarButtonItem.enabled = [_drawing canDeleteLayer];
     
     // ensure that the selection indicator doesn't disappear when undoing layer reorder
     [self performSelector:@selector(selectActiveLayer) withObject:nil afterDelay:0];
@@ -145,7 +142,7 @@
     [layerTable_ deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     [layerTable_ endUpdates];
     
-    self.navigationItem.leftBarButtonItem.enabled = [drawing_ canDeleteLayer];
+    self.navigationItem.leftBarButtonItem.enabled = [_drawing canDeleteLayer];
 }
 
 - (void) activeLayerChanged:(NSNotification *)aNotification
@@ -156,7 +153,7 @@
 - (void) layerVisibilityChanged:(NSNotification *)aNotification
 {
     WDLayer *layer = [aNotification userInfo][@"layer"];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[self flipIndex_:[drawing_.layers indexOfObject:layer]] inSection:0];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[self flipIndex_:[_drawing.layers indexOfObject:layer]] inSection:0];
     
     WDLayerCell *layerCell = (WDLayerCell *) [layerTable_ cellForRowAtIndexPath:indexPath];
     [layerCell updateVisibilityButton];
@@ -167,7 +164,7 @@
 - (void) layerLockedStatusChanged:(NSNotification *)aNotification
 {
     WDLayer *layer = [aNotification userInfo][@"layer"];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[self flipIndex_:[drawing_.layers indexOfObject:layer]] inSection:0];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[self flipIndex_:[_drawing.layers indexOfObject:layer]] inSection:0];
     
     WDLayerCell *layerCell = (WDLayerCell *) [layerTable_ cellForRowAtIndexPath:indexPath];
     [layerCell updateLockedStatusButton];
@@ -178,7 +175,7 @@
 - (void) layerOpacityChanged:(NSNotification *)aNotification
 {
     WDLayer *layer = [aNotification userInfo][@"layer"];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[self flipIndex_:[drawing_.layers indexOfObject:layer]] inSection:0];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[self flipIndex_:[_drawing.layers indexOfObject:layer]] inSection:0];
     
     WDLayerCell *layerCell = (WDLayerCell *) [layerTable_ cellForRowAtIndexPath:indexPath];
     [layerCell updateOpacity];
@@ -189,7 +186,7 @@
 - (void) layerThumbnailChanged:(NSNotification *)aNotification
 {
     WDLayer *layer = [aNotification userInfo][@"layer"];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[self flipIndex_:[drawing_.layers indexOfObject:layer]] inSection:0];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[self flipIndex_:[_drawing.layers indexOfObject:layer]] inSection:0];
     
     WDLayerCell *layerCell = (WDLayerCell *) [layerTable_ cellForRowAtIndexPath:indexPath];
     [layerCell updateThumbnail];
@@ -198,7 +195,7 @@
 - (void) layerNameChanged:(NSNotification *)aNotification
 {
     WDLayer *layer = [aNotification userInfo][@"layer"];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[self flipIndex_:[drawing_.layers indexOfObject:layer]] inSection:0];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[self flipIndex_:[_drawing.layers indexOfObject:layer]] inSection:0];
     
     WDLayerCell *layerCell = (WDLayerCell *) [layerTable_ cellForRowAtIndexPath:indexPath];
     [layerCell updateLayerName];
@@ -207,13 +204,13 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellIdentifier = @"LayerCell";
-    WDLayer         *layer = (drawing_.layers)[[self flipIndex_:indexPath.row]];
+    WDLayer         *layer = (_drawing.layers)[[self flipIndex_:indexPath.row]];
     
     WDLayerCell *cell = (WDLayerCell *) [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     
     if (cell == nil) {
         [[NSBundle mainBundle] loadNibNamed:@"LayerCell" owner:self options:nil];
-        cell = layerCell_;
+        cell = _layerCell;
         self.layerCell = nil;
     }
     
@@ -228,7 +225,7 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
-    drawing_.activeLayer.name = textField.text;
+    _drawing.activeLayer.name = textField.text;
     activeField_ = nil;
 }
 
@@ -260,7 +257,7 @@
     srcIndex = [self flipIndex_:srcIndex];
     destIndex = [self flipIndex_:destIndex];
     
-    [drawing_ moveLayerAtIndex:srcIndex toIndex:destIndex];
+    [_drawing moveLayerAtIndex:srcIndex toIndex:destIndex];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)newIndexPath
@@ -271,7 +268,7 @@
         [activeField_ resignFirstResponder];
     }
     
-    [drawing_ activateLayerAtIndex:index];
+    [_drawing activateLayerAtIndex:index];
 }
 
 - (void) scrollToSelectedRowIfNotVisible
@@ -288,14 +285,14 @@
 {
     [self updateOpacity];
     
-    NSUInteger  activeRow = [self flipIndex_:drawing_.indexOfActiveLayer];
+    NSUInteger  activeRow = [self flipIndex_:_drawing.indexOfActiveLayer];
     
     if ([[layerTable_ indexPathForSelectedRow] isEqual:[NSIndexPath indexPathForRow:activeRow inSection:0]]) {
         [self scrollToSelectedRowIfNotVisible];
         return;
     }
     
-    for (NSUInteger i = 0; i < drawing_.layers.count; i++) {
+    for (NSUInteger i = 0; i < _drawing.layers.count; i++) {
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0];
         
         if (i != activeRow) {
@@ -323,7 +320,7 @@
 {
     [super viewWillAppear:animated];
     
-    self.navigationItem.leftBarButtonItem.enabled = [drawing_ canDeleteLayer];
+    self.navigationItem.leftBarButtonItem.enabled = [_drawing canDeleteLayer];
     [self selectActiveLayer];
         
     [layerTable_ flashScrollIndicators];
@@ -331,15 +328,15 @@
 
 - (void) duplicateLayer:(id)sender
 {
-    [drawing_ duplicateActiveLayer];
+    [_drawing duplicateActiveLayer];
 }
 
 - (void) updateOpacity
 {
-    opacitySlider_.value = drawing_.activeLayer.opacity;
+    opacitySlider_.value = _drawing.activeLayer.opacity;
     
-    BOOL enableOpacityControl = !drawing_.activeLayer.locked && !drawing_.activeLayer.hidden;
-    float opacity = drawing_.activeLayer.opacity;
+    BOOL enableOpacityControl = !_drawing.activeLayer.locked && !_drawing.activeLayer.hidden;
+    float opacity = _drawing.activeLayer.opacity;
     
     opacitySlider_.enabled = enableOpacityControl;
     decrementButton_.enabled = enableOpacityControl && (opacity > 0.0f);
@@ -357,25 +354,25 @@
 
 - (void) takeOpacityFrom:(UISlider *)sender
 {
-    drawing_.activeLayer.opacity = [sender value];
+    _drawing.activeLayer.opacity = [sender value];
 }
 
 - (void) decrement:(id)sender
 {
-    float opacity = drawing_.activeLayer.opacity;
+    float opacity = _drawing.activeLayer.opacity;
     
     opacity = ((opacity * 100) - 1) / 100.0f;
     
-    drawing_.activeLayer.opacity = opacity;
+    _drawing.activeLayer.opacity = opacity;
 }
 
 - (void) increment:(id)sender
 {
-    float opacity = drawing_.activeLayer.opacity;
+    float opacity = _drawing.activeLayer.opacity;
     
     opacity = ((opacity * 100) + 1) / 100.0f;
     
-    drawing_.activeLayer.opacity = opacity;
+    _drawing.activeLayer.opacity = opacity;
 }
 
 - (NSArray *) toolbarItems
@@ -429,7 +426,7 @@
 
 - (NSUInteger) flipIndex_:(NSUInteger)ix
 {
-    return (drawing_.layers.count - ix - 1);
+    return (_drawing.layers.count - ix - 1);
 }
 
 @end

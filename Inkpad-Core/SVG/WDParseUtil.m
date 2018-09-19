@@ -15,7 +15,7 @@
 
 BOOL stringIsNumeric(NSString *s)
 {
-    if ([s length] == 0) {
+    if (s.length == 0) {
         return NO;
     }
     unichar c = [s characterAtIndex:0];
@@ -44,16 +44,18 @@ BOOL stringIsNumeric(NSString *s)
 NSArray *tokenize(NSString *source, unichar* buf)
 {
     // NOTE: this method is *the* hotspot for SVG parsing so it is carefully optimized
-    NSMutableArray *tokens = [[NSMutableArray alloc] initWithCapacity:([source length] / 3)];
+    NSMutableArray *tokens = [[NSMutableArray alloc] initWithCapacity:(source.length / 3)];
     enum {START, NUMBER, EXPONENT} state = START;
-    NSInteger length = [source length];
+    NSInteger length = source.length;
     [source getCharacters:buf range:NSMakeRange(0, length)];
     unichar *tokenStart = buf;
     unichar *tokenEnd;
     NSString *token;
-    for (tokenEnd = buf; tokenEnd < buf + length; ++tokenEnd) {
+    for (tokenEnd = buf; tokenEnd < buf + length; ++tokenEnd)
+    {
         unichar c = *tokenEnd;
-        switch (state) {
+        switch (state)
+        {
             case START:
                 switch (c) {
                     case '0':

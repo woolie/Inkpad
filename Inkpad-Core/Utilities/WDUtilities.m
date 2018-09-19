@@ -192,7 +192,7 @@ float WDRandomFloat()
 NSData * WDSHA1DigestForData(NSData *data)
 {
     unsigned char cHMAC[CC_SHA1_DIGEST_LENGTH];
-    CCHmac(kCCHmacAlgSHA1, NULL, 0, [data bytes], [data length], cHMAC);
+    CCHmac(kCCHmacAlgSHA1, NULL, 0, data.bytes, data.length, cHMAC);
     
     return [NSData dataWithBytes:cHMAC length:sizeof(cHMAC)];
 }

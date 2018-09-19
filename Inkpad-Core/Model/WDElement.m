@@ -20,92 +20,92 @@
 #import "WDSVGHelper.h"
 #import "WDUtilities.h"
 
-NSString *WDElementChanged = @"WDElementChanged";
-NSString *WDPropertyChangedNotification = @"WDPropertyChangedNotification";
-NSString *WDPropertiesChangedNotification = @"WDPropertiesChangedNotification";
-NSString *WDPropertyKey = @"WDPropertyKey";
-NSString *WDPropertiesKey = @"WDPropertiesKey";
+NSString* const WDElementChanged = @"WDElementChanged";
+NSString* const WDPropertyChangedNotification = @"WDPropertyChangedNotification";
+NSString* const WDPropertiesChangedNotification = @"WDPropertiesChangedNotification";
+NSString* const WDPropertyKey = @"WDPropertyKey";
+NSString* const WDPropertiesKey = @"WDPropertiesKey";
 
-NSString *WDBlendModeKey = @"WDBlendModeKey";
-NSString *WDGroupKey = @"WDGroupKey";
-NSString *WDLayerKey = @"WDLayerKey";
-NSString *WDTransformKey = @"WDTransformKey";
-NSString *WDFillKey = @"WDFillKey";
-NSString *WDFillTransformKey = @"WDFillTransformKey";
-NSString *WDStrokeKey = @"WDStrokeKey";
+NSString* const WDBlendModeKey = @"WDBlendModeKey";
+NSString* const WDGroupKey = @"WDGroupKey";
+NSString* const WDLayerKey = @"WDLayerKey";
+NSString* const WDTransformKey = @"WDTransformKey";
+NSString* const WDFillKey = @"WDFillKey";
+NSString* const WDFillTransformKey = @"WDFillTransformKey";
+NSString* const WDStrokeKey = @"WDStrokeKey";
 
-NSString *WDTextKey = @"WDTextKey";
-NSString *WDFontNameKey = @"WDFontNameKey";
-NSString *WDFontSizeKey = @"WDFontSizeKey";
+NSString* const WDTextKey = @"WDTextKey";
+NSString* const WDFontNameKey = @"WDFontNameKey";
+NSString* const WDFontSizeKey = @"WDFontSizeKey";
 
-NSString *WDObjectOpacityKey = @"WDOpacityKey";
-NSString *WDShadowKey = @"WDShadowKey";
+NSString* const WDObjectOpacityKey = @"WDOpacityKey";
+NSString* const WDShadowKey = @"WDShadowKey";
 
 #define kAnchorRadius 4
 
 @implementation WDElement
 
-@synthesize layer = layer_;
-@synthesize group = group_;
-@synthesize opacity = opacity_;
-@synthesize blendMode = blendMode_;
-@synthesize shadow = shadow_;
-@synthesize initialShadow = initialShadow_;
-
-- (void)encodeWithCoder:(NSCoder *)coder
+- (instancetype) init
 {
-    [coder encodeConditionalObject:layer_ forKey:WDLayerKey];
-    
-    if (group_) {
-        [coder encodeConditionalObject:group_ forKey:WDGroupKey];
+    self = [super init];
+    if (self != nil)
+    {
+        _opacity = 1.0f;
     }
-    
-    if (shadow_) {
+
+    return self;
+}
+
+- (instancetype) initWithCoder:(NSCoder *) coder
+{
+    self = [super init];
+    if (self != nil)
+    {
+        _layer = [coder decodeObjectForKey:WDLayerKey];
+        _group = [coder decodeObjectForKey:WDGroupKey];
+
+        _shadow = [coder decodeObjectForKey:WDShadowKey];
+
+        if ([coder containsValueForKey:WDObjectOpacityKey])
+        {
+            _opacity = [coder decodeFloatForKey:WDObjectOpacityKey];
+        }
+        else
+        {
+            _opacity = 1.0f;
+        }
+
+        _blendMode = [coder decodeIntForKey:WDBlendModeKey] ?: kCGBlendModeNormal;
+    }
+
+    return self;
+}
+
+- (void) encodeWithCoder:(NSCoder *) coder
+{
+    [coder encodeConditionalObject:_layer forKey:WDLayerKey];
+
+    if (_group)
+    {
+        [coder encodeConditionalObject:_group forKey:WDGroupKey];
+    }
+
+    if (_shadow)
+    {
         // If there's an initial shadow, we should save that. The user hasn't committed to the color shift yet.
-        WDShadow *shadowToSave = initialShadow_ ? initialShadow_ : shadow_;
+        WDShadow *shadowToSave = _initialShadow ? _initialShadow : _shadow;
         [coder encodeObject:shadowToSave forKey:WDShadowKey];
     }
-    
-    if (opacity_ != 1.0f) {
-        [coder encodeFloat:opacity_ forKey:WDObjectOpacityKey];
-    }
-	
-	if (blendMode_ != kCGBlendModeNormal) {
-		[coder encodeInt:blendMode_ forKey:WDBlendModeKey];
-	}
-}
 
-- (id)initWithCoder:(NSCoder *)coder
-{
-    self = [super init];
-    
-    layer_ = [coder decodeObjectForKey:WDLayerKey];
-    group_ = [coder decodeObjectForKey:WDGroupKey];
-    
-    shadow_ = [coder decodeObjectForKey:WDShadowKey];
-    
-    if ([coder containsValueForKey:WDObjectOpacityKey]) {
-        opacity_ = [coder decodeFloatForKey:WDObjectOpacityKey];
-    } else {
-        opacity_ = 1.0f;
-    }
-	
-	blendMode_ = [coder decodeIntForKey:WDBlendModeKey] ?: kCGBlendModeNormal;
-    
-    return self; 
-}
-
-- (id) init
-{
-    self = [super init];
-    
-    if (!self) {
-        return nil;
+    if (_opacity != 1.0f)
+    {
+        [coder encodeFloat:_opacity forKey:WDObjectOpacityKey];
     }
 
-    opacity_ = 1.0f;
-    
-    return self;
+    if (_blendMode != kCGBlendModeNormal)
+    {
+        [coder encodeInt:_blendMode forKey:WDBlendModeKey];
+    }
 }
 
 - (void) awakeFromEncoding
@@ -124,12 +124,12 @@ NSString *WDShadowKey = @"WDShadowKey";
 
 - (void) setGroup:(WDGroup *)group
 {
-    if (group == group_) {
+    if (group == _group) {
         return;
     }
     
-    [[self.undoManager prepareWithInvocationTarget:self] setGroup:group_];
-    group_ = group;
+    [[self.undoManager prepareWithInvocationTarget:self] setGroup:_group];
+    _group = group;
 }
 
 - (CGRect) bounds
@@ -286,19 +286,20 @@ NSString *WDShadowKey = @"WDShadowKey";
 
 - (void) cacheDirtyBounds
 {
-    dirtyBounds_ = self.styleBounds;
+    _dirtyBounds = self.styleBounds;
 }
 
 - (void) postDirtyBoundsChange
 {
-    if (!self.drawing) {
+    if (!self.drawing)
+    {
         return;
     }
     
     // the layer should dirty its thumbnail
     [self.layer invalidateThumbnail];
-    
-    NSArray *rects = @[[NSValue valueWithCGRect:dirtyBounds_], [NSValue valueWithCGRect:self.styleBounds]];
+
+    NSArray *rects = @[[NSValue valueWithCGRect:_dirtyBounds], [NSValue valueWithCGRect:self.styleBounds]];
     
     NSDictionary *userInfo = @{@"rects": rects};
     [[NSNotificationCenter defaultCenter] postNotificationName:WDElementChanged object:self.drawing userInfo:userInfo];
@@ -313,8 +314,9 @@ NSString *WDShadowKey = @"WDShadowKey";
     CGPoint             topLeft = rect.origin;
     CGPoint             rectCenter = WDCenterOfRect(rect);
     CGPoint             bottomRight = CGPointMake(CGRectGetMaxX(rect), CGRectGetMaxY(rect));
-    
-    switch(align) {
+
+    switch(align)
+    {
         case WDAlignLeft:
             translate = CGAffineTransformMakeTranslation(topLeft.x - CGRectGetMinX(bounds), 0.0f);
             break;
@@ -368,30 +370,36 @@ NSString *WDShadowKey = @"WDShadowKey";
 - (void) addSVGOpacityAndShadowAttributes:(WDXMLElement *)element
 {
     [element setAttribute:@"opacity" floatValue:self.opacity];
-    if (blendMode_ != kCGBlendModeNormal) {
+    if (_blendMode != kCGBlendModeNormal)
+    {
         [element setAttribute:@"inkpad:blendMode" value:[[WDSVGHelper sharedSVGHelper] displayNameForBlendMode:self.blendMode]];;
     }
-    [(initialShadow_ ?: shadow_) addSVGAttributes:element];
+    [(_initialShadow ?: _shadow) addSVGAttributes:element];
 }
 
 - (NSSet *) changedShadowPropertiesFrom:(WDShadow *)from to:(WDShadow *)to
 {
     NSMutableSet *changedProperties = [NSMutableSet set];
     
-    if ((!from && to) || (!to && from)) {
+    if ((!from && to) || (!to && from))
+    {
         [changedProperties addObject:WDShadowVisibleProperty];
     }
     
-    if (![from.color isEqual:to.color]) {
+    if (![from.color isEqual:to.color])
+    {
         [changedProperties addObject:WDShadowColorProperty];
     }
-    if (from.angle != to.angle) {
+    if (from.angle != to.angle)
+    {
         [changedProperties addObject:WDShadowAngleProperty];
     }
-    if (from.offset != to.offset) {
+    if (from.offset != to.offset)
+    {
         [changedProperties addObject:WDShadowOffsetProperty];
     }
-    if (from.radius != to.radius) {
+    if (from.radius != to.radius)
+    {
         [changedProperties addObject:WDShadowRadiusProperty];
     }
     
@@ -400,17 +408,17 @@ NSString *WDShadowKey = @"WDShadowKey";
 
 - (void) setShadow:(WDShadow *)shadow
 {
-    if ([shadow_ isEqual:shadow]) {
+    if ([_shadow isEqual:shadow]) {
         return;
     }
     
     [self cacheDirtyBounds];
     
-    [(WDElement *)[self.undoManager prepareWithInvocationTarget:self] setShadow:shadow_];
+    [(WDElement *)[self.undoManager prepareWithInvocationTarget:self] setShadow:_shadow];
     
-    NSSet *changedProperties = [self changedShadowPropertiesFrom:shadow_ to:shadow];
+    NSSet *changedProperties = [self changedShadowPropertiesFrom:_shadow to:shadow];
     
-    shadow_ = shadow;
+    _shadow = shadow;
     
     [self postDirtyBoundsChange];
     [self propertiesChanged:changedProperties];
@@ -418,15 +426,15 @@ NSString *WDShadowKey = @"WDShadowKey";
 
 - (void) setOpacity:(float)opacity
 {
-    if (opacity == opacity_) {
+    if (opacity == _opacity) {
         return;
     }
     
     [self cacheDirtyBounds];
     
-    [[self.undoManager prepareWithInvocationTarget:self] setOpacity:opacity_];
+    [[self.undoManager prepareWithInvocationTarget:self] setOpacity:_opacity];
     
-    opacity_ = WDClamp(0, 1, opacity);
+    _opacity = WDClamp(0, 1, opacity);
 
     [self postDirtyBoundsChange];
     [self propertyChanged:WDOpacityProperty];
@@ -434,15 +442,15 @@ NSString *WDShadowKey = @"WDShadowKey";
 
 - (void) setBlendMode:(CGBlendMode)blendMode
 {
-	if (blendMode == blendMode_) {
+	if (blendMode == _blendMode) {
 		return;
 	}
 	
 	[self cacheDirtyBounds];
 	
-	[[self.undoManager prepareWithInvocationTarget:self] setBlendMode:blendMode_];
+	[[self.undoManager prepareWithInvocationTarget:self] setBlendMode:_blendMode];
 	
-	blendMode_ = blendMode;
+	_blendMode = blendMode;
 	
 	[self postDirtyBoundsChange];
 	[self propertyChanged:WDBlendModeProperty];
@@ -487,9 +495,9 @@ NSString *WDShadowKey = @"WDShadowKey";
 - (id) valueForProperty:(NSString *)property
 {
     if ([property isEqualToString:WDOpacityProperty]) {
-        return @(opacity_);
+        return @(_opacity);
 	} else if ([property isEqualToString:WDBlendModeProperty]) {
-		return @(blendMode_);
+		return @(_blendMode);
     } else if ([property isEqualToString:WDShadowVisibleProperty]) {
         return @((self.shadow) ? YES : NO);
     } else if (self.shadow) {
@@ -572,15 +580,15 @@ NSString *WDShadowKey = @"WDShadowKey";
 
 - (BOOL) needsToSaveGState:(float)scale
 {
-    if (opacity_ != 1) {
+    if (_opacity != 1) {
         return YES;
     }
     
-    if (shadow_ && scale <= 3) {
+    if (_shadow && scale <= 3) {
         return YES;
     }
 	
-	if (blendMode_ != kCGBlendModeNormal) {
+	if (_blendMode != kCGBlendModeNormal) {
 		return YES;
 	}
     
@@ -600,16 +608,16 @@ NSString *WDShadowKey = @"WDShadowKey";
     
     CGContextSaveGState(ctx);
     
-    if (opacity_ != 1) {
-        CGContextSetAlpha(ctx, opacity_);
+    if (_opacity != 1) {
+        CGContextSetAlpha(ctx, _opacity);
     }
 
-    if (shadow_ && metaData.scale <= 3) {
-        [shadow_ applyInContext:ctx metaData:metaData];
+    if (_shadow && metaData.scale <= 3) {
+        [_shadow applyInContext:ctx metaData:metaData];
     }
 
-    if (blendMode_ != kCGBlendModeNormal) {
-        CGContextSetBlendMode(ctx, blendMode_);
+    if (_blendMode != kCGBlendModeNormal) {
+        CGContextSetBlendMode(ctx, _blendMode);
     }
     
     if ([self needsTransparencyLayer:metaData.scale]) {     
@@ -630,13 +638,13 @@ NSString *WDShadowKey = @"WDShadowKey";
     CGContextRestoreGState(ctx);
 }
 
-- (id) copyWithZone:(NSZone *)zone
+- (instancetype) copyWithZone:(NSZone *)zone
 {       
-    WDElement *element = [[[self class] allocWithZone:zone] init];
+    WDElement *element = [[self.class allocWithZone:zone] init];
     
-    element->shadow_ = [shadow_ copy];
-    element->opacity_ = opacity_;
-    element->blendMode_ = blendMode_;
+    element->_shadow = [_shadow copy];
+    element->_opacity = _opacity;
+    element->_blendMode = _blendMode;
     
     return element;
 }

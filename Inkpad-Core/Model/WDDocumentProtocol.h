@@ -13,9 +13,10 @@
 
 @protocol WDDocumentProtocol <NSObject>
 
-- (NSURL *) fileURL;
+@property (nonatomic, readonly) NSURL *fileURL;
+@property (nonatomic, readonly) BOOL hasUnsavedChanges;
+
 - (void) markChanged;
-- (BOOL) hasUnsavedChanges;
-- (void) saveToURL:(NSURL *)url forSaveOperation:(UIDocumentSaveOperation)saveOperation completionHandler:(void (^)(BOOL success))completionHandler;
+- (void) saveToURL:(NSURL*) url forSaveOperation:(UIDocumentSaveOperation) saveOperation completionHandler:(void (^)(BOOL success)) completionHandler;
 
 @end

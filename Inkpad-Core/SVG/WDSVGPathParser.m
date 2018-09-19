@@ -21,12 +21,12 @@
 
 @implementation WDSVGPathParser
 
-- (id) init
+- (instancetype) init
 {
     return [self initWithErrorReporter:nil];
 }
 
-- (id) initWithErrorReporter:(id<WDErrorReporter>)reporter
+- (instancetype) initWithErrorReporter:(id<WDErrorReporter>)reporter
 {
     self = [super init];
     if (!self) {
@@ -292,10 +292,10 @@ BOOL decomposeArcToCubic(CGMutablePathRef path, float angle, float rx, float ry,
     lastCurveControl_ = lastQuadCurveControl_ = CGPathGetCurrentPoint(path_);
     
     NSString *command = nil;
-    unichar *buf = malloc([source length] * sizeof(unichar));
+    unichar *buf = malloc(source.length * sizeof(unichar));
     NSArray *pathTokens = tokenize(source, buf);
     NSRange arguments = NSMakeRange(0, 0);
-    for (int i = 0; i < [pathTokens count]; ++i) {
+    for (int i = 0; i < pathTokens.count; ++i) {
         NSString *token = pathTokens[i];
         switch ([token characterAtIndex:0]) {
             case '0':

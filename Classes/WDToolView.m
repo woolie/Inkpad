@@ -18,7 +18,7 @@
 @synthesize tools = tools_;
 @synthesize owner, canvas;
 
-- (id) initWithTools:(NSArray *)tools
+- (instancetype) initWithTools:(NSArray *)tools
 {
     CGRect frame = CGRectMake(0, 0, [WDToolButton dimension], [WDToolButton dimension] * tools.count);
     

@@ -31,6 +31,6 @@
 @property (nonatomic, assign) CGAffineTransform viewBoxTransform;
 @property (nonatomic, assign) CGRect viewport;
 
-- (id) initWithElement:(WDSVGElement *)element;
+- (instancetype) initWithElement:(WDSVGElement *)element;
 
 @end

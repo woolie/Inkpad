@@ -24,12 +24,13 @@
 - (WDSVGElement *) initWithName:(NSString *)name andAttributes:(NSDictionary *)attributes
 {
     self = [super init];
-    if (!self) {
+    if (!self)
+    {
         return nil;
     }
     
     name_ = name;
-    if ([attributes count]) {
+    if (attributes.count) {
         attributes_ = attributes;
     }
 
@@ -95,7 +96,7 @@
 
 + (float) lengthFromString:(NSString *)source withBound:(float)bound andDefault:(float)deft
 {
-    NSInteger len = [source length];
+    NSInteger len = source.length;
     if (len == 0) {
         return deft;
     } else if (len == 1) {
@@ -150,7 +151,7 @@
 
 + (NSArray *) numberListFromString:(NSString *)source
 {
-    unichar *buf = malloc([source length] * sizeof(unichar));
+    unichar *buf = malloc(source.length * sizeof(unichar));
     NSArray *tokens = tokenize(source, buf);
     NSMutableArray *numbers = [NSMutableArray array];
     for (NSString *token in tokens) {
@@ -175,7 +176,7 @@
 
 + (NSArray *) lengthListFromString:(NSString *)source withBound:(float)bound
 {
-    unichar *buf = malloc([source length] * sizeof(unichar));
+    unichar *buf = malloc(source.length * sizeof(unichar));
     NSArray *tokens = tokenize(source, buf);
     NSMutableArray *numbers = [NSMutableArray array];
     for (NSString *token in tokens) {
@@ -222,7 +223,7 @@
 {
     NSString *funciri = [self attribute:key];
     if ([funciri hasPrefix:@"url(#"] && [funciri hasSuffix:@")"]) {
-        return [funciri substringWithRange:NSMakeRange(5, [funciri length] - 6)];
+        return [funciri substringWithRange:NSMakeRange(5, funciri.length - 6)];
     } else if (funciri) {
         [reporter reportError:@"unsupported funciri: %@", funciri];
         return nil;

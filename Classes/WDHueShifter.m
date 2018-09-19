@@ -20,7 +20,7 @@
 
 @synthesize indicator;
 
-- (id) initWithFrame:(CGRect)frame
+- (instancetype) initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     
@@ -81,7 +81,7 @@
     return indicator;
 }
 
-- (id) initWithFrame:(CGRect)frame
+- (instancetype) initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     
@@ -141,7 +141,7 @@
     indicator_.sharpCenter = CGPointMake(value, 10);
 }
 
-- (id) initWithCoder:(NSCoder *)aDecoder
+- (instancetype) initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];
     

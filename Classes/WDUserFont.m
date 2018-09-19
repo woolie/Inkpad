@@ -28,7 +28,7 @@
     return [[WDUserFont alloc] initWithFilename:filename];
 }
 
-- (id) initWithFilename:(NSString *)filename
+- (instancetype) initWithFilename:(NSString *)filename
 {
     self = [super init];
     

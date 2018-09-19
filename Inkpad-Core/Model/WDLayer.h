@@ -33,7 +33,7 @@
 
 + (WDLayer *) layer;
 
-- (id) initWithElements:(NSMutableArray *)elements;
+- (instancetype) initWithElements:(NSMutableArray *)elements;
 - (void) awakeFromEncoding;
 
 - (void) renderInContext:(CGContextRef)ctx clipRect:(CGRect)clip metaData:(WDRenderingMetaData)metaData;

@@ -50,13 +50,13 @@ NSString *WDOpacityKey = @"WDOpacityKey";
     return [[WDLayer alloc] init];
 }
 
-- (id) init
+- (instancetype) init
 {
     NSMutableArray* elements = [[NSMutableArray alloc] init];
     return [self initWithElements:elements];
 }
 
-- (id) initWithElements:(NSMutableArray *)elements
+- (instancetype) initWithElements:(NSMutableArray *)elements
 {
     self = [super init];
     
@@ -297,7 +297,7 @@ NSString *WDOpacityKey = @"WDOpacityKey";
 
 - (void) sendBackward:(NSSet *)elements
 {
-    NSInteger top = [elements_ count];
+    NSInteger top = elements_.count;
     
     for (int i = 1; i < top; i++) {
         WDElement *curr = (WDElement *) elements_[i];
@@ -319,7 +319,7 @@ NSString *WDOpacityKey = @"WDOpacityKey";
 
 - (void) bringForward:(NSSet *)elements
 {
-    NSInteger top = [elements_ count] - 1;
+    NSInteger top = elements_.count - 1;
     
     for (NSInteger i = top - 1; i >= 0; i--) {
         WDElement *curr = (WDElement *) elements_[i];
@@ -333,7 +333,7 @@ NSString *WDOpacityKey = @"WDOpacityKey";
 
 - (void) bringToFront:(NSArray *)sortedElements
 {
-    NSInteger top = [elements_ count] - 1;
+    NSInteger top = elements_.count - 1;
     
     for (WDElement *e in sortedElements) {
         [self removeObject:e];

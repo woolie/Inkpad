@@ -46,7 +46,7 @@ typedef enum {
                               startArrow:(NSString *)startArrow
                                 endArrow:(NSString *)endArrow;
 
-- (id) initWithWidth:(float)width
+- (instancetype) initWithWidth:(float)width
                  cap:(CGLineCap)cap
                 join:(CGLineJoin)join
                color:(WDColor *)color

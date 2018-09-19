@@ -21,7 +21,7 @@
 @property (weak, nonatomic, readonly) NSString *XMLValue;
 
 + (WDXMLElement *) elementWithName:(NSString *)name;
-- (id) initWithName:(NSString *)name;
+- (instancetype) initWithName:(NSString *)name;
 
 - (void) setAttribute:(NSString *)attribute value:(NSString *)value;
 - (void) setAttribute:(NSString *)attribute floatValue:(float)value;

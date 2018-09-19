@@ -172,11 +172,11 @@ NSString *WDFontAddedNotification = @"WDFontAddedNotification";
     
     NSString *typeface = [longName copy];
     if ([typeface hasPrefix:familyName]) {
-        typeface = [longName substringFromIndex:[familyName length]];
+        typeface = [longName substringFromIndex:familyName.length];
         typeface = [typeface stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     }
     
-    if ([typeface length] == 0) {
+    if (typeface.length == 0) {
         typeface = @"Regular";
     }
     

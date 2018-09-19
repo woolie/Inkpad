@@ -69,7 +69,7 @@ NSString *WDDefaultFreehandTool = @"WDDefaultFreehandTool";
 
 - (void) endWithEvent:(WDEvent *)theEvent inCanvas:(WDCanvas *)canvas
 {
-    if (pathStarted_ && [tempPath_.nodes count] > 1) {
+    if (pathStarted_ && tempPath_.nodes.count > 1) {
         float maxError = (kMaxError / canvas.viewScale);
         
         canvas.shapeUnderConstruction = nil;

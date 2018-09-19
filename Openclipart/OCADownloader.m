@@ -33,7 +33,7 @@
     return [[OCADownloader alloc] initWithURL:url delegate:delegate info:info];
 }
 
-- (id) initWithURL:(NSString *)url delegate:(id<OCADownloaderDelegate>)delegate info:(id)info
+- (instancetype) initWithURL:(NSString *)url delegate:(id<OCADownloaderDelegate>)delegate info:(id)info
 {
     self = [super init];
     

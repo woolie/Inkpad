@@ -29,7 +29,7 @@ NSString *WDDataKey = @"WDDataKey";
     return [[WDImageData alloc] initWithData:data];
 }
 
-- (id) initWithData:(NSData *)data
+- (instancetype) initWithData:(NSData *)data
 {
     self = [super init];
  

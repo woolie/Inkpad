@@ -29,7 +29,7 @@
 
 @implementation WDSVGParser
 
-- (id) initWithDrawing:(WDDrawing *)drawing
+- (instancetype) initWithDrawing:(WDDrawing *)drawing
 {
     self = [super init];
     if (!self) {
@@ -211,13 +211,13 @@
     }
     WDGroup *group = (WDGroup *) element;
     NSArray *elements = group.elements;
-    if ([elements count] == 0) {
+    if (elements.count == 0) {
         // create empty clipping path
         CGPathRef emptyPath = CGPathCreateMutable();
         WDAbstractPath *path = [WDAbstractPath pathWithCGPathRef:emptyPath];
         CGPathRelease(emptyPath);
         return path;
-    } else if ([elements count] == 1) {
+    } else if (elements.count == 1) {
         id element = [elements lastObject];
         if ([element isKindOfClass:[WDStylable class]]) {
             ((WDElement *) element).group = nil;
@@ -311,7 +311,7 @@
 - (void) foundString:(NSString *)string
 {
     WDSVGElement *svgElement = [svgElements_ lastObject];
-    if ([svgElement.text length] > 0) {
+    if (svgElement.text.length > 0) {
         [svgElement.text appendString:@" "];
     }
     [svgElement.text appendString:string];
@@ -353,7 +353,7 @@
 
 - (float) floatFromArray:(NSArray *)array atIndex:(int)index
 {
-    if (index >= [array count]) {
+    if (index >= array.count) {
         return 0;
     } else {
         return [array[index] floatValue];
@@ -362,7 +362,7 @@
 
 - (void) createLayerFor:(NSMutableArray *)elements
 {
-    if ([elements count] > 0) {
+    if (elements.count > 0) {
         NSMutableArray *copy = [elements mutableCopy];
         WDLayer *layer = [[WDLayer alloc] initWithElements:copy];
         [elements removeAllObjects];
@@ -388,7 +388,7 @@
         
         if ([painter isKindOfClass:[WDGradient class]]) {
             WDGradient *refGradient = painter;
-            if ([stopsCopy count] == 0) {
+            if (stopsCopy.count == 0) {
                 [stopsCopy addObjectsFromArray:refGradient.stops];
             }
         }
@@ -503,7 +503,7 @@
     NSArray *dx = [state_ lengthList:@"dx" withBound:[state_ viewWidth]];
     NSArray *dy = [state_ lengthList:@"dy" withBound:[state_ viewHeight]];
     NSArray *rotate = [state_ numberList:@"rotate"];
-    NSInteger highestCount = MAX([x count], MAX([y count], MAX([dx count], MAX([dy count], [rotate count]))));
+    NSInteger highestCount = MAX(x.count, MAX(y.count, MAX(dx.count, MAX(dy.count, rotate.count))));
     if (highestCount <= 1) {
         float tx = [self floatFromArray:x atIndex:0] + [self floatFromArray:dx atIndex:0];
         float ty = [self floatFromArray:y atIndex:0] + [self floatFromArray:dy atIndex:0];
@@ -667,7 +667,7 @@
 - (void) endG
 {
     NSMutableArray *elements = [state_.group mutableCopy];
-    if ([elements count]) {
+    if (elements.count) {
         [state_.group removeAllObjects];
         NSString *xmlid = [state_ attribute:@"id"];
         NSString *layerName = [state_ attribute:@"inkpad:layerName"];
@@ -677,7 +677,7 @@
             for (WDElement *element in elements) {
                 if ([element isKindOfClass:[WDStylable class]]) {
                     maskedElements = [((WDStylable *) element).maskedElements mutableCopy];
-                    while ([maskedElements count] == 1 && [[maskedElements lastObject] isKindOfClass:[WDGroup class]]) {
+                    while (maskedElements.count == 1 && [[maskedElements lastObject] isKindOfClass:[WDGroup class]]) {
                         // if the list contains a single group, just unwrap it
                         maskedElements = ((WDGroup *) [maskedElements lastObject]).elements;
                     }
@@ -711,7 +711,7 @@
             }
             [self createLayerFor:[state_ stateAtDepth:2].group];
             [drawing_ addLayer:layer];
-        } else if ([elements count] == 1) {
+        } else if (elements.count == 1) {
             state_.wdElement = [self clipAndGroup:[elements lastObject]];
             if ([state_ style:kWDPropertyOpacity]) {
                 state_.wdElement.opacity *= [[state_ style:kWDPropertyOpacity] floatValue];
@@ -761,9 +761,9 @@
 {
     NSMutableArray *elements = [state_.group mutableCopy];
     [state_.group removeAllObjects];
-    if ([elements count] == 1) {
+    if (elements.count == 1) {
         state_.wdElement = [self clip:[elements lastObject]];
-    } else if ([elements count] > 1) {
+    } else if (elements.count > 1) {
         WDGroup *group = [[WDGroup alloc] init];
         group.layer = drawing_.activeLayer;
         group.elements = elements;
@@ -784,7 +784,7 @@
         [text setWidth:textLength];
         [state_.group removeAllObjects]; // no need for elements created by <tspan> children
         [state_.group addObject:text];
-    } else if ([svgtext length] == 0) {
+    } else if (svgtext.length == 0) {
         [state_.group removeObject:state_.wdElement];
         state_.wdElement = nil;
     } else if ([state_.wdElement isKindOfClass:[WDText class]]) {
@@ -811,12 +811,12 @@
         }
     } else if ([state_.wdElement isKindOfClass:[WDGroup class]]) {
         WDGroup *group = (WDGroup *) state_.wdElement;
-        int count = (int) [group.elements count];
-        for (int i = 0; (i < count - 1) && (i < [svgtext length]); ++i) {
+        int count = (int) group.elements.count;
+        for (int i = 0; (i < count - 1) && (i < svgtext.length); ++i) {
             WDText *text = (group.elements)[i];
             [text setTextQuiet:[svgtext substringWithRange:NSMakeRange(i, 1)]];
         }
-        if (count - 1 < [svgtext length]) {
+        if (count - 1 < svgtext.length) {
             WDText *text = [group.elements lastObject];
             [text setTextQuiet:[svgtext substringFromIndex:(count - 1)]];
         }

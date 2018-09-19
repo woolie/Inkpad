@@ -28,7 +28,7 @@ typedef enum {
 @property (nonatomic, readonly) CGRect naturalBounds;
 
 + (WDImageData *) imageDataWithData:(NSData *)data;
-- (id) initWithData:(NSData *)data;
+- (instancetype) initWithData:(NSData *)data;
 
 - (WDImageDataFormat) imageFormat;
 

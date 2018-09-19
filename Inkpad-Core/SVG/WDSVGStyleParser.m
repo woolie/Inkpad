@@ -45,7 +45,7 @@ NSString * const kWDPropertyVisibility       = @"visibility";
 
 @implementation WDSVGStyleParser
     
-- (id) initWithStack:(WDSVGParserStateStack *)stack
+- (instancetype) initWithStack:(WDSVGParserStateStack *)stack
 {
     self = [super init];
     if (!self) {
@@ -140,7 +140,7 @@ static int charHexValue(unichar c)
             return painter;
         }
     } else if ([source characterAtIndex:0] == '#') {
-        if ([source length] == 4) {
+        if (source.length == 4) {
             unichar cr = [source characterAtIndex:1];
             unichar cg = [source characterAtIndex:2];
             unichar cb = [source characterAtIndex:3];
@@ -148,7 +148,7 @@ static int charHexValue(unichar c)
             float green = (charHexValue(cg) * 16 + charHexValue(cg)) / 255.f;
             float blue = (charHexValue(cb) * 16 + charHexValue(cb)) / 255.f;
             return [WDColor colorWithRed:red green:green blue:blue alpha:alpha];
-        } else if ([source length] == 7) {
+        } else if (source.length == 7) {
             unichar crh = [source characterAtIndex:1];
             unichar crl = [source characterAtIndex:2];
             unichar cgh = [source characterAtIndex:3];
@@ -175,7 +175,7 @@ static int charHexValue(unichar c)
         [scanner scanString:@")" intoString:NULL];
         return [WDColor colorWithRed:(red / redMax) green:(green / greenMax) blue:(blue / blueMax) alpha:alpha];
     } else if ([source hasPrefix:@"url("] && [source hasSuffix:@")"]) {
-        NSString *url = [source substringWithRange:NSMakeRange(4, [source length] - 5)];
+        NSString *url = [source substringWithRange:NSMakeRange(4, source.length - 5)];
         return [self resolvePainter:url alpha:alpha];
     } else if ([source isEqualToString:@"currentColor"]) {
         return [self resolvePainter:[stack_ style:kWDPropertyColor] alpha:alpha];
@@ -190,7 +190,7 @@ NSArray *tokenizeStyle(NSString *source)
     NSMutableArray *tokens = [[NSMutableArray alloc] init];
     enum {START, IDENTIFIER, STRING1, STRING2, BEGIN_COMMENT, COMMENT, END_COMMENT} state = START;
     NSRange token;
-    for (int i = 0; i < [source length]; ++i) {
+    for (int i = 0; i < source.length; ++i) {
         unichar c = [source characterAtIndex:i];
         switch (state) {
         case START:
@@ -315,7 +315,7 @@ NSArray *tokenizeStyle(NSString *source)
     NSString *fontName = [stack_ style:kWDPropertyFontFamily];
     // TODO this is really over-simplified
     if ([fontName hasPrefix:@"'"] && [fontName hasSuffix:@"'"]) {
-        fontName = [fontName substringWithRange:NSMakeRange(1, [fontName length] - 2)];
+        fontName = [fontName substringWithRange:NSMakeRange(1, fontName.length - 2)];
     }
     return fontName;
 }
@@ -337,7 +337,7 @@ NSArray *tokenizeStyle(NSString *source)
         
         NSArray *dashArray = [WDSVGElement lengthListFromString:[stack_ style:kWDPropertyStrokeDashArray] withBound:[stack_ viewRadius]];
         NSArray *dashPattern;
-        if ([dashArray count]) {
+        if (dashArray.count) {
             NSMutableArray *scaledDashArray = [NSMutableArray array];
             for (NSNumber *n in dashArray) {
                 [scaledDashArray addObject:@(scaleRadially([n floatValue], stack_.transform))];

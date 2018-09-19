@@ -22,7 +22,7 @@
 @property (nonatomic, readonly) NSMutableArray *horizontalGuides;
 @property (nonatomic, weak, readonly) WDDrawingController *drawingController;
 
-- (id) initWithDrawingController:(WDDrawingController *)drawingController;
+- (instancetype) initWithDrawingController:(WDDrawingController *)drawingController;
 
 // guide lifecyle
 - (void) beginGuideOperation;

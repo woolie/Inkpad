@@ -24,7 +24,7 @@
     return element;
 }
 
-- (id) initWithName:(NSString *)name
+- (instancetype) initWithName:(NSString *)name
 {
     self = [super init];
     

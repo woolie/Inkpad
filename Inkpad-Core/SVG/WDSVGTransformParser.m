@@ -22,7 +22,7 @@ NSArray *tokenizeTransforms(NSString* source, id<WDErrorReporter> reporter)
     NSMutableArray *tokens = [NSMutableArray array];
     enum {START, FUNCTION, OPEN_PAREN, START_ARGUMENT, ARGUMENT} state = START;
     NSRange token;
-    for (int i = 0; i < [source length]; ++i) {
+    for (int i = 0; i < source.length; ++i) {
         unichar c = [source characterAtIndex:i];
         switch (state) {
         case START:
@@ -88,15 +88,15 @@ CGAffineTransform processTransform(NSString *function, NSArray *arguments, id<WD
         return CGAffineTransformMake(a, b, c, d, tx, ty);
     } else if ([function isEqualToString:@"translate"]) {
         float tx = [arguments[0] floatValue];
-        float ty = [arguments count] > 1 ? [arguments[1] floatValue] : 0.0;
+        float ty = arguments.count > 1 ? [arguments[1] floatValue] : 0.0;
         return CGAffineTransformMake(1, 0, 0, 1, tx, ty);
     } else if ([function isEqualToString:@"scale"]) {
         float sx = [arguments[0] floatValue];
-        float sy = [arguments count] > 1 ? [arguments[1] floatValue] : sx;
+        float sy = arguments.count > 1 ? [arguments[1] floatValue] : sx;
         return CGAffineTransformMake(sx, 0, 0, sy, 0, 0);
     } else if ([function isEqualToString:@"rotate"]) {
         float a = [arguments[0] floatValue] * M_PI / 180;
-        if ([arguments count] == 3) {
+        if (arguments.count == 3) {
             float cx = [arguments[1] floatValue];
             float cy = [arguments[2] floatValue];
             return CGAffineTransformTranslate(CGAffineTransformRotate(CGAffineTransformMakeTranslation(cx, cy), a), -cx, -cy);

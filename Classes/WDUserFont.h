@@ -22,7 +22,7 @@
 @property (nonatomic, strong) NSData *digest;
 
 + (WDUserFont *) userFontWithFilename:(NSString *)filename;
-- (id) initWithFilename:(NSString *)filename;
+- (instancetype) initWithFilename:(NSString *)filename;
 - (CTFontRef) newFontRefForSize:(float)size;
 
 @end

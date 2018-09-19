@@ -72,7 +72,7 @@ const float kWDMinimumExtent = 120.0f;
     return guide;
 }
 
-- (id) initWithOffset:(double)offset
+- (instancetype) initWithOffset:(double)offset
 {
     self = [super init];
     

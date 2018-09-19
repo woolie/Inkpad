@@ -44,7 +44,7 @@
     return [[WDArrowhead alloc] initWithPath:pathRef attachment:attach capAdjustment:adjustment];
 }
 
-- (id) initWithPath:(CGPathRef)pathRef attachment:(CGPoint)attach capAdjustment:(CGPoint)adjustment
+- (instancetype) initWithPath:(CGPathRef)pathRef attachment:(CGPoint)attach capAdjustment:(CGPoint)adjustment
 {
     self = [super init];
     

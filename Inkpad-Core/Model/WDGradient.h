@@ -33,7 +33,7 @@ typedef enum {
 + (WDGradient *) defaultGradient;
 + (WDGradient *) gradientWithStart:(WDColor *)start andEnd:(WDColor*)end;
 + (WDGradient *) gradientWithType:(WDGradientType)type stops:(NSArray *)stops;
-- (id) initWithType:(WDGradientType)type stops:(NSArray *)stops;
+- (instancetype) initWithType:(WDGradientType)type stops:(NSArray *)stops;
 
 - (WDGradient *) gradientByReversing;
 - (WDGradient *) gradientByDistributingEvenly;

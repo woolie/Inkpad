@@ -25,7 +25,7 @@
 @property (nonatomic, weak) UIPopoverController *popover;
 @property (nonatomic, weak) id delegate;
 
-- (id) initWithItems:(NSArray *)items;
+- (instancetype) initWithItems:(NSArray *)items;
 - (void) dismiss;
 
 @end

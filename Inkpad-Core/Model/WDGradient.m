@@ -64,7 +64,7 @@ NSString *WDGradientStopsKey = @"WDGradientStopsKey";
     return g;
 }
 
-- (id) initWithType:(WDGradientType)type stops:(NSArray *)stops
+- (instancetype) initWithType:(WDGradientType)type stops:(NSArray *)stops
 {
     self = [super init];
 

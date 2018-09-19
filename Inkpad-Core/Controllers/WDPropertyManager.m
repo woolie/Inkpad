@@ -33,7 +33,7 @@ NSString *WDInvalidPropertiesKey = @"WDInvalidPropertiesKey";
 @synthesize drawingController = drawingController_;
 @synthesize ignoreSelectionChanges = ignoreSelectionChanges_;
 
-- (id) init
+- (instancetype) init
 {
     self = [super init];
 

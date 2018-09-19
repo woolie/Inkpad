@@ -22,7 +22,7 @@
     CGPoint             lastQuadCurveControl_;
 }
 
-- (id) initWithErrorReporter:(id<WDErrorReporter>)reporter;
+- (instancetype) initWithErrorReporter:(id<WDErrorReporter>)reporter;
 - (CGPathRef) parse:(NSString *)source;
 
 @end

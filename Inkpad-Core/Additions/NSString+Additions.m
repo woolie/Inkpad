@@ -16,7 +16,7 @@
 - (NSString *) stringByUnescapingEntities
 {
     NSMutableString *unescapeStr = [NSMutableString stringWithString:self];
-    NSRange range = NSMakeRange(0, [unescapeStr length]);
+    NSRange range = NSMakeRange(0, unescapeStr.length);
     
     [unescapeStr replaceOccurrencesOfString:@"&amp;"  withString:@"&"  options:NSLiteralSearch range:range];
     [unescapeStr replaceOccurrencesOfString:@"&quot;" withString:@"\"" options:NSLiteralSearch range:range];
@@ -33,7 +33,7 @@
 - (NSString *) stringByEscapingEntities
 {
     NSMutableString *escapeStr = [NSMutableString stringWithString:self];
-    NSRange range = NSMakeRange(0, [escapeStr length]);
+    NSRange range = NSMakeRange(0, escapeStr.length);
     
     [escapeStr replaceOccurrencesOfString:@"&"  withString:@"&amp;"  options:NSLiteralSearch range:range];
     [escapeStr replaceOccurrencesOfString:@"\"" withString:@"&quot;" options:NSLiteralSearch range:range];
@@ -47,7 +47,7 @@
 - (NSString *) stringByEscapingEntitiesAndWhitespace
 {
     NSMutableString *escapeStr = (NSMutableString *) [self stringByEscapingEntities];
-    NSRange range = NSMakeRange(0, [escapeStr length]);
+    NSRange range = NSMakeRange(0, escapeStr.length);
     
     [escapeStr replaceOccurrencesOfString:@"\n"  withString:@"&#xA;"  options:NSLiteralSearch range:range];
     [escapeStr replaceOccurrencesOfString:@"\r"  withString:@"&#xA;"  options:NSLiteralSearch range:range];

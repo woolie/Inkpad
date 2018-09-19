@@ -39,7 +39,7 @@ NSString *WDAttachmentNotification = @"WDAttachmentNotification";
 
 #pragma mark -
 
-- (id) initWithCoder:(NSCoder *)aDecoder
+- (instancetype) initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];
     
@@ -545,9 +545,9 @@ NSString *WDAttachmentNotification = @"WDAttachmentNotification";
 
 - (void) properlyEnableToolbarItems
 {
-    deleteItem_.enabled = [selectedDrawings_ count] == 0 ? NO : YES;
-    emailItem_.enabled = ([selectedDrawings_ count] > 0 && [selectedDrawings_ count] < 6) ? YES : NO;
-    dropboxExportItem_.enabled = [selectedDrawings_ count] == 0 ? NO : (filesBeingUploaded_.count == 0 ? YES : NO);
+    deleteItem_.enabled = selectedDrawings_.count == 0 ? NO : YES;
+    emailItem_.enabled = (selectedDrawings_.count > 0 && selectedDrawings_.count < 6) ? YES : NO;
+    dropboxExportItem_.enabled = selectedDrawings_.count == 0 ? NO : (filesBeingUploaded_.count == 0 ? YES : NO);
     
     if (filesBeingUploaded_.count) {
         dropboxExportItem_.title = NSLocalizedString(@"Uploading...", @"Uploading...");
@@ -820,7 +820,7 @@ NSString *WDAttachmentNotification = @"WDAttachmentNotification";
     
     WDEmail *email = [[WDEmail alloc] init];
     email.completeAttachments = 0;
-    email.expectedAttachments = [selectedDrawings_ count];
+    email.expectedAttachments = selectedDrawings_.count;
     email.picker = picker;
     
     for (NSString *filename in selectedDrawings_) {

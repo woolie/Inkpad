@@ -25,6 +25,6 @@ typedef enum {
 @property (weak, nonatomic, readonly) NSString *title;
 
 + (WDActivity *) activityWithFilePath:(NSString *)title type:(WDActivityType)type;
-- (id) initWithFilePath:(NSString *)aFilePath type:(WDActivityType)aType;
+- (instancetype) initWithFilePath:(NSString *)aFilePath type:(WDActivityType)aType;
 
 @end

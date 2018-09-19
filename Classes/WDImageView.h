@@ -13,7 +13,7 @@
 
 @interface WDImageView : UIView
 
-- (id) initWithImage:(UIImage *)image maxDimension:(float)maxDimension;
+- (instancetype) initWithImage:(UIImage *)image maxDimension:(float)maxDimension;
 
 @property (nonatomic, strong) UIImage *image;
 @property (nonatomic, assign) float maximumDimension;

@@ -73,7 +73,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	return [blendModeNames_ count];
+	return blendModeNames_.count;
 }
 
 - (NSString *) localizedTitleForKey:(NSString *)key

@@ -45,7 +45,7 @@ extern NSString * const kWDPropertyVisibility;
     NSMutableDictionary     *forwardReferences_;
 }
 
-- (id) initWithStack:(WDSVGParserStateStack *)stack;
+- (instancetype) initWithStack:(WDSVGParserStateStack *)stack;
 - (id) resolvePainter:(NSString *)source alpha:(float)alpha;
 - (NSDictionary *) parseStyles:(NSString *)source;
 - (void) styleOpacityBlendAndShadow:(WDElement *)element;

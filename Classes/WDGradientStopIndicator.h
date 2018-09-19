@@ -24,7 +24,7 @@
 @property (nonatomic, assign) BOOL selected;
 @property (nonatomic, strong) WDGradientStopOverlay *overlay;
 
-- (id) initWithStop:(WDGradientStop *)stop;
+- (instancetype) initWithStop:(WDGradientStop *)stop;
 - (CGRect) colorRect;
 
 @end

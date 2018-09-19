@@ -910,7 +910,7 @@ NSString *WDAlignmentKey = @"WDAlignmentKey";
     [text setAttribute:@"inkpad:width" floatValue:naturalBounds_.size.width];
     [text setAttribute:@"inkpad:text" value:[self.text stringByEscapingEntitiesAndWhitespace]];
     
-    if (self.maskedElements && [self.maskedElements count] > 0) {
+    if (self.maskedElements && self.maskedElements.count > 0) {
         // Produces an element such as:
         // <defs>
         //   <text id="TextN"><tspan>...</tspan></text>

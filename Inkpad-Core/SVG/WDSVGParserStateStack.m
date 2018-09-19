@@ -17,7 +17,7 @@
 
 @implementation WDSVGParserStateStack
 
-- (id) init
+- (instancetype) init
 {
     self = [super init];
     if (!self) {
@@ -70,7 +70,7 @@
 
 - (WDSVGParserState *) stateAtDepth:(int)depth
 {
-    return ([stack_ count] > depth) ? stack_[depth] : nil;
+    return (stack_.count > depth) ? stack_[depth] : nil;
 }
 
 - (NSString *) style:(NSString *)name
@@ -271,7 +271,7 @@
 - (NSString *) description
 {
     NSMutableString *tree = [[NSMutableString alloc] init];
-    for (int i = 1; i < [stack_ count]; ++i) {
+    for (int i = 1; i < stack_.count; ++i) {
         [tree appendString:@"\n"];
         for (int j = 1; j < i; ++j) {
             [tree appendString:@"  "];

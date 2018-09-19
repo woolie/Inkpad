@@ -23,12 +23,12 @@
 @synthesize viewBoxTransform = viewBoxTransform_;
 @synthesize viewport = viewport_;
 
-- (id) init
+- (instancetype) init
 {
     return [self initWithElement:nil];
 }
 
-- (id) initWithElement:(WDSVGElement *)element
+- (instancetype) initWithElement:(WDSVGElement *)element
 {
     self = [super init];
     if (!self) {

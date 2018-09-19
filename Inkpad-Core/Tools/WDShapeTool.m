@@ -38,7 +38,7 @@ NSString *WDShapeToolSpiralDecay = @"WDShapeToolSpiralDecay";
     return imageNames[shapeMode_];
 }
 
-- (id) init
+- (instancetype) init
 {
     self = [super init];
 

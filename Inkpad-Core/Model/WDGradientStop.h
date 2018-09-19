@@ -20,7 +20,7 @@
 @property (nonatomic, readonly) WDColor *color; // can include transparency
 
 + (WDGradientStop *) stopWithColor:(WDColor *)color andRatio:(float)ratio;
-- (id) initWithColor:(WDColor *)color andRatio:(float)ratio;
+- (instancetype) initWithColor:(WDColor *)color andRatio:(float)ratio;
 
 - (WDGradientStop *) stopWithRatio:(float)ratio;
 - (WDGradientStop *) stopWithColor:(WDColor *)color;

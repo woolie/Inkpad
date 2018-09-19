@@ -27,16 +27,18 @@
 extern const float kMinimumDrawingDimension;
 extern const float kMaximumDrawingDimension;
 
-enum {
-    WDRenderDefault      = 0x0,
-    WDRenderOutlineOnly  = 0x1,
-    WDRenderThumbnail    = 0x1 << 1,
-    WDRenderFlipped      = 0x1 << 2
+enum
+{
+	WDRenderDefault	  = 0x0,
+	WDRenderOutlineOnly  = 0x1,
+	WDRenderThumbnail	= 0x1 << 1,
+	WDRenderFlipped	  = 0x1 << 2
 };
 
-typedef struct {
-    float   scale;
-    UInt32  flags;
+typedef struct
+{
+	float   scale;
+	UInt32  flags;
 } WDRenderingMetaData;
 
 WDRenderingMetaData WDRenderingMetaDataMake(float scale, UInt32 flags);
@@ -45,17 +47,18 @@ BOOL WDRenderingMetaDataOutlineOnly(WDRenderingMetaData metaData);
 @protocol WDDocumentProtocol;
 @protocol WDPathPainter;
 
-@interface WDDrawing : NSObject <NSCoding, NSCopying> {    
-    NSMutableDictionary     *imageDatas_;
-    NSInteger               suppressNotifications_;
+@interface WDDrawing : NSObject <NSCoding, NSCopying>
+{
+	NSMutableDictionary*	_imageDatas;
+	NSInteger				_suppressNotifications;
 }
 
 @property (nonatomic, readonly) CGSize dimensions;
-@property (nonatomic, readonly) NSMutableArray *layers;
-@property (weak, nonatomic, readonly) WDLayer *activeLayer;
-@property (nonatomic, readonly) NSMutableDictionary *settings;
+@property (nonatomic, readonly) NSMutableArray* layers;
+@property (weak, nonatomic, readonly) WDLayer* activeLayer;
+@property (nonatomic, readonly) NSMutableDictionary* settings;
 @property (nonatomic, assign) BOOL deleted;
-@property (nonatomic, strong) NSUndoManager *undoManager;
+@property (nonatomic, strong) NSUndoManager* undoManager;
 @property (nonatomic, weak) id<WDDocumentProtocol> document;
 
 @property (nonatomic, assign) float width;
@@ -70,79 +73,77 @@ BOOL WDRenderingMetaDataOutlineOnly(WDRenderingMetaData metaData);
 @property (nonatomic, assign) BOOL isolateActiveLayer;
 @property (nonatomic, assign) BOOL outlineMode;
 @property (nonatomic, assign) BOOL rulersVisible;
-@property (nonatomic, weak) NSString *units;
-@property (weak, nonatomic, readonly) WDRulerUnit *rulerUnit;
+@property (nonatomic, weak) NSString* units;
+@property (weak, nonatomic, readonly) WDRulerUnit* rulerUnit;
 @property (nonatomic, assign) float gridSpacing;
 @property (nonatomic, readonly) BOOL isSuppressingNotifications;
+@property (nonatomic, readonly) NSArray* allElements;
+@property (nonatomic, readonly) NSUInteger snapFlags;
+@property (nonatomic, readonly) UIImage* image;
+@property (nonatomic, readonly) NSData* inkpadRepresentation;
+@property (nonatomic, readonly) NSData* PDFRepresentation;
+@property (nonatomic, readonly) NSData* SVGRepresentation;
+@property (nonatomic, readonly) NSData* thumbnailData;
+@property (nonatomic, readonly) UIImage* thumbnailImage;
+@property (nonatomic, readonly) BOOL canDeleteLayer;
+@property (nonatomic, readonly) NSString* uniqueLayerName;
 
-- (id) initWithUnits:(NSString *)units; // for use with SVG import only
-- (id) initWithSize:(CGSize)size andUnits:(NSString *)units;
+- (instancetype) initWithUnits:(NSString*) units; // for use with SVG import only
+- (instancetype) initWithSize:(CGSize) size andUnits:(NSString*) units;
 
 - (void) beginSuppressingNotifications;
 - (void) endSuppressingNotifications;
 
 - (void) purgeUnreferencedImageDatas;
-- (WDImageData *) trackedImageData:(WDImageData *)imageData;
+- (WDImageData*) trackedImageData:(WDImageData*) imageData;
 
-- (void) renderInContext:(CGContextRef)ctx clipRect:(CGRect)clip metaData:(WDRenderingMetaData)metaData;
+- (void) renderInContext:(CGContextRef) ctx clipRect:(CGRect) clip metaData:(WDRenderingMetaData) metaData;
 
 - (void) activateLayerAtIndex:(NSUInteger)ix;
-- (void) addLayer:(WDLayer *)layer;
-- (BOOL) canDeleteLayer;
+- (void) addLayer:(WDLayer*) layer;
 - (void) deleteActiveLayer;
-- (void) insertLayer:(WDLayer *)layer atIndex:(NSUInteger)index;
+- (void) insertLayer:(WDLayer*) layer atIndex:(NSUInteger)index;
 - (void) moveLayerAtIndex:(NSUInteger)src toIndex:(NSUInteger)dest;
 - (void) duplicateActiveLayer;
-- (NSString *) uniqueLayerName;
 
-- (NSArray *) allElements;
 - (void) addObject:(id)obj;
 
-- (NSUInteger) snapFlags;
+- (instancetype) initWithImage:(UIImage*) image imageName:(NSString*) imageName;
+- (WDImageData*) imageDataForUIImage:(UIImage*)image;
++ (UIImage*) imageForElements:(NSArray*) elements scale:(float) scale;
 
-- (id) initWithImage:(UIImage *)image imageName:(NSString *)imageName;
-- (WDImageData *) imageDataForUIImage:(UIImage *)image;
-+ (UIImage *) imageForElements:(NSArray *)elements scale:(float)scale;
-- (UIImage *) image;
-
-- (NSData *) inkpadRepresentation;
-- (NSData *) PDFRepresentation;
-- (NSData *) SVGRepresentation;
-- (NSData *) thumbnailData;
-- (UIImage *) thumbnailImage;
-
-- (void) setSetting:(NSString *)name value:(NSString *)value;
+- (void) setSetting:(NSString*) name value:(NSString*) value;
 
 @end
 
 // Setting keys
-extern NSString *WDSnapToPoints;
-extern NSString *WDSnapToEdges;
-extern NSString *WDSnapToGrid;
-extern NSString *WDDynamicGuides;
-extern NSString *WDShowGrid;
-extern NSString *WDGridSpacing;
-extern NSString *WDIsolateActiveLayer;
-extern NSString *WDOutlineMode;
-extern NSString *WDRulersVisible;
-extern NSString *WDUnits;
-extern NSString *WDCustomSizeWidth;
-extern NSString *WDCustomSizeHeight;
-extern NSString *WDCustomSizeUnits;
+extern NSString* const WDSnapToPoints;
+extern NSString* const WDSnapToEdges;
+extern NSString* const WDSnapToGrid;
+extern NSString* const WDDynamicGuides;
+extern NSString* const WDShowGrid;
+extern NSString* const WDGridSpacing;
+extern NSString* const WDIsolateActiveLayer;
+extern NSString* const WDOutlineMode;
+extern NSString* const WDRulersVisible;
+extern NSString* const WDUnits;
+extern NSString* const WDCustomSizeWidth;
+extern NSString* const WDCustomSizeHeight;
+extern NSString* const WDCustomSizeUnits;
 
 // Notifications
-extern NSString *WDLayersReorderedNotification;
-extern NSString *WDLayerAddedNotification;
-extern NSString *WDLayerDeletedNotification;
-extern NSString *WDIsolateActiveLayerSettingChangedNotification;
-extern NSString *WDOutlineModeSettingChangedNotification;
-extern NSString *WDActiveLayerChanged;
-extern NSString *WDDrawingChangedNotification;
-extern NSString *WDRulersVisibleSettingChangedNotification;
-extern NSString *WDUnitsChangedNotification;
-extern NSString *WDDrawingDimensionsChanged;
-extern NSString *WDGridSpacingChangedNotification;
+extern NSString* const WDLayersReorderedNotification;
+extern NSString* const WDLayerAddedNotification;
+extern NSString* const WDLayerDeletedNotification;
+extern NSString* const WDIsolateActiveLayerSettingChangedNotification;
+extern NSString* const WDOutlineModeSettingChangedNotification;
+extern NSString* const WDActiveLayerChanged;
+extern NSString* const WDDrawingChangedNotification;
+extern NSString* const WDRulersVisibleSettingChangedNotification;
+extern NSString* const WDUnitsChangedNotification;
+extern NSString* const WDDrawingDimensionsChanged;
+extern NSString* const WDGridSpacingChangedNotification;
 
 // encoder keys
-extern NSString *WDDrawingKey;
-extern NSString *WDThumbnailKey;
+extern NSString* const WDDrawingKey;
+extern NSString* const WDThumbnailKey;

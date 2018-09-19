@@ -29,7 +29,7 @@ NSString *WDEraserToolSize = @"WDEraserToolSize";
     return @"eraser.png";
 }
 
-- (id) init
+- (instancetype) init
 {
     self = [super init];
     
@@ -74,7 +74,7 @@ NSString *WDEraserToolSize = @"WDEraserToolSize";
 {
     canvas.eraserPath = nil;
     
-    if (tempPath_ && [tempPath_.nodes count] > 1) {
+    if (tempPath_ && tempPath_.nodes.count > 1) {
         NSMutableArray *points = [NSMutableArray array];
         for (WDBezierNode *node in tempPath_.nodes) {
             [points addObject:[NSValue valueWithCGPoint:node.anchorPoint]];

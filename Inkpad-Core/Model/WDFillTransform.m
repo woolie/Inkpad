@@ -37,7 +37,7 @@ NSString *WDFillTransformTransformKey = @"WDFillTransformTransformKey";
     return fT;
 }
 
-- (id) initWithTransform:(CGAffineTransform)transform start:(CGPoint)start end:(CGPoint)end
+- (instancetype) initWithTransform:(CGAffineTransform)transform start:(CGPoint)start end:(CGPoint)end
 {
     self = [super init];
     

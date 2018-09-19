@@ -23,7 +23,7 @@
 @property (nonatomic, readonly) float angle;
 
 + (WDShadow *) shadowWithColor:(WDColor *)color radius:(float)radius offset:(float)offset angle:(float)angle;
-- (id) initWithColor:(WDColor *)color radius:(float)radius offset:(float)offset angle:(float)angle;
+- (instancetype) initWithColor:(WDColor *)color radius:(float)radius offset:(float)offset angle:(float)angle;
 
 - (void) applyInContext:(CGContextRef)ctx metaData:(WDRenderingMetaData)metaData;
 

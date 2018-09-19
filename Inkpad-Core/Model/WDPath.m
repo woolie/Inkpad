@@ -42,7 +42,7 @@ NSString *WDClosedKey = @"WDClosedKey";
 @synthesize displayColor = displayColor_;   
 @synthesize displayClosed = displayClosed_;
 
-- (id) init
+- (instancetype) init
 {
     self = [super init];
     
@@ -57,7 +57,7 @@ NSString *WDClosedKey = @"WDClosedKey";
     return self;
 }
 
-- (id) initWithNode:(WDBezierNode *)node
+- (instancetype) initWithNode:(WDBezierNode *)node
 {
     self = [super init];
     
@@ -320,7 +320,7 @@ NSString *WDClosedKey = @"WDClosedKey";
     return path;
 }
 
-- (id) initWithRect:(CGRect)rect
+- (instancetype) initWithRect:(CGRect)rect
 {
     self = [self init];
     
@@ -341,7 +341,7 @@ NSString *WDClosedKey = @"WDClosedKey";
     return self;
 }
 
-- (id) initWithRoundedRect:(CGRect)rect cornerRadius:(float)radius
+- (instancetype) initWithRoundedRect:(CGRect)rect cornerRadius:(float)radius
 {
     radius = MIN(radius, MIN(CGRectGetHeight(rect) * 0.5f, CGRectGetWidth(rect) * 0.5f));
     
@@ -409,7 +409,7 @@ NSString *WDClosedKey = @"WDClosedKey";
     return self;
 }
 
-- (id) initWithOvalInRect:(CGRect)rect
+- (instancetype) initWithOvalInRect:(CGRect)rect
 {
     self = [self init];
     
@@ -451,7 +451,7 @@ NSString *WDClosedKey = @"WDClosedKey";
     return self;
 }
 
-- (id) initWithStart:(CGPoint)start end:(CGPoint)end
+- (instancetype) initWithStart:(CGPoint)start end:(CGPoint)end
 {
     self = [self init];
     

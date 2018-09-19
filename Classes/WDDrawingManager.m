@@ -77,7 +77,7 @@ NSString *WDDrawingNewFilenameKey = @"WDDrawingNewFilenameKey";
     return filtered;
 }
 
-- (id) init
+- (instancetype) init
 {
     self = [super init];
     

@@ -25,7 +25,7 @@
     NSMutableArray          *svgElements_;
 }
 
-- (id) initWithDrawing:(WDDrawing *)drawing;
+- (instancetype) initWithDrawing:(WDDrawing *)drawing;
 - (void) startElement:(WDSVGElement *)element;
 - (WDElement *) endElement;
 - (BOOL) hadErrors;

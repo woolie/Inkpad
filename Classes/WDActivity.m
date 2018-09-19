@@ -23,7 +23,7 @@
     return activity;
 }
 
-- (id) initWithFilePath:(NSString *)aFilePath type:(WDActivityType)aType
+- (instancetype) initWithFilePath:(NSString *)aFilePath type:(WDActivityType)aType
 {
     self = [super init];
     

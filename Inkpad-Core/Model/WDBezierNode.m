@@ -60,7 +60,7 @@ NSString *WDPointArrayKey = @"WDPointArrayKey";
     return node;
 }
 
-- (id) initWithAnchorPoint:(CGPoint)pt
+- (instancetype) initWithAnchorPoint:(CGPoint)pt
 {
     self = [super init];
     
@@ -73,7 +73,7 @@ NSString *WDPointArrayKey = @"WDPointArrayKey";
     return self;
 }
 
-- (id) initWithInPoint:(CGPoint)inPoint anchorPoint:(CGPoint)pt outPoint:(CGPoint)outPoint
+- (instancetype) initWithInPoint:(CGPoint)inPoint anchorPoint:(CGPoint)pt outPoint:(CGPoint)outPoint
 {
     self = [super init];
     

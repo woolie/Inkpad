@@ -54,7 +54,7 @@ BOOL WDRenderingMetaDataOutlineOnly(WDRenderingMetaData metaData);
 }
 
 @property (nonatomic, readonly) CGSize dimensions;
-@property (nonatomic, readonly) NSMutableArray* layers;
+@property (nonatomic, readonly) NSMutableArray<WDLayer*>* layers;
 @property (weak, nonatomic, readonly) WDLayer* activeLayer;
 @property (nonatomic, readonly) NSMutableDictionary* settings;
 @property (nonatomic, assign) BOOL deleted;
@@ -77,7 +77,7 @@ BOOL WDRenderingMetaDataOutlineOnly(WDRenderingMetaData metaData);
 @property (weak, nonatomic, readonly) WDRulerUnit* rulerUnit;
 @property (nonatomic, assign) float gridSpacing;
 @property (nonatomic, readonly) BOOL isSuppressingNotifications;
-@property (nonatomic, readonly) NSArray* allElements;
+@property (nonatomic, readonly) NSArray<WDElement*>* allElements;
 @property (nonatomic, readonly) NSUInteger snapFlags;
 @property (nonatomic, readonly) UIImage* image;
 @property (nonatomic, readonly) NSData* inkpadRepresentation;

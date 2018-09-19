@@ -810,7 +810,7 @@
 		6BCD529F123FFFED002FCB27 /* undo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = undo.png; path = Images/undo.png; sourceTree = "<group>"; };
 		6BCD52D812400017002FCB27 /* WDBrowserController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDBrowserController.h; sourceTree = "<group>"; };
 		6BCD52D912400017002FCB27 /* WDBrowserController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDBrowserController.m; sourceTree = "<group>"; };
-		6BCD52DA12400017002FCB27 /* WDCanvas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDCanvas.h; sourceTree = "<group>"; };
+		6BCD52DA12400017002FCB27 /* WDCanvas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDCanvas.h; sourceTree = "<group>"; usesTabs = 1; };
 		6BCD52DB12400017002FCB27 /* WDCanvas.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDCanvas.m; sourceTree = "<group>"; };
 		6BCD52DC12400017002FCB27 /* WDCanvasController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDCanvasController.h; sourceTree = "<group>"; };
 		6BCD52DD12400017002FCB27 /* WDCanvasController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = WDCanvasController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };

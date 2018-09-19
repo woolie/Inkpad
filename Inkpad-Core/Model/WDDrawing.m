@@ -110,7 +110,8 @@ BOOL WDRenderingMetaDataOutlineOnly(WDRenderingMetaData metaData)
 	return self;
 }
 
-- (instancetype) initWithSize:(CGSize)size andUnits:(NSString *)units
+- (instancetype) initWithSize:(CGSize) size
+					 andUnits:(NSString *) units
 {
 	self = [super init];
 
@@ -126,7 +127,7 @@ BOOL WDRenderingMetaDataOutlineOnly(WDRenderingMetaData metaData)
 		layer.drawing = self;
 		[_layers addObject:layer];
 
-		layer.name = [self uniqueLayerName];
+		layer.name = self.uniqueLayerName;
 		_activeLayer = layer;
 
 		_settings = [[NSMutableDictionary alloc] init];
@@ -194,8 +195,9 @@ BOOL WDRenderingMetaDataOutlineOnly(WDRenderingMetaData metaData)
 		}
 
 		_activeLayer = [coder decodeObjectForKey:WDActiveLayerKey];
-		if (!_activeLayer) {
-			_activeLayer = [_layers lastObject];
+		if (!_activeLayer)
+		{
+			_activeLayer = _layers.lastObject;
 		}
 
 		_undoManager = [[NSUndoManager alloc] init];
@@ -221,9 +223,9 @@ BOOL WDRenderingMetaDataOutlineOnly(WDRenderingMetaData metaData)
 	[coder encodeObject:_settings forKey:WDSettingsKey];
 }
 
-- (id) copyWithZone:(NSZone *)zone
+- (instancetype) copyWithZone:(NSZone *)zone
 {
-	WDDrawing *drawing = [[WDDrawing alloc] init];
+	WDDrawing* drawing = [[WDDrawing alloc] init];
 
 	drawing->_dimensions = _dimensions;
 	drawing->_settings = [_settings mutableCopy];
@@ -264,7 +266,7 @@ BOOL WDRenderingMetaDataOutlineOnly(WDRenderingMetaData metaData)
 #pragma mark - Drawing Attributes
 
 // return all the elements in the drawing
-- (NSArray *) allElements
+- (NSArray<WDElement*>*) allElements
 {
 	NSMutableArray *elements = [[NSMutableArray alloc] init];
 
@@ -277,15 +279,18 @@ BOOL WDRenderingMetaDataOutlineOnly(WDRenderingMetaData metaData)
 {
 	NSUInteger	  flags = 0;
 
-	if ([_settings[WDSnapToGrid] boolValue]) {
+	if ([_settings[WDSnapToGrid] boolValue])
+	{
 		flags |= kWDSnapGrid;
 	}
 
-	if ([_settings[WDSnapToPoints] boolValue]) {
+	if ([_settings[WDSnapToPoints] boolValue])
+	{
 		flags |= kWDSnapNodes;
 	}
 
-	if ([_settings[WDSnapToEdges] boolValue]) {
+	if ([_settings[WDSnapToEdges] boolValue])
+	{
 		flags |= kWDSnapEdges;
 	}
 
@@ -301,7 +306,8 @@ BOOL WDRenderingMetaDataOutlineOnly(WDRenderingMetaData metaData)
 {
 	CGRect styleBounds = CGRectNull;
 
-	for (WDLayer *layer in _layers) {
+	for (WDLayer *layer in _layers)
+	{
 		styleBounds = CGRectUnion(styleBounds, layer.styleBounds);
 	}
 
@@ -318,7 +324,7 @@ BOOL WDRenderingMetaDataOutlineOnly(WDRenderingMetaData metaData)
 
 	_imageDatas = [[NSMutableDictionary alloc] init];
 
-	for (WDImage *image in self.allElements)
+	for (WDImage* image in self.allElements)
 	{
 		if ([image isKindOfClass:[WDImage class]])
 		{
@@ -334,22 +340,23 @@ BOOL WDRenderingMetaDataOutlineOnly(WDRenderingMetaData metaData)
 	[images makeObjectsPerformSelector:@selector(useTrackedImageData) withObject:nil];
 }
 
-- (WDImageData *) imageDataForUIImage:(UIImage *)image
+- (WDImageData*) imageDataForUIImage:(UIImage *)image
 {
-	WDImageData	 *imageData = nil;
-	NSData		  *data;
-	NSData		  *digest;
+	NSData* data;
 
 	CGImageAlphaInfo alphaInfo = CGImageGetAlphaInfo(image.CGImage);
-	if (alphaInfo == kCGImageAlphaNoneSkipLast) {
+	if (alphaInfo == kCGImageAlphaNoneSkipLast)
+	{
 		// no alpha data, so let's make a JPEG
 		data = UIImageJPEGRepresentation(image, 0.9);
-	} else {
+	}
+	else
+	{
 		data = UIImagePNGRepresentation(image);
 	}
 
-	digest = WDSHA1DigestForData(data);
-	imageData = _imageDatas[digest];
+	NSData* digest = WDSHA1DigestForData(data);
+	WDImageData* imageData = _imageDatas[digest];
 
 	if (!imageData)
 	{
@@ -723,7 +730,8 @@ BOOL WDRenderingMetaDataOutlineOnly(WDRenderingMetaData metaData)
 	}
 
 	WDXMLElement *drawingMetadataElement = [WDXMLElement elementWithName:@"metadata"];
-	[_settings enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+	[_settings enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop)
+	{
 		WDXMLElement *settingElement = [WDXMLElement elementWithName:@"inkpad:setting"];
 		[settingElement setAttribute:@"key" value:[key substringFromIndex:2]];
 		[settingElement setAttribute:@"value" value:[NSString stringWithFormat:@"%@", obj]];

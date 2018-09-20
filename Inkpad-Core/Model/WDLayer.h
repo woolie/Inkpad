@@ -28,7 +28,7 @@
 @property (nonatomic, assign) float opacity;
 @property (nonatomic, readonly) BOOL editable;
 @property (nonatomic, readonly) CGRect styleBounds;
-@property (weak, nonatomic, readonly) UIImage* thumbnail;
+@property (nonatomic, weak) UIImage* thumbnail;
 @property (nonatomic, readonly) BOOL isSuppressingNotifications;
 
 + (instancetype) layer;

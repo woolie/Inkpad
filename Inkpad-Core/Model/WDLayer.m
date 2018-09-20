@@ -36,9 +36,7 @@ NSString* const WDOpacityKey = @"WDOpacityKey";
 
 @implementation WDLayer
 
-@synthesize thumbnail = _thumbnail;
-
-+ (WDLayer *) layer
++ (instancetype) layer
 {
     return [[WDLayer alloc] init];
 }
@@ -49,21 +47,20 @@ NSString* const WDOpacityKey = @"WDOpacityKey";
     return [self initWithElements:elements];
 }
 
-- (instancetype) initWithElements:(NSMutableArray *)elements
+- (instancetype) initWithElements:(NSMutableArray*) elements
 {
     self = [super init];
     
-    if (!self) {
-        return nil;
-    }
-    
-    _elements = elements;
-    [_elements makeObjectsPerformSelector:@selector(setLayer:) withObject:self];
-    self.highlightColor = [UIColor saturatedRandomColor];
-    self.visible = YES;
-    _opacity = 1.0f;
-    
-    return self;
+    if (self != nil)
+	{
+    	_elements = elements;
+    	[_elements makeObjectsPerformSelector:@selector(setLayer:) withObject:self];
+    	self.highlightColor = [UIColor saturatedRandomColor];
+    	self.visible = YES;
+    	_opacity = 1.0f;
+	}
+
+	return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)coder
@@ -172,27 +169,31 @@ NSString* const WDOpacityKey = @"WDOpacityKey";
 
 - (WDXMLElement *) SVGElement
 {
-    if (_elements.count == 0) {
+    if (_elements.count == 0)
+	{
         // no reason to add this layer
         return nil;
     }
     
-    WDXMLElement *layer = [WDXMLElement elementWithName:@"g"];
-    NSString *uniqueName = [[WDSVGHelper sharedSVGHelper] uniqueIDWithPrefix:
+    WDXMLElement* layer = [WDXMLElement elementWithName:@"g"];
+    NSString* uniqueName = [[WDSVGHelper sharedSVGHelper] uniqueIDWithPrefix:
                             [@"Layer$" stringByAppendingString:_name]];
     [layer setAttribute:@"id" value:[uniqueName substringFromIndex:6]];
     [layer setAttribute:@"inkpad:layerName" value:_name];
     
-    if (self.hidden) {
+    if (self.hidden)
+	{
         [layer setAttribute:@"visibility" value:@"hidden"];
     }
     
-    if (self.opacity != 1.0f) {
+    if (self.opacity != 1.0f)
+	{
         [layer setAttribute:@"opacity" floatValue:_opacity];
     }
     
-    for (WDElement *element in _elements) {
-        [layer addChild:[element SVGElement]];
+    for (WDElement* element in _elements)
+	{
+        [layer addChild:element.svgElement];
     }
     
     return layer;
@@ -256,10 +257,11 @@ NSString* const WDOpacityKey = @"WDOpacityKey";
     
     element.layer = self;
     [_elements insertObject:element atIndex:index];
-    
+
     [self invalidateThumbnail];
-    
-    if (!self.isSuppressingNotifications) {
+
+    if (!self.isSuppressingNotifications)
+	{
         NSDictionary *userInfo = @{@"layer": self,
                                   @"rect": [NSValue valueWithCGRect:element.styleBounds]};
         
@@ -354,18 +356,18 @@ NSString* const WDOpacityKey = @"WDOpacityKey";
 - (CGRect) styleBounds 
 {
     CGRect styleBounds = CGRectNull;
-
-    for (WDElement *element in _elements)
+    for (WDElement* element in _elements)
 	{
         styleBounds = CGRectUnion(styleBounds, element.styleBounds);
     }
-    
+
     return styleBounds;
 }
 
-- (void) notifyThumbnailChanged:(id)obj
+- (void) notifyThumbnailChanged:(id) obj
 {
-    if (!self.isSuppressingNotifications) {
+    if (!self.isSuppressingNotifications)
+	{
         NSDictionary *userInfo = @{@"layer": self};
         [[NSNotificationCenter defaultCenter] postNotificationName:WDLayerThumbnailChangedNotification object:self.drawing userInfo:userInfo];
     }
@@ -373,15 +375,13 @@ NSString* const WDOpacityKey = @"WDOpacityKey";
 
 - (void) invalidateThumbnail
 {
-    if (!_thumbnail)
+    if (self.thumbnail)
 	{
-        return;
-    }
+    	self.thumbnail = nil;
     
-    _thumbnail = nil;
-    
-    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(notifyThumbnailChanged:) object:nil];
-    [self performSelector:@selector(notifyThumbnailChanged:) withObject:nil afterDelay:0];
+    	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(notifyThumbnailChanged:) object:nil];
+    	[self performSelector:@selector(notifyThumbnailChanged:) withObject:nil afterDelay:0];
+	}
 }
 
 - (UIImage *) thumbnail

@@ -177,12 +177,14 @@ NSString *WDFillRuleKey = @"WDFillRuleKey";
         
         WDXMLElement *elements = [WDXMLElement elementWithName:@"g"];
         [elements setAttribute:@"clip-path" value:[NSString stringWithFormat:@"url(#%@)", uniqueClip]];
-        for (WDElement *element in self.maskedElements) {
-            [elements addChild:[element SVGElement]];
+        for (WDElement* element in self.maskedElements)
+		{
+            [elements addChild:element.svgElement];
         }
         [group addChild:elements];
         
-        if (self.strokeStyle && !hasArrow) {
+        if (self.strokeStyle && !hasArrow)
+		{
             // add a path for the stroke
             WDXMLElement *use = [WDXMLElement elementWithName:@"use"];
             [use setAttribute:@"xlink:href" value:[NSString stringWithFormat:@"#%@", uniqueMask]];

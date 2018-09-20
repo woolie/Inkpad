@@ -268,13 +268,14 @@ NSString *WDGroupElements = @"WDGroupElements";
     return value;
 }
 
-- (WDXMLElement *) SVGElement
+- (WDXMLElement*) svgElement
 {
-    WDXMLElement *group = [WDXMLElement elementWithName:@"g"];
+    WDXMLElement* group = [WDXMLElement elementWithName:@"g"];
     [self addSVGOpacityAndShadowAttributes:group];
     
-    for (WDElement *element in elements_) {
-        [group addChild:[element SVGElement]];
+    for (WDElement* element in elements_)
+	{
+        [group addChild:element.svgElement];
     }
     
     return group;

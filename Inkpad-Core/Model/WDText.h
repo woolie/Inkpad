@@ -17,32 +17,24 @@
 #import "WDStylable.h"
 #import "WDTextRenderer.h"
 
+@class WDAbstractPath;
 @class WDStrokeStyle;
-
 @protocol WDPathPainter;
 
-@interface WDText : WDStylable <NSCoding, NSCopying, WDTextRenderer> {
-    float               width_;
-    CGAffineTransform   transform_;
-    NSString            *text_;
-    NSTextAlignment     alignment_;
-    NSString            *fontName_;
-    float               fontSize_;
+@interface WDText : WDStylable <NSCoding, NSCopying, WDTextRenderer>
+{
+    CGMutablePathRef    _pathRef;
     
-    CTFontRef           fontRef_;
-    CGMutablePathRef    pathRef_;
+    BOOL                _needsLayout;
+    NSMutableArray*		_glyphs;
+    CGRect              _styleBounds;
     
-    BOOL                needsLayout_;
-    NSMutableArray      *glyphs_;
-    CGRect              styleBounds_;
+    NSString*			_cachedText;
+    CGAffineTransform   _cachedTransform;
+    float               _cachedWidth;
+    BOOL                _cachingWidth;
     
-    NSString            *cachedText_;
-    CGAffineTransform   cachedTransform_;
-    float               cachedWidth_;
-    BOOL                cachingWidth_;
-    
-    CGRect              naturalBounds_;
-    BOOL                naturalBoundsDirty_;
+    BOOL                _naturalBoundsDirty;
 }
 
 @property (nonatomic, assign) float width;
@@ -55,10 +47,11 @@
 @property (nonatomic, readonly) CTFontRef fontRef;
 @property (nonatomic, readonly, strong) NSAttributedString *attributedString;
 
-- (void) setFontName:(NSString *)fontName;
-- (void) setFontSize:(float)fontSize;
+// An array of WDPath objects representing each glyph in the text object
+@property (nonatomic, readonly) NSArray<WDAbstractPath*>* outlines;
 
-+ (float) minimumWidth;
+@property (class, readonly) CGFloat minimumWidth;
+
 - (void) moveHandle:(NSUInteger)handle toPoint:(CGPoint)pt;
 
 - (void) cacheOriginalText;
@@ -66,9 +59,6 @@
 
 - (void) cacheTransformAndWidth;
 - (void) registerUndoWithCachedTransformAndWidth;
-
-// an array of WDPath objects representing each glyph in the text object
-- (NSArray *) outlines;
 
 - (void) drawOpenGLTextOutlinesWithTransform:(CGAffineTransform)transform viewTransform:(CGAffineTransform)viewTransform;
 

@@ -56,15 +56,22 @@ typedef enum {
 @property (weak, nonatomic, readonly) NSUndoManager *undoManager;
 @property (weak, nonatomic, readonly) WDDrawing *drawing;
 @property (weak, nonatomic, readonly) NSSet *inspectableProperties;
+@property (nonatomic, readonly) WDXMLElement* svgElement;
+@property (nonatomic, readonly) CGRect bounds;
+@property (nonatomic, readonly) CGRect styleBounds;
+@property (nonatomic, readonly) CGRect subselectionBounds;
+@property (nonatomic, readonly) BOOL canMaskElements;
+@property (nonatomic, readonly) BOOL hasEditableText;
+@property (nonatomic, readonly) BOOL canPlaceText;
+@property (nonatomic, readonly) BOOL isErasable;
+@property (nonatomic, readonly) BOOL canAdjustColor;
+
 
 - (void) awakeFromEncoding;
 
-- (CGRect) bounds;
-- (CGRect) styleBounds;
 - (WDShadow *) shadowForStyleBounds;
 - (CGRect) expandStyleBounds:(CGRect)rect;
 
-- (CGRect) subselectionBounds;
 - (void) clearSubselection;
 
 - (BOOL) containsPoint:(CGPoint)pt;
@@ -88,25 +95,18 @@ typedef enum {
 - (void) drawGradientControlsWithViewTransform:(CGAffineTransform)transform;
 - (void) drawTextPathControlsWithViewTransform:(CGAffineTransform)viewTransform viewScale:(float)viewScale;
 
-- (NSSet *) transform:(CGAffineTransform)transform;
+- (NSSet*) transform:(CGAffineTransform) transform;
 - (void) adjustColor:(WDColor * (^)(WDColor *color))adjustment scope:(WDColorAdjustmentScope)scope;
 
-- (NSSet *) alignToRect:(CGRect)rect alignment:(WDAlignment)align;
+- (NSSet*) alignToRect:(CGRect) rect alignment:(WDAlignment) align;
 
-- (WDPickResult *) hitResultForPoint:(CGPoint)pt viewScale:(float)viewScale snapFlags:(int)flags;
-- (WDPickResult *) snappedPoint:(CGPoint)pt viewScale:(float)viewScale snapFlags:(int)flags;
+- (WDPickResult*) hitResultForPoint:(CGPoint)pt viewScale:(float)viewScale snapFlags:(int)flags;
+- (WDPickResult*) snappedPoint:(CGPoint)pt viewScale:(float)viewScale snapFlags:(int)flags;
 
 - (void) addBlendablesToArray:(NSMutableArray *)array;
 - (void) addElementsToArray:(NSMutableArray *)array;
 
-- (WDXMLElement *) SVGElement;
 - (void) addSVGOpacityAndShadowAttributes:(WDXMLElement *)element;
-
-- (BOOL) canMaskElements;
-- (BOOL) hasEditableText;
-- (BOOL) canPlaceText;
-- (BOOL) isErasable;
-- (BOOL) canAdjustColor;
 
 // inspection
 - (void) setValue:(id)value forProperty:(NSString *)property propertyManager:(WDPropertyManager *)propertyManager;

@@ -244,7 +244,8 @@ NSString *WDMaskedElementsKey = @"WDMaskedElementsKey";
 
 - (void) setStrokeStyle:(WDStrokeStyle *)strokeStyle 
 {
-    if ([strokeStyle isEqual:strokeStyle_]) {
+    if ([strokeStyle isEqual:strokeStyle_])
+	{
         return;
     }
     

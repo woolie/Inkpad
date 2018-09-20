@@ -432,7 +432,7 @@ NSString* const WDShadowKey = @"WDShadowKey";
     
     [self cacheDirtyBounds];
     
-    [[self.undoManager prepareWithInvocationTarget:self] setOpacity:_opacity];
+    [[self.undoManager prepareWithInvocationTarget:self] setOpacity:opacity];
     
     _opacity = WDClamp(0, 1, opacity);
 

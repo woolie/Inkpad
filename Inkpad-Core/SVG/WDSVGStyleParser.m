@@ -432,23 +432,29 @@ NSArray *tokenizeStyle(NSString *source)
     [self styleOpacityBlendAndShadow:stylable];
     
     // apply clipping rule
-    if ([stylable isKindOfClass:[WDAbstractPath class]]) {
+    if ([stylable isKindOfClass:[WDAbstractPath class]])
+	{
         WDAbstractPath *path = (WDAbstractPath *) stylable;
         NSString *clipRule = [stack_ style:kWDPropertyClipRule];
-        if ([clipRule isEqualToString:@"nonzero"]) {
+        if ([clipRule isEqualToString:@"nonzero"])
+		{
             path.fillRule = kWDNonZeroWindingFillRule;
-        } else if ([clipRule isEqualToString:@"evenodd"]) {
+        }
+		else if ([clipRule isEqualToString:@"evenodd"])
+		{
             path.fillRule = kWDEvenOddFillRule;
         }
     }
     
     // apply text attributes
-    if ([stylable isKindOfClass:[WDText class]]) {
+    if ([stylable isKindOfClass:[WDText class]])
+	{
         WDText *text = (WDText *) stylable;
         [text setFontNameQuiet:[self fontName]];
         [text setFontSizeQuiet:[self fontSize]];
         styleLog(@"Font: %@ %f", text.fontName, text.fontSize);
-    } else if ([stylable isKindOfClass:[WDTextPath class]]) {
+    } else if ([stylable isKindOfClass:[WDTextPath class]])
+	{
         WDTextPath *textPath = (WDTextPath *) stylable;
         textPath.fontName = [self fontName];
         textPath.fontSize = [self fontSize];

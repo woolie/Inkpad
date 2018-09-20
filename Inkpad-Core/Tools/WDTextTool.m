@@ -21,49 +21,49 @@
 
 @implementation WDTextTool
 
-- (NSString *) iconName
+- (NSString*) iconName
 {
-    return @"text.png";
+	return @"text.png";
 }
 
 - (BOOL) createsObject
 {
-    return YES;
+	return YES;
 }
 
 - (void) moveWithEvent:(WDEvent *)event inCanvas:(WDCanvas *)canvas
 {
-    if (!self.moved) {
-        [canvas.drawingController selectNone:nil];
-    }
-    
-    WDPath  *temp = [WDPath pathWithRect:WDRectWithPoints(self.initialEvent.snappedLocation, event.snappedLocation)];
-    canvas.shapeUnderConstruction = temp;
+	if (!self.moved) {
+		[canvas.drawingController selectNone:nil];
+	}
+	
+	WDPath  *temp = [WDPath pathWithRect:WDRectWithPoints(self.initialEvent.snappedLocation, event.snappedLocation)];
+	canvas.shapeUnderConstruction = temp;
 }
 
 - (void) endWithEvent:(WDEvent *)event inCanvas:(WDCanvas *)canvas
 {
-    WDText  *textObj = nil;
-    
-    // clear path under construction
-    canvas.shapeUnderConstruction = nil;
-    
-    if (self.moved) {
-        CGRect placedRect = WDRectWithPoints(self.initialEvent.snappedLocation, event.snappedLocation);
-        placedRect.size.width = MAX([WDText minimumWidth], placedRect.size.width);
-        
-        textObj = [canvas.drawingController createTextObjectInRect:placedRect];
-        [canvas.controller editTextObject:textObj selectAll:YES];
-    } else { // see if we tapped an existing text object
-        WDPickResult    *result = [canvas.drawingController objectUnderPoint:event.location viewScale:canvas.viewScale];
-        textObj = (WDText *) result.element;
-        
-        if (textObj && [textObj hasEditableText]) {
-            [canvas.drawingController selectNone:nil];
-            [canvas.drawingController selectObject:textObj];
-            [canvas.controller editTextObject:textObj selectAll:NO];
-        }
-    }
+	WDText  *textObj = nil;
+	
+	// clear path under construction
+	canvas.shapeUnderConstruction = nil;
+	
+	if (self.moved) {
+		CGRect placedRect = WDRectWithPoints(self.initialEvent.snappedLocation, event.snappedLocation);
+		placedRect.size.width = MAX([WDText minimumWidth], placedRect.size.width);
+		
+		textObj = [canvas.drawingController createTextObjectInRect:placedRect];
+		[canvas.controller editTextObject:textObj selectAll:YES];
+	} else { // see if we tapped an existing text object
+		WDPickResult	*result = [canvas.drawingController objectUnderPoint:event.location viewScale:canvas.viewScale];
+		textObj = (WDText*) result.element;
+		
+		if (textObj && [textObj hasEditableText]) {
+			[canvas.drawingController selectNone:nil];
+			[canvas.drawingController selectObject:textObj];
+			[canvas.controller editTextObject:textObj selectAll:NO];
+		}
+	}
 }
 
 @end

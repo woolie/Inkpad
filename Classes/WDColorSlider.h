@@ -15,26 +15,26 @@
 @class WDColor;
 
 typedef enum {
-    WDColorSliderModeHue,
-    WDColorSliderModeSaturation,
-    WDColorSliderModeBrightness,
-    WDColorSliderModeRed,
-    WDColorSliderModeGreen,
-    WDColorSliderModeBlue,
-    WDColorSliderModeAlpha,
-    WDColorSliderModeRedBalance,
-    WDColorSliderModeGreenBalance,
-    WDColorSliderModeBlueBalance
+	WDColorSliderModeHue,
+	WDColorSliderModeSaturation,
+	WDColorSliderModeBrightness,
+	WDColorSliderModeRed,
+	WDColorSliderModeGreen,
+	WDColorSliderModeBlue,
+	WDColorSliderModeAlpha,
+	WDColorSliderModeRedBalance,
+	WDColorSliderModeGreenBalance,
+	WDColorSliderModeBlueBalance
 } WDColorSliderMode;
 
 @interface WDColorSlider : UIControl {
-    CGImageRef          hueImage_;
-    WDColor             *color_;
-    float               value_;
-    WDColorIndicator    *indicator_;
-    CGShadingRef        shadingRef_;
-    WDColorSliderMode   mode_;
-    BOOL                reversed_;
+	CGImageRef		  hueImage_;
+	WDColor			 *color_;
+	float			   value_;
+	WDColorIndicator	*indicator_;
+	CGShadingRef		shadingRef_;
+	WDColorSliderMode   mode_;
+	BOOL				reversed_;
 }
 
 @property (nonatomic, assign) WDColorSliderMode mode;

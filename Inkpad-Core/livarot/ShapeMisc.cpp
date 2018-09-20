@@ -9,7 +9,7 @@
 #include "Shape.h"
 #include "Path.h"
 
-void              Shape::ConvertToForme(Path* dest)
+void			  Shape::ConvertToForme(Path* dest)
 {
 	if ( nbPt <= 1 || nbAr <= 1 ) return;
 	if ( Eulerian(true) == false ) return;
@@ -49,7 +49,7 @@ void              Shape::ConvertToForme(Path* dest)
 			}
 			lastPtUsed=fi+1;
 			if ( fi < nbPt ) {
-				int      bestB=pts[fi].firstA;
+				int	  bestB=pts[fi].firstA;
 				while ( bestB >= 0 && aretes[bestB].st != fi ) bestB=NextAt(fi,bestB);
 				if ( bestB >= 0 ) {
 					startBord=bestB;
@@ -61,7 +61,7 @@ void              Shape::ConvertToForme(Path* dest)
 			// parcours en profondeur pour mettre les leF et riF a leurs valeurs
 			swdData[startBord].misc=(void*)1;
 //			printf("part de %d\n",startBord);
-			int    curBord=startBord;
+			int	curBord=startBord;
 			bool   back=false;
 			swdData[curBord].precParc=-1;
 			swdData[curBord].suivParc=-1;
@@ -154,7 +154,7 @@ void				 Shape::ConvertToForme(Path* dest,int nbP,Path* *orig)
 			}
 			lastPtUsed=fi+1;
 			if ( fi < nbPt ) {
-				int      bestB=pts[fi].firstA;
+				int	  bestB=pts[fi].firstA;
 				while ( bestB >= 0 && aretes[bestB].st != fi ) bestB=NextAt(fi,bestB);
 				if ( bestB >= 0 ) {
 					startBord=bestB;
@@ -166,11 +166,11 @@ void				 Shape::ConvertToForme(Path* dest,int nbP,Path* *orig)
 			// parcours en profondeur pour mettre les leF et riF a leurs valeurs
 			swdData[startBord].misc=(void*)1;
 			//			printf("part de %d\n",startBord);
-			int    curBord=startBord;
+			int	curBord=startBord;
 			bool   back=false;
 			swdData[curBord].precParc=-1;
 			swdData[curBord].suivParc=-1;
-      int curStartPt=aretes[curBord].st;
+	  int curStartPt=aretes[curBord].st;
 			do {
 				int  cPt=aretes[curBord].en;
 				int  nb=curBord;
@@ -207,16 +207,16 @@ void				 Shape::ConvertToForme(Path* dest,int nbP,Path* *orig)
 //						dest->MoveTo(pts[cPt].x,pts[cPt].y);
 						back=false;
 						startBord=nb;
-            curStartPt=aretes[nb].st;
+			curStartPt=aretes[nb].st;
 					} else { 
-            if ( aretes[curBord].en == curStartPt ) {
-              //printf("contour %i ",curStartPt);
-              swdData[curBord].suivParc = -1;
-              AddContour (dest, nbP, orig, startBord, curBord);
-              startBord=nb;
-            }
-          }
-          swdData[nb].misc=(void*)1;
+			if ( aretes[curBord].en == curStartPt ) {
+			  //printf("contour %i ",curStartPt);
+			  swdData[curBord].suivParc = -1;
+			  AddContour (dest, nbP, orig, startBord, curBord);
+			  startBord=nb;
+			}
+		  }
+		  swdData[nb].misc=(void*)1;
 					swdData[nb].ind=searchInd++;
 					swdData[nb].precParc=curBord;
 					swdData[curBord].suivParc=nb;
@@ -234,7 +234,7 @@ void				 Shape::ConvertToForme(Path* dest,int nbP,Path* *orig)
 	MakeSweepDestData(false);
 }
 // offsets
-int          Shape::MakeOffset(Shape* a, float dec,JoinType join,float miter)
+int		  Shape::MakeOffset(Shape* a, float dec,JoinType join,float miter)
 {
 	Reset(0,0);
 	MakeBackData(false);
@@ -267,8 +267,8 @@ int          Shape::MakeOffset(Shape* a, float dec,JoinType join,float miter)
 	a->MakeSweepSrcData(true);
 	
 	for (int i=0;i<a->nbAr;i++) {
-//		int    stP=a->swsData[i].stPt/*,enP=a->swsData[i].enPt*/;
-		int    stB=-1,enB=-1;
+//		int	stP=a->swsData[i].stPt/*,enP=a->swsData[i].enPt*/;
+		int	stB=-1,enB=-1;
 		if ( dec > 0 ) {
 			stB=a->CycleNextAt(a->aretes[i].st,i);
 			enB=a->CyclePrevAt(a->aretes[i].en,i);
@@ -319,9 +319,9 @@ Path::DoLeftJoin(this,-dec,join,ptP,stD,seD,miter,stL,seL,stNo,enNo);
 	
 	return 0;
 }
-void          Shape::AddContour(Path* dest,int nbP,Path* *orig,int startBord,int curBord)
+void		  Shape::AddContour(Path* dest,int nbP,Path* *orig,int startBord,int curBord)
 {	
-	int      bord=startBord;
+	int	  bord=startBord;
 	
 	dest->MoveTo(pts[aretes[bord].st].x,pts[aretes[bord].st].y);
 	
@@ -372,7 +372,7 @@ void          Shape::AddContour(Path* dest,int nbP,Path* *orig,int startBord,int
 	dest->Close();
 }
 
-int          Shape::ReFormeLineTo(int bord,int curBord,Path *dest,Path *orig)
+int		  Shape::ReFormeLineTo(int bord,int curBord,Path *dest,Path *orig)
 {
 	int		 nPiece=ebData[bord].pieceID;
 	int		 nPath=ebData[bord].pathID;
@@ -396,7 +396,7 @@ int          Shape::ReFormeLineTo(int bord,int curBord,Path *dest,Path *orig)
 	dest->LineTo(nx,ny);
 	return bord;
 }
-int          Shape::ReFormeArcTo(int bord,int curBord,Path *dest,Path* from)
+int		  Shape::ReFormeArcTo(int bord,int curBord,Path *dest,Path* from)
 {
 	int		 nPiece=ebData[bord].pieceID;
 	int		 nPath=ebData[bord].pathID;
@@ -455,7 +455,7 @@ Path::ArcAngles(prevx,prevy,from->descr_data[nPiece].d.a.x,from->descr_data[nPie
 	dest->ArcTo(nx,ny,from->descr_data[nPiece].d.a.rx,from->descr_data[nPiece].d.a.ry,from->descr_data[nPiece].d.a.angle,nLarge,nClockwise);
 	return bord;
 }
-int          Shape::ReFormeCubicTo(int bord,int curBord,Path *dest,Path *from)
+int		  Shape::ReFormeCubicTo(int bord,int curBord,Path *dest,Path *from)
 {
 	int		 nPiece=ebData[bord].pieceID;
 	int		 nPath=ebData[bord].pathID;
@@ -493,16 +493,16 @@ Path::CubicTangent(te,eDx,eDy,prevx,prevy,from->descr_data[nPiece].d.c.stDx,from
 	dest->CubicTo(nx,ny,sDx,sDy,eDx,eDy);
 	return bord;
 }
-int          Shape::ReFormeBezierTo(int bord,int curBord,Path *dest,Path *from)
+int		  Shape::ReFormeBezierTo(int bord,int curBord,Path *dest,Path *from)
 {
 	int		 nPiece=ebData[bord].pieceID;
 	int		 nPath=ebData[bord].pathID;
 	float  ts=ebData[bord].tSt,te=ebData[bord].tEn;
-	int    ps=nPiece,pe=nPiece;
+	int	ps=nPiece,pe=nPiece;
 	float  px=pts[aretes[bord].st].x,py=pts[aretes[bord].st].y;
 	float  nx=pts[aretes[bord].en].x,ny=pts[aretes[bord].en].y;
-	int    inBezier=-1,nbInterm=-1;
-	int    typ;
+	int	inBezier=-1,nbInterm=-1;
+	int	typ;
 	typ=from->descr_data[nPiece].flags&descr_type_mask;
 	if ( typ == descr_bezierto ) {
 		inBezier=nPiece;
@@ -645,7 +645,7 @@ int          Shape::ReFormeBezierTo(int bord,int curBord,Path *dest,Path *from)
 	}
 	return bord;
 }
-void               Shape::ReFormeBezierChunk(float px,float py,float nx,float ny,Path *dest,int inBezier,int nbInterm,Path* from,int p,float ts,float te)
+void			   Shape::ReFormeBezierChunk(float px,float py,float nx,float ny,Path *dest,int inBezier,int nbInterm,Path* from,int p,float ts,float te)
 {
 	float bstx,bsty;
 	float benx,beny;

@@ -13,28 +13,28 @@
 
 @implementation NSArray (WDAdditions)
 
-- (NSArray *) map:(id (^)(id obj))fn
+- (NSArray*) map:(id (^)(id obj))fn
 {
-    NSMutableArray *result = [[NSMutableArray alloc] initWithCapacity:self.count];
-    
-    for (id element in self) {
-        [result addObject:fn(element)];
-    }
-    
-    return result;
+	NSMutableArray *result = [[NSMutableArray alloc] initWithCapacity:self.count];
+	
+	for (id element in self) {
+		[result addObject:fn(element)];
+	}
+	
+	return result;
 }
 
-- (NSArray *) filter:(BOOL (^)(id obj))predicate
+- (NSArray*) filter:(BOOL (^)(id obj))predicate
 {
-    NSMutableArray *result = [NSMutableArray array];
-    
-    for (id element in self) {
-        if (predicate(element)) {
-            [result addObject:element];
-        }
-    }
-    
-    return result;
+	NSMutableArray *result = [NSMutableArray array];
+	
+	for (id element in self) {
+		if (predicate(element)) {
+			[result addObject:element];
+		}
+	}
+	
+	return result;
 }
 
 @end

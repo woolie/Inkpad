@@ -10,8 +10,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <CoreData/CoreData.h>
-#import <Foundation/Foundation.h>
+
 #import "WDDocumentProtocol.h"
 #import "WDStrokeStyle.h"
 
@@ -24,8 +23,8 @@
 @class WDPickResult;
 @class WDRulerUnit;
 
-extern const float kMinimumDrawingDimension;
-extern const float kMaximumDrawingDimension;
+extern const CGFloat kMinimumDrawingDimension;
+extern const CGFloat kMaximumDrawingDimension;
 
 enum
 {
@@ -41,7 +40,7 @@ typedef struct
 	UInt32  flags;
 } WDRenderingMetaData;
 
-WDRenderingMetaData WDRenderingMetaDataMake(float scale, UInt32 flags);
+WDRenderingMetaData WDRenderingMetaDataMake(CGFloat scale, UInt32 flags);
 BOOL WDRenderingMetaDataOutlineOnly(WDRenderingMetaData metaData);
 
 @protocol WDDocumentProtocol;
@@ -61,8 +60,8 @@ BOOL WDRenderingMetaDataOutlineOnly(WDRenderingMetaData metaData);
 @property (nonatomic, strong) NSUndoManager* undoManager;
 @property (nonatomic, weak) id<WDDocumentProtocol> document;
 
-@property (nonatomic, assign) float width;
-@property (nonatomic, assign) float height;
+@property (nonatomic, assign) CGFloat width;
+@property (nonatomic, assign) CGFloat height;
 @property (nonatomic, readonly) CGRect bounds;
 @property (nonatomic, readonly) NSUInteger indexOfActiveLayer;
 @property (nonatomic, assign) BOOL snapToEdges;

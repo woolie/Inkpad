@@ -19,36 +19,36 @@
 
 class AVLTree : public DblLinked {
 public:
-	AVLTree*         dad;
-	AVLTree*         sonL;
-	AVLTree*         sonR;
+	AVLTree*		 dad;
+	AVLTree*		 sonL;
+	AVLTree*		 sonR;
 	
-	int              balance;
+	int			  balance;
 
-//	AVLTree*         leftElem;
-//	AVLTree*         rightElem;
+//	AVLTree*		 leftElem;
+//	AVLTree*		 rightElem;
 	
 	AVLTree(void);
 	~AVLTree(void);
 
-	void        MakeNew(void);
-	void        MakeDelete(void);
+	void		MakeNew(void);
+	void		MakeDelete(void);
 
-	int         Remove(AVLTree* &racine,bool rebalance=true);
-	int         Remove(AVLTree* &racine,AVLTree* &startNode,int &diff);
+	int		 Remove(AVLTree* &racine,bool rebalance=true);
+	int		 Remove(AVLTree* &racine,AVLTree* &startNode,int &diff);
 
-	int         Insert(AVLTree* &racine,int insertType,AVLTree* insertL,AVLTree* insertR,bool rebalance);
-	int         Insert(AVLTree* &racine,int insertType,AVLTree* insertL,AVLTree* insertR);
+	int		 Insert(AVLTree* &racine,int insertType,AVLTree* insertL,AVLTree* insertR,bool rebalance);
+	int		 Insert(AVLTree* &racine,int insertType,AVLTree* insertL,AVLTree* insertR);
 
-	AVLTree*    LeftLeaf(AVLTree* from,bool from_dad);
-	AVLTree*    RightLeaf(AVLTree* from,bool from_dad);
+	AVLTree*	LeftLeaf(AVLTree* from,bool from_dad);
+	AVLTree*	RightLeaf(AVLTree* from,bool from_dad);
 
-	AVLTree*    Leftmost(void);
+	AVLTree*	Leftmost(void);
 
-	int         RestoreBalances(AVLTree* from,AVLTree* &racine);
-	int         RestoreBalances(int diff,AVLTree* &racine);
+	int		 RestoreBalances(AVLTree* from,AVLTree* &racine);
+	int		 RestoreBalances(int diff,AVLTree* &racine);
 
-	void        Relocate(AVLTree* to);
+	void		Relocate(AVLTree* to);
 };
 
 #endif

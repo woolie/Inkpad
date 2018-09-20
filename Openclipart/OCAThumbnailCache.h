@@ -20,6 +20,6 @@
 @interface OCAThumbnailCache : NSObject <OCADownloaderDelegate>
 
 + (OCAThumbnailCache *) sharedInstance;
-- (void) registerForThumbnail:(id<WDOpenClipArtThumbnailReceiver>)receiver url:(NSString *)thumbURL;
+- (void) registerForThumbnail:(id<WDOpenClipArtThumbnailReceiver>)receiver url:(NSString*)thumbURL;
 
 @end

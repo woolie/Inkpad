@@ -14,12 +14,12 @@
 @class WDDrawing;
 
 @interface WDUnitsController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate> {
-    IBOutlet UITableView    *table_;
-    NSArray                 *units_;
-    
-    NSNumberFormatter       *formatter_;
-    UITextField             *width_;
-    UITextField             *height_;
+	IBOutlet UITableView	*table_;
+	NSArray				 *units_;
+	
+	NSNumberFormatter	   *formatter_;
+	UITextField			 *width_;
+	UITextField			 *height_;
 }
 
 @property (nonatomic, weak) WDDrawing *drawing;
@@ -28,4 +28,4 @@
 
 @end
 
-extern NSString *WDCustomDrawingSizeChanged;
+extern NSString* WDCustomDrawingSizeChanged;

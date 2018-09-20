@@ -16,11 +16,11 @@
 @class WDDrawing;
 
 typedef enum {
-    WDToolDefault           = 0,
-    WDToolShiftKey          = 1 << 0,
-    WDToolOptionKey         = 1 << 1,
-    WDToolControlKey        = 1 << 2,
-    WDToolSecondaryTouch    = 1 << 3
+	WDToolDefault		   = 0,
+	WDToolShiftKey		  = 1 << 0,
+	WDToolOptionKey		 = 1 << 1,
+	WDToolControlKey		= 1 << 2,
+	WDToolSecondaryTouch	= 1 << 3
 } WDToolFlags;
 
 // Generic event object to abstract touches and clicks
@@ -33,7 +33,7 @@ typedef enum {
 @interface WDTool : NSObject
 
 @property (weak, nonatomic, readonly) id icon;
-@property (weak, nonatomic, readonly) NSString *iconName;
+@property (weak, nonatomic, readonly) NSString*iconName;
 @property (nonatomic, readonly) BOOL needsPivot;
 @property (nonatomic, readonly) BOOL primaryTouchEnded;
 @property (weak, nonatomic, readonly) UITouch *primaryTouch;
@@ -55,10 +55,10 @@ typedef enum {
 - (void) configureOptionsView:(UIView *)options;
 
 #if TARGET_OS_IPHONE
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event inCanvas:(WDCanvas *)canvas;
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event inCanvas:(WDCanvas *)canvas;
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event inCanvas:(WDCanvas *)canvas;
-- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event inCanvas:(WDCanvas *)canvas;
+- (void)touchesBegan:(NSSet*)touches withEvent:(UIEvent *)event inCanvas:(WDCanvas *)canvas;
+- (void)touchesMoved:(NSSet*)touches withEvent:(UIEvent *)event inCanvas:(WDCanvas *)canvas;
+- (void)touchesEnded:(NSSet*)touches withEvent:(UIEvent *)event inCanvas:(WDCanvas *)canvas;
+- (void)touchesCancelled:(NSSet*)touches withEvent:(UIEvent *)event inCanvas:(WDCanvas *)canvas;
 #else
 - (void) mouseDown:(NSEvent *)theEvent inCanvas:(WDCanvas *)canvas;
 - (void) mouseDragged:(NSEvent *)theEvent inCanvas:(WDCanvas *)canvas;

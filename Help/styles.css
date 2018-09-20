@@ -1,14 +1,14 @@
 body {
 	background-color: #eee;
-    margin:15pt;
+	margin:15pt;
 }
 
 h1 {
-    margin-top:1em;
+	margin-top:1em;
 }
 
 h3 {
-    margin-top:1.25em;
+	margin-top:1.25em;
 }
 
 body, p, ol, ul, td {
@@ -16,15 +16,15 @@ body, p, ol, ul, td {
 }
 
 div.content {
-    padding:0pt 15pt 15pt 15pt;
+	padding:0pt 15pt 15pt 15pt;
 	background-color: #fff;
-    border: 1px solid #bbb;
+	border: 1px solid #bbb;
 }
 
 img.logo {
-    float:left;
-    margin-top:0.3em;
-    margin-right: 1em;
+	float:left;
+	margin-top:0.3em;
+	margin-right: 1em;
 }
 
 img.tool_palette {
@@ -48,16 +48,16 @@ img.tool_inline {
 img.color_inline {
 	float:left;
 	padding-right:0.5em;
-    margin-top:0.25em;
+	margin-top:0.25em;
 }
 
 img.undo_inline {
 	float:left;
 	padding-right:1.0em;
-    margin-top:-0.2em;
+	margin-top:-0.2em;
 }
 
 div.example {
-    text-align:center;
+	text-align:center;
 }
 

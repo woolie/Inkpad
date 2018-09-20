@@ -16,10 +16,10 @@
 @class WDXMLElement;
 
 @interface WDSVGHelper : NSObject {
-    NSMutableDictionary     *uniques_;
-    WDXMLElement            *definitions_;
-    NSMutableDictionary     *images_;
-    NSMutableDictionary     *blendModeNames_;
+	NSMutableDictionary	 *uniques_;
+	WDXMLElement			*definitions_;
+	NSMutableDictionary	 *images_;
+	NSMutableDictionary	 *blendModeNames_;
 }
 
 @property (nonatomic, readonly) WDXMLElement *definitions;
@@ -29,13 +29,13 @@
 - (void) beginSVGGeneration;
 - (void) endSVGGeneration;
 
-- (NSString *) uniqueIDWithPrefix:(NSString *)prefix;
+- (NSString*) uniqueIDWithPrefix:(NSString*)prefix;
 - (void) addDefinition:(WDXMLElement *)def;
 - (WDXMLElement *) definitions;
 
-- (void) setImageID:(NSString *)unique forDigest:(NSData *)digest;
-- (NSString *) imageIDForDigest:(NSData *)digest;
+- (void) setImageID:(NSString*)unique forDigest:(NSData *)digest;
+- (NSString*) imageIDForDigest:(NSData *)digest;
 
-- (NSString *) displayNameForBlendMode:(CGBlendMode)blendMode;
+- (NSString*) displayNameForBlendMode:(CGBlendMode)blendMode;
 
 @end

@@ -9,7 +9,7 @@
 #include "Path.h"
 #include "Shape.h"
 
-void            Path::ConvertWithBackData(float treshhold)
+void			Path::ConvertWithBackData(float treshhold)
 {
 	if ( descr_flags&descr_adding_bezier ) CancelBezier();
 	if ( descr_flags&descr_doing_subpath ) CloseSubpath(0);
@@ -17,9 +17,9 @@ void            Path::ConvertWithBackData(float treshhold)
 	SetBackData(true);
 	ResetPoints(descr_nb);
 	if ( descr_nb <= 0 ) return;
-	float    curX,curY,curW;
-	int      curP=1;
-	int      lastMoveTo=0;
+	float	curX,curY,curW;
+	int	  curP=1;
+	int	  lastMoveTo=0;
 	
 	// le moveto
 	curX=(descr_data)->d.m.x;
@@ -34,9 +34,9 @@ void            Path::ConvertWithBackData(float treshhold)
 		// et le reste, 1 par 1
 	while ( curP < descr_nb ) {
 		path_descr*  curD=descr_data+curP;
-		int          nType=curD->flags&descr_type_mask;
-		bool         nWeight=curD->flags&descr_weighted;
-		float        nextX,nextY,nextW;
+		int		  nType=curD->flags&descr_type_mask;
+		bool		 nWeight=curD->flags&descr_weighted;
+		float		nextX,nextY,nextW;
 		if ( nType == descr_forced ) {
 			if ( weighted ) AddForcedPoint(curX,curY,curW,curP,1.0); else AddForcedPoint(curX,curY,curP,1.0);
 			curP++;
@@ -203,7 +203,7 @@ void            Path::ConvertWithBackData(float treshhold)
 		curW=nextW;
 	}
 }
-void            Path::ConvertForOffset(float treshhold,Path* orig,float off_dec)
+void			Path::ConvertForOffset(float treshhold,Path* orig,float off_dec)
 {
 	if ( descr_flags&descr_adding_bezier ) CancelBezier();
 	if ( descr_flags&descr_doing_subpath ) CloseSubpath(0);
@@ -211,9 +211,9 @@ void            Path::ConvertForOffset(float treshhold,Path* orig,float off_dec)
 	SetBackData(true);
 	ResetPoints(descr_nb);
 	if ( descr_nb <= 0 ) return;
-	float    curX,curY,curW;
-	int      curP=1;
-	int      lastMoveTo=0;
+	float	curX,curY,curW;
+	int	  curP=1;
+	int	  lastMoveTo=0;
 	
 	// le moveto
 	curX=(descr_data)->d.m.x;
@@ -225,16 +225,16 @@ void            Path::ConvertForOffset(float treshhold,Path* orig,float off_dec)
 	}
 	lastMoveTo=AddPoint(curX,curY,0,0.0,true);
 	
-	offset_orig     off_data;
+	offset_orig	 off_data;
 	off_data.orig=orig;
 	off_data.off_dec=off_dec;
 	
 		// et le reste, 1 par 1
 	while ( curP < descr_nb ) {
 		path_descr*  curD=descr_data+curP;
-		int          nType=curD->flags&descr_type_mask;
-		bool         nWeight=curD->flags&descr_weighted;
-		float        nextX,nextY,nextW;
+		int		  nType=curD->flags&descr_type_mask;
+		bool		 nWeight=curD->flags&descr_weighted;
+		float		nextX,nextY,nextW;
 		if ( nType == descr_forced ) {
 			AddForcedPoint(curX,curY,curP,1.0);
 			curP++;
@@ -406,7 +406,7 @@ void            Path::ConvertForOffset(float treshhold,Path* orig,float off_dec)
 		curW=nextW;
 	}
 }
-void            Path::Convert(float treshhold)
+void			Path::Convert(float treshhold)
 {
 	if ( descr_flags&descr_adding_bezier ) CancelBezier();
 	if ( descr_flags&descr_doing_subpath ) CloseSubpath(0);
@@ -414,9 +414,9 @@ void            Path::Convert(float treshhold)
 	SetBackData(false);
 	ResetPoints(descr_nb);
 	if ( descr_nb <= 0 ) return;
-	float    curX,curY,curW;
-	int      curP=1;
-	int      lastMoveTo=0;
+	float	curX,curY,curW;
+	int	  curP=1;
+	int	  lastMoveTo=0;
 	
 	// le moveto
 	curX=(descr_data)->d.m.x;
@@ -432,9 +432,9 @@ void            Path::Convert(float treshhold)
 		// et le reste, 1 par 1
 	while ( curP < descr_nb ) {
 		path_descr*  curD=descr_data+curP;
-		int          nType=curD->flags&descr_type_mask;
-		bool         nWeight=curD->flags&descr_weighted;
-		float        nextX,nextY,nextW;
+		int		  nType=curD->flags&descr_type_mask;
+		bool		 nWeight=curD->flags&descr_weighted;
+		float		nextX,nextY,nextW;
 		if ( nType == descr_forced ) {
 			if ( weighted ) (curD)->associated=AddForcedPoint(curX,curY,curW); else (curD)->associated=AddForcedPoint(curX,curY);
 			curP++;
@@ -670,7 +670,7 @@ void            Path::Convert(float treshhold)
 		curW=nextW;
 	}
 }
-void            Path::ConvertEvenLines(float treshhold)
+void			Path::ConvertEvenLines(float treshhold)
 {
 	if ( descr_flags&descr_adding_bezier ) CancelBezier();
 	if ( descr_flags&descr_doing_subpath ) CloseSubpath(0);
@@ -678,9 +678,9 @@ void            Path::ConvertEvenLines(float treshhold)
 	SetBackData(false);
 	ResetPoints(descr_nb);
 	if ( descr_nb <= 0 ) return;
-	float    curX,curY,curW;
-	int      curP=1;
-	int      lastMoveTo=0;
+	float	curX,curY,curW;
+	int	  curP=1;
+	int	  lastMoveTo=0;
 	
 	// le moveto
 	curX=(descr_data)->d.m.x;
@@ -696,9 +696,9 @@ void            Path::ConvertEvenLines(float treshhold)
 		// et le reste, 1 par 1
 	while ( curP < descr_nb ) {
 		path_descr*  curD=descr_data+curP;
-		int          nType=curD->flags&descr_type_mask;
-		bool         nWeight=curD->flags&descr_weighted;
-		float        nextX,nextY,nextW;
+		int		  nType=curD->flags&descr_type_mask;
+		bool		 nWeight=curD->flags&descr_weighted;
+		float		nextX,nextY,nextW;
 		if ( nType == descr_forced ) {
 			if ( weighted ) (curD)->associated=AddForcedPoint(curX,curY,curW); else (curD)->associated=AddForcedPoint(curX,curY);
 			curP++;
@@ -1001,7 +1001,7 @@ void						Path::PrevPoint(int i,float &x,float &y)
 		PrevPoint(i-1,x,y);
 	}
 }
-void            Path::QuadraticPoint(float t,float &ox,float &oy,float sx,float sy,float mx,float my,float ex,float ey)
+void			Path::QuadraticPoint(float t,float &ox,float &oy,float sx,float sy,float mx,float my,float ex,float ey)
 {
 	float ax,bx,cx;
 	float ay,by,cy;
@@ -1015,7 +1015,7 @@ void            Path::QuadraticPoint(float t,float &ox,float &oy,float sx,float 
 	ox=ax*t*t+bx*t+cx;
 	oy=ay*t*t+by*t+cy;
 }
-void            Path::CubicTangent(float t,float &ox,float &oy,float sx,float sy,float sdx,float sdy,float ex,float ey,float edx,float edy)
+void			Path::CubicTangent(float t,float &ox,float &oy,float sx,float sy,float sdx,float sdy,float ex,float ey,float edx,float edy)
 {
 	float ax,bx,cx,dx;
 	float ay,by,cy,dy;
@@ -1031,7 +1031,7 @@ void            Path::CubicTangent(float t,float &ox,float &oy,float sx,float sy
 	ox=3*ax*t*t+2*bx*t+cx;
 	oy=3*ay*t*t+2*by*t+cy;
 }
-void            Path::ArcAngles(float sx,float sy,float ex,float ey,float rx,float ry,float angle,bool large,bool wise,float &sang,float &eang)
+void			Path::ArcAngles(float sx,float sy,float ex,float ey,float rx,float ry,float angle,bool large,bool wise,float &sang,float &eang)
 {
 	float   sex=ex-sx,sey=ey-sy;
 	float   ca=cos(angle),sa=sin(angle);
@@ -1087,7 +1087,7 @@ void            Path::ArcAngles(float sx,float sy,float ex,float ey,float rx,flo
 	}
 	drx+=(sx+ex)/2;dry+=(sy+ey)/2;
 }
-void            Path::DoArc(float sx,float sy,float ex,float ey,float rx,float ry,float angle,bool large,bool wise,float tresh)
+void			Path::DoArc(float sx,float sy,float ex,float ey,float rx,float ry,float angle,bool large,bool wise,float tresh)
 {
 	if ( rx <= 0.0001 || ry <= 0.0001 ) return; // on ajoute toujours un lineto apres, donc c bon
 	
@@ -1165,7 +1165,7 @@ void            Path::DoArc(float sx,float sy,float ex,float ey,float rx,float r
 		}
 	}
 }
-void            Path::DoArc(float sx,float sy,float sw,float ex,float ey,float ew,float rx,float ry,float angle,bool large,bool wise,float tresh)
+void			Path::DoArc(float sx,float sy,float sw,float ex,float ey,float ew,float rx,float ry,float angle,bool large,bool wise,float tresh)
 {
 	if ( rx <= 0.0001 || ry <= 0.0001 ) return; // on ajoute toujours un lineto apres, donc c bon
 
@@ -1245,7 +1245,7 @@ void            Path::DoArc(float sx,float sy,float sw,float ex,float ey,float e
 		}
 	}
 }
-void            Path::RecCubicTo(float sx,float sy,float sdx,float sdy,float ex,float ey,float edx,float edy,float tresh,int lev,float maxL)
+void			Path::RecCubicTo(float sx,float sy,float sdx,float sdy,float ex,float ey,float edx,float edy,float tresh,int lev,float maxL)
 {
 	float dC=sqrt((ex-sx)*(ex-sx)+(ey-sy)*(ey-sy));
 	if ( dC < 0.01 ) {
@@ -1290,7 +1290,7 @@ void            Path::RecCubicTo(float sx,float sy,float sdx,float sdy,float ex,
 		RecCubicTo(mx,my,mdx,mdy,ex,ey,edx/2,edy/2,tresh,lev-1,maxL);
 	}
 }
-void            Path::RecCubicTo(float sx,float sy,float sw,float sdx,float sdy,float ex,float ey,float ew,float edx,float edy,float tresh,int lev,float maxL)
+void			Path::RecCubicTo(float sx,float sy,float sw,float sdx,float sdy,float ex,float ey,float ew,float edx,float edy,float tresh,int lev,float maxL)
 {
 	float dC=sqrt((ex-sx)*(ex-sx)+(ey-sy)*(ey-sy));
 	if ( dC < 0.01 ) {
@@ -1335,7 +1335,7 @@ void            Path::RecCubicTo(float sx,float sy,float sw,float sdx,float sdy,
 	AddPoint(mx,my,mw);
 	RecCubicTo(mx,my,mw,mdx,mdy,ex,ey,ew,edx/2,edy/2,tresh,lev-1,maxL);
 }
-void            Path::RecBezierTo(float px,float py,float sx,float sy,float ex,float ey,float tresh,int lev,float maxL)
+void			Path::RecBezierTo(float px,float py,float sx,float sy,float ex,float ey,float tresh,int lev,float maxL)
 {
 	if ( lev <= 0 ) return;
 	float s=(sx-px)*(ey-py)-(sy-py)*(ex-px);
@@ -1369,7 +1369,7 @@ void            Path::RecBezierTo(float px,float py,float sx,float sy,float ex,f
 		RecBezierTo(mdx,mdy,mx,my,ex,ey,tresh,lev-1,maxL);	
 	}
 }
-void            Path::RecBezierTo(float px,float py,float pw,float sx,float sy,float sw,float ex,float ey,float ew,float tresh,int lev,float maxL)
+void			Path::RecBezierTo(float px,float py,float pw,float sx,float sy,float sw,float ex,float ey,float ew,float tresh,int lev,float maxL)
 {
 	if ( lev <= 0 ) return;
 	float s=(sx-px)*(ey-py)-(sy-py)*(ex-px);
@@ -1409,7 +1409,7 @@ void            Path::RecBezierTo(float px,float py,float pw,float sx,float sy,f
 	RecBezierTo(mdx,mdy,mdw,mx,my,mw,ex,ey,ew,tresh,lev-1,maxL);
 }
 
-void            Path::DoArc(float sx,float sy,float ex,float ey,float rx,float ry,float angle,bool large,bool wise,float tresh,int piece)
+void			Path::DoArc(float sx,float sy,float ex,float ey,float rx,float ry,float angle,bool large,bool wise,float tresh,int piece)
 {
 	if ( rx <= 0.0001 || ry <= 0.0001 ) return; // on ajoute toujours un lineto apres, donc c bon
 	
@@ -1487,7 +1487,7 @@ void            Path::DoArc(float sx,float sy,float ex,float ey,float rx,float r
 		}
 	}
 }
-void            Path::DoArc(float sx,float sy,float sw,float ex,float ey,float ew,float rx,float ry,float angle,bool large,bool wise,float tresh,int piece)
+void			Path::DoArc(float sx,float sy,float sw,float ex,float ey,float ew,float rx,float ry,float angle,bool large,bool wise,float tresh,int piece)
 {
 	if ( rx <= 0.0001 || ry <= 0.0001 ) return; // on ajoute toujours un lineto apres, donc c bon
 
@@ -1567,7 +1567,7 @@ void            Path::DoArc(float sx,float sy,float sw,float ex,float ey,float e
 		}
 	}
 }
-void            Path::RecCubicTo(float sx,float sy,float sdx,float sdy,float ex,float ey,float edx,float edy,float tresh,int lev,float st,float et,int piece)
+void			Path::RecCubicTo(float sx,float sy,float sdx,float sdy,float ex,float ey,float edx,float edy,float tresh,int lev,float st,float et,int piece)
 {
 	float dC=sqrt((ex-sx)*(ex-sx)+(ey-sy)*(ey-sy));
 	if ( dC < 0.01 ) {
@@ -1597,7 +1597,7 @@ void            Path::RecCubicTo(float sx,float sy,float sdx,float sdy,float ex,
 	AddPoint(mx,my,piece,mt);
 	RecCubicTo(mx,my,mdx,mdy,ex,ey,edx/2,edy/2,tresh,lev-1,mt,et,piece);
 }
-void            Path::RecCubicTo(float sx,float sy,float sw,float sdx,float sdy,float ex,float ey,float ew,float edx,float edy,float tresh,int lev,float st,float et,int piece)
+void			Path::RecCubicTo(float sx,float sy,float sw,float sdx,float sdy,float ex,float ey,float ew,float edx,float edy,float tresh,int lev,float st,float et,int piece)
 {
 	float dC=sqrt((ex-sx)*(ex-sx)+(ey-sy)*(ey-sy));
 	if ( dC < 0.01 ) {
@@ -1627,7 +1627,7 @@ void            Path::RecCubicTo(float sx,float sy,float sw,float sdx,float sdy,
 	AddPoint(mx,my,mw,piece,mt);
 	RecCubicTo(mx,my,mw,mdx,mdy,ex,ey,ew,edx/2,edy/2,tresh,lev-1,mt,et,piece);
 }
-void            Path::RecBezierTo(float px,float py,float sx,float sy,float ex,float ey,float tresh,int lev,float st,float et,int piece)
+void			Path::RecBezierTo(float px,float py,float sx,float sy,float ex,float ey,float tresh,int lev,float st,float et,int piece)
 {
 	if ( lev <= 0 ) return ;
 	float s=(sx-px)*(ey-py)-(sy-py)*(ex-px);
@@ -1646,7 +1646,7 @@ void            Path::RecBezierTo(float px,float py,float sx,float sy,float ex,f
 	mdy=(ey+py)/2;
 	RecBezierTo(mdx,mdy,mx,my,ex,ey,tresh,lev-1,mt,et,piece);	
 }
-void            Path::RecBezierTo(float px,float py,float pw,float sx,float sy,float sw,float ex,float ey,float ew,float tresh,int lev,float st,float et,int piece)
+void			Path::RecBezierTo(float px,float py,float pw,float sx,float sy,float sw,float ex,float ey,float ew,float tresh,int lev,float st,float et,int piece)
 {
 	if ( lev <= 0 ) return;
 	float s=(sx-px)*(ey-py)-(sy-py)*(ex-px);
@@ -1669,7 +1669,7 @@ void            Path::RecBezierTo(float px,float py,float pw,float sx,float sy,f
 	RecBezierTo(mdx,mdy,mdw,mx,my,mw,ex,ey,ew,tresh,lev-1,mt,et,piece);
 }
 
-void            Path::DoArc(float sx,float sy,float ex,float ey,float rx,float ry,float angle,bool large,bool wise,float tresh,int piece,offset_orig& orig)
+void			Path::DoArc(float sx,float sy,float ex,float ey,float rx,float ry,float angle,bool large,bool wise,float tresh,int piece,offset_orig& orig)
 {
 	// on n'arrivera jamais ici, puisque les offsets sont fait de cubiques
 	if ( rx <= 0.0001 || ry <= 0.0001 ) return; // on ajoute toujours un lineto apres, donc c bon
@@ -1748,7 +1748,7 @@ void            Path::DoArc(float sx,float sy,float ex,float ey,float rx,float r
 		}
 	}
 }
-void            Path::RecCubicTo(float sx,float sy,float sdx,float sdy,float ex,float ey,float edx,float edy,float tresh,int lev,float st,float et,int piece,offset_orig& orig)
+void			Path::RecCubicTo(float sx,float sy,float sdx,float sdy,float ex,float ey,float edx,float edy,float tresh,int lev,float st,float et,int piece,offset_orig& orig)
 {
 	float dC=sqrt((ex-sx)*(ex-sx)+(ey-sy)*(ey-sy));
 	bool  doneSub=false;
@@ -1842,7 +1842,7 @@ void            Path::RecCubicTo(float sx,float sy,float sdx,float sdy,float ex,
 	AddPoint(mx,my,piece,mt);
 	RecCubicTo(mx,my,mdx,mdy,ex,ey,edx/2,edy/2,tresh,lev-1,mt,et,piece,orig);
 }
-void            Path::RecBezierTo(float px,float py,float sx,float sy,float ex,float ey,float tresh,int lev,float st,float et,int piece,offset_orig& orig)
+void			Path::RecBezierTo(float px,float py,float sx,float sy,float ex,float ey,float tresh,int lev,float st,float et,int piece,offset_orig& orig)
 {
 	bool doneSub=false;
 	float s=(sx-px)*(ey-py)-(sy-py)*(ex-px);
@@ -1904,7 +1904,7 @@ void            Path::RecBezierTo(float px,float py,float sx,float sy,float ex,f
  * conversions
  */
 
-void            Path::Fill(Shape* dest,int pathID,bool justAdd,bool closeIfNeeded,bool invert)
+void			Path::Fill(Shape* dest,int pathID,bool justAdd,bool closeIfNeeded,bool invert)
 {
 	if ( dest == NULL ) return;
 	if ( justAdd == false ) {
@@ -1922,15 +1922,15 @@ void            Path::Fill(Shape* dest,int pathID,bool justAdd,bool closeIfNeede
 			if ( weighted ) {
 				// !invert && back && weighted
 				for (int i=0;i<nbPt;i++) dest->AddPoint(((path_lineto_wb*)pts)[i].x,((path_lineto_wb*)pts)[i].y);
-				int               lastM=0;
+				int			   lastM=0;
 				int								curP=1;
-				int               pathEnd=0;
-				bool              closed=false;
-				int               lEdge=-1;
+				int			   pathEnd=0;
+				bool			  closed=false;
+				int			   lEdge=-1;
 				while ( curP < nbPt ) {
-					path_lineto_wb*    sbp=((path_lineto_wb*)pts)+curP;
-					path_lineto_wb*    lm=((path_lineto_wb*)pts)+lastM;
-					path_lineto_wb*    prp=((path_lineto_wb*)pts)+pathEnd;
+					path_lineto_wb*	sbp=((path_lineto_wb*)pts)+curP;
+					path_lineto_wb*	lm=((path_lineto_wb*)pts)+lastM;
+					path_lineto_wb*	prp=((path_lineto_wb*)pts)+pathEnd;
 					if ( sbp->isMoveTo == polyline_moveto ) {
 						if ( closeIfNeeded ) {
 							if ( closed && lEdge >= 0 ) {
@@ -1976,7 +1976,7 @@ void            Path::Fill(Shape* dest,int pathID,bool justAdd,bool closeIfNeede
 						dest->DisconnectEnd(lEdge);
 						dest->ConnectEnd(first+lastM,lEdge);
 					} else {
-						path_lineto_wb*    lm=((path_lineto_wb*)pts)+lastM;
+						path_lineto_wb*	lm=((path_lineto_wb*)pts)+lastM;
 						lEdge=dest->AddEdge(first+pathEnd,first+lastM);
 						dest->ebData[lEdge].pathID=pathID;
 						dest->ebData[lEdge].pieceID=lm->piece;
@@ -1987,15 +1987,15 @@ void            Path::Fill(Shape* dest,int pathID,bool justAdd,bool closeIfNeede
 			} else {
 				// !invert && back && !weighted
 				for (int i=0;i<nbPt;i++) dest->AddPoint(((path_lineto_b*)pts)[i].x,((path_lineto_b*)pts)[i].y);
-				int               lastM=0;
+				int			   lastM=0;
 				int								curP=1;
-				int               pathEnd=0;
-				bool              closed=false;
-				int               lEdge=-1;
+				int			   pathEnd=0;
+				bool			  closed=false;
+				int			   lEdge=-1;
 				while ( curP < nbPt ) {
-					path_lineto_b*    sbp=((path_lineto_b*)pts)+curP;
-					path_lineto_b*    lm=((path_lineto_b*)pts)+lastM;
-					path_lineto_b*    prp=((path_lineto_b*)pts)+pathEnd;
+					path_lineto_b*	sbp=((path_lineto_b*)pts)+curP;
+					path_lineto_b*	lm=((path_lineto_b*)pts)+lastM;
+					path_lineto_b*	prp=((path_lineto_b*)pts)+pathEnd;
 					if ( sbp->isMoveTo == polyline_moveto ) {
 						if ( closeIfNeeded ) {
 							if ( closed && lEdge >= 0 ) {
@@ -2041,7 +2041,7 @@ void            Path::Fill(Shape* dest,int pathID,bool justAdd,bool closeIfNeede
 						dest->DisconnectEnd(lEdge);
 						dest->ConnectEnd(first+lastM,lEdge);
 					} else {
-						path_lineto_b*    lm=((path_lineto_b*)pts)+lastM;
+						path_lineto_b*	lm=((path_lineto_b*)pts)+lastM;
 						lEdge=dest->AddEdge(first+pathEnd,first+lastM);
 						dest->ebData[lEdge].pathID=pathID;
 						dest->ebData[lEdge].pieceID=lm->piece;
@@ -2054,15 +2054,15 @@ void            Path::Fill(Shape* dest,int pathID,bool justAdd,bool closeIfNeede
 			if ( weighted ) {
 				// !invert && !back && weighted
 				for (int i=0;i<nbPt;i++) dest->AddPoint(((path_lineto_w*)pts)[i].x,((path_lineto_w*)pts)[i].y);
-				int               lastM=0;
+				int			   lastM=0;
 				int								curP=1;
-				int               pathEnd=0;
-				bool              closed=false;
-				int               lEdge=-1;
+				int			   pathEnd=0;
+				bool			  closed=false;
+				int			   lEdge=-1;
 				while ( curP < nbPt ) {
-					path_lineto_w*    sbp=((path_lineto_w*)pts)+curP;
-					path_lineto_w*    lm=((path_lineto_w*)pts)+lastM;
-					path_lineto_w*    prp=((path_lineto_w*)pts)+pathEnd;
+					path_lineto_w*	sbp=((path_lineto_w*)pts)+curP;
+					path_lineto_w*	lm=((path_lineto_w*)pts)+lastM;
+					path_lineto_w*	prp=((path_lineto_w*)pts)+pathEnd;
 					if ( sbp->isMoveTo == polyline_moveto ) {
 						if ( closeIfNeeded ) {
 							if ( closed && lEdge >= 0 ) {
@@ -2102,15 +2102,15 @@ void            Path::Fill(Shape* dest,int pathID,bool justAdd,bool closeIfNeede
 			} else {
 				// !invert && !back && !weighted
 				for (int i=0;i<nbPt;i++) dest->AddPoint(((path_lineto*)pts)[i].x,((path_lineto*)pts)[i].y);
-				int               lastM=0;
+				int			   lastM=0;
 				int								curP=1;
-				int               pathEnd=0;
-				bool              closed=false;
-				int               lEdge=-1;
+				int			   pathEnd=0;
+				bool			  closed=false;
+				int			   lEdge=-1;
 				while ( curP < nbPt ) {
-					path_lineto*    sbp=((path_lineto*)pts)+curP;
-					path_lineto*    lm=((path_lineto*)pts)+lastM;
-					path_lineto*    prp=((path_lineto*)pts)+pathEnd;
+					path_lineto*	sbp=((path_lineto*)pts)+curP;
+					path_lineto*	lm=((path_lineto*)pts)+lastM;
+					path_lineto*	prp=((path_lineto*)pts)+pathEnd;
 					if ( sbp->isMoveTo == polyline_moveto ) {
 						if ( closeIfNeeded ) {
 							if ( closed && lEdge >= 0 ) {

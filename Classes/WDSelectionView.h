@@ -18,14 +18,14 @@
 @class WDDrawing;
 
 @interface WDSelectionView : UIView {
-    
+	
 @private
-    // The pixel dimensions of the backbuffer
-    GLint backingWidth;
-    GLint backingHeight;
-    
-    // OpenGL names for the renderbuffer and framebuffer used to render to this view
-    GLuint colorRenderbuffer, defaultFramebuffer;
+	// The pixel dimensions of the backbuffer
+	GLint backingWidth;
+	GLint backingHeight;
+	
+	// OpenGL names for the renderbuffer and framebuffer used to render to this view
+	GLuint colorRenderbuffer, defaultFramebuffer;
 }
 
 @property (nonatomic, weak) WDCanvas *canvas;

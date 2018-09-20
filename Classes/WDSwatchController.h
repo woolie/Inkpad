@@ -15,19 +15,19 @@
 @class WDDrawingController;
 
 enum {
-    kWDShadowSwatchMode = 0,
-    kWDStrokeSwatchMode,
-    kWDFillSwatchMode
+	kWDShadowSwatchMode = 0,
+	kWDStrokeSwatchMode,
+	kWDFillSwatchMode
 };
 
 @interface WDSwatchController : UICollectionViewController {
-    UICollectionView    *collectionView_;
-    
-    UIBarButtonItem     *deleteItem_;
-    NSMutableSet        *selectedSwatches_;
-    
-    UISegmentedControl  *modeSegment_;
-    NSInteger           mode_;
+	UICollectionView	*collectionView_;
+	
+	UIBarButtonItem	 *deleteItem_;
+	NSMutableSet		*selectedSwatches_;
+	
+	UISegmentedControl  *modeSegment_;
+	NSInteger		   mode_;
 }
 
 @property (nonatomic, weak) WDDrawingController *drawingController;

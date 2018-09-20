@@ -13,21 +13,21 @@
 
 @interface WDRulerUnit : NSObject 
 
-@property (nonatomic, strong) NSString *name;
-@property (nonatomic, strong) NSString *abbreviation;
+@property (nonatomic, strong) NSString*name;
+@property (nonatomic, strong) NSString*abbreviation;
 @property (nonatomic, strong) NSArray *stepUpCycle;
 @property (nonatomic, strong) NSArray *stepDownCycle;
 @property (nonatomic, assign) float conversionFactor;
 
-+ (WDRulerUnit *) rulerUnitWithName:(NSString *)name
-                        abbeviation:(NSString *)abbreviation
-       unitToPointsConversionFactor:(CGFloat)conversionFactor
-                        stepUpCycle:(NSArray *)stepUpCycle
-                      stepDownCycle:(NSArray *)stepDownCycle;
-    
-+ (NSDictionary *) rulerUnits;
++ (WDRulerUnit *) rulerUnitWithName:(NSString*)name
+						abbeviation:(NSString*)abbreviation
+	   unitToPointsConversionFactor:(CGFloat)conversionFactor
+						stepUpCycle:(NSArray*)stepUpCycle
+					  stepDownCycle:(NSArray*)stepDownCycle;
+	
++ (NSDictionary*) rulerUnits;
 
-+ (NSString *) localizedUnitName:(NSString *)name;
-+ (NSString *) localizedUnitAbbreviation:(NSString *)abbreviation;
++ (NSString*) localizedUnitName:(NSString*)name;
++ (NSString*) localizedUnitAbbreviation:(NSString*)abbreviation;
 
 @end

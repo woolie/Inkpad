@@ -16,31 +16,31 @@
 @class WDTextPath;
 
 @interface WDSelectionTool : WDTool {
-    CGAffineTransform       transform_;
-    BOOL                    marqueeMode_;
-    BOOL                    groupSelect_;
-    
-    WDBezierNode            *activeNode_;
-    NSUInteger              activeTextHandle_;
-    NSUInteger              activeGradientHandle_;
-    
-    BOOL                    transformingGradient_;
-    BOOL                    transformingNodes_;
-    BOOL                    transformingHandles_;
-    BOOL                    convertingNode_;
-    BOOL                    transformingTextKnobs_;
-    BOOL                    transformingTextPathStartKnob_;
-    
-    WDTextPath              *activeTextPath_;
-    
-    int                     originalReflectionMode_;
-    WDBezierNode            *replacementNode_;
-    NSUInteger              pointToMove_;
-    NSUInteger              pointToConvert_;
+	CGAffineTransform	   transform_;
+	BOOL					marqueeMode_;
+	BOOL					groupSelect_;
+	
+	WDBezierNode			*activeNode_;
+	NSUInteger			  activeTextHandle_;
+	NSUInteger			  activeGradientHandle_;
+	
+	BOOL					transformingGradient_;
+	BOOL					transformingNodes_;
+	BOOL					transformingHandles_;
+	BOOL					convertingNode_;
+	BOOL					transformingTextKnobs_;
+	BOOL					transformingTextPathStartKnob_;
+	
+	WDTextPath			  *activeTextPath_;
+	
+	int					 originalReflectionMode_;
+	WDBezierNode			*replacementNode_;
+	NSUInteger			  pointToMove_;
+	NSUInteger			  pointToConvert_;
 
-    BOOL                    nodeWasSelected_;
-    BOOL                    objectWasSelected_;
-    WDElement               *lastTappedObject_;
+	BOOL					nodeWasSelected_;
+	BOOL					objectWasSelected_;
+	WDElement			   *lastTappedObject_;
 }
 
 @property (nonatomic, assign) BOOL groupSelect;

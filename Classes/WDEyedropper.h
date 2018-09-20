@@ -14,8 +14,8 @@
 @class WDColor;
 
 @interface WDEyedropper : UIView {
-    float   borderWidth_;
-    float   alphaComponent_;
+	float   borderWidth_;
+	float   alphaComponent_;
 }
 
 @property (nonatomic, strong) id fill;

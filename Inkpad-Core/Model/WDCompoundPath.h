@@ -15,8 +15,8 @@
 @class WDPath;
 
 @interface WDCompoundPath : WDAbstractPath <NSCoding, NSCopying> {
-    CGMutablePathRef    pathRef_;
-    CGMutablePathRef    strokePathRef_;
+	CGMutablePathRef	pathRef_;
+	CGMutablePathRef	strokePathRef_;
 }
 
 @property (nonatomic, strong) NSMutableArray *subpaths;

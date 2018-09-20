@@ -17,48 +17,41 @@
 #import "WDStylable.h"
 #import "WDTextRenderer.h"
 
+@class WDAbstractPath;
 @class WDStrokeStyle;
-
 @protocol WDPathPainter;
 
-@interface WDText : WDStylable <NSCoding, NSCopying, WDTextRenderer> {
-    float               width_;
-    CGAffineTransform   transform_;
-    NSString            *text_;
-    NSTextAlignment     alignment_;
-    NSString            *fontName_;
-    float               fontSize_;
-    
-    CTFontRef           fontRef_;
-    CGMutablePathRef    pathRef_;
-    
-    BOOL                needsLayout_;
-    NSMutableArray      *glyphs_;
-    CGRect              styleBounds_;
-    
-    NSString            *cachedText_;
-    CGAffineTransform   cachedTransform_;
-    float               cachedWidth_;
-    BOOL                cachingWidth_;
-    
-    CGRect              naturalBounds_;
-    BOOL                naturalBoundsDirty_;
+@interface WDText : WDStylable <NSCoding, NSCopying, WDTextRenderer>
+{
+	CGMutablePathRef	_pathRef;
+
+	BOOL				_needsLayout;
+	NSMutableArray*		_glyphs;
+	CGRect			  _styleBounds;
+
+	NSString*			_cachedText;
+	CGAffineTransform   _cachedTransform;
+	CGFloat			   _cachedWidth;
+	BOOL				_cachingWidth;
+
+	BOOL				_naturalBoundsDirty;
 }
 
 @property (nonatomic, assign) float width;
-@property (nonatomic, strong) NSString *fontName;
+@property (nonatomic, strong) NSString*fontName;
 @property (nonatomic, assign) float fontSize;
 @property (nonatomic, assign) CGAffineTransform transform;
-@property (nonatomic, strong) NSString *text;
+@property (nonatomic, strong) NSString* text;
 @property (nonatomic, assign) NSTextAlignment alignment;
 @property (nonatomic, readonly) CGRect naturalBounds;
 @property (nonatomic, readonly) CTFontRef fontRef;
 @property (nonatomic, readonly, strong) NSAttributedString *attributedString;
 
-- (void) setFontName:(NSString *)fontName;
-- (void) setFontSize:(float)fontSize;
+// An array of WDPath objects representing each glyph in the text object
+@property (nonatomic, readonly) NSArray<WDAbstractPath*>* outlines;
 
-+ (float) minimumWidth;
+@property (class, readonly) CGFloat minimumWidth;
+
 - (void) moveHandle:(NSUInteger)handle toPoint:(CGPoint)pt;
 
 - (void) cacheOriginalText;
@@ -67,14 +60,11 @@
 - (void) cacheTransformAndWidth;
 - (void) registerUndoWithCachedTransformAndWidth;
 
-// an array of WDPath objects representing each glyph in the text object
-- (NSArray *) outlines;
-
 - (void) drawOpenGLTextOutlinesWithTransform:(CGAffineTransform)transform viewTransform:(CGAffineTransform)viewTransform;
 
-- (void) setFontNameQuiet:(NSString *)fontName;
+- (void) setFontNameQuiet:(NSString*)fontName;
 - (void) setFontSizeQuiet:(float)fontSize;
-- (void) setTextQuiet:(NSString *)text;
+- (void) setTextQuiet:(NSString*)text;
 - (void) setTransformQuiet:(CGAffineTransform)transform;
 - (void) setWidthQuiet:(float)width;
 

@@ -21,18 +21,18 @@
 @synthesize nodePosition = nodePosition_;
 
 const float kNodeSelectionTolerance = 25;
-    
+	
 + (WDPickResult *) pickResult
 {
-    WDPickResult *pickResult = [[WDPickResult alloc] init];
-    
-    return pickResult;
+	WDPickResult *pickResult = [[WDPickResult alloc] init];
+	
+	return pickResult;
 }
 
 - (void) setSnappedPoint:(CGPoint)pt
 {
-    snappedPoint_ = pt;
-    snapped_ = YES;
+	snappedPoint_ = pt;
+	snapped_ = YES;
 }
 
 @end

@@ -70,14 +70,14 @@ void					  Path::Affiche(void)
 		}
 	}
 }
-void            Path::Reset(void)
+void			Path::Reset(void)
 {
 	descr_nb=0;
 	pending_bezier=-1;
 	pending_moveto=-1;
 	descr_flags=0;
 }
-void            Path::Copy(Path* who)
+void			Path::Copy(Path* who)
 {
 	ResetPoints(0);
 	if ( who->descr_nb > descr_max ) {
@@ -89,14 +89,14 @@ void            Path::Copy(Path* who)
 	memcpy(descr_data,who->descr_data,descr_nb*sizeof(path_descr));
 }
 
-void            Path::Alloue(int addSize)
+void			Path::Alloue(int addSize)
 {
 	if ( descr_nb+addSize > descr_max ) {
 		descr_max=2*descr_nb+addSize;
 		descr_data=(path_descr*)realloc(descr_data,descr_max*sizeof(path_descr));
 	}
 }
-void            Path::CloseSubpath(int add)
+void			Path::CloseSubpath(int add)
 {
 	for (int i=descr_nb-1;i>=0;i--) {
 		int ty=(descr_data+i)->flags&descr_type_mask;
@@ -109,7 +109,7 @@ void            Path::CloseSubpath(int add)
 	pending_moveto=-1;
 }
 
-int            Path::ForcePoint(void)
+int			Path::ForcePoint(void)
 {
 	if ( descr_flags&descr_adding_bezier ) EndBezierTo();
 	if ( descr_flags&descr_doing_subpath ) {
@@ -125,7 +125,7 @@ int            Path::ForcePoint(void)
 	nElem->flags=descr_forced;
 	return descr_nb-1;
 }
-int            Path::Close(void)
+int			Path::Close(void)
 {
 	if ( descr_flags&descr_adding_bezier ) CancelBezier();
 	if ( descr_flags&descr_doing_subpath ) {
@@ -145,7 +145,7 @@ int            Path::Close(void)
 	pending_moveto=-1;
 	return descr_nb-1;
 }
-int            Path::MoveTo(float ix,float iy)
+int			Path::MoveTo(float ix,float iy)
 {
 	if ( descr_flags&descr_adding_bezier ) EndBezierTo(ix,iy);
 	if ( descr_flags&descr_doing_subpath ) CloseSubpath(0);
@@ -164,7 +164,7 @@ int            Path::MoveTo(float ix,float iy)
 	descr_flags|=descr_doing_subpath;
 	return descr_nb-1;
 }
-int            Path::MoveTo(float ix,float iy,float iw)
+int			Path::MoveTo(float ix,float iy,float iw)
 {
 	if ( descr_flags&descr_adding_bezier ) EndBezierTo(ix,iy,iw);
 	if ( descr_flags&descr_doing_subpath ) CloseSubpath(0);
@@ -184,7 +184,7 @@ int            Path::MoveTo(float ix,float iy,float iw)
 	descr_flags|=descr_doing_subpath;
 	return descr_nb-1;
 }
-int            Path::LineTo(float ix,float iy)
+int			Path::LineTo(float ix,float iy)
 {
 	if ( descr_flags&descr_adding_bezier ) EndBezierTo(ix,iy);
 	if ( descr_flags&descr_doing_subpath ) {
@@ -202,7 +202,7 @@ int            Path::LineTo(float ix,float iy)
 	nElem->d.l.y=iy;
 	return descr_nb-1;
 }
-int            Path::LineTo(float ix,float iy,float iw)
+int			Path::LineTo(float ix,float iy,float iw)
 {
 	if ( descr_flags&descr_adding_bezier ) EndBezierTo(ix,iy,iw);
 	if ( descr_flags&descr_doing_subpath ) {
@@ -221,7 +221,7 @@ int            Path::LineTo(float ix,float iy,float iw)
 	nElem->d.l.w=iw;
 	return descr_nb-1;
 }
-int            Path::CubicTo(float ix,float iy,float isDx,float isDy,float ieDx,float ieDy)
+int			Path::CubicTo(float ix,float iy,float isDx,float isDy,float ieDx,float ieDy)
 {
 	if ( descr_flags&descr_adding_bezier ) EndBezierTo(ix,iy);
 	if ( descr_flags&descr_doing_subpath ) {
@@ -243,7 +243,7 @@ int            Path::CubicTo(float ix,float iy,float isDx,float isDy,float ieDx,
 	nElem->d.c.enDy=ieDy;
 	return descr_nb-1;
 }
-int            Path::CubicTo(float ix,float iy,float isDx,float isDy,float ieDx,float ieDy,float iw)
+int			Path::CubicTo(float ix,float iy,float isDx,float isDy,float ieDx,float ieDy,float iw)
 {
 	if ( descr_flags&descr_adding_bezier ) EndBezierTo(ix,iy,iw);
 	if ( descr_flags&descr_doing_subpath ) {
@@ -266,7 +266,7 @@ int            Path::CubicTo(float ix,float iy,float isDx,float isDy,float ieDx,
 	nElem->d.c.enDy=ieDy;
 	return descr_nb-1;
 }
-int            Path::ArcTo(float ix,float iy,float iRx,float iRy,float angle,bool iLargeArc,bool iClockwise)
+int			Path::ArcTo(float ix,float iy,float iRx,float iRy,float angle,bool iLargeArc,bool iClockwise)
 {
 	if ( descr_flags&descr_adding_bezier ) EndBezierTo(ix,iy);
 	if ( descr_flags&descr_doing_subpath ) {
@@ -289,7 +289,7 @@ int            Path::ArcTo(float ix,float iy,float iRx,float iRy,float angle,boo
 	nElem->d.a.clockwise=iClockwise;
 	return descr_nb-1;
 }
-int            Path::ArcTo(float ix,float iy,float iRx,float iRy,float angle,bool iLargeArc,bool iClockwise,float iw)
+int			Path::ArcTo(float ix,float iy,float iRx,float iRy,float angle,bool iLargeArc,bool iClockwise,float iw)
 {
 	if ( descr_flags&descr_adding_bezier ) EndBezierTo(ix,iy,iw);
 	if ( descr_flags&descr_doing_subpath ) {
@@ -313,7 +313,7 @@ int            Path::ArcTo(float ix,float iy,float iRx,float iRy,float angle,boo
 	nElem->d.a.clockwise=iClockwise;
 	return descr_nb-1;
 }
-int            Path::TempBezierTo(void)
+int			Path::TempBezierTo(void)
 {
 	if ( descr_flags&descr_adding_bezier ) CancelBezier();
 	if ( descr_flags&descr_doing_subpath ) {
@@ -334,7 +334,7 @@ int            Path::TempBezierTo(void)
 	descr_flags|=descr_delayed_bezier;
 	return descr_nb-1;
 }
-int            Path::TempBezierToW(void)
+int			Path::TempBezierToW(void)
 {
 	if ( descr_flags&descr_adding_bezier ) CancelBezier();
 	if ( descr_flags&descr_doing_subpath ) {
@@ -355,7 +355,7 @@ int            Path::TempBezierToW(void)
 	descr_flags|=descr_delayed_bezier;
 	return descr_nb-1;
 }
-void            Path::CancelBezier(void)
+void			Path::CancelBezier(void)
 {
 	descr_flags&=~(descr_adding_bezier);
 	descr_flags&=~(descr_delayed_bezier);
@@ -363,7 +363,7 @@ void            Path::CancelBezier(void)
 	descr_nb=pending_bezier;
 	pending_bezier=-1;
 }
-int             Path::EndBezierTo(void)
+int			 Path::EndBezierTo(void)
 {
 	if ( descr_flags&descr_delayed_bezier ) {
 		CancelBezier();
@@ -374,7 +374,7 @@ int             Path::EndBezierTo(void)
 	}
 	return -1;
 }
-int             Path::EndBezierTo(float ix,float iy)
+int			 Path::EndBezierTo(float ix,float iy)
 {
 	if ( descr_flags&descr_adding_bezier ) {
 	} else {
@@ -396,7 +396,7 @@ int             Path::EndBezierTo(float ix,float iy)
 	descr_flags&=~(descr_delayed_bezier);
 	return -1;
 }
-int            Path::EndBezierTo(float ix,float iy,float iw)
+int			Path::EndBezierTo(float ix,float iy,float iw)
 {
 	if ( descr_flags&descr_adding_bezier ) {
 	} else {
@@ -418,7 +418,7 @@ int            Path::EndBezierTo(float ix,float iy,float iw)
 	descr_flags&=~(descr_delayed_bezier);
 	return -1;
 }
-int            Path::IntermBezierTo(float ix,float iy)
+int			Path::IntermBezierTo(float ix,float iy)
 {
 	if ( descr_flags&descr_adding_bezier ) {
 	} else {
@@ -446,7 +446,7 @@ int            Path::IntermBezierTo(float ix,float iy)
 	}
 	return -1;
 }
-int            Path::IntermBezierTo(float ix,float iy,float iw)
+int			Path::IntermBezierTo(float ix,float iy,float iw)
 {
 	if ( descr_flags&descr_adding_bezier ) {
 	} else {
@@ -475,7 +475,7 @@ int            Path::IntermBezierTo(float ix,float iy,float iw)
 	}
 	return -1;
 }
-int            Path::BezierTo(float ix,float iy)
+int			Path::BezierTo(float ix,float iy)
 {
 	if ( descr_flags&descr_adding_bezier ) EndBezierTo(ix,iy);
 	if ( descr_flags&descr_doing_subpath ) {
@@ -497,7 +497,7 @@ int            Path::BezierTo(float ix,float iy)
 	descr_flags&=~(descr_delayed_bezier);
 	return descr_nb-1;
 }
-int            Path::BezierTo(float ix,float iy,float iw)
+int			Path::BezierTo(float ix,float iy,float iw)
 {
 	if ( descr_flags&descr_adding_bezier ) EndBezierTo(ix,iy,iw);
 	if ( descr_flags&descr_doing_subpath ) {
@@ -525,7 +525,7 @@ int            Path::BezierTo(float ix,float iy,float iw)
 /*
  * points de la polyligne
  */
-void            Path::SetWeighted(bool nVal)
+void			Path::SetWeighted(bool nVal)
 {
 	if ( back == false ) {
 		if ( nVal == true && weighted == false ) {
@@ -545,7 +545,7 @@ void            Path::SetWeighted(bool nVal)
 		}
 	}
 }
-void            Path::SetBackData(bool nVal)
+void			Path::SetBackData(bool nVal)
 {
 	if ( back == false ) {
 		if ( nVal == true && back == false ) {
@@ -565,7 +565,7 @@ void            Path::SetBackData(bool nVal)
 		}
 	}
 }
-void            Path::ResetPoints(int expected)
+void			Path::ResetPoints(int expected)
 {
 	nbPt=0;
 	if ( back ) {
@@ -586,7 +586,7 @@ void            Path::ResetPoints(int expected)
 		pts=(char*)realloc(pts,maxPt);
 	}
 }
-int             Path::AddPoint(float ix,float iy,bool mvto)
+int			 Path::AddPoint(float ix,float iy,bool mvto)
 {
 	if ( back ) {
 		return AddPoint(ix,iy,-1,0.0,mvto);
@@ -608,7 +608,7 @@ int             Path::AddPoint(float ix,float iy,bool mvto)
 	((path_lineto*)pts)[n].y=iy;
 	return n;
 }
-int             Path::AddPoint(float ix,float iy,float iw,bool mvto)
+int			 Path::AddPoint(float ix,float iy,float iw,bool mvto)
 {
 	if ( back ) {
 		return AddPoint(ix,iy,iw,-1,0.0,mvto);
@@ -632,7 +632,7 @@ int             Path::AddPoint(float ix,float iy,float iw,bool mvto)
 	((path_lineto_w*)pts)[n].w=iw;
 	return n;
 }
-int             Path::AddPoint(float ix,float iy,int ip,float it,bool mvto)
+int			 Path::AddPoint(float ix,float iy,int ip,float it,bool mvto)
 {
 	if ( back ) {
 		if ( weighted ) {
@@ -656,7 +656,7 @@ int             Path::AddPoint(float ix,float iy,int ip,float it,bool mvto)
 	((path_lineto_b*)pts)[n].t=it;
 	return n;
 }
-int             Path::AddPoint(float ix,float iy,float iw,int ip,float it,bool mvto)
+int			 Path::AddPoint(float ix,float iy,float iw,int ip,float it,bool mvto)
 {
 	if ( back ) {
 		if ( weighted ) {
@@ -682,7 +682,7 @@ int             Path::AddPoint(float ix,float iy,float iw,int ip,float it,bool m
 	((path_lineto_wb*)pts)[n].t=it;
 	return n;
 }
-int             Path::AddForcedPoint(float ix,float iy)
+int			 Path::AddForcedPoint(float ix,float iy)
 {
 	if ( back ) {
 		return AddForcedPoint(ix,iy,-1,0.0);
@@ -704,7 +704,7 @@ int             Path::AddForcedPoint(float ix,float iy)
 	((path_lineto*)pts)[n].y=((path_lineto*)pts)[n-1].y;
 	return n;
 }
-int             Path::AddForcedPoint(float ix,float iy,float iw)
+int			 Path::AddForcedPoint(float ix,float iy,float iw)
 {
 	if ( back ) {
 		return AddForcedPoint(ix,iy,iw,-1,0.0);
@@ -728,7 +728,7 @@ int             Path::AddForcedPoint(float ix,float iy,float iw)
 	((path_lineto_w*)pts)[n].w=((path_lineto_w*)pts)[n-1].w;
 	return n;
 }
-int             Path::AddForcedPoint(float ix,float iy,int ip,float it)
+int			 Path::AddForcedPoint(float ix,float iy,int ip,float it)
 {
 	if ( back ) {
 		if ( weighted ) {
@@ -752,7 +752,7 @@ int             Path::AddForcedPoint(float ix,float iy,int ip,float it)
 	((path_lineto_b*)pts)[n].t=((path_lineto_b*)pts)[n-1].t;
 	return n;
 }
-int             Path::AddForcedPoint(float ix,float iy,float iw,int ip,float it)
+int			 Path::AddForcedPoint(float ix,float iy,float iw,int ip,float it)
 {
 	if ( back ) {
 		if ( weighted ) {
@@ -779,7 +779,7 @@ int             Path::AddForcedPoint(float ix,float iy,float iw,int ip,float it)
 	return n;
 }
 
-int              Path::Winding(void)
+int			  Path::Winding(void)
 {
 	if ( nbPt <= 1 ) return 0;
 	float   sum=0;
@@ -798,7 +798,7 @@ int              Path::Winding(void)
 }
 
 // utilities
-void            Path::PointAt(int piece,float at,vec2 &pos)
+void			Path::PointAt(int piece,float at,vec2 &pos)
 {
 	if ( piece < 0 || piece >= descr_nb ) {
 		pos.x=pos.y=0;
@@ -880,7 +880,7 @@ void            Path::PointAt(int piece,float at,vec2 &pos)
 		}
 	}
 }
-void            Path::PointAndTangentAt(int piece,float at,vec2 &pos,vec2 &tgt)
+void			Path::PointAndTangentAt(int piece,float at,vec2 &pos,vec2 &tgt)
 {
 	if ( piece < 0 || piece >= descr_nb ) {
 		pos.x=pos.y=0;
@@ -957,7 +957,7 @@ void            Path::PointAndTangentAt(int piece,float at,vec2 &pos,vec2 &tgt)
 	}
 }
 
-void     Path::TangentOnSegAt(float at,float sx,float sy,path_descr_lineto& fin,vec2& pos,vec2& tgt,float &len)
+void	 Path::TangentOnSegAt(float at,float sx,float sy,path_descr_lineto& fin,vec2& pos,vec2& tgt,float &len)
 {
 	float ex,ey;
 	ex=fin.x;
@@ -981,7 +981,7 @@ void     Path::TangentOnSegAt(float at,float sx,float sy,path_descr_lineto& fin,
 	}
 }
 
-void     Path::TangentOnArcAt(float at,float sx,float sy,path_descr_arcto& fin,vec2& pos,vec2& tgt,float &len,float &rad)
+void	 Path::TangentOnArcAt(float at,float sx,float sy,path_descr_arcto& fin,vec2& pos,vec2& tgt,float &len,float &rad)
 {
 	float ex,ey;
 	ex=fin.x;
@@ -993,13 +993,13 @@ void     Path::TangentOnArcAt(float at,float sx,float sy,path_descr_arcto& fin,v
 	bool  large,wise;
 	large=fin.large;
 	wise=fin.clockwise;
-    
+	
 	pos.x=sx;
 	pos.y=sy;
 	tgt.x=0;
 	tgt.y=0;
 	if ( rx <= 0.0001 || ry <= 0.0001 ) return;
-    
+	
 	float   sex=ex-sx,sey=ey-sy;
 	float   ca=cos(angle),sa=sin(angle);
 	float   csex=ca*sex+sa*sey,csey=-sa*sex+ca*sey;
@@ -1086,11 +1086,11 @@ void     Path::TangentOnArcAt(float at,float sx,float sy,path_descr_arcto& fin,v
 		rad=len*(tgt.x*tgt.x+tgt.y*tgt.y)/(tgt.x*dtgt.y-tgt.y*dtgt.x);
 		tgt.x/=len;
 		tgt.y/=len;
-        
+		
 	}
 }
 
-void     Path::TangentOnCubAt(float at,float sx,float sy,path_descr_cubicto& fin,bool before,vec2& pos,vec2& tgt,float &len,float &rad)
+void	 Path::TangentOnCubAt(float at,float sx,float sy,path_descr_cubicto& fin,bool before,vec2& pos,vec2& tgt,float &len,float &rad)
 {
 	float ex,ey;
 	ex=fin.x;
@@ -1106,7 +1106,7 @@ void     Path::TangentOnCubAt(float at,float sx,float sy,path_descr_cubicto& fin
 	tgt.x=0;
 	tgt.y=0;
 	len=rad=0;
-    
+	
 	float   ax,bx,cx,dx;
 	float   ay,by,cy,dy;
 	ax=sdx+edx-2*ex+2*sx;
@@ -1127,24 +1127,24 @@ void     Path::TangentOnCubAt(float at,float sx,float sy,path_descr_cubicto& fin
 	dder.y=6*ay*atb+2*by;
 	ddder.x=6*ax;
 	ddder.y=6*ay;
-    /*	ax=sdx+edx+2*sx-2*ex;
-     bx=3*ex-3*sx-2*sdx-edx;
-     cx=sdx;
-     dx=sx;
-     ay=sdy+edy+2*sy-2*ey;
-     by=3*ey-3*sy-2*sdy-edy;
-     cy=sdy;
-     dy=sy;
-     
-     pos.x=ax*at*at*at+bx*at*at+cx*at+dx;
-     pos.y=ay*at*at*at+by*at*at+cy*at+dy;
-     vec2  der,dder,ddder;
-     der.x=3*ax*at*at+2*bx*at+cx;
-     der.y=3*ay*at*at+2*by*at+cy;
-     dder.x=6*ax*at+2*bx;
-     dder.y=6*ay*at+2*by;
-     ddder.x=6*ax;
-     ddder.y=6*ay;*/
+	/*	ax=sdx+edx+2*sx-2*ex;
+	 bx=3*ex-3*sx-2*sdx-edx;
+	 cx=sdx;
+	 dx=sx;
+	 ay=sdy+edy+2*sy-2*ey;
+	 by=3*ey-3*sy-2*sdy-edy;
+	 cy=sdy;
+	 dy=sy;
+	 
+	 pos.x=ax*at*at*at+bx*at*at+cx*at+dx;
+	 pos.y=ay*at*at*at+by*at*at+cy*at+dy;
+	 vec2  der,dder,ddder;
+	 der.x=3*ax*at*at+2*bx*at+cx;
+	 der.y=3*ay*at*at+2*by*at+cy;
+	 dder.x=6*ax*at+2*bx;
+	 dder.y=6*ay*at+2*by;
+	 ddder.x=6*ax;
+	 ddder.y=6*ay;*/
 	float   l=sqrtf(der.x*der.x+der.y*der.y);
 	if ( l <= 0.0001 ) {
 		len=0;
@@ -1175,7 +1175,7 @@ void     Path::TangentOnCubAt(float at,float sx,float sy,path_descr_cubicto& fin
 	tgt.y=der.y/l;
 }
 
-void     Path::TangentOnBezAt(float at,float sx,float sy,path_descr_intermbezierto& mid,path_descr_bezierto& fin,bool before,vec2& pos,vec2& tgt,float &len,float &rad)
+void	 Path::TangentOnBezAt(float at,float sx,float sy,path_descr_intermbezierto& mid,path_descr_bezierto& fin,bool before,vec2& pos,vec2& tgt,float &len,float &rad)
 {
 	float ex,ey;
 	ex=fin.x;
@@ -1226,7 +1226,7 @@ void     Path::TangentOnBezAt(float at,float sx,float sy,path_descr_intermbezier
 	tgt.y=der.y/l;
 }
 
-void            Path::DoLeftJoin(Shape* dest,float width,JoinType join,vec2 pos,vec2 prev,vec2 next,float miter,float prevL,float nextL,int &leftStNo,int &leftEnNo)
+void			Path::DoLeftJoin(Shape* dest,float width,JoinType join,vec2 pos,vec2 prev,vec2 next,float miter,float prevL,float nextL,int &leftStNo,int &leftEnNo)
 {
 	vec2   pnor,nnor;
 	RotCCWTo(prev,pnor);
@@ -1254,32 +1254,32 @@ void            Path::DoLeftJoin(Shape* dest,float width,JoinType join,vec2 pos,
 		return;
 	}
 	if ( angSi < 0 ) {
-        /*		vec2     biss;
-         biss.x=next.x-prev.x;
-         biss.y=next.y-prev.y;
-         float   c2=Dot(biss,next);
-         float   l=width/c2;
-         float		projn=l*(Cross(biss,next));
-         float		projp=-l*(Cross(biss,prev));
-         if ( projp <= 0.5*prevL && projn <= 0.5*nextL ) {
-         float   x,y;
-         x=pos.x+l*biss.x;
-         y=pos.y+l*biss.y;
-         leftEnNo=leftStNo=dest->AddPoint(x,y);
-         } else {*/
-        float   x,y;
-        x=pos.x+width*pnor.x;
-        y=pos.y+width*pnor.y;
-        leftStNo=dest->AddPoint(x,y);
-        x=pos.x+width*nnor.x;
-        y=pos.y+width*nnor.y;
-        leftEnNo=dest->AddPoint(x,y);
-        x=pos.x;
-        y=pos.y;
-        int midNo=dest->AddPoint(x,y);
-        dest->AddEdge(leftEnNo,midNo);
-        dest->AddEdge(midNo,leftStNo);
-        //		}
+		/*		vec2	 biss;
+		 biss.x=next.x-prev.x;
+		 biss.y=next.y-prev.y;
+		 float   c2=Dot(biss,next);
+		 float   l=width/c2;
+		 float		projn=l*(Cross(biss,next));
+		 float		projp=-l*(Cross(biss,prev));
+		 if ( projp <= 0.5*prevL && projn <= 0.5*nextL ) {
+		 float   x,y;
+		 x=pos.x+l*biss.x;
+		 y=pos.y+l*biss.y;
+		 leftEnNo=leftStNo=dest->AddPoint(x,y);
+		 } else {*/
+		float   x,y;
+		x=pos.x+width*pnor.x;
+		y=pos.y+width*pnor.y;
+		leftStNo=dest->AddPoint(x,y);
+		x=pos.x+width*nnor.x;
+		y=pos.y+width*nnor.y;
+		leftEnNo=dest->AddPoint(x,y);
+		x=pos.x;
+		y=pos.y;
+		int midNo=dest->AddPoint(x,y);
+		dest->AddEdge(leftEnNo,midNo);
+		dest->AddEdge(midNo,leftStNo);
+		//		}
 	} else {
 		float   x,y;
 		if ( join == join_pointy ) {
@@ -1289,8 +1289,8 @@ void            Path::DoLeftJoin(Shape* dest,float width,JoinType join,vec2 pos,
 			float ex=pos.x+width*nnor.x;
 			float ey=pos.y+width*nnor.y;
 			leftEnNo=dest->AddPoint(ex,ey);
-            
-			vec2     biss;
+			
+			vec2	 biss;
 			biss.x=pnor.x+nnor.x;
 			biss.y=pnor.y+nnor.y;
 			Normalize(biss);
@@ -1307,9 +1307,9 @@ void            Path::DoLeftJoin(Shape* dest,float width,JoinType join,vec2 pos,
 			} else {
 				float   s2=Dot(biss,nnor);
 				float   dec=(l-emiter)*c2/s2;
-				vec2    tbiss;
+				vec2	tbiss;
 				RotCCWTo(biss,tbiss);
-                
+				
 				x=pos.x+emiter*biss.x+dec*tbiss.x;
 				y=pos.y+emiter*biss.y+dec*tbiss.y;
 				int nleftStNo=dest->AddPoint(x,y);
@@ -1327,14 +1327,14 @@ void            Path::DoLeftJoin(Shape* dest,float width,JoinType join,vec2 pos,
 			float ex=pos.x+width*nnor.x;
 			float ey=pos.y+width*nnor.y;
 			leftEnNo=dest->AddPoint(ex,ey);
-            
-			vec2     biss;
+			
+			vec2	 biss;
 			biss.x=pnor.x+nnor.x;
 			biss.y=pnor.y+nnor.y;
 			Normalize(biss);
 			float   c2=Cross(biss,nnor);
 			float   l=width/c2;
-			float    typ=Cross(pnor,nnor);
+			float	typ=Cross(pnor,nnor);
 			if ( typ >= 0 ) {
 				x=pos.x+l*biss.x;
 				y=pos.y+l*biss.y;
@@ -1342,13 +1342,13 @@ void            Path::DoLeftJoin(Shape* dest,float width,JoinType join,vec2 pos,
 			} else {
 				float   s2=Dot(biss,nnor);
 				float   dec=(l-width)*c2/s2;
-				vec2    tbiss;
+				vec2	tbiss;
 				RotCCWTo(biss,tbiss);
-                
+				
 				float mx=pos.x+width*biss.x;
 				float my=pos.y+width*biss.y;
 				int midNo=dest->AddPoint(mx,my);
-                
+				
 				float nsx=pos.x+width*biss.x+dec*tbiss.x;
 				float nsy=pos.y+width*biss.y+dec*tbiss.y;
 				float nex=pos.x+width*biss.x-dec*tbiss.x;
@@ -1367,7 +1367,7 @@ void            Path::DoLeftJoin(Shape* dest,float width,JoinType join,vec2 pos,
 		}
 	}
 }
-void            Path::DoRightJoin(Shape* dest,float width,JoinType join,vec2 pos,vec2 prev,vec2 next,float miter,float prevL,float nextL,int &rightStNo,int &rightEnNo)
+void			Path::DoRightJoin(Shape* dest,float width,JoinType join,vec2 pos,vec2 prev,vec2 next,float miter,float prevL,float nextL,int &rightStNo,int &rightEnNo)
 {
 	vec2   pnor,nnor;
 	RotCCWTo(prev,pnor);
@@ -1396,7 +1396,7 @@ void            Path::DoRightJoin(Shape* dest,float width,JoinType join,vec2 pos
 	}
 	if ( angSi < 0 ) {
 		float   x,y;
-        
+		
 		if ( join == join_pointy ) {
 			float sx=pos.x-width*pnor.x;
 			float sy=pos.y-width*pnor.y;
@@ -1404,8 +1404,8 @@ void            Path::DoRightJoin(Shape* dest,float width,JoinType join,vec2 pos
 			float ex=pos.x-width*nnor.x;
 			float ey=pos.y-width*nnor.y;
 			rightEnNo=dest->AddPoint(ex,ey);
-            
-			vec2     biss;
+			
+			vec2	 biss;
 			biss.x=pnor.x+nnor.x;
 			biss.y=pnor.y+nnor.y;
 			Normalize(biss);
@@ -1422,9 +1422,9 @@ void            Path::DoRightJoin(Shape* dest,float width,JoinType join,vec2 pos
 			} else {
 				float   s2=Dot(biss,nnor);
 				float   dec=(l-emiter)*c2/s2;
-				vec2    tbiss;
+				vec2	tbiss;
 				RotCCWTo(biss,tbiss);
-                
+				
 				x=pos.x-emiter*biss.x-dec*tbiss.x;
 				y=pos.y-emiter*biss.y-dec*tbiss.y;
 				int nrightStNo=dest->AddPoint(x,y);
@@ -1442,14 +1442,14 @@ void            Path::DoRightJoin(Shape* dest,float width,JoinType join,vec2 pos
 			float ex=pos.x-width*nnor.x;
 			float ey=pos.y-width*nnor.y;
 			rightEnNo=dest->AddPoint(ex,ey);
-            
-			vec2     biss;
+			
+			vec2	 biss;
 			biss.x=pnor.x+nnor.x;
 			biss.y=pnor.y+nnor.y;
 			Normalize(biss);
 			float   c2=Cross(biss,nnor);
 			float   l=width/c2;
-			float    typ=Cross(pnor,nnor);
+			float	typ=Cross(pnor,nnor);
 			if ( typ >= 0 ) {
 				x=pos.x-l*biss.x;
 				y=pos.y-l*biss.y;
@@ -1457,7 +1457,7 @@ void            Path::DoRightJoin(Shape* dest,float width,JoinType join,vec2 pos
 			} else {
 				float   s2=Dot(biss,nnor);
 				float   dec=(l-width)*c2/s2;
-				vec2    tbiss;
+				vec2	tbiss;
 				RotCCWTo(biss,tbiss);
 				float nsx=pos.x-width*biss.x-dec*tbiss.x;
 				float nsy=pos.y-width*biss.y-dec*tbiss.y;
@@ -1479,36 +1479,36 @@ void            Path::DoRightJoin(Shape* dest,float width,JoinType join,vec2 pos
 			dest->AddEdge(rightStNo,rightEnNo);
 		}
 	} else {
-        /*		vec2     biss;
-         biss.x=next.x-prev.x;
-         biss.y=next.y-prev.y;
-         float   c2=Dot(next,biss);
-         float   l=width/c2;
-         float		projn=l*(Cross(biss,next));
-         float		projp=-l*(Cross(biss,prev));
-         if ( projp <= 0.5*prevL && projn <= 0.5*nextL ) {
-         float   x,y;
-         x=pos.x+l*biss.x;
-         y=pos.y+l*biss.y;
-         rightEnNo=rightStNo=dest->AddPoint(x,y);
-         } else {*/
-        float   x,y;
-        x=pos.x-width*pnor.x;
-        y=pos.y-width*pnor.y;
-        rightStNo=dest->AddPoint(x,y);
-        x=pos.x-width*nnor.x;
-        y=pos.y-width*nnor.y;
-        rightEnNo=dest->AddPoint(x,y);
-        x=pos.x;
-        y=pos.y;
-        int midNo=dest->AddPoint(x,y);
-        dest->AddEdge(rightStNo,midNo);
-        dest->AddEdge(midNo,rightEnNo);
-        //		}
+		/*		vec2	 biss;
+		 biss.x=next.x-prev.x;
+		 biss.y=next.y-prev.y;
+		 float   c2=Dot(next,biss);
+		 float   l=width/c2;
+		 float		projn=l*(Cross(biss,next));
+		 float		projp=-l*(Cross(biss,prev));
+		 if ( projp <= 0.5*prevL && projn <= 0.5*nextL ) {
+		 float   x,y;
+		 x=pos.x+l*biss.x;
+		 y=pos.y+l*biss.y;
+		 rightEnNo=rightStNo=dest->AddPoint(x,y);
+		 } else {*/
+		float   x,y;
+		x=pos.x-width*pnor.x;
+		y=pos.y-width*pnor.y;
+		rightStNo=dest->AddPoint(x,y);
+		x=pos.x-width*nnor.x;
+		y=pos.y-width*nnor.y;
+		rightEnNo=dest->AddPoint(x,y);
+		x=pos.x;
+		y=pos.y;
+		int midNo=dest->AddPoint(x,y);
+		dest->AddEdge(rightStNo,midNo);
+		dest->AddEdge(midNo,rightEnNo);
+		//		}
 	}
 }
 
-void            Path::RecRound(Shape* dest,int sNo,int eNo,float px,float py,float sx,float sy,float ex,float ey,float tresh,int lev)
+void			Path::RecRound(Shape* dest,int sNo,int eNo,float px,float py,float sx,float sy,float ex,float ey,float tresh,int lev)
 {
 	if ( lev <= 0 ) {
 		dest->AddEdge(sNo,eNo);
@@ -1525,7 +1525,7 @@ void            Path::RecRound(Shape* dest,int sNo,int eNo,float px,float py,flo
 	mx=(sx+ex+2*px)/4;
 	my=(sy+ey+2*py)/4;
 	int mNo=dest->AddPoint(mx,my);
-    
+	
 	mdx=(sx+px)/2;
 	mdy=(sy+py)/2;
 	RecRound(dest,sNo,mNo,mdx,mdy,sx,sy,mx,my,tresh,lev-1);

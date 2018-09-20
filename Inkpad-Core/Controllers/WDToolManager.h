@@ -23,4 +23,4 @@
 @end
 
 // notifications
-extern NSString *WDActiveToolDidChange;
+extern NSString* WDActiveToolDidChange;

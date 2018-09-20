@@ -53,7 +53,7 @@ Shape::~Shape(void)
 	if ( voreData ) free(voreData);
 }
 
-void              Shape::MakePointData(bool nVal)
+void			  Shape::MakePointData(bool nVal)
 {
 	if ( nVal ) {
 		if ( HasPointsData() ) {
@@ -73,7 +73,7 @@ void              Shape::MakePointData(bool nVal)
 		}
 	}
 }
-void              Shape::MakeEdgeData(bool nVal)
+void			  Shape::MakeEdgeData(bool nVal)
 {
 	if ( nVal ) {
 		if ( HasEdgesData() ) {
@@ -93,7 +93,7 @@ void              Shape::MakeEdgeData(bool nVal)
 		}
 	}
 }
-void              Shape::MakeRasterData(bool nVal)
+void			  Shape::MakeRasterData(bool nVal)
 {
 	if ( nVal ) {
 		if ( HasRasterData() ) {
@@ -113,7 +113,7 @@ void              Shape::MakeRasterData(bool nVal)
 		}
 	}
 }
-void              Shape::MakeQuickRasterData(bool nVal)
+void			  Shape::MakeQuickRasterData(bool nVal)
 {
 	if ( nVal ) {
 		if ( HasQuickRasterData() ) {
@@ -133,7 +133,7 @@ void              Shape::MakeQuickRasterData(bool nVal)
 		}
 	}
 }
-void              Shape::MakeSweepSrcData(bool nVal)
+void			  Shape::MakeSweepSrcData(bool nVal)
 {
 	if ( nVal ) {
 		if ( HasSweepSrcData() ) {
@@ -153,7 +153,7 @@ void              Shape::MakeSweepSrcData(bool nVal)
 		}
 	}
 }
-void              Shape::MakeSweepDestData(bool nVal)
+void			  Shape::MakeSweepDestData(bool nVal)
 {
 	if ( nVal ) {
 		if ( HasSweepDestData() ) {
@@ -173,7 +173,7 @@ void              Shape::MakeSweepDestData(bool nVal)
 		}
 	}
 }
-void              Shape::MakeBackData(bool nVal)
+void			  Shape::MakeBackData(bool nVal)
 {
 	if ( nVal ) {
 		if ( HasBackData() ) {
@@ -193,7 +193,7 @@ void              Shape::MakeBackData(bool nVal)
 		}
 	}
 }
-void              Shape::MakeVoronoiData(bool nVal)
+void			  Shape::MakeVoronoiData(bool nVal)
 {
 	if ( nVal ) {
 		if ( HasVoronoiData() ) {
@@ -223,7 +223,7 @@ void              Shape::MakeVoronoiData(bool nVal)
 /*
  *
  */
-void            Shape::Copy(Shape* who)
+void			Shape::Copy(Shape* who)
 {
 	if ( who == NULL ) {
 		Reset(0,0);
@@ -251,7 +251,7 @@ SweepEvent::DestroyQueue(sEvts);
 	memcpy(pts,who->pts,nbPt*sizeof(dg_point));
 	memcpy(aretes,who->aretes,nbAr*sizeof(dg_arete));
 }
-void              Shape::Reset(int n,int m)
+void			  Shape::Reset(int n,int m)
 {
 	nbPt=0;
 	nbAr=0;
@@ -274,7 +274,7 @@ void              Shape::Reset(int n,int m)
 	SetFlag(need_points_sorting,false);
 	SetFlag(need_edges_sorting,false);
 }
-int               Shape::AddPoint(float x,float y)
+int			   Shape::AddPoint(float x,float y)
 {
 	if ( nbPt >= maxPt ) {
 		maxPt=2*nbPt+1;
@@ -301,7 +301,7 @@ int               Shape::AddPoint(float x,float y)
 	SetFlag(need_points_sorting,true);
 	return n;
 }
-void              Shape::SubPoint(int p)
+void			  Shape::SubPoint(int p)
 {
 	if ( p < 0 || p >= nbPt ) return;
 	SetFlag(need_points_sorting,true);
@@ -326,7 +326,7 @@ void              Shape::SubPoint(int p)
 	if ( p < nbPt-1 ) SwapPoints(p,nbPt-1);
 	nbPt--;
 }
-void              Shape::SwapPoints(int a,int b)
+void			  Shape::SwapPoints(int a,int b)
 {
 	if ( a == b ) return;
 	if ( pts[a].dI+pts[a].dO == 2 && pts[b].dI+pts[b].dO == 2 ) {
@@ -412,22 +412,22 @@ void              Shape::SwapPoints(int a,int b)
 		voronoi_point swav=vorpData[a];vorpData[a]=vorpData[b];vorpData[b]=swav;
 	}
 }
-void              Shape::SwapPoints(int a,int b,int c)
+void			  Shape::SwapPoints(int a,int b,int c)
 {
 	if ( a == b || b == c || a == c ) return;
 	SwapPoints(a,b);
 	SwapPoints(b,c);
 }
-void              Shape::SortPoints(void)
+void			  Shape::SortPoints(void)
 {
 	if ( GetFlag(need_points_sorting) && nbPt > 0 ) SortPoints(0,nbPt-1);
 	SetFlag(need_points_sorting,false);
 }
-void              Shape::SortPointsRounded(void)
+void			  Shape::SortPointsRounded(void)
 {
 	if ( nbPt > 0 ) SortPointsRounded(0,nbPt-1);
 }
-void              Shape::SortPoints(int s,int e)
+void			  Shape::SortPoints(int s,int e)
 {
 	if ( s >= e ) return;
 	if ( e == s+1 ) {
@@ -546,7 +546,7 @@ void              Shape::SortPoints(int s,int e)
 	SortPoints(s,ppos-1);
 	SortPoints(plast+1,e);
 }
-void              Shape::SortPointsByOldInd(int s,int e)
+void			  Shape::SortPointsByOldInd(int s,int e)
 {
 	if ( s >= e ) return;
 	if ( e == s+1 ) {
@@ -559,7 +559,7 @@ void              Shape::SortPointsByOldInd(int s,int e)
 	int  plast=ppos;
 	float  pvalx=pts[ppos].x;
 	float  pvaly=pts[ppos].y;
-	int     pvali=pData[ppos].oldInd;
+	int	 pvali=pData[ppos].oldInd;
 	
 	int le=s,ri=e;
 	while ( le < ppos || ri > plast ) {
@@ -680,7 +680,7 @@ void              Shape::SortPointsByOldInd(int s,int e)
 	SortPointsByOldInd(plast+1,e);
 }
 
-void              Shape::SortPointsRounded(int s,int e)
+void			  Shape::SortPointsRounded(int s,int e)
 {
 	if ( s >= e ) return;
 	if ( e == s+1 ) {
@@ -803,7 +803,7 @@ void              Shape::SortPointsRounded(int s,int e)
 /*
  *
  */
-int               Shape::AddEdge(int st,int en)
+int			   Shape::AddEdge(int st,int en)
 {
 	if ( st == en ) return -1;
 	if ( st < 0 || en < 0 ) return -1;
@@ -853,7 +853,7 @@ int               Shape::AddEdge(int st,int en)
 	SetFlag(need_edges_sorting,true);
 	return n;
 }
-int               Shape::AddEdge(int st,int en,int leF,int riF)
+int			   Shape::AddEdge(int st,int en,int leF,int riF)
 {
 	if ( st == en ) return -1;
 	if ( st < 0 || en < 0 ) return -1;
@@ -911,7 +911,7 @@ int               Shape::AddEdge(int st,int en,int leF,int riF)
 	SetFlag(need_edges_sorting,true);
 	return n;
 }
-void              Shape::SubEdge(int e)
+void			  Shape::SubEdge(int e)
 {
 	if ( e < 0 || e >= nbAr ) return;
 	type=shape_graph;
@@ -921,7 +921,7 @@ void              Shape::SubEdge(int e)
 	nbAr--;
 	SetFlag(need_edges_sorting,true);
 }
-void              Shape::SwapEdges(int a,int b)
+void			  Shape::SwapEdges(int a,int b)
 {
 	if ( a == b ) return;
 	if ( aretes[a].prevS >= 0 && aretes[a].prevS != b ) {
@@ -1025,13 +1025,13 @@ void              Shape::SwapEdges(int a,int b)
 	if ( HasBackData() ) {back_data swae=ebData[a];ebData[a]=ebData[b];ebData[b]=swae;}
 	if ( HasVoronoiData() ) {voronoi_edge swav=voreData[a];voreData[a]=voreData[b];voreData[b]=swav;}
 }
-void              Shape::SwapEdges(int a,int b,int c)
+void			  Shape::SwapEdges(int a,int b,int c)
 {
 	if ( a == b || b == c || a == c ) return;
 	SwapEdges(a,b);
 	SwapEdges(b,c);
 }
-void              Shape::SortEdges(void)
+void			  Shape::SortEdges(void)
 {
 	if ( GetFlag(need_edges_sorting) ) {
 	} else {
@@ -1092,7 +1092,7 @@ void              Shape::SortEdges(void)
 	}
 	free(list);
 }
-int             Shape::CmpToVert(float ax,float ay,float bx,float by)
+int			 Shape::CmpToVert(float ax,float ay,float bx,float by)
 {
 	int   tstAX=0;	
 	int   tstAY=0;
@@ -1171,7 +1171,7 @@ int             Shape::CmpToVert(float ax,float ay,float bx,float by)
 	return tstSi;
 }
 
-void              Shape::SortEdgesList(edge_list* list,int s,int e)
+void			  Shape::SortEdgesList(edge_list* list,int s,int e)
 {
 	if ( s >= e ) return;
 	if ( e == s+1 ) {
@@ -1181,8 +1181,8 @@ void              Shape::SortEdgesList(edge_list* list,int s,int e)
 		return;
 	}
 
-	int      ppos=(s+e)/2;
-	int      plast=ppos;
+	int	  ppos=(s+e)/2;
+	int	  plast=ppos;
 	float   pvalx=list[ppos].x,pvaly=list[ppos].y;
 
 	int le=s,ri=e;
@@ -1273,7 +1273,7 @@ void              Shape::SortEdgesList(edge_list* list,int s,int e)
 /*
  *
  */
-void              Shape::ConnectStart(int p,int b)
+void			  Shape::ConnectStart(int p,int b)
 {
 	if ( aretes[b].st >= 0 ) DisconnectStart(b);
 	aretes[b].st=p;
@@ -1290,7 +1290,7 @@ void              Shape::ConnectStart(int p,int b)
 	pts[p].lastA=b;
 	if ( pts[p].firstA < 0 ) pts[p].firstA=b;
 }
-void              Shape::ConnectEnd(int p,int b)
+void			  Shape::ConnectEnd(int p,int b)
 {
 	if ( aretes[b].en >= 0 ) DisconnectEnd(b);
 	aretes[b].en=p;
@@ -1307,7 +1307,7 @@ void              Shape::ConnectEnd(int p,int b)
 	pts[p].lastA=b;
 	if ( pts[p].firstA < 0 ) pts[p].firstA=b;
 }
-void              Shape::DisconnectStart(int b)
+void			  Shape::DisconnectStart(int b)
 {
 	if ( aretes[b].st < 0 ) return;
 	pts[aretes[b].st].dO--;
@@ -1329,7 +1329,7 @@ void              Shape::DisconnectStart(int b)
 	if ( pts[aretes[b].st].lastA == b ) pts[aretes[b].st].lastA=aretes[b].prevS;
 	aretes[b].st=-1;
 }
-void              Shape::DisconnectEnd(int b)
+void			  Shape::DisconnectEnd(int b)
 {
 	if ( aretes[b].en < 0 ) return;
 	pts[aretes[b].en].dI--;
@@ -1352,7 +1352,7 @@ void              Shape::DisconnectEnd(int b)
 	aretes[b].en=-1;
 }
 
-bool              Shape::Eulerian(bool directed)
+bool			  Shape::Eulerian(bool directed)
 {
 	if ( directed ) {
 		for (int i=0;i<nbPt;i++) {
@@ -1370,7 +1370,7 @@ bool              Shape::Eulerian(bool directed)
 	}
 	return true;
 }
-void              Shape::Inverse(int b)
+void			  Shape::Inverse(int b)
 {
 	int swap;
 	swap=aretes[b].st;aretes[b].st=aretes[b].en;aretes[b].en=swap;
@@ -1385,7 +1385,7 @@ void              Shape::Inverse(int b)
 	if ( HasBackData() ) {float swat=ebData[b].tSt;ebData[b].tSt=ebData[b].tEn;ebData[b].tEn=swat;}
 	if ( HasVoronoiData() ) {int swai=voreData[b].leF;voreData[b].leF=voreData[b].riF;voreData[b].riF=swai;}
 }
-void              Shape::CalcBBox(void)
+void			  Shape::CalcBBox(void)
 {
 	if ( nbPt <= 0 ) {
 		leftX=rightX=topY=bottomY=0;
@@ -1401,7 +1401,7 @@ void              Shape::CalcBBox(void)
 	}
 }
 
-bool              Shape::SetFlag(int nFlag,bool nval) {
+bool			  Shape::SetFlag(int nFlag,bool nval) {
 		if ( nval ) {
 			if ( flags&nFlag ) {
 				return false;
@@ -1419,7 +1419,7 @@ bool              Shape::SetFlag(int nFlag,bool nval) {
 		}
 		return false;
 }
-bool              Shape::GetFlag(int nFlag) {
+bool			  Shape::GetFlag(int nFlag) {
 		return (flags&nFlag);
 }
 

@@ -13,8 +13,8 @@
 
 
 @interface WDAnglePicker : UIControl {
-    float           initialValue_;
-    CGPoint         initialTap_;
+	float		   initialValue_;
+	CGPoint		 initialTap_;
 }
 
 @property (nonatomic, assign) float value;

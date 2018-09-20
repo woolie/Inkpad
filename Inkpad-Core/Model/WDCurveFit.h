@@ -14,5 +14,5 @@
 @class WDPath;
 
 @interface WDCurveFit : NSObject
-+ (WDPath *) smoothPathForPoints:(NSArray *)points error:(float)epsilon attemptToClose:(BOOL)shouldClose;
++ (WDPath *) smoothPathForPoints:(NSArray*)points error:(float)epsilon attemptToClose:(BOOL)shouldClose;
 @end

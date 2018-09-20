@@ -16,40 +16,40 @@
 
 @implementation WDScissorTool
 
-- (NSString *) iconName
+- (NSString*) iconName
 {
-    return @"scissor.png";
+	return @"scissor.png";
 }
 
 - (void) beginWithEvent:(WDEvent *)theEvent inCanvas:(WDCanvas *)canvas
 {
-    WDPickResult *result = [canvas.drawingController snappedPoint:theEvent.location
-                                                        viewScale:canvas.viewScale
-                                                        snapFlags:(kWDSnapEdges | kWDSnapNodes)];
-    WDPath *path = (WDPath *) result.element;
-    
-    if (![path isKindOfClass:[WDPath class]]) {
-        return;
-    }
-    
-    if (result.snapped) {
-        NSDictionary *whatToSelect = nil;
-        
-        if (result.type != kWDEdge && result.nodePosition != kWDMiddleNode) {
-            // don't want to split at the first or last node!
-            return;
-        }
-        
-        if (result.type == kWDEdge) {
-            whatToSelect = [path splitAtPoint:result.snappedPoint viewScale:canvas.viewScale];
-        } else if (result.type == kWDAnchorPoint) {
-            whatToSelect = [path splitAtNode:result.node];
-        }
-        
-        [canvas.drawingController selectNone:nil];
-        [canvas.drawingController selectObject:whatToSelect[@"path"]];
-        [canvas.drawingController selectNode:whatToSelect[@"node"]];
-    }
+	WDPickResult *result = [canvas.drawingController snappedPoint:theEvent.location
+														viewScale:canvas.viewScale
+														snapFlags:(kWDSnapEdges | kWDSnapNodes)];
+	WDPath *path = (WDPath *) result.element;
+	
+	if (![path isKindOfClass:[WDPath class]]) {
+		return;
+	}
+	
+	if (result.snapped) {
+		NSDictionary *whatToSelect = nil;
+		
+		if (result.type != kWDEdge && result.nodePosition != kWDMiddleNode) {
+			// don't want to split at the first or last node!
+			return;
+		}
+		
+		if (result.type == kWDEdge) {
+			whatToSelect = [path splitAtPoint:result.snappedPoint viewScale:canvas.viewScale];
+		} else if (result.type == kWDAnchorPoint) {
+			whatToSelect = [path splitAtNode:result.node];
+		}
+		
+		[canvas.drawingController selectNone:nil];
+		[canvas.drawingController selectObject:whatToSelect[@"path"]];
+		[canvas.drawingController selectNode:whatToSelect[@"node"]];
+	}
 }
 
 @end

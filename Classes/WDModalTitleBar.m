@@ -18,43 +18,43 @@
 
 - (instancetype) initWithCoder:(NSCoder *)aDecoder
 {
-    self = [super initWithCoder:aDecoder];
-    
-    if (!self) {
-        return nil;
-    }
-    
-    self.opaque = NO;
-    self.backgroundColor = nil;
-    
-    return self;
+	self = [super initWithCoder:aDecoder];
+	
+	if (!self) {
+		return nil;
+	}
+	
+	self.opaque = NO;
+	self.backgroundColor = nil;
+	
+	return self;
 }
 
 - (BOOL) hadRoundedCorners
 {
-    return (cornerRadius > 0 && self.roundedCorners);
+	return (cornerRadius > 0 && self.roundedCorners);
 }
 
 - (void)drawRect:(CGRect)rect
 {
-    CGContextRef    ctx = UIGraphicsGetCurrentContext();
-    
-    if ([self hadRoundedCorners]) {
-        CGContextSaveGState(ctx);
-        
-        CGSize radii = CGSizeMake(self.cornerRadius, self.cornerRadius);
-        UIBezierPath *shadowPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds
-                                                         byRoundingCorners:self.roundedCorners
-                                                               cornerRadii:radii];
-        
-        [shadowPath addClip];
-    }
-    
-    [super drawRect:rect];
-    
-    if ([self hadRoundedCorners]) {
-        CGContextRestoreGState(ctx);
-    }
+	CGContextRef	ctx = UIGraphicsGetCurrentContext();
+	
+	if ([self hadRoundedCorners]) {
+		CGContextSaveGState(ctx);
+		
+		CGSize radii = CGSizeMake(self.cornerRadius, self.cornerRadius);
+		UIBezierPath *shadowPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds
+														 byRoundingCorners:self.roundedCorners
+															   cornerRadii:radii];
+		
+		[shadowPath addClip];
+	}
+	
+	[super drawRect:rect];
+	
+	if ([self hadRoundedCorners]) {
+		CGContextRestoreGState(ctx);
+	}
 }
-    
+	
 @end

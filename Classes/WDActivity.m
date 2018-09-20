@@ -17,39 +17,39 @@
 @synthesize progress;
 @synthesize type;
 
-+ (WDActivity *) activityWithFilePath:(NSString *)filePath type:(WDActivityType)type
++ (WDActivity *) activityWithFilePath:(NSString*)filePath type:(WDActivityType)type
 {
-    WDActivity *activity = [[WDActivity alloc] initWithFilePath:filePath type:type];
-    return activity;
+	WDActivity *activity = [[WDActivity alloc] initWithFilePath:filePath type:type];
+	return activity;
 }
 
-- (instancetype) initWithFilePath:(NSString *)aFilePath type:(WDActivityType)aType
+- (instancetype) initWithFilePath:(NSString*)aFilePath type:(WDActivityType)aType
 {
-    self = [super init];
-    
-    if (!self) {
-        return nil;
-    }
-    
-    self.filePath = aFilePath;
-    type = aType;
-    
-    return self;
+	self = [super init];
+	
+	if (!self) {
+		return nil;
+	}
+	
+	self.filePath = aFilePath;
+	type = aType;
+	
+	return self;
 }
 
-- (NSString *) description
+- (NSString*) description
 {
-    NSArray *types = @[@"DOWNLOAD", @"UPLOAD", @"IMPORT"];
-    return [NSString stringWithFormat:@"%@: %@; %@; %.0f%%", [super description], types[type], self.filePath, self.progress * 100];
+	NSArray *types = @[@"DOWNLOAD", @"UPLOAD", @"IMPORT"];
+	return [NSString stringWithFormat:@"%@: %@; %@; %.0f%%", [super description], types[type], self.filePath, self.progress * 100];
 }
 
-- (NSString *) title
+- (NSString*) title
 {
-    NSArray *formats = @[NSLocalizedString(@"Downloading “%@”", @"Downloading “%@”"),
-                        NSLocalizedString(@"Uploading “%@”", @"Uploading “%@”"),
-                        NSLocalizedString(@"Importing “%@”", @"Importing “%@”")];
-    
-    return [NSString stringWithFormat:formats[type], [self.filePath lastPathComponent]];
+	NSArray *formats = @[NSLocalizedString(@"Downloading “%@”", @"Downloading “%@”"),
+						NSLocalizedString(@"Uploading “%@”", @"Uploading “%@”"),
+						NSLocalizedString(@"Importing “%@”", @"Importing “%@”")];
+	
+	return [NSString stringWithFormat:formats[type], [self.filePath lastPathComponent]];
 }
 
 @end

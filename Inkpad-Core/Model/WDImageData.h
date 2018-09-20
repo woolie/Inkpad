@@ -12,19 +12,19 @@
 #import <Foundation/Foundation.h>
 
 typedef enum {
-    WDImageDataJPEGFormat,
-    WDImageDataPNGFormat
+	WDImageDataJPEGFormat,
+	WDImageDataPNGFormat
 } WDImageDataFormat;
 
 @interface WDImageData : NSObject <NSCoding, NSCopying> {
-    BOOL    receivedMemoryWarning_;
+	BOOL	receivedMemoryWarning_;
 }
 
 @property (nonatomic, readonly) NSData *data;
 @property (nonatomic, readonly) UIImage *image;
 @property (nonatomic, readonly) UIImage *thumbnailImage;
 @property (nonatomic, readonly) NSData *digest;
-@property (nonatomic, readonly) NSString *mimetype;
+@property (nonatomic, readonly) NSString*mimetype;
 @property (nonatomic, readonly) CGRect naturalBounds;
 
 + (WDImageData *) imageDataWithData:(NSData *)data;

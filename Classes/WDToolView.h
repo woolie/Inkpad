@@ -20,6 +20,6 @@
 @property (nonatomic, weak) WDCanvas *canvas;
 @property (nonatomic, weak) WDToolButton *owner;
 
-- (instancetype) initWithTools:(NSArray *)tools;
+- (instancetype) initWithTools:(NSArray*)tools;
 
 @end

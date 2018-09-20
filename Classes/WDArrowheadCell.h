@@ -15,12 +15,12 @@
 @property (nonatomic, strong) IBOutlet UIButton *startArrowButton;
 @property (nonatomic, strong) IBOutlet UIButton *endArrowButton;
 
-@property (nonatomic, strong) NSString *arrowhead;
+@property (nonatomic, strong) NSString*arrowhead;
 @property (nonatomic, weak) WDDrawingController *drawingController;
 
 + (UIColor *) tintColor;
 
 - (UIImage *) selectedBackground;
-- (UIImage *) imageForArrow:(NSString *)arrowID start:(BOOL)isStart;
+- (UIImage *) imageForArrow:(NSString*)arrowID start:(BOOL)isStart;
 
 @end

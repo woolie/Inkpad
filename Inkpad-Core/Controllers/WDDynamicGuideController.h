@@ -29,8 +29,8 @@
 - (void) endGuideOperation;
 
 // querying and adding guides
-- (double) deltaForGuide:(WDDynamicGuide *)guide array:(NSArray *)guides;
-- (WDDynamicGuide *) findCoincidentGuide:(WDDynamicGuide *)guide array:(NSArray *)guides;
+- (double) deltaForGuide:(WDDynamicGuide *)guide array:(NSArray*)guides;
+- (WDDynamicGuide *) findCoincidentGuide:(WDDynamicGuide *)guide array:(NSArray*)guides;
 - (void) insertGuide:(WDDynamicGuide *)guide array:(NSMutableArray *)guides;
 
 // calculating offsets
@@ -38,7 +38,7 @@
 - (CGPoint) offsetSelectionForGuides:(CGPoint)originalDelta viewScale:(float)viewScale;
 
 // finding snapped guides
-- (NSArray *) snappedGuidesForPoint:(CGPoint)pt;
-- (NSArray *) snappedGuidesForRect:(CGRect)snapRect;
+- (NSArray*) snappedGuidesForPoint:(CGPoint)pt;
+- (NSArray*) snappedGuidesForRect:(CGRect)snapRect;
 
 @end

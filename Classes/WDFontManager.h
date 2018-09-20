@@ -29,27 +29,27 @@
 
 - (void) loadAllFonts;
 
-- (BOOL) isUserFont:(NSString *)fullName;
-- (BOOL) validFont:(NSString *)fullName;
-- (NSString *) displayNameForFont:(NSString *)fullName;
-- (NSString *) typefaceNameForFont:(NSString *)fullName;
+- (BOOL) isUserFont:(NSString*)fullName;
+- (BOOL) validFont:(NSString*)fullName;
+- (NSString*) displayNameForFont:(NSString*)fullName;
+- (NSString*) typefaceNameForFont:(NSString*)fullName;
 
-- (NSString *) defaultFontForFamily:(NSString *)familyName;
-- (NSString *) familyNameForFont:(NSString *)fullName;
-- (NSArray *) fontsInFamily:(NSString *)familyName;
+- (NSString*) defaultFontForFamily:(NSString*)familyName;
+- (NSString*) familyNameForFont:(NSString*)fullName;
+- (NSArray*) fontsInFamily:(NSString*)familyName;
 
-- (WDUserFont *) userFontForPath:(NSString *)path;
+- (WDUserFont *) userFontForPath:(NSString*)path;
 // on success returns the display name of the font, otherwise returns nil
-- (NSString *) installUserFont:(NSURL *)srcURL alreadyInstalled:(BOOL *)alreadyInstalled;
-- (void) deleteUserFontWithName:(NSString *)fullName;
+- (NSString*) installUserFont:(NSURL *)srcURL alreadyInstalled:(BOOL *)alreadyInstalled;
+- (void) deleteUserFontWithName:(NSString*)fullName;
 
-- (CTFontRef) newFontRefForFont:(NSString *)fullName withSize:(float)size;
-- (CTFontRef) newFontRefForFont:(NSString *)fullName withSize:(float)size provideDefault:(BOOL)provideDefault;
+- (CTFontRef) newFontRefForFont:(NSString*)fullName withSize:(float)size;
+- (CTFontRef) newFontRefForFont:(NSString*)fullName withSize:(float)size provideDefault:(BOOL)provideDefault;
 
-- (NSString *) pathForUserLibrary;
-- (NSArray *) userLibraryFontPaths;
+- (NSString*) pathForUserLibrary;
+- (NSArray*) userLibraryFontPaths;
 
 @end
 
-extern NSString *WDFontAddedNotification;
-extern NSString *WDFontDeletedNotification;
+extern NSString* WDFontAddedNotification;
+extern NSString* WDFontDeletedNotification;

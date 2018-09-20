@@ -19,30 +19,30 @@
 
 - (instancetype) initWithFrame:(CGRect)frame
 {
-    self = [super initWithFrame:frame];
-    
-    if (!self) {
-        return nil;
-    }
-    
-    self.opaque = NO;
-    self.backgroundColor = nil;
-    
-    return self;
+	self = [super initWithFrame:frame];
+	
+	if (!self) {
+		return nil;
+	}
+	
+	self.opaque = NO;
+	self.backgroundColor = nil;
+	
+	return self;
 }
 
 - (void)drawRect:(CGRect)rect
 {
-    CGContextRef ctx = UIGraphicsGetCurrentContext();
+	CGContextRef ctx = UIGraphicsGetCurrentContext();
 
-    CGContextSaveGState(ctx);
+	CGContextSaveGState(ctx);
 
-    CGContextConcatCTM(ctx, canvas_.canvasTransform);
-    CGContextSetShouldAntialias(ctx, NO);
-    
-    [canvas_.eraserPath renderInContext:ctx metaData:WDRenderingMetaDataMake(canvas_.viewScale, WDRenderDefault)];
-    
-    CGContextRestoreGState(ctx);
+	CGContextConcatCTM(ctx, canvas_.canvasTransform);
+	CGContextSetShouldAntialias(ctx, NO);
+	
+	[canvas_.eraserPath renderInContext:ctx metaData:WDRenderingMetaDataMake(canvas_.viewScale, WDRenderDefault)];
+	
+	CGContextRestoreGState(ctx);
 }
 
 @end

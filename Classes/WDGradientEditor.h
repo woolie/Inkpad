@@ -17,11 +17,11 @@
 @class WDGradientStopIndicator;
 
 @interface WDGradientEditor : UIControl {
-    NSMutableArray              *indicators_;
-    WDGradientStopIndicator     *activeIndicator_;
-    WDGradientStopIndicator     *indicatorToRemove_;
-    WDGradientStopIndicator     *indicatorToDrag_;
-    BOOL                        moved_;
+	NSMutableArray			  *indicators_;
+	WDGradientStopIndicator	 *activeIndicator_;
+	WDGradientStopIndicator	 *indicatorToRemove_;
+	WDGradientStopIndicator	 *indicatorToDrag_;
+	BOOL						moved_;
 }
 
 @property (nonatomic, strong) WDGradient *gradient;

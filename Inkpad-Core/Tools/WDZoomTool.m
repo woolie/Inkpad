@@ -19,38 +19,38 @@
 
 @implementation WDZoomTool
 
-- (NSString *) iconName
+- (NSString*) iconName
 {
-    return @"zoom.png";
+	return @"zoom.png";
 }
 
 - (void) moveWithEvent:(WDEvent *)event inCanvas:(WDCanvas *)canvas
 {   
-    canvas.marquee = [NSValue valueWithCGRect:WDRectWithPoints(self.initialEvent.location, event.location)];
+	canvas.marquee = [NSValue valueWithCGRect:WDRectWithPoints(self.initialEvent.location, event.location)];
 }
 
 #if !TARGET_OS_IPHONE
 - (void) endWithEvent:(WDEvent *)event inCanvas:(WDCanvas *)canvas
-{    
-    CGPoint pt = event.location;
-    
-    if (!self.moved) {
-        (self.flags & WDToolOptionKey) ? [canvas zoomOutAtPoint:pt] : [canvas zoomInAtPoint:pt];
-    } else {
-        [canvas zoomInToRect:WDRectWithPoints(self.initialEvent.location, pt)];
-        canvas.marquee = nil;
-    }
+{	
+	CGPoint pt = event.location;
+	
+	if (!self.moved) {
+		(self.flags & WDToolOptionKey) ? [canvas zoomOutAtPoint:pt] : [canvas zoomInAtPoint:pt];
+	} else {
+		[canvas zoomInToRect:WDRectWithPoints(self.initialEvent.location, pt)];
+		canvas.marquee = nil;
+	}
 }
 #endif
 
 - (void) buttonDoubleTapped
 {
 #if !TARGET_OS_IPHONE
-    WDDocument *doc = [[NSDocumentController sharedDocumentController] currentDocument];
-    
-    if (doc) {
-        [doc.canvas makeActualSize:nil];
-    }
+	WDDocument *doc = [[NSDocumentController sharedDocumentController] currentDocument];
+	
+	if (doc) {
+		[doc.canvas makeActualSize:nil];
+	}
 #endif
 }
 

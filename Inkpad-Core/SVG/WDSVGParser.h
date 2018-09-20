@@ -17,12 +17,12 @@
 
 
 @interface WDSVGParser : NSObject <NSXMLParserDelegate>  {
-    NSMutableDictionary     *defs_;
-    WDDrawing               *drawing_;
-    NSMutableArray          *gradientStops_;
-    WDSVGParserStateStack   *state_;
-    WDSVGStyleParser        *styleParser_;
-    NSMutableArray          *svgElements_;
+	NSMutableDictionary	 *defs_;
+	WDDrawing			   *drawing_;
+	NSMutableArray		  *gradientStops_;
+	WDSVGParserStateStack   *state_;
+	WDSVGStyleParser		*styleParser_;
+	NSMutableArray		  *svgElements_;
 }
 
 - (instancetype) initWithDrawing:(WDDrawing *)drawing;

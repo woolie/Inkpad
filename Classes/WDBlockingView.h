@@ -12,7 +12,7 @@
 #import <UIKit/UIKit.h>
 
 @interface WDBlockingView : UIView {
-    BOOL        sendAction_;
+	BOOL		sendAction_;
 }
 
 @property (nonatomic, assign) SEL action;

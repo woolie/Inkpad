@@ -22,19 +22,19 @@
 - (void) addActivity:(WDActivity *)activity;
 
 // find
-- (WDActivity *) activityWithFilepath:(NSString *)filepath;
+- (WDActivity *) activityWithFilepath:(NSString*)filepath;
 - (NSUInteger) indexOfActivity:(WDActivity *)activity;
 
 // delete
-- (void) removeActivityWithFilepath:(NSString *)filepath;
+- (void) removeActivityWithFilepath:(NSString*)filepath;
 - (void) removeActivity:(WDActivity *)activity;
 
 // update
-- (void) updateProgressForFilepath:(NSString *)filepath progress:(float)progress;
+- (void) updateProgressForFilepath:(NSString*)filepath progress:(float)progress;
 
 @end
 
-extern NSString *WDActivityAddedNotification;
-extern NSString *WDActivityRemovedNotification;
-extern NSString *WDActivityProgressChangedNotification;
+extern NSString* WDActivityAddedNotification;
+extern NSString* WDActivityRemovedNotification;
+extern NSString* WDActivityProgressChangedNotification;
 

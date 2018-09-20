@@ -28,7 +28,7 @@
 //
 
 static NSComparator guideCompare = ^(id a, id b){
-    return [a compare:b];
+	return [a compare:b];
 };
 
 @interface WDDynamicGuide : NSObject
@@ -52,11 +52,11 @@ static NSComparator guideCompare = ^(id a, id b){
 + (WDDynamicGuide *) verticalGuideWithOffset:(double)offset;
 
 + (void) generateGuidesForBoundingBox:(CGRect)bbox
-                     horizontalGuides:(NSMutableArray *)horizontal
-                       verticalGuides:(NSMutableArray *)vertical;
+					 horizontalGuides:(NSMutableArray *)horizontal
+					   verticalGuides:(NSMutableArray *)vertical;
 
 - (void) addExtent:(WDExtent *)extent;
-- (void) addExtentsFromSet:(NSSet *)extents;
+- (void) addExtentsFromSet:(NSSet*)extents;
 
 - (void) render:(WDCanvas *)canvas;
 

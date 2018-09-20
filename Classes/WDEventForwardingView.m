@@ -18,17 +18,17 @@
 
 - (void) awakeFromNib
 {
-    [super awakeFromNib];
+	[super awakeFromNib];
 
-    self.opaque = NO;
-    self.backgroundColor = nil;
+	self.opaque = NO;
+	self.backgroundColor = nil;
 }
 
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
 {
-    UIView *view = [super hitTest:point withEvent:event];
-    
-    return (view == self) ? forwardToView_ : view;
+	UIView *view = [super hitTest:point withEvent:event];
+	
+	return (view == self) ? forwardToView_ : view;
 }
 
 @end

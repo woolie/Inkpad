@@ -12,19 +12,19 @@
 #import <Foundation/Foundation.h>
 
 typedef enum {
-    WDActivityTypeDownload,
-    WDActivityTypeUpload,
-    WDActivityTypeImport
+	WDActivityTypeDownload,
+	WDActivityTypeUpload,
+	WDActivityTypeImport
 } WDActivityType;
 
 @interface WDActivity : NSObject
 
 @property (nonatomic, assign) WDActivityType type;
-@property (nonatomic, strong) NSString *filePath;
+@property (nonatomic, strong) NSString*filePath;
 @property (nonatomic, assign) float progress;
-@property (weak, nonatomic, readonly) NSString *title;
+@property (weak, nonatomic, readonly) NSString* title;
 
-+ (WDActivity *) activityWithFilePath:(NSString *)title type:(WDActivityType)type;
-- (instancetype) initWithFilePath:(NSString *)aFilePath type:(WDActivityType)aType;
++ (WDActivity *) activityWithFilePath:(NSString*)title type:(WDActivityType)type;
+- (instancetype) initWithFilePath:(NSString*)aFilePath type:(WDActivityType)aType;
 
 @end

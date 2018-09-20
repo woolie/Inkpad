@@ -13,19 +13,19 @@
 
 @implementation OCAEntry
 
-+ (OCAEntry *) openClipArtEntryWithDictionary:(NSDictionary *)dict
++ (OCAEntry *) openClipArtEntryWithDictionary:(NSDictionary*)dict
 {
-    OCAEntry *entry = [[OCAEntry alloc] init];
-    
-    entry.title = dict[@"title"];
-    entry.uploader = dict[@"uploader"];
-    entry.ID = dict[@"id"];
-    entry.favorites = [dict[@"total_favorites"] integerValue];
-    entry.downloads = [dict[@"downloaded_by"] integerValue];
-    entry.SVGURL = [dict[@"svg"][@"url"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    entry.thumbURL = [dict[@"svg"][@"png_thumb"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+	OCAEntry *entry = [[OCAEntry alloc] init];
+	
+	entry.title = dict[@"title"];
+	entry.uploader = dict[@"uploader"];
+	entry.ID = dict[@"id"];
+	entry.favorites = [dict[@"total_favorites"] integerValue];
+	entry.downloads = [dict[@"downloaded_by"] integerValue];
+	entry.SVGURL = [dict[@"svg"][@"url"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+	entry.thumbURL = [dict[@"svg"][@"png_thumb"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 
-    return entry;
+	return entry;
 }
 
 @end

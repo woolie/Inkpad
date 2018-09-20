@@ -19,7 +19,7 @@
 - (void) drawTextInContext:(CGContextRef)ctx drawingMode:(CGTextDrawingMode)mode didClip:(BOOL *)didClip;
 
 - (CGAffineTransform) transform;
-- (NSArray *) outlines;
+- (NSArray*) outlines;
 
 - (void) drawOpenGLTextOutlinesWithTransform:(CGAffineTransform)transform viewTransform:(CGAffineTransform)viewTransform;
 

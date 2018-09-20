@@ -15,8 +15,8 @@
 @class WDDrawing;
 
 @interface WDImage : WDElement <NSCoding, NSCopying> {
-    CGMutablePathRef    pathRef_;
-    CGPoint             corner_[4];
+	CGMutablePathRef	pathRef_;
+	CGPoint			 corner_[4];
 }
 
 @property (nonatomic, assign) CGAffineTransform transform;

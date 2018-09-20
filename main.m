@@ -13,9 +13,9 @@
 #import "WDAppDelegate.h"
 
 int main(int argc, char *argv[]) {
-    srandom((unsigned)(mach_absolute_time() & 0xFFFFFFFF));
-    
-    @autoreleasepool {
-        return UIApplicationMain(argc, argv, nil, NSStringFromClass([WDAppDelegate class]));
-    }
+	srandom((unsigned)(mach_absolute_time() & 0xFFFFFFFF));
+	
+	@autoreleasepool {
+		return UIApplicationMain(argc, argv, nil, NSStringFromClass([WDAppDelegate class]));
+	}
 }

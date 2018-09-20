@@ -18,21 +18,21 @@
 @class WDPaletteBackgroundView;
 
 @interface WDColorAdjustmentController : UIViewController <UIGestureRecognizerDelegate> {
-    IBOutlet WDModalTitleBar            *navBar_;
-    IBOutlet WDPaletteBackgroundView    *background_;
-    
-    NSNumberFormatter                   *formatter_;
-    
-    WDBlockingView                      *blockingView_;
+	IBOutlet WDModalTitleBar			*navBar_;
+	IBOutlet WDPaletteBackgroundView	*background_;
+	
+	NSNumberFormatter				   *formatter_;
+	
+	WDBlockingView					  *blockingView_;
 }
 
 @property (nonatomic, weak) WDDrawingController *drawingController;
 @property (nonatomic, weak) WDCanvas *canvas;
-@property (nonatomic, strong) NSString *defaultsName;
+@property (nonatomic, strong) NSString* defaultsName;
 @property (nonatomic, readonly) NSNumberFormatter *formatter;
 
-- (IBAction) cancel:(id)sender;
-- (IBAction) accept:(id)sender;
+- (IBAction) cancel:(id) sender;
+- (IBAction) accept:(id) sender;
 
 - (void) bringOnScreenAnimated:(BOOL)animated;
 - (void) runModalOverView:(UIView *)view;

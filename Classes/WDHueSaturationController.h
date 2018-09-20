@@ -16,17 +16,17 @@
 @class WDHueShifter;
 
 @interface WDHueSaturationController : WDColorAdjustmentController {
-    IBOutlet WDHueShifter       *hueShifter_;
-    IBOutlet WDColorSlider      *saturationSlider_;
-    IBOutlet WDColorSlider      *brightnessSlider_;
-    
-    IBOutlet UILabel            *hueLabel_;
-    IBOutlet UILabel            *saturationLabel_;
-    IBOutlet UILabel            *brightnessLabel_;
-    
-    float                       hueShift_;
-    float                       saturationShift_;
-    float                       brightnessShift_;
+	IBOutlet WDHueShifter	   *hueShifter_;
+	IBOutlet WDColorSlider	  *saturationSlider_;
+	IBOutlet WDColorSlider	  *brightnessSlider_;
+	
+	IBOutlet UILabel			*hueLabel_;
+	IBOutlet UILabel			*saturationLabel_;
+	IBOutlet UILabel			*brightnessLabel_;
+	
+	float					   hueShift_;
+	float					   saturationShift_;
+	float					   brightnessShift_;
 }
 
 @end

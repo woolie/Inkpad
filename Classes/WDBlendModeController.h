@@ -17,11 +17,11 @@
 {
 	NSArray *blendModeNames_;
 	IBOutlet UITableView *tableView_;
-    NSUInteger selectedRow_;
+	NSUInteger selectedRow_;
 }
 
 @property (nonatomic, weak) WDDrawingController *drawingController;
 
-- (NSString *) displayNameForBlendMode:(CGBlendMode)blendMode;
+- (NSString*) displayNameForBlendMode:(CGBlendMode)blendMode;
 
 @end

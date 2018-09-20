@@ -13,6 +13,6 @@
 
 @interface DBMetadata (Additions)
 
-- (NSDictionary *)dictionaryRepresentation;
+- (NSDictionary*)dictionaryRepresentation;
 
 @end

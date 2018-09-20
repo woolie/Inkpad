@@ -18,41 +18,41 @@
 @class WDStrokeStyle;
 
 typedef enum {
-    kStrokeNone,
-    kStrokeColor,
+	kStrokeNone,
+	kStrokeColor,
 } WDStrokeMode;
 
 @interface WDStrokeController : UIViewController {
-    IBOutlet UISlider               *widthSlider_;
-    IBOutlet UILabel                *widthLabel_;
-    IBOutlet WDLineAttributePicker  *capPicker_;
-    IBOutlet WDLineAttributePicker  *joinPicker_;
-    
-    IBOutlet UIButton               *increment;
-    IBOutlet UIButton               *decrement;
-    
-    IBOutlet UISwitch               *dashSwitch_;
-    IBOutlet WDSparkSlider          *dash0_;
-    IBOutlet WDSparkSlider          *dash1_;
-    IBOutlet WDSparkSlider          *gap0_;
-    IBOutlet WDSparkSlider          *gap1_;
-    
-    IBOutlet UIButton               *arrowButton_;
-    
-    WDColorController               *colorController_;
-    UISegmentedControl              *modeSegment_;
-    
-    WDStrokeMode                    mode_;
+	IBOutlet UISlider			   *widthSlider_;
+	IBOutlet UILabel				*widthLabel_;
+	IBOutlet WDLineAttributePicker  *capPicker_;
+	IBOutlet WDLineAttributePicker  *joinPicker_;
+	
+	IBOutlet UIButton			   *increment;
+	IBOutlet UIButton			   *decrement;
+	
+	IBOutlet UISwitch			   *dashSwitch_;
+	IBOutlet WDSparkSlider		  *dash0_;
+	IBOutlet WDSparkSlider		  *dash1_;
+	IBOutlet WDSparkSlider		  *gap0_;
+	IBOutlet WDSparkSlider		  *gap1_;
+	
+	IBOutlet UIButton			   *arrowButton_;
+	
+	WDColorController			   *colorController_;
+	UISegmentedControl			  *modeSegment_;
+	
+	WDStrokeMode					mode_;
 }
 
 @property (nonatomic, weak) WDDrawingController *drawingController;
 
-- (IBAction) toggleDash:(id)sender;
+- (IBAction) toggleDash:(id) sender;
 
-- (IBAction) increment:(id)sender;
-- (IBAction) decrement:(id)sender;
-- (IBAction) takeStrokeWidthFrom:(id)sender;
-- (IBAction) takeFinalStrokeWidthFrom:(id)sender;
-- (IBAction) showArrowheads:(id)sender;
+- (IBAction) increment:(id) sender;
+- (IBAction) decrement:(id) sender;
+- (IBAction) takeStrokeWidthFrom:(id) sender;
+- (IBAction) takeFinalStrokeWidthFrom:(id) sender;
+- (IBAction) showArrowheads:(id) sender;
 
 @end

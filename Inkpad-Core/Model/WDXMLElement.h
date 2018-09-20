@@ -14,17 +14,17 @@
 
 @interface WDXMLElement : NSObject
 
-@property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString*name;
 @property (nonatomic, strong) NSMutableArray *children;
 @property (nonatomic, strong) NSMutableDictionary *attributes;
-@property (nonatomic, strong) NSString *value;
-@property (weak, nonatomic, readonly) NSString *XMLValue;
+@property (nonatomic, strong) NSString*value;
+@property (weak, nonatomic, readonly) NSString*XMLValue;
 
-+ (WDXMLElement *) elementWithName:(NSString *)name;
-- (instancetype) initWithName:(NSString *)name;
++ (WDXMLElement *) elementWithName:(NSString*)name;
+- (instancetype) initWithName:(NSString*)name;
 
-- (void) setAttribute:(NSString *)attribute value:(NSString *)value;
-- (void) setAttribute:(NSString *)attribute floatValue:(float)value;
+- (void) setAttribute:(NSString*)attribute value:(NSString*)value;
+- (void) setAttribute:(NSString*)attribute floatValue:(float)value;
 
 - (void) addChild:(WDXMLElement *)element;
 - (void) removeAllChildren;

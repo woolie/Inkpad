@@ -28,8 +28,8 @@
 + (WDColor *) colorWithRed:(float)red green:(float)green blue:(float)blue alpha:(CGFloat)alpha;
 - (WDColor *) initWithHue:(CGFloat)hue saturation:(CGFloat)saturation brightness:(CGFloat)brightness alpha:(CGFloat)alpha;
 
-+ (WDColor *) colorWithDictionary:(NSDictionary *)dict;
-- (NSDictionary *) dictionary;
++ (WDColor *) colorWithDictionary:(NSDictionary*)dict;
+- (NSDictionary*) dictionary;
 
 + (WDColor *) colorWithData:(NSData *)data;
 - (NSData *) colorData;
@@ -58,7 +58,7 @@
 + (WDColor *) yellowColor;
 + (WDColor *) blueColor;
 
-- (NSString *) hexValue;
+- (NSString*) hexValue;
 
 - (WDColor *) blendedColorWithFraction:(float)fraction ofColor:(WDColor *)color;
 

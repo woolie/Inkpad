@@ -18,85 +18,85 @@
 @synthesize attributes = attributes_;
 @synthesize value = value_;
 
-+ (WDXMLElement *) elementWithName:(NSString *)name
++ (WDXMLElement *) elementWithName:(NSString*)name
 {
-    WDXMLElement *element = [[WDXMLElement alloc] initWithName:name];
-    return element;
+	WDXMLElement *element = [[WDXMLElement alloc] initWithName:name];
+	return element;
 }
 
-- (instancetype) initWithName:(NSString *)name
+- (instancetype) initWithName:(NSString*)name
 {
-    self = [super init];
-    
-    if (!self) {
-        return nil;
-    }
-    
-    self.name = name;
-    self.children = [NSMutableArray array];
-    self.attributes = [NSMutableDictionary dictionary];
-    
-    return self;
+	self = [super init];
+	
+	if (!self) {
+		return nil;
+	}
+	
+	self.name = name;
+	self.children = [NSMutableArray array];
+	self.attributes = [NSMutableDictionary dictionary];
+	
+	return self;
 }
 
-- (void) setAttribute:(NSString *)attribute value:(NSString *)value
+- (void) setAttribute:(NSString*)attribute value:(NSString*)value
 {
-    [self.attributes setValue:value forKey:attribute];
+	[self.attributes setValue:value forKey:attribute];
 }
 
-- (void) setAttribute:(NSString *)attribute floatValue:(float)value
+- (void) setAttribute:(NSString*)attribute floatValue:(float)value
 {
-    [self.attributes setValue:[NSString stringWithFormat:@"%g", value] forKey:attribute];
+	[self.attributes setValue:[NSString stringWithFormat:@"%g", value] forKey:attribute];
 }
 
 - (void) addChild:(WDXMLElement *)element
 {
-    [self.children addObject:element];
+	[self.children addObject:element];
 }
 
 - (void) removeAllChildren
 {
-    [self.children removeAllObjects];
+	[self.children removeAllObjects];
 }
 
-- (NSString *) XMLValue
+- (NSString*) XMLValue
 {
-    NSMutableString *xmlValue = [NSMutableString string];
-    BOOL            needsCloseTag = (self.value || self.children.count) ? YES : NO;
-    
-    [xmlValue appendString:[NSString stringWithFormat:@"<%@", name_]];
-    
-    for (NSString *key in [attributes_ allKeys]) {
-        [xmlValue appendString:[NSString stringWithFormat:@" %@=\"%@\"", key, [attributes_ valueForKey:key]]];
-    }
-    
-    if (!needsCloseTag) {
-        [xmlValue appendString:@"/>\n"];
-    } else {
-        [xmlValue appendString:@">\n"];
-    }
-    
-    if (self.value) {
-        [xmlValue appendString:@"<![CDATA["];
-        [xmlValue appendString:self.value];
-        [xmlValue appendString:@"]]>"];
-    } else if (self.children) {
-        for (WDXMLElement *element in self.children) {
-            [xmlValue appendString:[element XMLValue]];
-        }
-    }
-    
-    // close tag
-    if (needsCloseTag) {
-        [xmlValue appendString:[NSString stringWithFormat:@"</%@>\n", name_]];
-    }
-    
-    return xmlValue;
+	NSMutableString *xmlValue = [NSMutableString string];
+	BOOL			needsCloseTag = (self.value || self.children.count) ? YES : NO;
+	
+	[xmlValue appendString:[NSString stringWithFormat:@"<%@", name_]];
+	
+	for (NSString* key in [attributes_ allKeys]) {
+		[xmlValue appendString:[NSString stringWithFormat:@" %@=\"%@\"", key, [attributes_ valueForKey:key]]];
+	}
+	
+	if (!needsCloseTag) {
+		[xmlValue appendString:@"/>\n"];
+	} else {
+		[xmlValue appendString:@">\n"];
+	}
+	
+	if (self.value) {
+		[xmlValue appendString:@"<![CDATA["];
+		[xmlValue appendString:self.value];
+		[xmlValue appendString:@"]]>"];
+	} else if (self.children) {
+		for (WDXMLElement *element in self.children) {
+			[xmlValue appendString:[element XMLValue]];
+		}
+	}
+	
+	// close tag
+	if (needsCloseTag) {
+		[xmlValue appendString:[NSString stringWithFormat:@"</%@>\n", name_]];
+	}
+	
+	return xmlValue;
 }
 
-- (NSString *) description
+- (NSString*) description
 {
-    return [self XMLValue];
+	return [self XMLValue];
 }
 
 @end

@@ -16,14 +16,14 @@ extern const float kDefaultFlatness;
 @class WDBezierNode;
 
 enum {
-    TOP = 0x1, 
-    BOTTOM = 0x2, 
-    RIGHT = 0x4, 
-    LEFT = 0x8
+	TOP = 0x1, 
+	BOTTOM = 0x2, 
+	RIGHT = 0x4, 
+	LEFT = 0x8
 };
 
 typedef struct {
-    CGPoint a_, out_, in_, b_;
+	CGPoint a_, out_, in_, b_;
 } WDBezierSegment;
 
 

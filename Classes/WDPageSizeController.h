@@ -12,17 +12,17 @@
 #import <UIKit/UIKit.h>
 
 @interface WDPageSizeController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
-    IBOutlet UITableView    *table_;
-    NSArray                 *configuration_;
-    UITableViewCell         *customCell_;
+	IBOutlet UITableView	*table_;
+	NSArray				 *configuration_;
+	UITableViewCell		 *customCell_;
 }
 
 @property (nonatomic, weak) id target;
 @property (nonatomic, assign) SEL action;
 @property (nonatomic, readonly) CGSize size;
-@property (weak, nonatomic, readonly) NSString *units;
+@property (weak, nonatomic, readonly) NSString*units;
 
 @end
 
-extern NSString *WDPageOrientation;
-extern NSString *WDPageSize;
+extern NSString* WDPageOrientation;
+extern NSString* WDPageSize;

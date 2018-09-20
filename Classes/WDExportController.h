@@ -12,21 +12,21 @@
 #import <UIKit/UIKit.h>
 
 enum {
-    kWDExportViaEmailMode,
-    kWDExportViaDropboxMode
+	kWDExportViaEmailMode,
+	kWDExportViaDropboxMode
 };
 
 typedef enum {
-    kWDExportJPEG = 0,
-    kWDExportPNG,
-    kWDExportSVG,
-    kWDExportPDF,
-    kWDExportInkpad
+	kWDExportJPEG = 0,
+	kWDExportPNG,
+	kWDExportSVG,
+	kWDExportPDF,
+	kWDExportInkpad
 } WDExportFormat;
 
 
 @interface WDExportController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
-    IBOutlet    UITableView     *formatTable_;
+	IBOutlet	UITableView	 *formatTable_;
 }
 
 @property (nonatomic, assign) NSUInteger mode;
@@ -37,5 +37,5 @@ typedef enum {
 @end
 
 
-extern NSString *WDEmailFormatDefault;
-extern NSString *WDDropboxFormatDefault;
+extern NSString* WDEmailFormatDefault;
+extern NSString* WDDropboxFormatDefault;

@@ -16,12 +16,12 @@
 #import "WDSVGElement.h"
 
 @interface WDSVGParserState : NSObject {
-    WDSVGElement        *svgElement_;
-    WDElement           *wdElement_;
-    NSMutableArray      *group_;
-    CGAffineTransform   transform_;
-    CGAffineTransform   viewBoxTransform_;
-    CGRect              viewport_;
+	WDSVGElement		*svgElement_;
+	WDElement		   *wdElement_;
+	NSMutableArray	  *group_;
+	CGAffineTransform   transform_;
+	CGAffineTransform   viewBoxTransform_;
+	CGRect			  viewport_;
 }
 
 @property (nonatomic, readonly) WDSVGElement *svgElement;

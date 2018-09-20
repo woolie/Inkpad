@@ -13,11 +13,11 @@
 #import "WDBezierNode.h"
 
 @interface WDPenTool : WDTool {
-    WDBezierNode                *replacementNode_;
-    BOOL                        updatingOldNode_;
-    WDBezierNodeReflectionMode  oldNodeMode_;
-    BOOL                        closingPath_;
-    BOOL                        shouldResetFillTransform_;
+	WDBezierNode				*replacementNode_;
+	BOOL						updatingOldNode_;
+	WDBezierNodeReflectionMode  oldNodeMode_;
+	BOOL						closingPath_;
+	BOOL						shouldResetFillTransform_;
 }
 
 @property (nonatomic, strong) WDBezierNode *replacementNode;

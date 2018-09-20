@@ -24,11 +24,11 @@
 #import "WDSVGHelper.h"
 #import "WDUtilities.h"
 
-const float kMinimumDrawingDimension = 16;
-const float kMaximumDrawingDimension = 16000;
-const float kMaximumBitmapImageArea = 4096 * 4096;
-const float kMaximumCopiedBitmapImageDimension = 2048;
-const float kMaximumThumbnailDimension = 120;
+const CGFloat kMinimumDrawingDimension = 16.0;
+const CGFloat kMaximumDrawingDimension = 16000.0;
+const CGFloat kMaximumBitmapImageArea = 4096.0 * 4096.0;
+const CGFloat kMaximumCopiedBitmapImageDimension = 2048.0;
+const CGFloat kMaximumThumbnailDimension = 120.0;
 
 // encoder keys
 NSString* const WDDrawingKey = @"WDDrawingKey";
@@ -68,7 +68,7 @@ NSString* const WDActiveLayerChanged = @"WDActiveLayerChanged";
 NSString* const WDDrawingDimensionsChanged = @"WDDrawingDimensionsChanged";
 NSString* const WDGridSpacingChangedNotification = @"WDGridSpacingChangedNotification";
 
-WDRenderingMetaData WDRenderingMetaDataMake(float scale, UInt32 flags)
+WDRenderingMetaData WDRenderingMetaDataMake(CGFloat scale, UInt32 flags)
 {
 	WDRenderingMetaData metaData;
 
@@ -99,7 +99,7 @@ BOOL WDRenderingMetaDataOutlineOnly(WDRenderingMetaData metaData)
 		// create settings
 		_settings = [[NSMutableDictionary alloc] init];
 		_settings[WDUnits] = units;
-		_settings[WDGridSpacing] = @([[NSUserDefaults standardUserDefaults] floatForKey:WDGridSpacing]);
+		_settings[WDGridSpacing] = @([NSUserDefaults.standardUserDefaults floatForKey:WDGridSpacing]);
 
 		// image datas
 		_imageDatas = [[NSMutableDictionary alloc] init];
@@ -110,8 +110,7 @@ BOOL WDRenderingMetaDataOutlineOnly(WDRenderingMetaData metaData)
 	return self;
 }
 
-- (instancetype) initWithSize:(CGSize) size
-					 andUnits:(NSString *) units
+- (instancetype) initWithSize:(CGSize)size andUnits:(NSString*)units
 {
 	self = [super init];
 
@@ -134,9 +133,11 @@ BOOL WDRenderingMetaDataOutlineOnly(WDRenderingMetaData metaData)
 
 		// each drawing saves its own settings, but when a user alters them they become the default settings for new documents
 		// since this is a new document, look up the values in the defaults...
-		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-		NSArray *keyArray = @[WDShowGrid, WDSnapToGrid, WDSnapToPoints, WDSnapToEdges, WDDynamicGuides, WDRulersVisible];
-		for (NSString *key in keyArray) {
+
+		NSUserDefaults* defaults = NSUserDefaults.standardUserDefaults;
+		NSArray* keyArray = @[WDShowGrid, WDSnapToGrid, WDSnapToPoints, WDSnapToEdges, WDDynamicGuides, WDRulersVisible];
+		for (NSString* key in keyArray)
+		{
 			_settings[key] = @([defaults boolForKey:key]);
 		}
 
@@ -156,7 +157,7 @@ BOOL WDRenderingMetaDataOutlineOnly(WDRenderingMetaData metaData)
 	return self;
 }
 
-- (instancetype) initWithImage:(UIImage *) image imageName:(NSString *) imageName
+- (instancetype) initWithImage:(UIImage *) image imageName:(NSString*) imageName
 {
 	self = [self initWithSize:image.size andUnits:@"Pixels"];
 
@@ -190,14 +191,15 @@ BOOL WDRenderingMetaDataOutlineOnly(WDRenderingMetaData metaData)
 		_imageDatas = [coder decodeObjectForKey:WDImageDatasKey];
 		_settings = [coder decodeObjectForKey:WDSettingsKey];
 
-		if (!_settings[WDUnits]) {
-			_settings[WDUnits] = [[NSUserDefaults standardUserDefaults] objectForKey:WDUnits];
+		if (!_settings[WDUnits])
+		{
+			_settings[WDUnits] = [NSUserDefaults.standardUserDefaults objectForKey:WDUnits];
 		}
 
 		_activeLayer = [coder decodeObjectForKey:WDActiveLayerKey];
 		if (!_activeLayer)
 		{
-			_activeLayer = _layers.lastObject;
+			_activeLayer = [_layers lastObject];
 		}
 
 		_undoManager = [[NSUndoManager alloc] init];
@@ -210,7 +212,7 @@ BOOL WDRenderingMetaDataOutlineOnly(WDRenderingMetaData metaData)
 	return self;
 }
 
-- (void)encodeWithCoder:(NSCoder *) coder
+- (void) encodeWithCoder:(NSCoder *) coder
 {
 	// strip unused image datas
 	[self purgeUnreferencedImageDatas];
@@ -225,7 +227,7 @@ BOOL WDRenderingMetaDataOutlineOnly(WDRenderingMetaData metaData)
 
 - (instancetype) copyWithZone:(NSZone *)zone
 {
-	WDDrawing* drawing = [[WDDrawing alloc] init];
+	WDDrawing *drawing = [[WDDrawing alloc] init];
 
 	drawing->_dimensions = _dimensions;
 	drawing->_settings = [_settings mutableCopy];
@@ -266,7 +268,7 @@ BOOL WDRenderingMetaDataOutlineOnly(WDRenderingMetaData metaData)
 #pragma mark - Drawing Attributes
 
 // return all the elements in the drawing
-- (NSArray<WDElement*>*) allElements
+- (NSArray*) allElements
 {
 	NSMutableArray *elements = [[NSMutableArray alloc] init];
 
@@ -279,18 +281,15 @@ BOOL WDRenderingMetaDataOutlineOnly(WDRenderingMetaData metaData)
 {
 	NSUInteger	  flags = 0;
 
-	if ([_settings[WDSnapToGrid] boolValue])
-	{
+	if ([_settings[WDSnapToGrid] boolValue]) {
 		flags |= kWDSnapGrid;
 	}
 
-	if ([_settings[WDSnapToPoints] boolValue])
-	{
+	if ([_settings[WDSnapToPoints] boolValue]) {
 		flags |= kWDSnapNodes;
 	}
 
-	if ([_settings[WDSnapToEdges] boolValue])
-	{
+	if ([_settings[WDSnapToEdges] boolValue]) {
 		flags |= kWDSnapEdges;
 	}
 
@@ -306,8 +305,7 @@ BOOL WDRenderingMetaDataOutlineOnly(WDRenderingMetaData metaData)
 {
 	CGRect styleBounds = CGRectNull;
 
-	for (WDLayer *layer in _layers)
-	{
+	for (WDLayer *layer in _layers) {
 		styleBounds = CGRectUnion(styleBounds, layer.styleBounds);
 	}
 
@@ -324,7 +322,7 @@ BOOL WDRenderingMetaDataOutlineOnly(WDRenderingMetaData metaData)
 
 	_imageDatas = [[NSMutableDictionary alloc] init];
 
-	for (WDImage* image in self.allElements)
+	for (WDImage *image in self.allElements)
 	{
 		if ([image isKindOfClass:[WDImage class]])
 		{
@@ -367,30 +365,33 @@ BOOL WDRenderingMetaDataOutlineOnly(WDRenderingMetaData metaData)
 	return imageData;
 }
 
-- (WDImageData *) trackedImageData:(WDImageData *)imageData
+- (WDImageData*) trackedImageData:(WDImageData*) imageData
 {
-	NSData		  *digest = WDSHA1DigestForData(imageData.data);
-	WDImageData	 *existingData = _imageDatas[digest];
+	NSData*		 digest = WDSHA1DigestForData(imageData.data);
+	WDImageData* existingData = _imageDatas[digest];
 
 	if (!existingData)
 	{
 		_imageDatas[digest] = imageData;
 		return imageData;
-	} else {
+	}
+	else
+	{
 		return existingData;
 	}
 }
 
 #pragma mark - Layers
 
-- (void) addObject:(id)obj
+- (void) addObject:(id) obj
 {
 	[_activeLayer addObject:obj];
 }
 
-- (void) setActiveLayer:(WDLayer *)layer
+- (void) setActiveLayer:(WDLayer *) layer
 {
-	if (_activeLayer == layer) {
+	if (_activeLayer == layer)
+	{
 		return;
 	}
 
@@ -398,7 +399,8 @@ BOOL WDRenderingMetaDataOutlineOnly(WDRenderingMetaData metaData)
 
 	_activeLayer = layer;
 
-	if (!self.isSuppressingNotifications) {
+	if (!self.isSuppressingNotifications)
+	{
 		NSDictionary *userInfo = @{@"old index": @(oldIndex)};
 		[[NSNotificationCenter defaultCenter] postNotificationName:WDActiveLayerChanged object:self userInfo:userInfo];
 	}
@@ -414,7 +416,7 @@ BOOL WDRenderingMetaDataOutlineOnly(WDRenderingMetaData metaData)
 	return _layers.count ? [_layers indexOfObject:_activeLayer] : -1;
 }
 
-- (void) removeLayer:(WDLayer *)layer
+- (void) removeLayer:(WDLayer*) layer
 {
 	[[_undoManager prepareWithInvocationTarget:self] insertLayer:layer atIndex:[_layers indexOfObject:layer]];
 
@@ -422,30 +424,35 @@ BOOL WDRenderingMetaDataOutlineOnly(WDRenderingMetaData metaData)
 	NSValue *dirtyRect = [NSValue valueWithCGRect:layer.styleBounds];
 	[_layers removeObject:layer];
 
-	if (!self.isSuppressingNotifications) {
+	if (!self.isSuppressingNotifications)
+	{
 		NSDictionary *userInfo = @{@"index": @(index), @"rect": dirtyRect, @"layer": layer};
 		[[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:WDLayerDeletedNotification object:self userInfo:userInfo]];
 	}
 }
 
-- (void) insertLayer:(WDLayer *)layer atIndex:(NSUInteger)index
+- (void) insertLayer:(WDLayer *) layer
+			 atIndex:(NSUInteger) index
 {
 	[[_undoManager prepareWithInvocationTarget:self] removeLayer:layer];
 
 	[_layers insertObject:layer atIndex:index];
 
-	if (!self.isSuppressingNotifications) {
-		NSDictionary *userInfo = @{@"layer": layer, @"rect": [NSValue valueWithCGRect:layer.styleBounds]};
+	if (!self.isSuppressingNotifications)
+	{
+		NSDictionary* userInfo = @{@"layer": layer, @"rect": [NSValue valueWithCGRect:layer.styleBounds]};
 		[[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:WDLayerAddedNotification object:self userInfo:userInfo]];
 	}
 }
 
-- (NSString *) uniqueLayerName
+- (NSString*) uniqueLayerName
 {
-	NSMutableSet *layerNames = [NSMutableSet set];
+	NSMutableSet* layerNames = [NSMutableSet set];
 
-	for (WDLayer *layer in _layers) {
-		if (!layer.name) {
+	for (WDLayer* layer in _layers)
+	{
+		if (!layer.name)
+		{
 			continue;
 		}
 
@@ -453,9 +460,10 @@ BOOL WDRenderingMetaDataOutlineOnly(WDRenderingMetaData metaData)
 	}
 
 	NSString	*unique = nil;
-	int		 uniqueIx = 1;
+	NSUInteger	 uniqueIx = 1;
 
-	do {
+	do
+	{
 		unique = [NSString stringWithFormat:NSLocalizedString(@"Layer %d", @"Layer %d"), uniqueIx];
 		uniqueIx++;
 	} while ([layerNames containsObject:unique]);
@@ -627,7 +635,7 @@ BOOL WDRenderingMetaDataOutlineOnly(WDRenderingMetaData metaData)
 //
 // Used for copying an image of the selection to the clipboard
 //
-+ (UIImage *) imageForElements:(NSArray *)elements scale:(float)scaleFactor
++ (UIImage *) imageForElements:(NSArray*)elements scale:(float)scaleFactor
 {
 	CGRect contentBounds = CGRectNull;
 	for (WDElement *element in elements) {
@@ -712,17 +720,17 @@ BOOL WDRenderingMetaDataOutlineOnly(WDRenderingMetaData metaData)
 	[metadataElement addChild:thumbnailElement];
 	[svgElement addChild:metadataElement];
 
-	for (WDImageData *imgData in _imageDatas.allValues)
+	for (WDImageData* imgData in _imageDatas.allValues)
 	{
-		NSString		*unique = [[WDSVGHelper sharedSVGHelper] uniqueIDWithPrefix:@"Image"];
-		WDXMLElement	*image = [WDXMLElement elementWithName:@"image"];
+		NSString* unique = [[WDSVGHelper sharedSVGHelper] uniqueIDWithPrefix:@"Image"];
+		WDXMLElement* image = [WDXMLElement elementWithName:@"image"];
 
 		[image setAttribute:@"id" value:unique];
 		[image setAttribute:@"overflow" value:@"visible"];
 		[image setAttribute:@"width" floatValue:imgData.image.size.width];
 		[image setAttribute:@"height" floatValue:imgData.image.size.height];
 
-		NSString *base64encoding = [NSString stringWithFormat:@"data:%@;base64,\n%@", imgData.mimetype, [imgData.data base64EncodedStringWithOptions:0]];
+		NSString* base64encoding = [NSString stringWithFormat:@"data:%@;base64,\n%@", imgData.mimetype, [imgData.data base64EncodedStringWithOptions:0]];
 		[image setAttribute:@"xlink:href" value:base64encoding];
 
 		[sharedHelper addDefinition:image];
@@ -741,10 +749,12 @@ BOOL WDRenderingMetaDataOutlineOnly(WDRenderingMetaData metaData)
 	[svgElement addChild:drawingMetadataElement];
 	[svgElement addChild:[sharedHelper definitions]];
 
-	for (WDLayer *layer in _layers) {
+	for (WDLayer *layer in _layers)
+	{
 		WDXMLElement *layerSVG = [layer SVGElement];
 
-		if (layerSVG) {
+		if (layerSVG)
+		{
 			[svgElement addChild:layerSVG];
 		}
 	}
@@ -759,12 +769,16 @@ BOOL WDRenderingMetaDataOutlineOnly(WDRenderingMetaData metaData)
 
 - (UIImage *) thumbnailImage
 {
-	float   width = kMaximumThumbnailDimension, height = kMaximumThumbnailDimension;
-	float   aspectRatio = _dimensions.width / _dimensions.height;
+	CGFloat width = kMaximumThumbnailDimension;
+	CGFloat height = kMaximumThumbnailDimension;
+	CGFloat aspectRatio = _dimensions.width / _dimensions.height;
 
-	if (_dimensions.height > _dimensions.width) {
+	if (_dimensions.height > _dimensions.width)
+	{
 		width = round(kMaximumThumbnailDimension * aspectRatio);
-	} else {
+	}
+	else
+	{
 		height = round(kMaximumThumbnailDimension / aspectRatio);
 	}
 
@@ -777,7 +791,7 @@ BOOL WDRenderingMetaDataOutlineOnly(WDRenderingMetaData metaData)
 	CGContextSetGrayFillColor(ctx, 1, 1);
 	CGContextFillRect(ctx, CGRectMake(0, 0, size.width, size.height));
 
-	float scale = width / _dimensions.width;
+	CGFloat scale = width / _dimensions.width;
 	CGContextScaleCTM(ctx, scale, scale);
 	[self renderInContext:ctx clipRect:self.bounds metaData:WDRenderingMetaDataMake(scale, WDRenderThumbnail)];
 
@@ -816,7 +830,7 @@ BOOL WDRenderingMetaDataOutlineOnly(WDRenderingMetaData metaData)
 
 #pragma mark - Settings
 
-- (void) setSetting:(NSString *)name value:(NSString *)value
+- (void) setSetting:(NSString*)name value:(NSString*)value
 {
 	if ([name hasPrefix:@"WD"])
 	{
@@ -952,12 +966,12 @@ BOOL WDRenderingMetaDataOutlineOnly(WDRenderingMetaData metaData)
 	[self.document markChanged];
 }
 
-- (NSString *) units
+- (NSString*) units
 {
 	return _settings[WDUnits];
 }
 
-- (void) setUnits:(NSString *)units
+- (void) setUnits:(NSString*) units
 {
 	_settings[WDUnits] = units;
 	[[NSNotificationCenter defaultCenter] postNotificationName:WDUnitsChangedNotification object:self];
@@ -971,29 +985,29 @@ BOOL WDRenderingMetaDataOutlineOnly(WDRenderingMetaData metaData)
 	return [WDRulerUnit rulerUnits][self.units];
 }
 
-- (float) width
+- (CGFloat) width
 {
 	return _dimensions.width;
 }
 
-- (void) setWidth:(float) width
+- (void) setWidth:(CGFloat) width
 {
 	if (_dimensions.width == width)
 	{
 		return;
 	}
 
-	[(WDDrawing *)[_undoManager prepareWithInvocationTarget:self] setWidth:_dimensions.width];
+	[(WDDrawing*)[_undoManager prepareWithInvocationTarget:self] setWidth:_dimensions.width];
 	_dimensions.width = WDClamp(kMinimumDrawingDimension, kMaximumDrawingDimension, width);
 	[[NSNotificationCenter defaultCenter] postNotificationName:WDDrawingDimensionsChanged object:self];
 }
 
-- (float) height
+- (CGFloat) height
 {
 	return _dimensions.height;
 }
 
-- (void) setHeight:(float)height
+- (void) setHeight:(CGFloat)height
 {
 	if (_dimensions.height == height)
 	{

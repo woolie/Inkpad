@@ -18,31 +18,31 @@
 @class DBRestClient;
 
 @interface WDImportController : UIViewController <DBRestClientDelegate,
-                UIAlertViewDelegate, UITableViewDataSource, UITableViewDelegate> {
+				UIAlertViewDelegate, UITableViewDataSource, UITableViewDelegate> {
 
-	UIBarButtonItem                     *importButton_;
-	IBOutlet UIActivityIndicatorView    *activityIndicator_;
-	IBOutlet UITableView                *contentsTable_;
-	NSArray                             *dropboxItems_;
-	NSMutableSet                        *selectedItems_;
-	NSMutableDictionary                 *itemsKeyedByImagePath_;
-	NSMutableSet                        *itemsFailedImageLoading_;
-	BOOL                                isRoot_;
-	NSString                            *imageCacheDirectory_;
-	DBRestClient                        *dropboxClient_;
-	NSFileManager                       *fileManager_;
+	UIBarButtonItem					 *importButton_;
+	IBOutlet UIActivityIndicatorView	*activityIndicator_;
+	IBOutlet UITableView				*contentsTable_;
+	NSArray							 *dropboxItems_;
+	NSMutableSet						*selectedItems_;
+	NSMutableDictionary				 *itemsKeyedByImagePath_;
+	NSMutableSet						*itemsFailedImageLoading_;
+	BOOL								isRoot_;
+	NSString							*imageCacheDirectory_;
+	DBRestClient						*dropboxClient_;
+	NSFileManager					   *fileManager_;
 	
 }
 
-@property (nonatomic, copy) NSString *remotePath;
+@property (nonatomic, copy) NSString*remotePath;
 @property (nonatomic, weak) id <WDImportControllerDelegate> delegate;
 
-+ (BOOL) isFontType:(NSString *)extension;
-+ (BOOL) canImportType:(NSString *)extension;
++ (BOOL) isFontType:(NSString*)extension;
++ (BOOL) canImportType:(NSString*)extension;
 
 @end
 
 @protocol WDImportControllerDelegate
 @optional
-- (void) importController:(WDImportController *)controller didSelectDropboxItems:(NSArray *)dropboxItems;
+- (void) importController:(WDImportController *)controller didSelectDropboxItems:(NSArray*)dropboxItems;
 @end

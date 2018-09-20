@@ -17,6 +17,6 @@
 
 @interface WDSVGTransformParser : NSObject
 
-+ (CGAffineTransform) parse:(NSString *)source withReporter:(id<WDErrorReporter>)reporter;
++ (CGAffineTransform) parse:(NSString*)source withReporter:(id<WDErrorReporter>)reporter;
 
 @end

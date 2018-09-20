@@ -24,47 +24,46 @@
 @class WDRulerView;
 @class WDSelectionView;
 
-@interface WDCanvas : UIView
-{
-	WDSelectionView*		_selectionView;
-	WDEraserPreviewView*	_eraserPreview;
-
-	BOOL					_controlGesture;
-	BOOL					_moved;
-	BOOL					_transforming;
-	BOOL					_transformingNode;
-	BOOL					_showingPivot;
-	CGAffineTransform	   	_selectionTransform;
-	CGPoint					_pivot;
-	UIColor*				_isolationColor;
-
-	NSValue*				_marquee;
-	WDPath*					_shapeUnderConstruction;
-	WDPath*					_eraserPath;
-
+@interface WDCanvas : UIView {
+	WDSelectionView		 *selectionView_;
+	WDEraserPreviewView	 *eraserPreview_;
+	
+	BOOL					controlGesture_;
+	BOOL					moved_;
+	BOOL					transforming_;
+	BOOL					transformingNode_;
+	BOOL					showingPivot_;
+	CGAffineTransform	   selectionTransform_;
+	CGPoint				 pivot_;
+	UIColor				 *isolationColor_;
+	
+	NSValue				 *marquee_;
+	WDPath				  *shapeUnderConstruction_;
+	WDPath				  *eraserPath_;
+	
 	// managing the view scale and visible area
-	float					_trueViewScale;
-	float					_viewScale;
-	CGAffineTransform		_transform;
-	CGPoint					_userSpacePivot;
-	CGPoint					_deviceSpacePivot;
-	CGPoint					_oldDeviceSpacePivot;
-
+	float				   trueViewScale_;
+	float				   viewScale_;
+	CGAffineTransform	   transform_;
+	CGPoint				 userSpacePivot_;
+	CGPoint				 deviceSpacePivot_;
+	CGPoint				 oldDeviceSpacePivot_;
+	
 	// adornments
-	UIImageView*			_pivotView;
-	WDEyedropper*			_eyedropper;
-
+	UIImageView			 *pivotView_;
+	WDEyedropper			*eyedropper_;
+	
 	// rulers
-	WDRulerView*			horizontalRuler_;
-	WDRulerView*			verticalRuler_;
-	WDRulerCornerView*		cornerView_;
-
-	WDPalette*				toolPalette_;
-	UIButton*				deleteButton_; // pseudo delete tool
-	CGPoint					cachedCenter_;
-
-	UILabel*				messageLabel_;
-	NSTimer*				messageTimer_;
+	WDRulerView			 *horizontalRuler_;
+	WDRulerView			 *verticalRuler_;
+	WDRulerCornerView	   *cornerView_;
+	
+	WDPalette			   *toolPalette_;
+	UIButton				*deleteButton_; // pseudo delete tool
+	CGPoint				 cachedCenter_;
+	
+	UILabel				 *messageLabel_;
+	NSTimer				 *messageTimer_;
 }
 
 @property (nonatomic, weak) WDDrawing *drawing;
@@ -126,7 +125,7 @@
 - (void) ensureToolPaletteIsOnScreen;
 
 // displaying messages to the user
-- (void) showMessage:(NSString *)message;
+- (void) showMessage:(NSString*)message;
 - (void) nixMessageLabel;
 
 // eyedropper
@@ -142,4 +141,4 @@
 
 @end
 
-extern NSString *WDCanvasBeganTrackingTouches;
+extern NSString* WDCanvasBeganTrackingTouches;

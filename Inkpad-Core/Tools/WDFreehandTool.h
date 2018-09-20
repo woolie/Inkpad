@@ -14,8 +14,8 @@
 @class WDPath;
 
 @interface WDFreehandTool : WDTool {
-    WDPath          *tempPath_;
-    BOOL            pathStarted_;
+	WDPath		  *tempPath_;
+	BOOL			pathStarted_;
 }
 
 @property (nonatomic, assign) BOOL closeShape;

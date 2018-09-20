@@ -19,27 +19,27 @@
 @class WDFillTransform;
 
 @interface WDPath : WDAbstractPath <NSCoding, NSCopying> {
-    NSMutableArray      *nodes_;
-    BOOL                closed_;
-    BOOL                reversed_;
-    
-    CGMutablePathRef    pathRef_;
-    CGMutablePathRef    strokePathRef_;
-    CGRect              bounds_;
-    BOOL                boundsDirty_;
-    
-    // arrowheads
-    CGPoint             arrowStartAttachment_;
-    float               arrowStartAngle_;
-    BOOL                canFitStartArrow_;
-    CGPoint             arrowEndAttachment_;
-    float               arrowEndAngle_;
-    BOOL                canFitEndArrow_;
-    
-    // to simplify rendering
-    NSMutableArray      *displayNodes_;
-    UIColor             *displayColor_;
-    BOOL                displayClosed_;
+	NSMutableArray	  *nodes_;
+	BOOL				closed_;
+	BOOL				reversed_;
+	
+	CGMutablePathRef	pathRef_;
+	CGMutablePathRef	strokePathRef_;
+	CGRect			  bounds_;
+	BOOL				boundsDirty_;
+	
+	// arrowheads
+	CGPoint			 arrowStartAttachment_;
+	float			   arrowStartAngle_;
+	BOOL				canFitStartArrow_;
+	CGPoint			 arrowEndAttachment_;
+	float			   arrowEndAngle_;
+	BOOL				canFitEndArrow_;
+	
+	// to simplify rendering
+	NSMutableArray	  *displayNodes_;
+	UIColor			 *displayColor_;
+	BOOL				displayClosed_;
 }
 
 @property (nonatomic, assign) BOOL closed;
@@ -62,39 +62,39 @@
 - (instancetype) initWithRoundedRect:(CGRect)rect cornerRadius:(float)radius;
 - (instancetype) initWithOvalInRect:(CGRect)rect;
 - (instancetype) initWithStart:(CGPoint)start end:(CGPoint)end;
-- (instancetype) initWithNode:(WDBezierNode *)node;
+- (instancetype) initWithNode:(WDBezierNode*)node;
 
 - (void) invalidatePath;
 - (void) reversePathDirection;
 
 - (BOOL) canDeleteAnchors;
-- (void) deleteAnchor:(WDBezierNode *)node;
-- (NSArray *) selectedNodes;
+- (void) deleteAnchor:(WDBezierNode*)node;
+- (NSArray*) selectedNodes;
 - (BOOL) anyNodesSelected;
 - (BOOL) allNodesSelected;
 
-- (NSDictionary *) splitAtNode:(WDBezierNode *)node;
-- (NSDictionary *) splitAtPoint:(CGPoint)pt viewScale:(float)viewScale;
-- (WDBezierNode *) addAnchorAtPoint:(CGPoint)pt viewScale:(float)viewScale;
+- (NSDictionary*) splitAtNode:(WDBezierNode*)node;
+- (NSDictionary*) splitAtPoint:(CGPoint)pt viewScale:(float)viewScale;
+- (WDBezierNode*) addAnchorAtPoint:(CGPoint)pt viewScale:(float)viewScale;
 - (void) addAnchors;
 - (void) appendPath:(WDPath *)path;
 
-- (void) replaceFirstNodeWithNode:(WDBezierNode *)node;
-- (void) replaceLastNodeWithNode:(WDBezierNode *)node;
-- (BOOL) addNode:(WDBezierNode *)node scale:(float)scale;
-- (void) addNode:(WDBezierNode *)node;
+- (void) replaceFirstNodeWithNode:(WDBezierNode*)node;
+- (void) replaceLastNodeWithNode:(WDBezierNode*)node;
+- (BOOL) addNode:(WDBezierNode*)node scale:(float)scale;
+- (void) addNode:(WDBezierNode*)node;
 
-- (WDBezierNode *) firstNode;
-- (WDBezierNode *) lastNode;
+- (WDBezierNode*) firstNode;
+- (WDBezierNode*) lastNode;
 - (NSMutableArray *) reversedNodes;
-- (NSSet *) nodesInRect:(CGRect)rect;
+- (NSSet*) nodesInRect:(CGRect)rect;
 
-- (WDBezierNode *) convertNode:(WDBezierNode *)node whichPoint:(WDPickResultType)whichPoint;
+- (WDBezierNode*) convertNode:(WDBezierNode*)node whichPoint:(WDPickResultType)whichPoint;
 
 - (CGRect) controlBounds;
 - (void) computeBounds;
 
-- (NSString *) nodeSVGRepresentation;
+- (NSString*) nodeSVGRepresentation;
 
 - (void) setClosedQuiet:(BOOL)closed;
 

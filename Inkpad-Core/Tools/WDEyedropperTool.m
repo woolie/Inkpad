@@ -25,53 +25,53 @@
 @synthesize lastPickResult = lastPickResult_;
 @synthesize lastFill = lastFill_;
 
-- (NSString *) iconName
+- (NSString*) iconName
 {
-    return @"eyedropper.png";
+	return @"eyedropper.png";
 }
 
 - (void) beginWithEvent:(WDEvent *)theEvent inCanvas:(WDCanvas *)canvas
 {
 #if TARGET_OS_IPHONE
-    CGPoint pt = theEvent.location;
-    
-    [canvas displayEyedropperAtPoint:pt];
-    
-    self.lastPickResult = [canvas.drawingController inspectableUnderPoint:pt viewScale:canvas.viewScale];
-    canvas.eyedropper.fill = self.lastFill = [self.lastPickResult.element pathPainterAtPoint:pt];
+	CGPoint pt = theEvent.location;
+	
+	[canvas displayEyedropperAtPoint:pt];
+	
+	self.lastPickResult = [canvas.drawingController inspectableUnderPoint:pt viewScale:canvas.viewScale];
+	canvas.eyedropper.fill = self.lastFill = [self.lastPickResult.element pathPainterAtPoint:pt];
 #endif
 }
 
 - (void) moveWithEvent:(WDEvent *)theEvent inCanvas:(WDCanvas *)canvas
 {   
 #if TARGET_OS_IPHONE
-    CGPoint pt = theEvent.location;
-    
-    self.lastPickResult = [canvas.drawingController inspectableUnderPoint:pt viewScale:canvas.viewScale];
-    canvas.eyedropper.fill = self.lastFill = [self.lastPickResult.element pathPainterAtPoint:pt];
-    
-    [canvas moveEyedropperToPoint:pt];
+	CGPoint pt = theEvent.location;
+	
+	self.lastPickResult = [canvas.drawingController inspectableUnderPoint:pt viewScale:canvas.viewScale];
+	canvas.eyedropper.fill = self.lastFill = [self.lastPickResult.element pathPainterAtPoint:pt];
+	
+	[canvas moveEyedropperToPoint:pt];
 #endif
 }
 
 - (void) endWithEvent:(WDEvent *)theEvent inCanvas:(WDCanvas *)canvas
-{    
+{	
 #if TARGET_OS_IPHONE
-    WDElement *element = self.lastPickResult.element;
-    if (element) {
-        for (NSString *property in [element inspectableProperties]) {
-            [canvas.drawingController setValue:[element valueForProperty:property] forProperty:property];
-        }
-    }
-    
-    if ([element isKindOfClass:[WDImage class]]) {
-        [canvas.drawingController setValue:lastFill_ forProperty:WDFillProperty];
-    }
-    
-    self.lastPickResult = nil;
-    self.lastFill = nil;
-    
-    [canvas dismissEyedropper];
+	WDElement *element = self.lastPickResult.element;
+	if (element) {
+		for (NSString* property in [element inspectableProperties]) {
+			[canvas.drawingController setValue:[element valueForProperty:property] forProperty:property];
+		}
+	}
+	
+	if ([element isKindOfClass:[WDImage class]]) {
+		[canvas.drawingController setValue:lastFill_ forProperty:WDFillProperty];
+	}
+	
+	self.lastPickResult = nil;
+	self.lastFill = nil;
+	
+	[canvas dismissEyedropper];
 #endif
 }
 

@@ -53,14 +53,14 @@ SweepEvent::MakeDelete(void)
 	leftSweep=rightSweep=NULL;
 }
 
-void            SweepEvent::CreateQueue(SweepEventQueue &queue,int size)
+void			SweepEvent::CreateQueue(SweepEventQueue &queue,int size)
 {
 	queue.nbEvt=0;
 	queue.maxEvt=size;
 	queue.events=(SweepEvent*)malloc(queue.maxEvt*sizeof(SweepEvent));
 	queue.inds=(int*)malloc(queue.maxEvt*sizeof(int));
 }
-void            SweepEvent::DestroyQueue(SweepEventQueue &queue)
+void			SweepEvent::DestroyQueue(SweepEventQueue &queue)
 {
 	if ( queue.events ) free(queue.events);
 	if ( queue.inds ) free(queue.inds);
@@ -69,7 +69,7 @@ void            SweepEvent::DestroyQueue(SweepEventQueue &queue)
 	queue.events=NULL;
 }
 
-SweepEvent*     SweepEvent::AddInQueue(SweepTree* iLeft,SweepTree* iRight,float px,float py,float itl,float itr,SweepEventQueue &queue)
+SweepEvent*	 SweepEvent::AddInQueue(SweepTree* iLeft,SweepTree* iRight,float px,float py,float itl,float itr,SweepEventQueue &queue)
 {
 	if ( queue.nbEvt >= queue.maxEvt ) return NULL;
 	int  n=queue.nbEvt++;
@@ -105,19 +105,19 @@ SweepEvent*     SweepEvent::AddInQueue(SweepTree* iLeft,SweepTree* iRight,float 
 	}
 	return queue.events+n;
 }
-void            SweepEvent::SupprFromQueue(SweepEventQueue &queue)
+void			SweepEvent::SupprFromQueue(SweepEventQueue &queue)
 {
 	if ( queue.nbEvt <= 1 ) {
 		MakeDelete();
 		queue.nbEvt=0;
 		return;
 	}
-	int    n=ind;
-	int    to=queue.inds[n];
+	int	n=ind;
+	int	to=queue.inds[n];
 	MakeDelete();
 	queue.events[--queue.nbEvt].Relocate(queue,to);
 	
-	int    moveInd=queue.nbEvt;
+	int	moveInd=queue.nbEvt;
 	if ( moveInd == n ) return;
 	to=queue.inds[moveInd];
 
@@ -127,7 +127,7 @@ void            SweepEvent::SupprFromQueue(SweepEventQueue &queue)
 	int  curInd=n;
 	float   px=queue.events[to].posx;
 	float   py=queue.events[to].posy;
-	bool    didClimb=false;
+	bool	didClimb=false;
 	while ( curInd > 0 ) {
 		int  half=(curInd-1)/2;
 		int  no=queue.inds[half];
@@ -185,7 +185,7 @@ void            SweepEvent::SupprFromQueue(SweepEventQueue &queue)
 		}
 	}
 }
-bool            SweepEvent::PeekInQueue(SweepTree* &iLeft,SweepTree* &iRight,float &px,float &py,float &itl,float &itr,SweepEventQueue &queue)
+bool			SweepEvent::PeekInQueue(SweepTree* &iLeft,SweepTree* &iRight,float &px,float &py,float &itl,float &itr,SweepEventQueue &queue)
 {
 	if ( queue.nbEvt <= 0 ) return false;
 	iLeft=queue.events[queue.inds[0]].leftSweep;
@@ -196,7 +196,7 @@ bool            SweepEvent::PeekInQueue(SweepTree* &iLeft,SweepTree* &iRight,flo
 	itr=queue.events[queue.inds[0]].tr;
 	return true;
 }
-bool            SweepEvent::ExtractFromQueue(SweepTree* &iLeft,SweepTree* &iRight,float &px,float &py,float &itl,float &itr,SweepEventQueue &queue)
+bool			SweepEvent::ExtractFromQueue(SweepTree* &iLeft,SweepTree* &iRight,float &px,float &py,float &itl,float &itr,SweepEventQueue &queue)
 {
 	if ( queue.nbEvt <= 0 ) return false;
 	iLeft=queue.events[queue.inds[0]].leftSweep;
@@ -208,7 +208,7 @@ bool            SweepEvent::ExtractFromQueue(SweepTree* &iLeft,SweepTree* &iRigh
 	queue.events[queue.inds[0]].SupprFromQueue(queue);
 	return true;
 }
-void            SweepEvent::Relocate(SweepEventQueue &queue,int to)
+void			SweepEvent::Relocate(SweepEventQueue &queue,int to)
 {
 	if ( queue.inds[ind] == to ) return; // j'y suis deja
 	
@@ -275,31 +275,31 @@ SweepTree::MakeDelete(void)
 AVLTree::MakeDelete();
 }
 
-void          SweepTree::CreateList(SweepTreeList &list,int size)
+void		  SweepTree::CreateList(SweepTreeList &list,int size)
 {
 	list.nbTree=0;
 	list.maxTree=size;
 	list.trees=(SweepTree*)malloc(list.maxTree*sizeof(SweepTree));
 	list.racine=NULL;
 }
-void          SweepTree::DestroyList(SweepTreeList &list)
+void		  SweepTree::DestroyList(SweepTreeList &list)
 {
 	if ( list.trees ) free(list.trees);
 	list.trees=NULL;
 	list.nbTree=list.maxTree=0;
 	list.racine=NULL;
 }
-SweepTree*    SweepTree::AddInList(Shape* iSrc,int iBord,int iWeight,int iStartPoint,SweepTreeList &list,Shape* iDst)
+SweepTree*	SweepTree::AddInList(Shape* iSrc,int iBord,int iWeight,int iStartPoint,SweepTreeList &list,Shape* iDst)
 {
 	if ( list.nbTree >= list.maxTree ) return NULL;
-	int     n=list.nbTree++;
+	int	 n=list.nbTree++;
 	list.trees[n].MakeNew(iSrc,iBord,iWeight,iStartPoint);
 
 	return list.trees+n;
 }
-int           SweepTree::Find(float px,float py,SweepTree* newOne,SweepTree* &insertL,SweepTree* &insertR,bool sweepSens)
+int		   SweepTree::Find(float px,float py,SweepTree* newOne,SweepTree* &insertL,SweepTree* &insertR,bool sweepSens)
 {
-	vec2d    bOrig,bNorm;
+	vec2d	bOrig,bNorm;
 	bOrig.x=src->pData[src->aretes[bord].st].rx;
 	bOrig.y=src->pData[src->aretes[bord].st].ry;
 	bNorm.x=src->eData[bord].rdx;
@@ -310,7 +310,7 @@ int           SweepTree::Find(float px,float py,SweepTree* newOne,SweepTree* &in
 	}
 	RotCCW(bNorm);
 	
-	vec2d    diff;
+	vec2d	diff;
 	diff.x=px-bOrig.x;
 	diff.y=py-bOrig.y;
 	
@@ -373,9 +373,9 @@ int           SweepTree::Find(float px,float py,SweepTree* newOne,SweepTree* &in
 		}
 		return not_found;
 }
-int           SweepTree::Find(float px,float py,SweepTree* &insertL,SweepTree* &insertR)
+int		   SweepTree::Find(float px,float py,SweepTree* &insertL,SweepTree* &insertR)
 {
-	vec2d    bOrig,bNorm;
+	vec2d	bOrig,bNorm;
 	bOrig.x=src->pData[src->aretes[bord].st].rx;
 	bOrig.y=src->pData[src->aretes[bord].st].ry;
 	bNorm.x=src->eData[bord].rdx;
@@ -386,7 +386,7 @@ int           SweepTree::Find(float px,float py,SweepTree* &insertL,SweepTree* &
 	}
 	RotCCW(bNorm);
 	
-	vec2d    diff;
+	vec2d	diff;
 	diff.x=px-bOrig.x;
 	diff.y=py-bOrig.y;
 	
@@ -424,12 +424,12 @@ int           SweepTree::Find(float px,float py,SweepTree* &insertL,SweepTree* &
 	}
 	return not_found;
 }
-void          SweepTree::RemoveEvents(SweepEventQueue &queue)
+void		  SweepTree::RemoveEvents(SweepEventQueue &queue)
 {
 	RemoveEvent(queue,true);
 	RemoveEvent(queue,false);
 }
-void          SweepTree::RemoveEvent(SweepEventQueue &queue,bool onLeft)
+void		  SweepTree::RemoveEvent(SweepEventQueue &queue,bool onLeft)
 {
 	if ( onLeft ) {
 		if ( leftEvt ) {
@@ -445,7 +445,7 @@ void          SweepTree::RemoveEvent(SweepEventQueue &queue,bool onLeft)
 		rightEvt=NULL;
 	}
 }
-int           SweepTree::Remove(SweepTreeList &list,SweepEventQueue &queue,bool rebalance)
+int		   SweepTree::Remove(SweepTreeList &list,SweepEventQueue &queue,bool rebalance)
 {
 	RemoveEvents(queue);
 	AVLTree* tempR=static_cast <AVLTree*>(list.racine);
@@ -461,7 +461,7 @@ int           SweepTree::Remove(SweepTreeList &list,SweepEventQueue &queue,bool 
 	}
 	return err;
 }
-int           SweepTree::Insert(SweepTreeList &list,SweepEventQueue &queue,Shape* iDst,int iAtPoint,bool rebalance,bool sweepSens)
+int		   SweepTree::Insert(SweepTreeList &list,SweepEventQueue &queue,Shape* iDst,int iAtPoint,bool rebalance,bool sweepSens)
 {
 	if ( list.racine == NULL ) {
 		list.racine=this;
@@ -492,7 +492,7 @@ int           SweepTree::Insert(SweepTreeList &list,SweepEventQueue &queue,Shape
 	list.racine=static_cast <SweepTree*> (tempR);
 	return err;
 }
-int           SweepTree::InsertAt(SweepTreeList &list,SweepEventQueue &queue,Shape* iDst,SweepTree* insNode,int fromPt,bool rebalance,bool sweepSens)
+int		   SweepTree::InsertAt(SweepTreeList &list,SweepEventQueue &queue,Shape* iDst,SweepTree* insNode,int fromPt,bool rebalance,bool sweepSens)
 {
 	if ( list.racine == NULL ) {
 		list.racine=this;
@@ -514,7 +514,7 @@ int           SweepTree::InsertAt(SweepTreeList &list,SweepEventQueue &queue,Sha
 		nNorm.y=-nNorm.y;
 	}
 
-	vec2d    bNorm;
+	vec2d	bNorm;
 	bNorm.x=insNode->src->aretes[insNode->bord].dx;
 	bNorm.y=insNode->src->aretes[insNode->bord].dy;
 	if ( insNode->src->aretes[insNode->bord].st > insNode->src->aretes[insNode->bord].en ) {
@@ -616,7 +616,7 @@ int           SweepTree::InsertAt(SweepTreeList &list,SweepEventQueue &queue,Sha
 	list.racine=static_cast <SweepTree*> (tempR);
 	return err;
 }
-void          SweepTree::Relocate(SweepTree* to)
+void		  SweepTree::Relocate(SweepTree* to)
 {
 	if ( this == to ) return;
 AVLTree::Relocate(to);
@@ -631,7 +631,7 @@ AVLTree::Relocate(to);
 	if ( leftEvt ) leftEvt->rightSweep=to;
 	if ( rightEvt ) rightEvt->leftSweep=to;
 }
-void          SweepTree::SwapWithRight(SweepTreeList &list,SweepEventQueue &queue)
+void		  SweepTree::SwapWithRight(SweepTreeList &list,SweepEventQueue &queue)
 {
 	SweepTree* tL=this;
 	SweepTree* tR=static_cast <SweepTree*> (rightElem);
@@ -645,7 +645,7 @@ void          SweepTree::SwapWithRight(SweepTreeList &list,SweepEventQueue &queu
 //	{float swap=tL->invDirLength;tL->invDirLength=tR->invDirLength;tR->invDirLength=swap;}
 	{bool swap=tL->sens;tL->sens=tR->sens;tR->sens=swap;}
 }
-void          SweepTree::Avance(Shape* dstPts,int curPoint,Shape* a,Shape* b)
+void		  SweepTree::Avance(Shape* dstPts,int curPoint,Shape* a,Shape* b)
 {
 	return;
 /*	if ( curPoint != startPoint ) {

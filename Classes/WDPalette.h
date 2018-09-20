@@ -14,11 +14,11 @@
 
 @interface WDPalette : UIView <UIGestureRecognizerDelegate> 
 
-@property (nonatomic, strong) NSString *defaultsName;
+@property (nonatomic, strong) NSString* defaultsName;
 
-+ (WDPalette *) paletteWithBaseView:(UIView *)view defaultsName:(NSString *)name;
++ (WDPalette *) paletteWithBaseView:(UIView *)view defaultsName:(NSString*)name;
 - (void) bringOnScreen;
 
 @end
 
-extern NSString *WDPaletteMovedNotification;
+extern NSString* WDPaletteMovedNotification;

@@ -25,53 +25,53 @@
 
 + (WDMenuItem *)separatorItem
 {
-    WDMenuItem *item = [[WDMenuItem alloc] init];
-    
-    item.separator = YES;
-    
-    return item;
+	WDMenuItem *item = [[WDMenuItem alloc] init];
+	
+	item.separator = YES;
+	
+	return item;
 }
 
-+ (id)itemWithTitle:(NSString *)aString action:(SEL)aSelector target:(id)target
++ (id)itemWithTitle:(NSString*)aString action:(SEL)aSelector target:(id)target
 {
-    WDMenuItem *item = [[WDMenuItem alloc] initWithTitle:aString image:nil action:aSelector target:target];
-    return item;
+	WDMenuItem *item = [[WDMenuItem alloc] initWithTitle:aString image:nil action:aSelector target:target];
+	return item;
 }
 
-+ (id)itemWithTitle:(NSString *)aString image:(UIImage *)image action:(SEL)aSelector target:(id)target
++ (id)itemWithTitle:(NSString*)aString image:(UIImage *)image action:(SEL)aSelector target:(id)target
 {
-    WDMenuItem *item = [[WDMenuItem alloc] initWithTitle:aString image:image action:aSelector target:target];
-    return item;
+	WDMenuItem *item = [[WDMenuItem alloc] initWithTitle:aString image:image action:aSelector target:target];
+	return item;
 }
 
-- (instancetype) initWithTitle:(NSString *)aString image:(UIImage *)image action:(SEL)aSelector target:(id)target
+- (instancetype) initWithTitle:(NSString*)aString image:(UIImage *)image action:(SEL)aSelector target:(id)target
 {
-    self = [super init];
-    
-    if (!self) {
-        return nil;
-    }
-    
-    title_ = aString;
-    action_ = aSelector;
-    target_ = target;
-    enabled_ = YES;
-    self.image = image;
-    
-    return self;
+	self = [super init];
+	
+	if (!self) {
+		return nil;
+	}
+	
+	title_ = aString;
+	action_ = aSelector;
+	target_ = target;
+	enabled_ = YES;
+	self.image = image;
+	
+	return self;
 }
 
 - (float) imageWidth
 {
-    return image_ ? image_.size.width : 0.0f;
+	return image_ ? image_.size.width : 0.0f;
 }
 
 - (void) setEnabled:(BOOL)enabled
 {
-    enabled_ = enabled;
-    
-    self.label.alpha = enabled ? 1.0f : 0.2f;
-    self.imageView.alpha = enabled ? 1.0f : 0.2f;
+	enabled_ = enabled;
+	
+	self.label.alpha = enabled ? 1.0f : 0.2f;
+	self.imageView.alpha = enabled ? 1.0f : 0.2f;
 }
 
 @end

@@ -15,7 +15,7 @@
 @class WDToolView;
 
 @interface WDToolButton : UIButton <UIPopoverControllerDelegate> {
-    UIPopoverController             *subtoolsPopover_;
+	UIPopoverController			 *subtoolsPopover_;
 }
 
 @property (nonatomic, weak) WDTool  *tool;

@@ -12,14 +12,14 @@
 #import <Foundation/Foundation.h>
 
 @interface WDSparkSlider : UIControl {
-    UILabel         *valueLabel_;
-    UIImageView     *indicator_;
-    
-    CGPoint         initialPt_;
-    NSUInteger      initialValue_;
-    
-    BOOL            dragging_;
-    BOOL            moved_;
+	UILabel		 *valueLabel_;
+	UIImageView	 *indicator_;
+	
+	CGPoint		 initialPt_;
+	NSUInteger	  initialValue_;
+	
+	BOOL			dragging_;
+	BOOL			moved_;
 }
 
 @property (nonatomic, readonly) UILabel *title;

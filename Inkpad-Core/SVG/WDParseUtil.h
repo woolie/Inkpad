@@ -16,14 +16,14 @@
 
 static inline BOOL charIsWhitespace(unichar c)
 {
-    return [[NSCharacterSet whitespaceAndNewlineCharacterSet] characterIsMember:c];
+	return [[NSCharacterSet whitespaceAndNewlineCharacterSet] characterIsMember:c];
 }
 
 static inline float scaleRadially(float length, CGAffineTransform transform) {
-    CGSize size = CGSizeApplyAffineTransform(CGSizeMake(length, length), transform);
-    return sqrtf(size.width * size.width + size.height * size.height) / sqrtf(2.f);
+	CGSize size = CGSizeApplyAffineTransform(CGSizeMake(length, length), transform);
+	return sqrtf(size.width * size.width + size.height * size.height) / sqrtf(2.f);
 }
 
-BOOL stringIsNumeric(NSString *s);
+BOOL stringIsNumeric(NSString* s);
 
-NSArray *tokenize(NSString *source, unichar* buf);
+NSArray *tokenize(NSString* source, unichar* buf);

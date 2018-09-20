@@ -13,16 +13,17 @@
 
 @class WDImageView;
 
-@interface WDThumbnailView : UICollectionViewCell <UITextFieldDelegate> {
-    UIImageView                 *selectedIndicator_;
-    UIActivityIndicatorView     *activityView_;
-    UIButton                    *titleLabel_;
+@interface WDThumbnailView : UICollectionViewCell <UITextFieldDelegate>
+{
+	UIImageView*				selectedIndicator_;
+	UIActivityIndicatorView*	activityView_;
+	UIButton*					titleLabel_;
 }
 
-@property (nonatomic, strong) NSString *filename;
+@property (nonatomic, strong) NSString* filename;
 @property (nonatomic, weak) id delegate;
-@property (nonatomic, readonly) UITextField *titleField;
-@property (nonatomic, readonly) WDImageView *imageView;
+@property (nonatomic, readonly) UITextField* titleField;
+@property (nonatomic, readonly) WDImageView* imageView;
 @property (nonatomic, assign) BOOL shouldShowSelectionIndicator;
 
 // image management
@@ -30,7 +31,7 @@
 
 - (void) stopEditing;
 
-- (NSComparisonResult) compare:(WDThumbnailView *)thumbView;
+- (NSComparisonResult) compare:(WDThumbnailView*)thumbView;
 
 - (void) startActivity;
 - (void) stopActivity;
@@ -38,7 +39,7 @@
 @end
 
 @protocol WDThumbnailViewDelegate <NSObject>
-- (BOOL) thumbnailShouldBeginEditing:(WDThumbnailView *)thumb;
-- (void) thumbnailDidBeginEditing:(WDThumbnailView *)thumb;
-- (void) thumbnailDidEndEditing:(WDThumbnailView *)thumb;
+- (BOOL) thumbnailShouldBeginEditing:(WDThumbnailView*)thumb;
+- (void) thumbnailDidBeginEditing:(WDThumbnailView*)thumb;
+- (void) thumbnailDidEndEditing:(WDThumbnailView*)thumb;
 @end

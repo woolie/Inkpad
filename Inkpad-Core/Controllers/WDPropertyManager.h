@@ -19,17 +19,17 @@
 
 @interface WDPropertyManager : NSObject {
 @private
-    NSMutableSet        *invalidProperties_;
-    NSMutableDictionary *defaults_;
+	NSMutableSet		*invalidProperties_;
+	NSMutableDictionary *defaults_;
 }
 
 @property (nonatomic, weak) WDDrawingController *drawingController;
 @property (nonatomic, assign) BOOL ignoreSelectionChanges;
 
-- (void) addToInvalidProperties:(NSString *)property;
+- (void) addToInvalidProperties:(NSString*)property;
 
-- (void) setDefaultValue:(id)value forProperty:(NSString *)property;
-- (id) defaultValueForProperty:(NSString *)property;
+- (void) setDefaultValue:(id)value forProperty:(NSString*)property;
+- (id) defaultValueForProperty:(NSString*)property;
 
 - (WDStrokeStyle *) activeStrokeStyle;
 - (WDStrokeStyle *) defaultStrokeStyle;
@@ -45,8 +45,8 @@
 @end
 
 // notifications
-extern NSString *WDActiveStrokeChangedNotification;
-extern NSString *WDActiveFillChangedNotification;
-extern NSString *WDActiveShadowChangedNotification;
-extern NSString *WDInvalidPropertiesNotification;
-extern NSString *WDInvalidPropertiesKey;
+extern NSString* WDActiveStrokeChangedNotification;
+extern NSString* WDActiveFillChangedNotification;
+extern NSString* WDActiveShadowChangedNotification;
+extern NSString* WDInvalidPropertiesNotification;
+extern NSString* WDInvalidPropertiesKey;

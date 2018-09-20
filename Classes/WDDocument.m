@@ -15,16 +15,16 @@
 #import "WDSVGThumbnailExtractor.h"
 
 NSString* const WDDocumentDidLoadNotification = @"WDDocumentDidLoadNotification";
-static NSString *errorDomain = @"WDDocument";
+static NSString*errorDomain = @"WDDocument";
 
 @implementation WDDocument
 
-- (NSString *) filename
+- (NSString*) filename
 {
 	return self.fileURL.path.lastPathComponent;
 }
 
-- (NSString *) fileType
+- (NSString*) fileType
 {
 	if (self.fileTypeOverride)
 	{
@@ -143,7 +143,7 @@ static NSString *errorDomain = @"WDDocument";
 }
 
 - (BOOL) loadFromContents:(id) contents
-				   ofType:(NSString *) typeName
+				   ofType:(NSString*) typeName
 					error:(NSError **) outError
 {
 	self.drawing = nil;
@@ -208,7 +208,7 @@ static NSString *errorDomain = @"WDDocument";
 	return self.drawing ? self.drawing.thumbnailImage : _thumbnail;
 }
 
-- (id) contentsForType:(NSString *)typeName error:(NSError **)outError
+- (id) contentsForType:(NSString*)typeName error:(NSError **)outError
 {
 #if WD_DEBUG
 	NSDate *date = [NSDate date];
@@ -223,7 +223,7 @@ static NSString *errorDomain = @"WDDocument";
 - (BOOL) writeContents:(id)contents toURL:(NSURL *)url forSaveOperation:(UIDocumentSaveOperation)saveOperation originalContentsURL:(NSURL *)originalContentsURL error:(NSError **)outError
 {
 	WDDrawing *drawing = contents;
-	NSString *typeName = self.fileType;
+	NSString* typeName = self.fileType;
 	if ([typeName isEqualToString:@"public.svg-image"] || [typeName isEqualToString:@"SVG"])
 	{
 		contents = [drawing SVGRepresentation];
@@ -258,7 +258,7 @@ static NSString *errorDomain = @"WDDocument";
 	return [super writeContents:contents toURL:url forSaveOperation:saveOperation originalContentsURL:originalContentsURL error:outError];
 }
 
-- (NSString *) displayName
+- (NSString*) displayName
 {
 	return [[self.fileURL lastPathComponent] stringByDeletingPathExtension];
 }

@@ -18,9 +18,9 @@
 @class WDColor;
 
 @interface WDGradientController : UIViewController {
-    IBOutlet WDGradientEditor       *gradientEditor_;
-    IBOutlet WDColorWell            *colorWell_;
-    IBOutlet UIButton               *typeButton_;
+	IBOutlet WDGradientEditor	   *gradientEditor_;
+	IBOutlet WDColorWell			*colorWell_;
+	IBOutlet UIButton			   *typeButton_;
 }
 
 @property (nonatomic, strong) WDGradient *gradient;
@@ -29,13 +29,13 @@
 @property (nonatomic, weak) WDColorController *colorController;
 @property (nonatomic, assign) BOOL inactive;
 
-- (IBAction) takeGradientTypeFrom:(id)sender;
-- (IBAction) takeGradientStopsFrom:(id)sender;
+- (IBAction) takeGradientTypeFrom:(id) sender;
+- (IBAction) takeGradientStopsFrom:(id) sender;
 
 - (void) colorSelected:(WDColor *)color;
 - (void) setColor:(WDColor *)color;
 
-- (void) reverseGradient:(id)sender;
-- (void) distributeGradientStops:(id)sender;
+- (void) reverseGradient:(id) sender;
+- (void) distributeGradientStops:(id) sender;
 
 @end

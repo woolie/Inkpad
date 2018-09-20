@@ -445,7 +445,7 @@ NSString* WDAttachmentNotification = @"WDAttachmentNotification";
 
 - (void) deleteSelectedDrawings
 {
-	NSString*format = NSLocalizedString(@"Delete %d Drawings", @"Delete %d Drawings");
+	NSString* format = NSLocalizedString(@"Delete %d Drawings", @"Delete %d Drawings");
 	NSString* title = (selectedDrawings_.count) == 1 ? NSLocalizedString(@"Delete Drawing", @"Delete Drawing") :
 	[NSString stringWithFormat:format, selectedDrawings_.count];
 	
@@ -488,7 +488,7 @@ NSString* WDAttachmentNotification = @"WDAttachmentNotification";
 	
 	[self dismissPopover];
 	
-	NSString*format = NSLocalizedString(@"Delete %d Drawings", @"Delete %d Drawings");
+	NSString* format = NSLocalizedString(@"Delete %d Drawings", @"Delete %d Drawings");
 	NSString* title = (selectedDrawings_.count) == 1 ?
 		NSLocalizedString(@"Delete Drawing", @"Delete Drawing") :
 		[NSString stringWithFormat:format, selectedDrawings_.count];
@@ -815,7 +815,7 @@ NSString* WDAttachmentNotification = @"WDAttachmentNotification";
 {
 	[self dismissPopover];
 	
-	NSString*format = [[NSUserDefaults standardUserDefaults] objectForKey:WDEmailFormatDefault];
+	NSString* format = [[NSUserDefaults standardUserDefaults] objectForKey:WDEmailFormatDefault];
 	
 	MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
 	picker.mailComposeDelegate = self;
@@ -827,7 +827,7 @@ NSString* WDAttachmentNotification = @"WDAttachmentNotification";
 	email.expectedAttachments = selectedDrawings_.count;
 	email.picker = picker;
 	
-	for (NSString*filename in selectedDrawings_) {
+	for (NSString* filename in selectedDrawings_) {
 		[[self getThumbnail:filename] startActivity];
 		[[WDDrawingManager sharedInstance] openDocumentWithName:filename withCompletionHandler:^(WDDocument *document) {
 			@autoreleasepool {
@@ -914,9 +914,9 @@ NSString* WDAttachmentNotification = @"WDAttachmentNotification";
 		[restClient_ loadMetadata:@"/"];
 	}
 	
-	NSString*format = [[NSUserDefaults standardUserDefaults] objectForKey:WDDropboxFormatDefault];
+	NSString* format = [[NSUserDefaults standardUserDefaults] objectForKey:WDDropboxFormatDefault];
 	
-	for (NSString*filename in selectedDrawings_) {
+	for (NSString* filename in selectedDrawings_) {
 		[[WDDrawingManager sharedInstance] openDocumentWithName:filename withCompletionHandler:^(WDDocument *document) {
 			@autoreleasepool {
 				NSData	  *data = nil;
@@ -1049,7 +1049,7 @@ NSString* WDAttachmentNotification = @"WDAttachmentNotification";
 
 - (void) showImportErrorMessage:(NSString*)filename
 {
-	NSString*format = NSLocalizedString(@"Inkpad could not import “%@”. It may be corrupt or in a format that's not supported.",
+	NSString* format = NSLocalizedString(@"Inkpad could not import “%@”. It may be corrupt or in a format that's not supported.",
 										 @"Inkpad could not import “%@”. It may be corrupt or in a format that's not supported.");
 	UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Import Problem", @"Import Problem")
 														message:[NSString stringWithFormat:format, filename]
@@ -1061,7 +1061,7 @@ NSString* WDAttachmentNotification = @"WDAttachmentNotification";
 
 - (void) showImportMemoryWarningMessage:(NSString*)filename
 {
-	NSString*format = NSLocalizedString(@"Inkpad could not import “%@”. There is not enough available memory.",
+	NSString* format = NSLocalizedString(@"Inkpad could not import “%@”. There is not enough available memory.",
 										 @"Inkpad could not import “%@”. There is not enough available memory.");
 	UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Import Problem", @"Import Problem")
 														message:[NSString stringWithFormat:format, filename]
@@ -1170,7 +1170,7 @@ NSString* WDAttachmentNotification = @"WDAttachmentNotification";
 	[activities_ removeActivityWithFilepath:downloadPath];
 	[[NSFileManager defaultManager] removeItemAtPath:downloadPath error:NULL];
 	
-	NSString*format = NSLocalizedString(@"There was a problem downloading “%@”. Check your network connection and try again.",
+	NSString* format = NSLocalizedString(@"There was a problem downloading “%@”. Check your network connection and try again.",
 										 @"There was a problem downloading“%@”. Check your network connection and try again.");
 	UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Download Problem", @"Download Problem")
 														message:[NSString stringWithFormat:format, [downloadPath lastPathComponent]]
@@ -1191,7 +1191,7 @@ NSString* WDAttachmentNotification = @"WDAttachmentNotification";
 	
 	[self properlyEnableToolbarItems];
 	
-	NSString*format = NSLocalizedString(@"There was a problem uploading “%@”. Check your network connection and try again.",
+	NSString* format = NSLocalizedString(@"There was a problem uploading “%@”. Check your network connection and try again.",
 										 @"There was a problem uploading“%@”. Check your network connection and try again.");
 	UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Upload Problem", @"Upload Problem")
 														message:[NSString stringWithFormat:format, [srcPath lastPathComponent]]

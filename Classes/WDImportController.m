@@ -395,7 +395,7 @@ static NSString* const WDDropboxSubdirectoryMissingNotification = @"WDDropboxSub
 	if (selectedItems_.count < 1) {
 		title = NSLocalizedString(@"Import", @"Import");
 	} else {
-		NSString*format = NSLocalizedString(@"Import %lu", @"Import %lu");
+		NSString* format = NSLocalizedString(@"Import %lu", @"Import %lu");
 		title = [NSString stringWithFormat:format, (unsigned long)selectedItems_.count];
 	}
 	return title;

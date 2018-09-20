@@ -76,7 +76,7 @@ NSArray *tokenizeTransforms(NSString* source, id<WDErrorReporter> reporter)
 	return tokens;
 }
 
-CGAffineTransform processTransform(NSString*function, NSArray *arguments, id<WDErrorReporter> reporter)
+CGAffineTransform processTransform(NSString* function, NSArray *arguments, id<WDErrorReporter> reporter)
 {
 	if ([function isEqualToString:@"matrix"]) {
 		float a = [arguments[0] floatValue];
@@ -119,7 +119,7 @@ CGAffineTransform parseTransforms(NSArray *tokens, id<WDErrorReporter> reporter)
 {
 	CGAffineTransform transform = CGAffineTransformIdentity;
 	enum {FUNCTION, OPEN_PAREN, ARGUMENT} state = FUNCTION;
-	NSString*function;
+	NSString* function;
 	NSMutableArray *arguments = [[NSMutableArray alloc] init];
 	for (id token in tokens) {
 		switch (state) {

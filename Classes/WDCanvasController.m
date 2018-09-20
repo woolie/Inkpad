@@ -1450,7 +1450,7 @@
 - (void) export:(id) sender format:(NSString*)format
 {
 	NSString*baseFilename = [self.document.filename stringByDeletingPathExtension];
-	NSString*filename = nil;
+	NSString* filename = nil;
 
 	// Generates export file in requested format
 	if ([format isEqualToString:@"PDF"]) {

@@ -248,7 +248,7 @@
 	va_list argp;
 	va_start(argp, message);
 	
-	NSString*fullMessage = [[NSString alloc] initWithFormat:message arguments:argp];
+	NSString* fullMessage = [[NSString alloc] initWithFormat:message arguments:argp];
 	NSLog(@"ERROR: %@", fullMessage);
 	va_end(argp);
 }

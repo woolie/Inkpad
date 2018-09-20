@@ -17,12 +17,12 @@
 
 @interface WDDocument : UIDocument <WDDocumentProtocol>
 
-@property (nonatomic, strong) WDDrawing *drawing;
-@property (nonatomic, weak, readonly) NSString*filename;
+@property (nonatomic, strong) WDDrawing* drawing;
+@property (nonatomic, weak, readonly) NSString* filename;
 @property (nonatomic, strong) UIImage *thumbnail;
 @property (nonatomic, weak, readonly) NSString* displayName;
 @property (nonatomic, assign) BOOL loadOnlyThumbnail;
-@property (nonatomic, copy) NSString*fileTypeOverride;
+@property (nonatomic, copy) NSString* fileTypeOverride;
 
 @end
 

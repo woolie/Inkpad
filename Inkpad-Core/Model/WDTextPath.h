@@ -38,7 +38,7 @@ typedef enum {
 }
 
 @property (nonatomic, strong) NSString* text;
-@property (nonatomic, strong) NSString*fontName;
+@property (nonatomic, strong) NSString* fontName;
 @property (nonatomic, assign) float fontSize;
 @property (nonatomic, readonly) CTFontRef fontRef;
 

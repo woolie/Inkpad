@@ -93,7 +93,7 @@
 
 - (void) deleteSelectedFonts:(id) sender
 {
-	for (NSString*fontName in selectedFonts) {
+	for (NSString* fontName in selectedFonts) {
 		[[WDFontManager sharedInstance] deleteUserFontWithName:fontName];
 	}
 	
@@ -108,7 +108,7 @@
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	NSString*fontName = [[WDFontManager sharedInstance] userFonts][indexPath.row];
+	NSString* fontName = [[WDFontManager sharedInstance] userFonts][indexPath.row];
 	
 	if ([selectedFonts containsObject:fontName]) {
 		[selectedFonts removeObject:fontName];
@@ -136,7 +136,7 @@
 		[cell.contentView addSubview:label];
 	}
 	
-	NSString*fontName = [[WDFontManager sharedInstance] userFonts][indexPath.row];
+	NSString* fontName = [[WDFontManager sharedInstance] userFonts][indexPath.row];
 	
 	WDCoreTextLabel *label = (WDCoreTextLabel *) [cell viewWithTag:kCoreTextLabelTag];
 	

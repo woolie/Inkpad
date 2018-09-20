@@ -153,7 +153,7 @@
 	} else if (self.numItems == 1) {
 		self.itemCountLabel.text = NSLocalizedString(@"1 item found", @"Label for Openclipart search results (1)");
 	} else {
-		NSString*format = NSLocalizedString(@"%lu items found", @"Format string for Openclipart search results");
+		NSString* format = NSLocalizedString(@"%lu items found", @"Format string for Openclipart search results");
 		self.itemCountLabel.text = [NSString stringWithFormat:format, self.numItems];
 	}
 	

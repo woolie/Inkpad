@@ -221,7 +221,7 @@
 
 - (NSString*) idFromFuncIRI:(NSString*)key withReporter:(id<WDErrorReporter>)reporter
 {
-	NSString*funciri = [self attribute:key];
+	NSString* funciri = [self attribute:key];
 	if ([funciri hasPrefix:@"url(#"] && [funciri hasSuffix:@")"]) {
 		return [funciri substringWithRange:NSMakeRange(5, funciri.length - 6)];
 	} else if (funciri) {

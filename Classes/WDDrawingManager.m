@@ -66,7 +66,7 @@ NSString* WDDrawingNewFilenameKey = @"WDDrawingNewFilenameKey";
 {
 	NSMutableArray *filtered = [[NSMutableArray alloc] init];
 	
-	for (NSString*file in files) {
+	for (NSString* file in files) {
 		if ([[file pathExtension] compare:WDDrawingFileExtension options:NSCaseInsensitiveSearch] == NSOrderedSame) {
 			[filtered addObject:file];
 		} else if ([[file pathExtension] compare:WDSVGFileExtension options:NSCaseInsensitiveSearch] == NSOrderedSame) {
@@ -326,7 +326,7 @@ NSString* WDDrawingNewFilenameKey = @"WDDrawingNewFilenameKey";
 
 - (WDDocument *) openDocumentAtIndex:(NSUInteger)ix withCompletionHandler:(void (^)(WDDocument *document))completionHandler
 {
-	NSString*filename = drawingNames_[ix];
+	NSString* filename = drawingNames_[ix];
 	NSString* path = [[WDDrawingManager drawingPath] stringByAppendingPathComponent:filename];
 	NSURL *url = [NSURL fileURLWithPath:path];
 	WDDocument *document = [[WDDocument alloc] initWithFileURL:url];
@@ -416,11 +416,11 @@ NSString* WDDrawingNewFilenameKey = @"WDDrawingNewFilenameKey";
 	NSFileManager   *fm = [NSFileManager defaultManager];
 	
 	NSMutableArray *indexPaths = [NSMutableArray array];
-	for (NSString*filename in set) {
+	for (NSString* filename in set) {
 	   [indexPaths addObject:[NSIndexPath indexPathForItem:[drawingNames_ indexOfObject:filename] inSection:0]];
 	}
 	
-	for (NSString*filename in set) {
+	for (NSString* filename in set) {
 		[fm removeItemAtPath:[[WDDrawingManager drawingPath] stringByAppendingPathComponent:filename] error:NULL];
 		[drawingNames_ removeObject:filename];
 	}

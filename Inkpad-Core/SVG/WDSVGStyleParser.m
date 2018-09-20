@@ -312,7 +312,7 @@ NSArray *tokenizeStyle(NSString* source)
 
 - (NSString*) fontName
 {
-	NSString*fontName = [stack_ style:kWDPropertyFontFamily];
+	NSString* fontName = [stack_ style:kWDPropertyFontFamily];
 	// TODO this is really over-simplified
 	if ([fontName hasPrefix:@"'"] && [fontName hasSuffix:@"'"]) {
 		fontName = [fontName substringWithRange:NSMakeRange(1, fontName.length - 2)];
@@ -379,7 +379,7 @@ NSArray *tokenizeStyle(NSString* source)
 
 - (void) styleFill:(WDStylable *)stylable
 {
-	NSString*fillSource = [stack_ style:kWDPropertyFill];
+	NSString* fillSource = [stack_ style:kWDPropertyFill];
 	float fillOpacity = [[stack_ style:kWDPropertyFillOpacity] floatValue];
 	id fill = [self resolvePainter:fillSource alpha:fillOpacity];
 	if ([fill isKindOfClass:[WDStylable class]]) {

@@ -212,7 +212,7 @@
 		return WDFontManager.sharedInstance.supportedFamilies.count;
 	}
 	
-	NSString*familyName = [self defaultFontFamilyName];
+	NSString* familyName = [self defaultFontFamilyName];
 	
 	return [[WDFontManager sharedInstance] fontsInFamily:familyName].count;
 }
@@ -234,18 +234,18 @@
 		selectionView.backgroundColor = [UIColor colorWithRed:(193.0f / 255) green:(220.0f / 255) blue:1.0f alpha:0.666f];
 	}
 	
-	NSString*fontName = nil;
+	NSString* fontName = nil;
 	CGFloat fontSize = 18.0f;
 	WDCoreTextLabel *previewLabel = (WDCoreTextLabel *) [cell viewWithTag:kCoreTextLabelTag];
 	
 	if (tableView == familyTable_) {
 		// Set the text to the font family name
-		NSString*familyName = [[WDFontManager sharedInstance] supportedFamilies][indexPath.row];
+		NSString* familyName = [[WDFontManager sharedInstance] supportedFamilies][indexPath.row];
 		[previewLabel setText:familyName];
 		
 		fontName = [[WDFontManager sharedInstance] defaultFontForFamily:familyName];
 	} else {
-		NSString*familyName = [self defaultFontFamilyName];
+		NSString* familyName = [self defaultFontFamilyName];
 		
 		// Set the text to the font display name
 		fontName = [[WDFontManager sharedInstance] fontsInFamily:familyName][indexPath.row];
@@ -268,8 +268,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	NSString*font = nil;
-	NSString*familyName;
+	NSString* font = nil;
+	NSString* familyName;
 	
 	if (tableView == familyTable_) {
 		familyName = [[WDFontManager sharedInstance] supportedFamilies][indexPath.row];

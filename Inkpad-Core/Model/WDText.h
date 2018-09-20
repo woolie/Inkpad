@@ -38,7 +38,7 @@
 }
 
 @property (nonatomic, assign) float width;
-@property (nonatomic, strong) NSString*fontName;
+@property (nonatomic, strong) NSString* fontName;
 @property (nonatomic, assign) float fontSize;
 @property (nonatomic, assign) CGAffineTransform transform;
 @property (nonatomic, strong) NSString* text;

@@ -194,7 +194,7 @@ const NSInteger kThumbnailPadding = 12;
 	if (self.selectedURLs.count < 1) {
 		title = NSLocalizedString(@"Import", @"Import");
 	} else {
-		NSString*format = NSLocalizedString(@"Import %lu", @"Import %lu");
+		NSString* format = NSLocalizedString(@"Import %lu", @"Import %lu");
 		title = [NSString stringWithFormat:format, (unsigned long)self.selectedURLs.count];
 	}
 	return title;

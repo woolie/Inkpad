@@ -77,8 +77,8 @@ NSString* WDFontAddedNotification = @"WDFontAddedNotification";
 			systemFamilyMap = [[NSMutableDictionary alloc] init];
 			
 			NSArray *families = [UIFont familyNames];
-			for (NSString*family in families) {
-				for (NSString*fontName in [UIFont fontNamesForFamilyName:family]) {
+			for (NSString* family in families) {
+				for (NSString* fontName in [UIFont fontNamesForFamilyName:family]) {
 					CTFontRef myFont = CTFontCreateWithName((CFStringRef)fontName, 12, NULL);
 					CFStringRef displayName = CTFontCopyDisplayName(myFont);
 					CFStringRef familyName = CTFontCopyFamilyName(myFont);
@@ -97,7 +97,7 @@ NSString* WDFontAddedNotification = @"WDFontAddedNotification";
 			// load user fonts
 			userFontMap = [NSMutableDictionary dictionary];
 			userFamilyMap = [NSMutableDictionary dictionary];
-			for (NSString*fontPath in [self userLibraryFontPaths]) {
+			for (NSString* fontPath in [self userLibraryFontPaths]) {
 				WDUserFont *userFont = [WDUserFont userFontWithFilename:fontPath];
 				if (userFont) {
 					userFontMap[userFont.fullName] = userFont;
@@ -168,7 +168,7 @@ NSString* WDFontAddedNotification = @"WDFontAddedNotification";
 	[self waitForInitialLoad];
 	
 	NSString*longName = systemFontMap[fullName] ?: ((WDUserFont *)userFontMap[fullName]).displayName;
-	NSString*familyName = [self familyNameForFont:fullName];
+	NSString* familyName = [self familyNameForFont:fullName];
 	
 	NSString* typeface = [longName copy];
 	if ([typeface hasPrefix:familyName]) {
@@ -206,7 +206,7 @@ NSString* WDFontAddedNotification = @"WDFontAddedNotification";
 		return [a compare:b];
 	}];
 	
-	for (NSString*fontName in sorted) {
+	for (NSString* fontName in sorted) {
 		CTFontRef fontRef = [self newFontRefForFont:fontName withSize:10];
 		CTFontSymbolicTraits traits = CTFontGetSymbolicTraits(fontRef);
 		CFRelease(fontRef);
@@ -243,18 +243,18 @@ NSString* WDFontAddedNotification = @"WDFontAddedNotification";
 
 - (NSString*) pathForUserLibrary
 {
-	NSString*fontPath = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES)[0];
+	NSString* fontPath = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES)[0];
 	return [fontPath stringByAppendingPathComponent:@"Fonts"];
 }
 
 - (NSArray*) userLibraryFontPaths
 {
-	NSString*fontPath = [self pathForUserLibrary];
+	NSString* fontPath = [self pathForUserLibrary];
 	
 	NSFileManager *fm = [NSFileManager defaultManager];
 	NSMutableArray *expanded = [NSMutableArray array];
 	
-	for (NSString*font in [fm contentsOfDirectoryAtPath:fontPath error:NULL]) {
+	for (NSString* font in [fm contentsOfDirectoryAtPath:fontPath error:NULL]) {
 		[expanded addObject:[fontPath stringByAppendingPathComponent:font]];
 	}
 	

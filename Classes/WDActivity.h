@@ -20,7 +20,7 @@ typedef enum {
 @interface WDActivity : NSObject
 
 @property (nonatomic, assign) WDActivityType type;
-@property (nonatomic, strong) NSString*filePath;
+@property (nonatomic, strong) NSString* filePath;
 @property (nonatomic, assign) float progress;
 @property (weak, nonatomic, readonly) NSString* title;
 

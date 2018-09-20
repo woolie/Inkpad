@@ -50,7 +50,7 @@ typedef enum {
 - (WDColor *) colorAtRatio:(float)ratio;
 
 - (CGGradientRef) gradientRef;
-- (void) drawSwatchInRect:(CGRect)rect;
+- (void) drawSwatchInRect:(CGRect) rect;
 
 - (WDXMLElement *) SVGElementWithID:(NSString*)unique fillTransform:(WDFillTransform *)fT;
 

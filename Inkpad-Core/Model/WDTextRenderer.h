@@ -21,6 +21,6 @@
 - (CGAffineTransform) transform;
 - (NSArray*) outlines;
 
-- (void) drawOpenGLTextOutlinesWithTransform:(CGAffineTransform)transform viewTransform:(CGAffineTransform)viewTransform;
+- (void) drawOpenGLTextOutlinesWithTransform:(CGAffineTransform) transform viewTransform:(CGAffineTransform)viewTransform;
 
 @end

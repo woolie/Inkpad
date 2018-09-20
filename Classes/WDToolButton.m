@@ -44,7 +44,7 @@
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void) dismissSubtoolsAnimated:(BOOL)animated
+- (void) dismissSubtoolsAnimated:(BOOL) animated
 {
 	if (subtoolsPopover_) {
 		[subtoolsPopover_ dismissPopoverAnimated:animated];

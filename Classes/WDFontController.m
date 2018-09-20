@@ -178,7 +178,7 @@
 	[faceTable_ selectRowAtIndexPath:indexPath animated:YES scrollPosition:position];
 }
 
-- (void) viewWillAppear:(BOOL)animated
+- (void) viewWillAppear:(BOOL) animated
 {
 	[super viewWillAppear:animated];
 	[self scrollToSelectedFont];

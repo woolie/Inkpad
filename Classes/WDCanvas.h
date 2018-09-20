@@ -24,51 +24,52 @@
 @class WDRulerView;
 @class WDSelectionView;
 
-@interface WDCanvas : UIView {
-	WDSelectionView		 *selectionView_;
-	WDEraserPreviewView	 *eraserPreview_;
+@interface WDCanvas : UIView
+{
+	WDSelectionView*		_selectionView;
+	WDEraserPreviewView*	_eraserPreview;
 	
-	BOOL					controlGesture_;
-	BOOL					moved_;
-	BOOL					transforming_;
-	BOOL					transformingNode_;
-	BOOL					showingPivot_;
-	CGAffineTransform	   selectionTransform_;
-	CGPoint				 pivot_;
-	UIColor				 *isolationColor_;
+	BOOL					_controlGesture;
+	BOOL					_moved;
+	BOOL					_transforming;
+	BOOL					_transformingNode;
+	BOOL					_showingPivot;
+	CGAffineTransform		_selectionTransform;
+	CGPoint					_pivot;
+	UIColor*				_isolationColor;
 	
-	NSValue				 *marquee_;
-	WDPath				  *shapeUnderConstruction_;
-	WDPath				  *eraserPath_;
+	NSValue*				_marquee;
+	WDPath*					_shapeUnderConstruction;
+	WDPath*					_eraserPath;
 	
 	// managing the view scale and visible area
-	float				   trueViewScale_;
-	float				   viewScale_;
-	CGAffineTransform	   transform_;
-	CGPoint				 userSpacePivot_;
-	CGPoint				 deviceSpacePivot_;
-	CGPoint				 oldDeviceSpacePivot_;
+	float					_trueViewScale;
+	float					_viewScale;
+	CGAffineTransform		_transform;
+	CGPoint					_userSpacePivot;
+	CGPoint					_deviceSpacePivot;
+	CGPoint					_oldDeviceSpacePivot;
 	
 	// adornments
-	UIImageView			 *pivotView_;
-	WDEyedropper			*eyedropper_;
+	UIImageView*			_pivotView;
+	WDEyedropper*		 	_eyedropper;
 	
 	// rulers
-	WDRulerView			 *horizontalRuler_;
-	WDRulerView			 *verticalRuler_;
-	WDRulerCornerView	   *cornerView_;
+	WDRulerView*			_horizontalRuler;
+	WDRulerView*			_verticalRuler;
+	WDRulerCornerView*	  	_cornerView;
 	
-	WDPalette			   *toolPalette_;
-	UIButton				*deleteButton_; // pseudo delete tool
-	CGPoint				 cachedCenter_;
+	WDPalette*				_toolPalette;
+	UIButton*				_deleteButton; // pseudo delete tool
+	CGPoint				 	_cachedCenter;
 	
-	UILabel				 *messageLabel_;
-	NSTimer				 *messageTimer_;
+	UILabel*				_messageLabel;
+	NSTimer*				_messageTimer;
 }
 
-@property (nonatomic, weak) WDDrawing *drawing;
-@property (nonatomic) WDSelectionView *selectionView;
-@property (nonatomic) WDEraserPreviewView *eraserPreview;
+@property (nonatomic, weak) WDDrawing* drawing;
+@property (nonatomic) WDSelectionView* selectionView;
+@property (nonatomic) WDEraserPreviewView* eraserPreview;
 @property (nonatomic, readonly) CGAffineTransform canvasTransform;
 @property (nonatomic, readonly) CGAffineTransform selectionTransform;
 @property (nonatomic, readonly) CGRect visibleRect;
@@ -79,31 +80,31 @@
 @property (nonatomic, assign) BOOL transformingNode;
 @property (nonatomic, assign) CGPoint pivot;
 @property (nonatomic, assign) BOOL showingPivot;
-@property (nonatomic, strong) NSValue *marquee;
-@property (nonatomic, strong) WDPath *shapeUnderConstruction;
-@property (nonatomic, strong) WDPath *eraserPath;
-@property (nonatomic, weak) WDCanvasController *controller;
-@property (weak, nonatomic, readonly) WDDrawingController *drawingController;
-@property (nonatomic, strong, readonly) WDPalette *toolPalette;
-@property (nonatomic, readonly) WDEyedropper *eyedropper;
-@property (nonatomic, readonly) WDRulerView *horizontalRuler;
-@property (nonatomic, readonly) WDRulerView *verticalRuler;
-@property (nonatomic, weak) UIView *toolOptionsView;
+@property (nonatomic, strong) NSValue* marquee;
+@property (nonatomic, strong) WDPath* shapeUnderConstruction;
+@property (nonatomic, strong) WDPath* eraserPath;
+@property (nonatomic, weak) WDCanvasController* controller;
+@property (weak, nonatomic, readonly) WDDrawingController* drawingController;
+@property (nonatomic, strong, readonly) WDPalette* toolPalette;
+@property (nonatomic, readonly) WDEyedropper* eyedropper;
+@property (nonatomic, readonly) WDRulerView* horizontalRuler;
+@property (nonatomic, readonly) WDRulerView* verticalRuler;
+@property (nonatomic, weak) UIView* toolOptionsView;
 @property (nonatomic, readonly) float thinWidth;
-@property (nonatomic, strong) IBOutlet UIView *activityView;
-@property (nonatomic, strong) NSArray *dynamicGuides;
+@property (nonatomic, strong) IBOutlet UIView* activityView;
+@property (nonatomic, strong) NSArray* dynamicGuides;
 
-- (CGRect) convertRectToView:(CGRect)rect;
-- (CGPoint) convertPointToDocumentSpace:(CGPoint)pt;
-- (CGPoint) convertPointFromDocumentSpace:(CGPoint)pt;
-- (void) transformSelection:(CGAffineTransform)transform;
+- (CGRect) convertRectToView:(CGRect) rect;
+- (CGPoint) convertPointToDocumentSpace:(CGPoint) pt;
+- (CGPoint) convertPointFromDocumentSpace:(CGPoint) pt;
+- (void) transformSelection:(CGAffineTransform) transform;
 - (void) setShowsPivot:(BOOL)showsPivot;
 
-- (void) offsetByDelta:(CGPoint)delta;
-- (void) scaleBy:(double)scale;
+- (void) offsetByDelta:(CGPoint) delta;
+- (void) scaleBy:(double) scale;
 - (void) scaleDocumentToFit;
 - (void) rotateToInterfaceOrientation;
-- (void) offsetUserSpacePivot:(CGPoint)delta;
+- (void) offsetUserSpacePivot:(CGPoint) delta;
 
 - (void) hideAccessoryViews;
 - (void) showAccessoryViews;
@@ -111,8 +112,8 @@
 - (void) hideTools;
 - (void) showTools;
 
-- (void) showRulers:(BOOL)flag;
-- (void) showRulers:(BOOL)flag animated:(BOOL)animated;
+- (void) showRulers:(BOOL) flag;
+- (void) showRulers:(BOOL) flag animated:(BOOL) animated;
 
 - (void) startActivity;
 - (void) stopActivity;
@@ -130,8 +131,8 @@
 
 // eyedropper
 
-- (void) displayEyedropperAtPoint:(CGPoint)pt;
-- (void) moveEyedropperToPoint:(CGPoint)pt;
+- (void) displayEyedropperAtPoint:(CGPoint) pt;
+- (void) moveEyedropperToPoint:(CGPoint) pt;
 - (void) dismissEyedropper;
 
 // tool options view

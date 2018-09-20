@@ -109,7 +109,7 @@ static void release(void *info) {
 	self.clearsContextBeforeDrawing = YES;
 }
 
-- (BOOL) pointInside:(CGPoint)point withEvent:(UIEvent *)event
+- (BOOL) pointInside:(CGPoint) point withEvent:(UIEvent *)event
 {
 	CGRect bounds = CGRectInset(self.bounds, -10, -10);
 	return CGRectContainsPoint(bounds, point);
@@ -289,7 +289,7 @@ static void release(void *info) {
 	return roundf(value_ * CGRectGetWidth(trackRect) + CGRectGetMinX(trackRect));
 }
 
-- (void) computeValue_:(CGPoint)pt
+- (void) computeValue_:(CGPoint) pt
 {
 	CGRect  trackRect = CGRectInset(self.bounds, kIndicatorInset, 0);
 	float   percentage;

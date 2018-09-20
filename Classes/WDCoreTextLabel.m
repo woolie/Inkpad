@@ -70,7 +70,7 @@
 	return attrString;
 }
 
-- (void) drawRect:(CGRect)rect
+- (void) drawRect:(CGRect) rect
 {
 	if (!text || [text isEqualToString:@""]) {
 		return;

@@ -89,7 +89,7 @@
 	return self.state.transform;
 }
 
-- (void) setTransform:(CGAffineTransform)transform
+- (void) setTransform:(CGAffineTransform) transform
 {
 	self.state.transform = transform;
 }

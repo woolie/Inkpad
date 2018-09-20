@@ -118,7 +118,7 @@ NSString* WDMaskedElementsKey = @"WDMaskedElementsKey";
 	[self postDirtyBoundsChange];
 }
 
-- (NSSet*) transform:(CGAffineTransform)transform
+- (NSSet*) transform:(CGAffineTransform) transform
 {
 	self.fillTransform = [fillTransform_ transform:transform];
 	
@@ -156,7 +156,7 @@ NSString* WDMaskedElementsKey = @"WDMaskedElementsKey";
 	[self.maskedElements makeObjectsPerformSelector:@selector(setLayer:) withObject:layer];
 }	
 
-- (void) drawGradientControlsWithViewTransform:(CGAffineTransform)transform
+- (void) drawGradientControlsWithViewTransform:(CGAffineTransform) transform
 {
 	if (![self fillTransform]) {
 		return;
@@ -404,7 +404,7 @@ NSString* WDMaskedElementsKey = @"WDMaskedElementsKey";
 	return [super valueForProperty:property];
 }
 
-- (id) pathPainterAtPoint:(CGPoint)pt
+- (id) pathPainterAtPoint:(CGPoint) pt
 {
 	id fill = [self valueForProperty:WDFillProperty];
 	

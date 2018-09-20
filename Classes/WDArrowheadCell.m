@@ -21,7 +21,7 @@
 
 @implementation WDArrowSeparatorView
 
-- (void) drawRect:(CGRect)rect
+- (void) drawRect:(CGRect) rect
 {
 	CGRect		  frame = self.frame;
 	CGContextRef	ctx = UIGraphicsGetCurrentContext();

@@ -53,14 +53,14 @@
 @property (nonatomic, strong) UIColor *displayColor;
 @property (nonatomic, assign) BOOL displayClosed;
 
-+ (WDPath *) pathWithRect:(CGRect)rect;
-+ (WDPath *) pathWithRoundedRect:(CGRect)rect cornerRadius:(float)radius;
-+ (WDPath *) pathWithOvalInRect:(CGRect)rect;
++ (WDPath *) pathWithRect:(CGRect) rect;
++ (WDPath *) pathWithRoundedRect:(CGRect) rect cornerRadius:(float)radius;
++ (WDPath *) pathWithOvalInRect:(CGRect) rect;
 + (WDPath *) pathWithStart:(CGPoint)start end:(CGPoint)end;
 
-- (instancetype) initWithRect:(CGRect)rect;
-- (instancetype) initWithRoundedRect:(CGRect)rect cornerRadius:(float)radius;
-- (instancetype) initWithOvalInRect:(CGRect)rect;
+- (instancetype) initWithRect:(CGRect) rect;
+- (instancetype) initWithRoundedRect:(CGRect) rect cornerRadius:(float)radius;
+- (instancetype) initWithOvalInRect:(CGRect) rect;
 - (instancetype) initWithStart:(CGPoint)start end:(CGPoint)end;
 - (instancetype) initWithNode:(WDBezierNode*)node;
 
@@ -74,8 +74,8 @@
 - (BOOL) allNodesSelected;
 
 - (NSDictionary*) splitAtNode:(WDBezierNode*)node;
-- (NSDictionary*) splitAtPoint:(CGPoint)pt viewScale:(float)viewScale;
-- (WDBezierNode*) addAnchorAtPoint:(CGPoint)pt viewScale:(float)viewScale;
+- (NSDictionary*) splitAtPoint:(CGPoint) pt viewScale:(float)viewScale;
+- (WDBezierNode*) addAnchorAtPoint:(CGPoint) pt viewScale:(float)viewScale;
 - (void) addAnchors;
 - (void) appendPath:(WDPath *)path;
 
@@ -87,7 +87,7 @@
 - (WDBezierNode*) firstNode;
 - (WDBezierNode*) lastNode;
 - (NSMutableArray *) reversedNodes;
-- (NSSet*) nodesInRect:(CGRect)rect;
+- (NSSet*) nodesInRect:(CGRect) rect;
 
 - (WDBezierNode*) convertNode:(WDBezierNode*)node whichPoint:(WDPickResultType)whichPoint;
 

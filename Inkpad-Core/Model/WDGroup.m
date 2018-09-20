@@ -72,7 +72,7 @@ NSString* WDGroupElements = @"WDGroupElements";
 	}
 }
 
-- (NSSet*) transform:(CGAffineTransform)transform
+- (NSSet*) transform:(CGAffineTransform) transform
 {
 	[self cacheDirtyBounds];
 	
@@ -141,7 +141,7 @@ NSString* WDGroupElements = @"WDGroupElements";
 	return [self expandStyleBounds:bounds];
 }
 
-- (BOOL) intersectsRect:(CGRect)rect
+- (BOOL) intersectsRect:(CGRect) rect
 {
 	for (WDElement *element in [elements_ reverseObjectEnumerator]) {
 		if ([element intersectsRect:rect]) {
@@ -161,28 +161,28 @@ NSString* WDGroupElements = @"WDGroupElements";
 	}
 }
 
-- (void) drawOpenGLHighlightWithTransform:(CGAffineTransform)transform viewTransform:(CGAffineTransform)viewTransform
+- (void) drawOpenGLHighlightWithTransform:(CGAffineTransform) transform viewTransform:(CGAffineTransform)viewTransform
 {
 	for (WDElement *element in elements_) {
 		[element drawOpenGLHighlightWithTransform:transform viewTransform:viewTransform];
 	}
 }
 
-- (void) drawOpenGLHandlesWithTransform:(CGAffineTransform)transform viewTransform:(CGAffineTransform)viewTransform
+- (void) drawOpenGLHandlesWithTransform:(CGAffineTransform) transform viewTransform:(CGAffineTransform)viewTransform
 {
 	for (WDElement *element in elements_) {
 		[element drawOpenGLAnchorsWithViewTransform:viewTransform];
 	}
 }
 
-- (void) drawOpenGLAnchorsWithViewTransform:(CGAffineTransform)transform
+- (void) drawOpenGLAnchorsWithViewTransform:(CGAffineTransform) transform
 {
 	for (WDElement *element in elements_) {
 		[element drawOpenGLAnchorsWithViewTransform:transform];
 	}
 }
 
-- (WDPickResult *) hitResultForPoint:(CGPoint)pt viewScale:(float)viewScale snapFlags:(int)flags
+- (WDPickResult *) hitResultForPoint:(CGPoint) pt viewScale:(float)viewScale snapFlags:(int)flags
 {
 	flags = flags | kWDSnapEdges;
 	
@@ -200,7 +200,7 @@ NSString* WDGroupElements = @"WDGroupElements";
 	return [WDPickResult pickResult];
 }
 
-- (WDPickResult *) snappedPoint:(CGPoint)pt viewScale:(float)viewScale snapFlags:(int)flags
+- (WDPickResult *) snappedPoint:(CGPoint) pt viewScale:(float)viewScale snapFlags:(int)flags
 {
 	if (flags & kWDSnapSubelement) {
 		for (WDElement *element in [elements_ reverseObjectEnumerator]) {

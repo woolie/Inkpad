@@ -69,7 +69,7 @@
 - (void) selectObjects:(NSArray*)elements;
 - (void) deselectObject:(WDElement *)element;
 - (void) deselectObjectAndSubelements:(WDElement *)element;
-- (void) selectObjectsInRect:(CGRect)rect;
+- (void) selectObjectsInRect:(CGRect) rect;
 
 - (void) selectNone:(id) sender;
 - (void) selectAll:(id) sender;
@@ -124,7 +124,7 @@
 - (void) sendToBack:(id) sender;
 
 // transform
-- (void) transformSelection:(CGAffineTransform)transform;
+- (void) transformSelection:(CGAffineTransform) transform;
 - (void) transformAgain:(id) sender;
 
 - (void) align:(WDAlignment)alignment;
@@ -158,9 +158,9 @@
 - (void) invertColors:(id) sender;
 
 // hit testing
-- (WDPickResult *) snappedPoint:(CGPoint)pt viewScale:(float)viewScale snapFlags:(int)flags;
-- (WDPickResult *) inspectableUnderPoint:(CGPoint)pt viewScale:(float)viewScale;
-- (WDPickResult *) objectUnderPoint:(CGPoint)pt viewScale:(float)viewScale;
+- (WDPickResult *) snappedPoint:(CGPoint) pt viewScale:(float)viewScale snapFlags:(int)flags;
+- (WDPickResult *) inspectableUnderPoint:(CGPoint) pt viewScale:(float)viewScale;
+- (WDPickResult *) objectUnderPoint:(CGPoint) pt viewScale:(float)viewScale;
 
 // can do methods
 - (BOOL) canPaste;

@@ -296,19 +296,19 @@ NSString* WDClosedKey = @"WDClosedKey";
 	return pathRef_;
 }
 
-+ (WDPath *) pathWithRect:(CGRect)rect
++ (WDPath *) pathWithRect:(CGRect) rect
 {
 	WDPath *path = [[WDPath alloc] initWithRect:rect];
 	return path;
 }
 
-+ (WDPath *) pathWithRoundedRect:(CGRect)rect cornerRadius:(float)radius
++ (WDPath *) pathWithRoundedRect:(CGRect) rect cornerRadius:(float)radius
 {
 	WDPath *path = [[WDPath alloc] initWithRoundedRect:rect cornerRadius:radius];
 	return path;
 }
 
-+ (WDPath *) pathWithOvalInRect:(CGRect)rect
++ (WDPath *) pathWithOvalInRect:(CGRect) rect
 {
 	WDPath *path = [[WDPath alloc] initWithOvalInRect:rect];
 	return path;
@@ -320,7 +320,7 @@ NSString* WDClosedKey = @"WDClosedKey";
 	return path;
 }
 
-- (instancetype) initWithRect:(CGRect)rect
+- (instancetype) initWithRect:(CGRect) rect
 {
 	self = [self init];
 	
@@ -341,7 +341,7 @@ NSString* WDClosedKey = @"WDClosedKey";
 	return self;
 }
 
-- (instancetype) initWithRoundedRect:(CGRect)rect cornerRadius:(float)radius
+- (instancetype) initWithRoundedRect:(CGRect) rect cornerRadius:(float)radius
 {
 	radius = MIN(radius, MIN(CGRectGetHeight(rect) * 0.5f, CGRectGetWidth(rect) * 0.5f));
 	
@@ -409,7 +409,7 @@ NSString* WDClosedKey = @"WDClosedKey";
 	return self;
 }
 
-- (instancetype) initWithOvalInRect:(CGRect)rect
+- (instancetype) initWithOvalInRect:(CGRect) rect
 {
 	self = [self init];
 	
@@ -786,7 +786,7 @@ NSString* WDClosedKey = @"WDClosedKey";
 	return [self expandStyleBounds:styleBounds];
 }
 
-- (BOOL) intersectsRect:(CGRect)rect
+- (BOOL) intersectsRect:(CGRect) rect
 {
 	WDBezierNode 		*prev = nil;
 	WDBezierSegment 	seg;
@@ -823,7 +823,7 @@ NSString* WDClosedKey = @"WDClosedKey";
 	return NO;
 }
 
-- (NSSet*) nodesInRect:(CGRect)rect
+- (NSSet*) nodesInRect:(CGRect) rect
 {
 	NSMutableSet *nodesInRect = [NSMutableSet set];
 	
@@ -897,7 +897,7 @@ NSString* WDClosedKey = @"WDClosedKey";
 	WDGLDrawLineStrip(vertices, index);
 }
 
-- (void) drawOpenGLHighlightWithTransform:(CGAffineTransform)transform viewTransform:(CGAffineTransform)viewTransform
+- (void) drawOpenGLHighlightWithTransform:(CGAffineTransform) transform viewTransform:(CGAffineTransform)viewTransform
 {	
 	NSArray			 *nodes = displayNodes_ ? displayNodes_ : nodes_;
 	
@@ -964,7 +964,7 @@ NSString* WDClosedKey = @"WDClosedKey";
 	WDGLDrawLineStrip(vertices, index);
 }
 
-- (void) drawOpenGLAnchorsWithViewTransform:(CGAffineTransform)transform
+- (void) drawOpenGLAnchorsWithViewTransform:(CGAffineTransform) transform
 {
 	UIColor *color = displayColor_ ? displayColor_ : self.layer.highlightColor;
 	NSArray *nodes = displayNodes_ ? displayNodes_ : nodes_;
@@ -974,7 +974,7 @@ NSString* WDClosedKey = @"WDClosedKey";
 	}
 }
 
-- (void) drawOpenGLHandlesWithTransform:(CGAffineTransform)transform viewTransform:(CGAffineTransform)viewTransform
+- (void) drawOpenGLHandlesWithTransform:(CGAffineTransform) transform viewTransform:(CGAffineTransform)viewTransform
 {
 	CGAffineTransform   combined = CGAffineTransformConcat(transform, viewTransform);
 	UIColor			 *color = displayColor_ ? displayColor_ : self.layer.highlightColor;
@@ -1011,7 +1011,7 @@ NSString* WDClosedKey = @"WDClosedKey";
 	return YES;
 }
 
-- (NSSet*) alignToRect:(CGRect)rect alignment:(WDAlignment)align
+- (NSSet*) alignToRect:(CGRect) rect alignment:(WDAlignment)align
 {
 	if (![self anyNodesSelected]) {
 		return [super alignToRect:rect alignment:align];
@@ -1077,7 +1077,7 @@ NSString* WDClosedKey = @"WDClosedKey";
 	[self postDirtyBoundsChange];
 }
 
-- (NSSet*) transform:(CGAffineTransform)transform
+- (NSSet*) transform:(CGAffineTransform) transform
 {
 	NSMutableArray	  *newNodes = [[NSMutableArray alloc] init];
 	BOOL				transformAll = [self anyNodesSelected] ? NO : YES;
@@ -1186,14 +1186,14 @@ NSString* WDClosedKey = @"WDClosedKey";
 	return whatToSelect;
 }
 
-- (NSDictionary*) splitAtPoint:(CGPoint)pt viewScale:(float)viewScale
+- (NSDictionary*) splitAtPoint:(CGPoint) pt viewScale:(float)viewScale
 {
 	WDBezierNode *node = [self addAnchorAtPoint:pt viewScale:viewScale];
 	
 	return [self splitAtNode:node];
 }
 
-- (WDBezierNode*) addAnchorAtPoint:(CGPoint)pt viewScale:(float)viewScale
+- (WDBezierNode*) addAnchorAtPoint:(CGPoint) pt viewScale:(float)viewScale
 {
 	NSMutableArray	  *newNodes = [NSMutableArray array];
 	NSInteger		   numNodes = closed_ ? (nodes_.count + 1) : nodes_.count;
@@ -1460,7 +1460,7 @@ NSString* WDClosedKey = @"WDClosedKey";
 	return [super hasFill] || self.maskedElements;
 }
 
-- (WDPickResult *) hitResultForPoint:(CGPoint)point viewScale:(float)viewScale snapFlags:(int)flags
+- (WDPickResult *) hitResultForPoint:(CGPoint) point viewScale:(float)viewScale snapFlags:(int)flags
 {
 	WDPickResult		*result = [WDPickResult pickResult];
 	CGRect			  pointRect = WDRectFromPoint(point, kNodeSelectionTolerance / viewScale, kNodeSelectionTolerance / viewScale);
@@ -1562,7 +1562,7 @@ NSString* WDClosedKey = @"WDClosedKey";
 	return result;
 }
 
-- (WDPickResult *) snappedPoint:(CGPoint)point viewScale:(float)viewScale snapFlags:(int)flags
+- (WDPickResult *) snappedPoint:(CGPoint) point viewScale:(float)viewScale snapFlags:(int)flags
 {
 	WDPickResult		*result = [WDPickResult pickResult];
 	CGRect			  pointRect = WDRectFromPoint(point, kNodeSelectionTolerance / viewScale, kNodeSelectionTolerance / viewScale);

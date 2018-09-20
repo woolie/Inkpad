@@ -344,7 +344,7 @@ const float kMaxStrokeWidth = 300.0f;
 	self.preferredContentSize = self.view.frame.size;
 }
 
-- (void) viewWillAppear:(BOOL)animated
+- (void) viewWillAppear:(BOOL) animated
 {
 	[super viewWillAppear:animated];
 	

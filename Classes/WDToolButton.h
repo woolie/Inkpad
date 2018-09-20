@@ -24,6 +24,6 @@
 + (float) dimension;
 
 - (void) didChooseTool:(WDToolView *)toolView;
-- (void) dismissSubtoolsAnimated:(BOOL)animated;
+- (void) dismissSubtoolsAnimated:(BOOL) animated;
 
 @end

@@ -389,7 +389,7 @@
 
 #pragma mark - Grid Snapping
 
-- (NSValue *) snapCorner:(CGPoint)pt inCanvas:(WDCanvas *)canvas
+- (NSValue *) snapCorner:(CGPoint) pt inCanvas:(WDCanvas *)canvas
 {
 	WDPickResult *result = [canvas.drawingController snappedPoint:pt viewScale:canvas.viewScale snapFlags:kWDSnapGrid];
 	

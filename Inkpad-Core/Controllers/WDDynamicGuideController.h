@@ -34,11 +34,11 @@
 - (void) insertGuide:(WDDynamicGuide *)guide array:(NSMutableArray *)guides;
 
 // calculating offsets
-- (CGPoint) adjustedPointForGuides:(CGPoint)pt viewScale:(float)viewScale;
+- (CGPoint) adjustedPointForGuides:(CGPoint) pt viewScale:(float)viewScale;
 - (CGPoint) offsetSelectionForGuides:(CGPoint)originalDelta viewScale:(float)viewScale;
 
 // finding snapped guides
-- (NSArray*) snappedGuidesForPoint:(CGPoint)pt;
+- (NSArray*) snappedGuidesForPoint:(CGPoint) pt;
 - (NSArray*) snappedGuidesForRect:(CGRect)snapRect;
 
 @end

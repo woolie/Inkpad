@@ -98,7 +98,7 @@
 	return CGRectGetWidth(bounds_) - [self attachmentAdjusted:adjusted].x;
 }
 
-- (CGAffineTransform) transformAtPosition:(CGPoint)pt scale:(float)scale angle:(float)angle useAdjustment:(BOOL)adjust
+- (CGAffineTransform) transformAtPosition:(CGPoint) pt scale:(float)scale angle:(float)angle useAdjustment:(BOOL)adjust
 {
 	CGPoint attach = [self attachmentAdjusted:adjust];
 	
@@ -111,7 +111,7 @@
 	return transform;
 }
 
-- (CGRect) boundingBoxAtPosition:(CGPoint)pt scale:(float)scale angle:(float)angle useAdjustment:(BOOL)adjust
+- (CGRect) boundingBoxAtPosition:(CGPoint) pt scale:(float)scale angle:(float)angle useAdjustment:(BOOL)adjust
 {
 	CGAffineTransform transform = [self transformAtPosition:pt scale:scale angle:angle useAdjustment:adjust];
 	CGPathRef rectPath = CGPathCreateWithRect(self.bounds, &transform);
@@ -121,13 +121,13 @@
 	return arrowBounds;
 }
 
-- (void) addToMutablePath:(CGMutablePathRef)pathRef position:(CGPoint)pt scale:(float)scale angle:(float)angle useAdjustment:(BOOL)adjust
+- (void) addToMutablePath:(CGMutablePathRef)pathRef position:(CGPoint) pt scale:(float)scale angle:(float)angle useAdjustment:(BOOL)adjust
 {
 	CGAffineTransform transform = [self transformAtPosition:pt scale:scale angle:angle useAdjustment:adjust];
 	CGPathAddPath(pathRef, &transform, self.path);
 }
 
-- (void) addArrowInContext:(CGContextRef)ctx position:(CGPoint)pt scale:(float)scale angle:(float)angle useAdjustment:(BOOL)adjust
+- (void) addArrowInContext:(CGContextRef)ctx position:(CGPoint) pt scale:(float)scale angle:(float)angle useAdjustment:(BOOL)adjust
 {
 	CGContextSaveGState(ctx);
 	CGContextConcatCTM(ctx, [self transformAtPosition:pt scale:scale angle:angle useAdjustment:adjust]);

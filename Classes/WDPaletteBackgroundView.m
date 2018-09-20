@@ -35,7 +35,7 @@
 	return (cornerRadius > 0 && self.roundedCorners);
 }
 
-- (void)drawRect:(CGRect)rect
+- (void)drawRect:(CGRect) rect
 {
 	CGRect		  bounds = self.bounds;
 	CGContextRef	ctx = UIGraphicsGetCurrentContext();

@@ -35,7 +35,7 @@ const float kArrowDimension = 6;
 	CGPathRelease(pathRef);
 }
 
-- (void) drawRect:(CGRect)rect
+- (void) drawRect:(CGRect) rect
 {
 	CGContextRef	ctx = UIGraphicsGetCurrentContext();
 	float		   radius = CGRectGetWidth(self.bounds) / 2 - kArrowInset;

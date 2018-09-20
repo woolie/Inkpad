@@ -164,7 +164,7 @@ NSString* WDSubpathsKey = @"WDSubpathsKey";
 	return [self expandStyleBounds:bounds];
 }
 
-- (NSSet*) transform:(CGAffineTransform)transform
+- (NSSet*) transform:(CGAffineTransform) transform
 {
 	[self cacheDirtyBounds];
 
@@ -180,7 +180,7 @@ NSString* WDSubpathsKey = @"WDSubpathsKey";
 	return nil;
 }
 
-- (BOOL) intersectsRect:(CGRect)rect
+- (BOOL) intersectsRect:(CGRect) rect
 {
 	for (WDPath *path in [subpaths_ reverseObjectEnumerator]) {
 		if ([path intersectsRect:rect]) {
@@ -191,7 +191,7 @@ NSString* WDSubpathsKey = @"WDSubpathsKey";
 	return NO;
 }
 
-- (WDPickResult *) hitResultForPoint:(CGPoint)point viewScale:(float)viewScale snapFlags:(int)flags
+- (WDPickResult *) hitResultForPoint:(CGPoint) point viewScale:(float)viewScale snapFlags:(int)flags
 {   
 	WDPickResult		*result = [WDPickResult pickResult];
 	CGRect			  pointRect = WDRectFromPoint(point, kNodeSelectionTolerance / viewScale, kNodeSelectionTolerance / viewScale);
@@ -234,7 +234,7 @@ NSString* WDSubpathsKey = @"WDSubpathsKey";
 	return [WDPickResult pickResult];
 }
 
-- (WDPickResult *) snappedPoint:(CGPoint)pt viewScale:(float)viewScale snapFlags:(int)flags
+- (WDPickResult *) snappedPoint:(CGPoint) pt viewScale:(float)viewScale snapFlags:(int)flags
 {
 	for (WDPath *path in [subpaths_ reverseObjectEnumerator]) {
 		WDPickResult *result = [path snappedPoint:pt viewScale:viewScale snapFlags:flags];
@@ -295,21 +295,21 @@ NSString* WDSubpathsKey = @"WDSubpathsKey";
 	}
 }
 
-- (void) drawOpenGLHighlightWithTransform:(CGAffineTransform)transform viewTransform:(CGAffineTransform)viewTransform
+- (void) drawOpenGLHighlightWithTransform:(CGAffineTransform) transform viewTransform:(CGAffineTransform)viewTransform
 {
 	for (WDPath *subpath in subpaths_) {
 		[subpath drawOpenGLHighlightWithTransform:transform viewTransform:viewTransform];
 	}
 }
 
-- (void) drawOpenGLHandlesWithTransform:(CGAffineTransform)transform viewTransform:(CGAffineTransform)viewTransform
+- (void) drawOpenGLHandlesWithTransform:(CGAffineTransform) transform viewTransform:(CGAffineTransform)viewTransform
 {
 	for (WDPath *subpath in subpaths_) {
 		[subpath drawOpenGLAnchorsWithViewTransform:viewTransform];
 	}
 }
 
-- (void) drawOpenGLAnchorsWithViewTransform:(CGAffineTransform)transform
+- (void) drawOpenGLAnchorsWithViewTransform:(CGAffineTransform) transform
 {
 	for (WDPath *subpath in subpaths_) {
 		[subpath drawOpenGLAnchorsWithViewTransform:transform];

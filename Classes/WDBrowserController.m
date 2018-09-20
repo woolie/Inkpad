@@ -211,28 +211,32 @@ NSString* WDAttachmentNotification = @"WDAttachmentNotification";
 {
 	OCAEntry *entry = viewController.selectedEntry;
 	
-	if (!downloaders_) {
+	if (!downloaders_)
+    {
 		downloaders_ = [NSMutableSet set];
 	}
 	
-	OCADownloader *downloader = [OCADownloader downloaderWithURL:entry.SVGURL delegate:self info:entry.title];
+	OCADownloader *downloader = [OCADownloader downloaderWithURL:entry.svgURL delegate:self info:entry.title];
 	[downloaders_ addObject:downloader];
 	
-	if (openClipArtController_.isVisible) {
+	if (openClipArtController_.isVisible)
+    {
 		[self dismissPopover];
 	}
 }
 
 - (void) showOpenClipArt:(id) sender
 {
-	if (openClipArtController_.isVisible) {
+	if (openClipArtController_.isVisible)
+    {
 		[self dismissPopover];
 		return;
 	}
 	
 	[self dismissPopover];
 	
-	if (!openClipArtController_) {
+	if (!openClipArtController_)
+    {
 		openClipArtController_ = [[OCAViewController alloc] initWithNibName:@"OpenClipArt" bundle:nil];
 		[openClipArtController_ setImportTarget:self action:@selector(importOpenClipArt:)];
 		[openClipArtController_ setActionTitle:NSLocalizedString(@"Import", @"Import")];
@@ -291,7 +295,7 @@ NSString* WDAttachmentNotification = @"WDAttachmentNotification";
 
 #pragma mark - View Lifecycle
 
-- (void) viewWillAppear:(BOOL)animated
+- (void) viewWillAppear:(BOOL) animated
 {
 	if (!everLoaded_) {
 		if ([[WDDrawingManager sharedInstance] numberOfDrawings] > 0) {
@@ -518,7 +522,7 @@ NSString* WDAttachmentNotification = @"WDAttachmentNotification";
 	[self setEditing:NO animated:YES];
 }
 
-- (void) setEditing:(BOOL)editing animated:(BOOL)animated
+- (void) setEditing:(BOOL)editing animated:(BOOL) animated
 {
 	[self dismissPopover];
 	
@@ -757,7 +761,7 @@ NSString* WDAttachmentNotification = @"WDAttachmentNotification";
 
 #pragma mark - Popovers
 
-- (void) dismissPopoverAnimated:(BOOL)animated
+- (void) dismissPopoverAnimated:(BOOL) animated
 {
 	if (popoverController_) {
 		[popoverController_ dismissPopoverAnimated:animated];

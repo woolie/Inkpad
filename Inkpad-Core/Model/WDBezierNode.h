@@ -48,19 +48,19 @@ typedef enum {
 // some helper state... not strictly part of the model, but makes many operations simpler
 @property (nonatomic, assign) BOOL selected;
 
-+ (WDBezierNode*) bezierNodeWithAnchorPoint:(CGPoint)pt;
-+ (WDBezierNode*) bezierNodeWithInPoint:(CGPoint)inPoint anchorPoint:(CGPoint)pt outPoint:(CGPoint)outPoint;
++ (WDBezierNode*) bezierNodeWithAnchorPoint:(CGPoint) pt;
++ (WDBezierNode*) bezierNodeWithInPoint:(CGPoint)inPoint anchorPoint:(CGPoint) pt outPoint:(CGPoint)outPoint;
 
-- (instancetype) initWithAnchorPoint:(CGPoint)pt;
-- (instancetype) initWithInPoint:(CGPoint)inPoint anchorPoint:(CGPoint)pt outPoint:(CGPoint)outPoint;
+- (instancetype) initWithAnchorPoint:(CGPoint) pt;
+- (instancetype) initWithInPoint:(CGPoint)inPoint anchorPoint:(CGPoint) pt outPoint:(CGPoint)outPoint;
 
-- (WDBezierNode*) transform:(CGAffineTransform)transform;
+- (WDBezierNode*) transform:(CGAffineTransform) transform;
 - (WDBezierNode*) chopHandles;
 - (WDBezierNode*) chopOutHandle;
 - (WDBezierNode*) chopInHandle;
 
-- (WDBezierNode*) setInPoint:(CGPoint)pt reflectionMode:(WDBezierNodeReflectionMode)reflectionMode;
-- (WDBezierNode*) moveControlHandle:(WDPickResultType)pointToTransform toPoint:(CGPoint)pt reflectionMode:(WDBezierNodeReflectionMode)reflectionMode;
+- (WDBezierNode*) setInPoint:(CGPoint) pt reflectionMode:(WDBezierNodeReflectionMode)reflectionMode;
+- (WDBezierNode*) moveControlHandle:(WDPickResultType)pointToTransform toPoint:(CGPoint) pt reflectionMode:(WDBezierNodeReflectionMode)reflectionMode;
 
 - (WDBezierNode*) flippedNode;
 
@@ -69,6 +69,6 @@ typedef enum {
 @end
 
 @interface WDBezierNode (GLRendering)
-- (void) drawGLWithViewTransform:(CGAffineTransform)transform color:(UIColor *)color mode:(WDBezierNodeRenderMode)mode;
+- (void) drawGLWithViewTransform:(CGAffineTransform) transform color:(UIColor *)color mode:(WDBezierNodeRenderMode)mode;
 @end
 

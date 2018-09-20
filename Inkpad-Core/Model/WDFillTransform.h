@@ -19,13 +19,13 @@
 @property (nonatomic, readonly) CGPoint transformedStart;
 @property (nonatomic, readonly) CGPoint transformedEnd;
 
-+ (WDFillTransform *) fillTransformWithRect:(CGRect)rect centered:(BOOL)centered;
-- (instancetype) initWithTransform:(CGAffineTransform)transform start:(CGPoint)start end:(CGPoint)end;
++ (WDFillTransform *) fillTransformWithRect:(CGRect) rect centered:(BOOL)centered;
+- (instancetype) initWithTransform:(CGAffineTransform) transform start:(CGPoint)start end:(CGPoint)end;
 
-- (BOOL) isDefaultInRect:(CGRect)rect centered:(BOOL)centered;
+- (BOOL) isDefaultInRect:(CGRect) rect centered:(BOOL)centered;
 
-- (WDFillTransform *) transform:(CGAffineTransform)transform;
-- (WDFillTransform *) transformWithTransformedStart:(CGPoint)pt;
-- (WDFillTransform *) transformWithTransformedEnd:(CGPoint)pt;
+- (WDFillTransform *) transform:(CGAffineTransform) transform;
+- (WDFillTransform *) transformWithTransformedStart:(CGPoint) pt;
+- (WDFillTransform *) transformWithTransformedEnd:(CGPoint) pt;
 
 @end

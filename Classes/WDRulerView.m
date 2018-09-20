@@ -156,7 +156,7 @@ static NSMutableDictionary *registeredUnits_ = nil;
 	marksBetweenLabels_ = rint(labelDistance / markDistance_);
 }
 
-- (void)drawRect:(CGRect)rect
+- (void)drawRect:(CGRect) rect
 {
 	CGContextRef		ctx = UIGraphicsGetCurrentContext();
 	UIFont			  *font = [UIFont systemFontOfSize:11];
@@ -305,7 +305,7 @@ static NSMutableDictionary *registeredUnits_ = nil;
 	return self;
 }
 
-- (void)drawRect:(CGRect)rect
+- (void)drawRect:(CGRect) rect
 {
 	CGContextRef ctx = UIGraphicsGetCurrentContext();
 	

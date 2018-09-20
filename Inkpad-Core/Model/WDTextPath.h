@@ -52,7 +52,7 @@ typedef enum {
 - (void) setFontName:(NSString*)fontName;
 - (void) setFontSize:(float)fontSize;
 
-- (void) moveStartKnobToNearestPoint:(CGPoint)pt;
+- (void) moveStartKnobToNearestPoint:(CGPoint) pt;
 
 - (void) cacheOriginalText;
 - (void) registerUndoWithCachedText;

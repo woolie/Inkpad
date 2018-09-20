@@ -97,7 +97,7 @@
 	}
 }
 
-- (void) setEntry:(OCAEntry *)entry
+- (void) setEntry:(OCAEntry*)entry
 {
 	entry_ = entry;
 	

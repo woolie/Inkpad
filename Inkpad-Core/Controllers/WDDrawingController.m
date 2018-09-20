@@ -509,7 +509,7 @@ NSString* WDSelectionChangedNotification = @"WDSelectionChangedNotification";
 	[self deselectObject:element];
 }
 
-- (void) selectObjectsInRect:(CGRect)rect
+- (void) selectObjectsInRect:(CGRect) rect
 {
 	[selectedObjects_ removeAllObjects];
 	
@@ -1310,7 +1310,7 @@ NSString* WDSelectionChangedNotification = @"WDSelectionChangedNotification";
 
 #pragma mark - Transform
 
-- (void) transformSelection:(CGAffineTransform)transform
+- (void) transformSelection:(CGAffineTransform) transform
 {
 	if (CGAffineTransformIsIdentity(transform)) {
 		// this will have no effect, so we don't want to register undos, etc.
@@ -1465,7 +1465,7 @@ NSString* WDSelectionChangedNotification = @"WDSelectionChangedNotification";
 #pragma mark - Text
 
 // this is called by the text tool
-- (WDText*) createTextObjectInRect:(CGRect)rect
+- (WDText*) createTextObjectInRect:(CGRect) rect
 {
 	WDText *text = [[WDText alloc] init];
 	text.width = CGRectGetWidth(rect);
@@ -1793,7 +1793,7 @@ NSString* WDSelectionChangedNotification = @"WDSelectionChangedNotification";
 	return dynamicGuideController_;
 }
 
-- (WDPickResult *) snappedPoint:(CGPoint)pt viewScale:(float)viewScale snapFlags:(int)flags
+- (WDPickResult *) snappedPoint:(CGPoint) pt viewScale:(float)viewScale snapFlags:(int)flags
 {
 	WDPickResult	*pickResult;
 	
@@ -1876,7 +1876,7 @@ NSString* WDSelectionChangedNotification = @"WDSelectionChangedNotification";
 	return [WDPickResult pickResult];
 }
 
-- (WDPickResult *) inspectableUnderPoint:(CGPoint)pt viewScale:(float)viewScale
+- (WDPickResult *) inspectableUnderPoint:(CGPoint) pt viewScale:(float)viewScale
 {
 	WDPickResult	*pickResult;
 	NSUInteger	  flags = (kWDSnapEdges | kWDSnapSubelement);
@@ -1906,7 +1906,7 @@ NSString* WDSelectionChangedNotification = @"WDSelectionChangedNotification";
 	return [WDPickResult pickResult];
 }
 
-- (WDPickResult *) objectUnderPoint:(CGPoint)pt viewScale:(float)viewScale
+- (WDPickResult *) objectUnderPoint:(CGPoint) pt viewScale:(float)viewScale
 {
 	WDPickResult	*pickResult;
 	NSUInteger	  flags = kWDSnapEdges;

@@ -31,7 +31,7 @@
 	return [CAEAGLLayer class];
 }
 
-- (UIView *) hitTest:(CGPoint)point withEvent:(UIEvent *)event
+- (UIView *) hitTest:(CGPoint) point withEvent:(UIEvent *)event
 {
 	return self.superview;
 }
@@ -74,7 +74,7 @@
 	return self;
 }
 
-- (CGRect) convertRectFromCanvas:(CGRect)rect
+- (CGRect) convertRectFromCanvas:(CGRect) rect
 {
 	rect.origin = WDSubtractPoints(rect.origin, [canvas_ visibleRect].origin);
 	rect = CGRectApplyAffineTransform(rect, self.canvas.canvasTransform);

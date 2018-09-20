@@ -21,7 +21,7 @@
 	return @"scale.png";
 }
 
-- (CGAffineTransform) computeTransform:(CGPoint)pt pivot:(CGPoint)pivot constrain:(WDToolFlags)flags
+- (CGAffineTransform) computeTransform:(CGPoint) pt pivot:(CGPoint)pivot constrain:(WDToolFlags)flags
 {
 	CGPoint delta = WDSubtractPoints(self.initialEvent.location, pivot);
 	CGPoint newDelta = WDSubtractPoints(pt, pivot);

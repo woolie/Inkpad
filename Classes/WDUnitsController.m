@@ -131,7 +131,7 @@ NSString* WDCustomDrawingSizeChanged = @"WDCustomDrawingSizeChanged";
 	[self updateDimensionFields];
 }
 
-- (void) viewWillAppear:(BOOL)animated
+- (void) viewWillAppear:(BOOL) animated
 {
 	[super viewWillAppear:animated];
 	[self updateDimensionFields];

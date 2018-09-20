@@ -22,8 +22,8 @@
 - (BOOL) transformable;
 - (BOOL) wantsCenteredFillTransform;
 - (BOOL) canPaintStroke;
-- (void) drawSwatchInRect:(CGRect)rect;
-- (void) drawEyedropperSwatchInRect:(CGRect)rect;
+- (void) drawSwatchInRect:(CGRect) rect;
+- (void) drawEyedropperSwatchInRect:(CGRect) rect;
 - (void) paintText:(id<WDTextRenderer>)text inContext:(CGContextRef)ctx;
 - (id) adjustColor:(WDColor * (^)(WDColor *color))adjustment;
 @end

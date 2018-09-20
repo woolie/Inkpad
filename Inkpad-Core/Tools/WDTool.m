@@ -100,7 +100,7 @@
 	return NO;
 }
 
-- (CGPoint) snappedPointForPoint:(CGPoint)pt inCanvas:(WDCanvas *)canvas
+- (CGPoint) snappedPointForPoint:(CGPoint) pt inCanvas:(WDCanvas *)canvas
 {
 	NSUInteger snapFlags = [canvas.drawing snapFlags] | kWDSnapLocked | kWDSnapSubelement;
 	
@@ -130,7 +130,7 @@
 
 - (void)touchesBegan:(NSSet*)touches withEvent:(UIEvent *)event inCanvas:(WDCanvas *)canvas
 {
-	if ([event allTouches].count == 1) {
+	if (event.allTouches.count == 1) {
 		primaryTouch_ = [touches anyObject];
 		
 		primaryTouchEnded_ = NO;
@@ -150,7 +150,7 @@
 		return;
 	}
 	
-	if ([event allTouches].count > 1) {
+	if (event.allTouches.count > 1) {
 		// if we have a new touch, we need to constrain
 		flags_ = WDToolSecondaryTouch;
 		[self flagsChangedInCanvas:canvas];
@@ -189,7 +189,7 @@
 	
 	if (!self.primaryTouchEnded) {
 		// reflect the modifier touch immediately
-		NSInteger   remainingTouchCount = [event allTouches].count - touches.count;
+		NSInteger   remainingTouchCount = event.allTouches.count - touches.count;
 		WDToolFlags newFlags = (remainingTouchCount > 1 ? WDToolSecondaryTouch : WDToolDefault);
 		
 		[self setFlags:newFlags inCanvas:canvas];

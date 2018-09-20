@@ -37,7 +37,7 @@ const float kColorRectInset = 10;
 	return self;
 }
 
-- (void)drawRect:(CGRect)rect
+- (void)drawRect:(CGRect) rect
 {
 	CGContextRef	ctx = UIGraphicsGetCurrentContext();
 	CGRect		  colorRect = [indicator colorRect];
@@ -135,7 +135,7 @@ const float kColorRectInset = 10;
 	return rect;
 }
 
-- (void)drawRect:(CGRect)rect
+- (void)drawRect:(CGRect) rect
 {
 	CGContextRef	ctx = UIGraphicsGetCurrentContext();
 	CGRect		  colorRect = [self colorRect];

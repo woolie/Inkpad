@@ -233,7 +233,7 @@ NSString* WDSwatchPanelModeKey = @"WDSwatchPanelModeKey";
 	self.navigationItem.rightBarButtonItem.enabled = NO;
 }
 
-- (void) setEditing:(BOOL)editing animated:(BOOL)animated
+- (void) setEditing:(BOOL)editing animated:(BOOL) animated
 {
 	[super setEditing:editing animated:animated];
 
@@ -262,7 +262,7 @@ NSString* WDSwatchPanelModeKey = @"WDSwatchPanelModeKey";
 	}
 }
 
-- (void) viewWillDisappear:(BOOL)animated
+- (void) viewWillDisappear:(BOOL) animated
 {
 	[self setEditing:NO animated:NO];
 }

@@ -52,7 +52,7 @@
 
 @property (class, readonly) CGFloat minimumWidth;
 
-- (void) moveHandle:(NSUInteger)handle toPoint:(CGPoint)pt;
+- (void) moveHandle:(NSUInteger)handle toPoint:(CGPoint) pt;
 
 - (void) cacheOriginalText;
 - (void) registerUndoWithCachedText;
@@ -60,12 +60,12 @@
 - (void) cacheTransformAndWidth;
 - (void) registerUndoWithCachedTransformAndWidth;
 
-- (void) drawOpenGLTextOutlinesWithTransform:(CGAffineTransform)transform viewTransform:(CGAffineTransform)viewTransform;
+- (void) drawOpenGLTextOutlinesWithTransform:(CGAffineTransform) transform viewTransform:(CGAffineTransform)viewTransform;
 
 - (void) setFontNameQuiet:(NSString*)fontName;
 - (void) setFontSizeQuiet:(float)fontSize;
 - (void) setTextQuiet:(NSString*)text;
-- (void) setTransformQuiet:(CGAffineTransform)transform;
+- (void) setTransformQuiet:(CGAffineTransform) transform;
 - (void) setWidthQuiet:(float)width;
 
 @end

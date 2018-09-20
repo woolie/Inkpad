@@ -63,7 +63,7 @@
 	self.view = tableView_;
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL) animated
 {
 	NSIndexPath *selectedIndexPath = [self updateSelectedRow];
 	[tableView_ scrollToRowAtIndexPath:selectedIndexPath atScrollPosition:UITableViewScrollPositionNone animated:NO];

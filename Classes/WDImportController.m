@@ -116,7 +116,7 @@ static NSString* const WDDropboxSubdirectoryMissingNotification = @"WDDropboxSub
 	[self.navigationController setToolbarHidden:NO];
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL) animated
 {
 	NSString*rootPath = @"/";
 	
@@ -154,7 +154,7 @@ static NSString* const WDDropboxSubdirectoryMissingNotification = @"WDDropboxSub
 	}
 }
 
-- (void)viewWillDisappear:(BOOL)animated
+- (void)viewWillDisappear:(BOOL) animated
 {
 	[[NSUserDefaults standardUserDefaults] setObject:remotePath_ forKey:WDDropboxLastPathVisited];
 	[[NSUserDefaults standardUserDefaults] synchronize];

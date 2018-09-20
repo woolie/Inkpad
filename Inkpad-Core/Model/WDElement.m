@@ -147,7 +147,7 @@ NSString* const WDShadowKey = @"WDShadowKey";
 	return self.shadow;
 }
 
-- (CGRect) expandStyleBounds:(CGRect)rect
+- (CGRect) expandStyleBounds:(CGRect) rect
 {
 	WDShadow *shadow = [self shadowForStyleBounds];
 	
@@ -180,12 +180,12 @@ NSString* const WDShadowKey = @"WDShadowKey";
 {
 }
 
-- (BOOL) containsPoint:(CGPoint)pt
+- (BOOL) containsPoint:(CGPoint) pt
 {
 	return CGRectContainsPoint([self bounds], pt);
 }
 
-- (BOOL) intersectsRect:(CGRect)rect
+- (BOOL) intersectsRect:(CGRect) rect
 {
 	return CGRectIntersectsRect([self bounds], rect);
 }
@@ -233,14 +233,14 @@ NSString* const WDShadowKey = @"WDShadowKey";
 	}
 }
 
-- (NSSet*) transform:(CGAffineTransform)transform
+- (NSSet*) transform:(CGAffineTransform) transform
 {
 	return nil;
 }
 
 // OpenGL-based selection rendering
 
-- (void) drawOpenGLAnchorAtPoint:(CGPoint)pt transform:(CGAffineTransform)transform selected:(BOOL)selected
+- (void) drawOpenGLAnchorAtPoint:(CGPoint) pt transform:(CGAffineTransform) transform selected:(BOOL)selected
 {
 	CGPoint location = WDRoundPoint(CGPointApplyAffineTransform(pt, transform));
 	CGRect anchorRect = CGRectMake(location.x - kAnchorRadius, location.y - kAnchorRadius, kAnchorRadius * 2, kAnchorRadius * 2);
@@ -264,19 +264,19 @@ NSString* const WDShadowKey = @"WDShadowKey";
 	}
 }
 
-- (void) drawOpenGLHighlightWithTransform:(CGAffineTransform)transform viewTransform:(CGAffineTransform)viewTransform
+- (void) drawOpenGLHighlightWithTransform:(CGAffineTransform) transform viewTransform:(CGAffineTransform)viewTransform
 {
 }
 
-- (void) drawOpenGLHandlesWithTransform:(CGAffineTransform)transform viewTransform:(CGAffineTransform)viewTransform
+- (void) drawOpenGLHandlesWithTransform:(CGAffineTransform) transform viewTransform:(CGAffineTransform)viewTransform
 {
 }
 
-- (void) drawOpenGLAnchorsWithViewTransform:(CGAffineTransform)transform
+- (void) drawOpenGLAnchorsWithViewTransform:(CGAffineTransform) transform
 {
 }
 
-- (void) drawGradientControlsWithViewTransform:(CGAffineTransform)transform
+- (void) drawGradientControlsWithViewTransform:(CGAffineTransform) transform
 {
 }
 
@@ -305,7 +305,7 @@ NSString* const WDShadowKey = @"WDShadowKey";
 	[[NSNotificationCenter defaultCenter] postNotificationName:WDElementChanged object:self.drawing userInfo:userInfo];
 }
 
-- (NSSet*) alignToRect:(CGRect)rect alignment:(WDAlignment)align
+- (NSSet*) alignToRect:(CGRect) rect alignment:(WDAlignment)align
 {
 	CGRect			  bounds = [self bounds];
 	CGAffineTransform	translate = CGAffineTransformIdentity;
@@ -342,12 +342,12 @@ NSString* const WDShadowKey = @"WDShadowKey";
 	return nil;
 }
 
-- (WDPickResult *) hitResultForPoint:(CGPoint)pt viewScale:(float)viewScale snapFlags:(int)flags
+- (WDPickResult *) hitResultForPoint:(CGPoint) pt viewScale:(float)viewScale snapFlags:(int)flags
 {
 	return [WDPickResult pickResult];
 }
 
-- (WDPickResult *) snappedPoint:(CGPoint)pt viewScale:(float)viewScale snapFlags:(int)flags
+- (WDPickResult *) snappedPoint:(CGPoint) pt viewScale:(float)viewScale snapFlags:(int)flags
 {
 	return [WDPickResult pickResult];
 }
@@ -543,7 +543,7 @@ NSString* const WDShadowKey = @"WDShadowKey";
 	}
 }
 
-- (id) pathPainterAtPoint:(CGPoint)pt
+- (id) pathPainterAtPoint:(CGPoint) pt
 {
 	return [self valueForProperty:WDFillProperty];
 }

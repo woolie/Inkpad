@@ -70,7 +70,7 @@
 	[self createLabels_];
 }
 
-- (void)drawRect:(CGRect)rect
+- (void)drawRect:(CGRect) rect
 {
 	CGContextRef	ctx = UIGraphicsGetCurrentContext();
 	
@@ -86,7 +86,7 @@
 	[self setNeedsDisplay];
 }
 
-- (void) handlePoint:(CGPoint)pt
+- (void) handlePoint:(CGPoint) pt
 {
 	int currentIndex = selectedIndex_;
 	

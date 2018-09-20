@@ -34,7 +34,7 @@
 - (IBAction) cancel:(id) sender;
 - (IBAction) accept:(id) sender;
 
-- (void) bringOnScreenAnimated:(BOOL)animated;
+- (void) bringOnScreenAnimated:(BOOL) animated;
 - (void) runModalOverView:(UIView *)view;
 
 - (void) resetShiftsToZero;

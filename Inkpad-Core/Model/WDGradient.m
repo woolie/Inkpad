@@ -307,7 +307,7 @@ NSString* WDGradientStopsKey = @"WDGradientStopsKey";
 	return gradientRef_;
 }
 
-- (void) drawSwatchInRect:(CGRect)rect
+- (void) drawSwatchInRect:(CGRect) rect
 {
 	CGContextRef ctx = UIGraphicsGetCurrentContext();
 	CGGradientDrawingOptions options = kCGGradientDrawsBeforeStartLocation | kCGGradientDrawsAfterEndLocation;
@@ -332,7 +332,7 @@ NSString* WDGradientStopsKey = @"WDGradientStopsKey";
 	CGContextRestoreGState(ctx);
 }
 
-- (void) drawEyedropperSwatchInRect:(CGRect)rect
+- (void) drawEyedropperSwatchInRect:(CGRect) rect
 {
 	CGContextRef ctx = UIGraphicsGetCurrentContext();
 	CGGradientDrawingOptions options = kCGGradientDrawsBeforeStartLocation | kCGGradientDrawsAfterEndLocation;

@@ -78,6 +78,6 @@ typedef enum {
 - (void) buttonDoubleTapped;
 
 // raw drawing coordinate -> snapped drawing coordinate
-- (CGPoint) snappedPointForPoint:(CGPoint)pt inCanvas:(WDCanvas *)canvas;
+- (CGPoint) snappedPointForPoint:(CGPoint) pt inCanvas:(WDCanvas *)canvas;
 
 @end

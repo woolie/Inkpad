@@ -51,7 +51,7 @@ static NSString*orientations_[] = { @"Portrait", @"Landscape" };
 	return self;
 }
 
-- (void) viewWillAppear:(BOOL)animated
+- (void) viewWillAppear:(BOOL) animated
 {
 	UIBarButtonItem *createItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Create", @"Create new drawing")
 																   style:UIBarButtonItemStyleDone

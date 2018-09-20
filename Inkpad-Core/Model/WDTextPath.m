@@ -568,7 +568,7 @@ done:
 	return transform_;
 }
 
-- (void) setTransform:(CGAffineTransform)transform
+- (void) setTransform:(CGAffineTransform) transform
 {
 	[self cacheDirtyBounds];
 	
@@ -594,7 +594,7 @@ done:
 	[self postDirtyBoundsChange];
 }
 
-- (NSSet*) transform:(CGAffineTransform)transform
+- (NSSet*) transform:(CGAffineTransform) transform
 {
 	BOOL anyWereSelected = [self anyNodesSelected];
 	
@@ -710,7 +710,7 @@ done:
 	return paths;
 }
 
-- (void) drawOpenGLHandlesWithTransform:(CGAffineTransform)transform viewTransform:(CGAffineTransform)viewTransform
+- (void) drawOpenGLHandlesWithTransform:(CGAffineTransform) transform viewTransform:(CGAffineTransform)viewTransform
 {
 	[super drawOpenGLHandlesWithTransform:transform viewTransform:viewTransform];
 
@@ -791,7 +791,7 @@ done:
 	}
 }
 
-- (void) drawOpenGLHighlightWithTransform:(CGAffineTransform)transform viewTransform:(CGAffineTransform)viewTransform
+- (void) drawOpenGLHighlightWithTransform:(CGAffineTransform) transform viewTransform:(CGAffineTransform)viewTransform
 {
 	[super drawOpenGLHighlightWithTransform:transform viewTransform:viewTransform];
 	
@@ -800,7 +800,7 @@ done:
 	}
 }
 
-- (void) drawOpenGLTextOutlinesWithTransform:(CGAffineTransform)transform viewTransform:(CGAffineTransform)viewTransform
+- (void) drawOpenGLTextOutlinesWithTransform:(CGAffineTransform) transform viewTransform:(CGAffineTransform)viewTransform
 {
 	[self.layer.highlightColor openGLSet];
 	
@@ -853,7 +853,7 @@ done:
 	return WDGrowRectToPoint([super controlBounds], top);
 }
 
-- (WDPickResult *) hitResultForPoint:(CGPoint)point viewScale:(float)viewScale snapFlags:(int)flags
+- (WDPickResult *) hitResultForPoint:(CGPoint) point viewScale:(float)viewScale snapFlags:(int)flags
 {
 	WDPickResult		*result = [WDPickResult pickResult];
 	CGRect			  pointRect = WDRectFromPoint(point, kNodeSelectionTolerance / viewScale, kNodeSelectionTolerance / viewScale);
@@ -903,7 +903,7 @@ done:
 	[self postDirtyBoundsChange];
 }
 
-- (void) moveStartKnobToNearestPoint:(CGPoint)pt
+- (void) moveStartKnobToNearestPoint:(CGPoint) pt
 {
 	NSInteger		   numSegments = [self segmentCount];
 	WDBezierSegment	 segments[numSegments];

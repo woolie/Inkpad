@@ -29,7 +29,7 @@ const float kNodeSelectionTolerance = 25;
 	return pickResult;
 }
 
-- (void) setSnappedPoint:(CGPoint)pt
+- (void) setSnappedPoint:(CGPoint) pt
 {
 	snappedPoint_ = pt;
 	snapped_ = YES;

@@ -79,7 +79,7 @@
 	return trackRect;
 }
 
-- (void) drawRect:(CGRect)rect
+- (void) drawRect:(CGRect) rect
 {
 	CGContextRef	ctx = UIGraphicsGetCurrentContext();
 	CGRect		  trackRect = [self trackRect];

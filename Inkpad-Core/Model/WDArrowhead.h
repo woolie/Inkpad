@@ -25,9 +25,9 @@
 + (WDArrowhead *) arrowheadWithPath:(CGPathRef)pathRef attachment:(CGPoint)attach capAdjustment:(CGPoint)adjustment;
 - (instancetype) initWithPath:(CGPathRef)pathRef attachment:(CGPoint)attach capAdjustment:(CGPoint)adjustment;
 
-- (CGRect) boundingBoxAtPosition:(CGPoint)pt scale:(float)scale angle:(float)angle useAdjustment:(BOOL)adjust;
-- (void) addToMutablePath:(CGMutablePathRef)pathRef position:(CGPoint)pt scale:(float)scale angle:(float)angle useAdjustment:(BOOL)adjust;
-- (void) addArrowInContext:(CGContextRef)ctx position:(CGPoint)pt scale:(float)scale angle:(float)angle useAdjustment:(BOOL)adjust;
+- (CGRect) boundingBoxAtPosition:(CGPoint) pt scale:(float)scale angle:(float)angle useAdjustment:(BOOL)adjust;
+- (void) addToMutablePath:(CGMutablePathRef)pathRef position:(CGPoint) pt scale:(float)scale angle:(float)angle useAdjustment:(BOOL)adjust;
+- (void) addArrowInContext:(CGContextRef)ctx position:(CGPoint) pt scale:(float)scale angle:(float)angle useAdjustment:(BOOL)adjust;
 - (float) insetLength:(BOOL)adjusted;
 
 @end

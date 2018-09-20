@@ -38,7 +38,7 @@
 	return self;
 }
 
-- (void)drawRect:(CGRect)rect
+- (void)drawRect:(CGRect) rect
 {
 	CGContextRef		ctx = UIGraphicsGetCurrentContext();
 	CGRect			  colorRect = [indicator colorRect];
@@ -111,7 +111,7 @@
 	return CGRectMake(7,5,17,17);
 }
 
-- (void) drawRect:(CGRect)rect
+- (void) drawRect:(CGRect) rect
 {
 	[color_ set];
 	UIRectFill([self colorRect]);
@@ -128,7 +128,7 @@
 
 @synthesize floatValue = value_;
 
-- (BOOL) pointInside:(CGPoint)point withEvent:(UIEvent *)event
+- (BOOL) pointInside:(CGPoint) point withEvent:(UIEvent *)event
 {
 	CGRect bounds = CGRectInset(self.bounds, -10, -10);
 	return CGRectContainsPoint(bounds, point);
@@ -170,7 +170,7 @@
 	[self setNeedsDisplay];
 }
 
-- (void) drawRect:(CGRect)rect
+- (void) drawRect:(CGRect) rect
 {
 	UIImage *image = [UIImage imageWithCGImage:[self p_hueImage]];
 	UIImage *overlay = [[UIImage imageNamed:@"hue_shifter_overlay.png"] stretchableImageWithLeftCapWidth:10 topCapHeight:0];
@@ -192,7 +192,7 @@
 	[overlay drawInRect:border blendMode:kCGBlendModeMultiply alpha:0.4f];
 }
 
-- (void) computeValue_:(CGPoint)pt
+- (void) computeValue_:(CGPoint) pt
 {
 	CGRect  trackRect = self.bounds;
 	float   percentage;

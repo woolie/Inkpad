@@ -167,13 +167,13 @@
 	[self updateItemCount];
 }
 
-- (void)viewDidDisappear:(BOOL)animated
+- (void)viewDidDisappear:(BOOL) animated
 {
 	[super viewDidDisappear:animated];
 	self.visible = false;
 }
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)viewDidAppear:(BOOL) animated
 {
 	[super viewDidAppear:animated];
 	self.visible = true;

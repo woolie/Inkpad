@@ -18,7 +18,7 @@
 @synthesize action = action_;
 @synthesize target = target_;
 
-- (UIView *) hitTest:(CGPoint)point withEvent:(UIEvent *)event
+- (UIView *) hitTest:(CGPoint) point withEvent:(UIEvent *)event
 {
 	point = [self convertPoint:point toView:nil];
 	

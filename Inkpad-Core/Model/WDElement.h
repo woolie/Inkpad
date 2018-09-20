@@ -70,12 +70,12 @@ typedef enum {
 - (void) awakeFromEncoding;
 
 - (WDShadow *) shadowForStyleBounds;
-- (CGRect) expandStyleBounds:(CGRect)rect;
+- (CGRect) expandStyleBounds:(CGRect) rect;
 
 - (void) clearSubselection;
 
-- (BOOL) containsPoint:(CGPoint)pt;
-- (BOOL) intersectsRect:(CGRect)rect;
+- (BOOL) containsPoint:(CGPoint) pt;
+- (BOOL) intersectsRect:(CGRect) rect;
 
 - (void) renderInContext:(CGContextRef)ctx metaData:(WDRenderingMetaData)metaData;
 
@@ -88,11 +88,11 @@ typedef enum {
 
 // OpenGL-based selection rendering
 - (void) drawOpenGLZoomOutlineWithViewTransform:(CGAffineTransform)viewTransform visibleRect:(CGRect)visibleRect;
-- (void) drawOpenGLAnchorAtPoint:(CGPoint)pt transform:(CGAffineTransform)transform selected:(BOOL)selected;
-- (void) drawOpenGLHighlightWithTransform:(CGAffineTransform)transform viewTransform:(CGAffineTransform)viewTransform;
-- (void) drawOpenGLHandlesWithTransform:(CGAffineTransform)transform viewTransform:(CGAffineTransform)viewTransform;
-- (void) drawOpenGLAnchorsWithViewTransform:(CGAffineTransform)transform;
-- (void) drawGradientControlsWithViewTransform:(CGAffineTransform)transform;
+- (void) drawOpenGLAnchorAtPoint:(CGPoint) pt transform:(CGAffineTransform) transform selected:(BOOL)selected;
+- (void) drawOpenGLHighlightWithTransform:(CGAffineTransform) transform viewTransform:(CGAffineTransform)viewTransform;
+- (void) drawOpenGLHandlesWithTransform:(CGAffineTransform) transform viewTransform:(CGAffineTransform)viewTransform;
+- (void) drawOpenGLAnchorsWithViewTransform:(CGAffineTransform) transform;
+- (void) drawGradientControlsWithViewTransform:(CGAffineTransform) transform;
 - (void) drawTextPathControlsWithViewTransform:(CGAffineTransform)viewTransform viewScale:(float)viewScale;
 
 - (NSSet*) transform:(CGAffineTransform) transform;
@@ -100,8 +100,8 @@ typedef enum {
 
 - (NSSet*) alignToRect:(CGRect) rect alignment:(WDAlignment) align;
 
-- (WDPickResult*) hitResultForPoint:(CGPoint)pt viewScale:(float)viewScale snapFlags:(int)flags;
-- (WDPickResult*) snappedPoint:(CGPoint)pt viewScale:(float)viewScale snapFlags:(int)flags;
+- (WDPickResult*) hitResultForPoint:(CGPoint) pt viewScale:(float)viewScale snapFlags:(int)flags;
+- (WDPickResult*) snappedPoint:(CGPoint) pt viewScale:(float)viewScale snapFlags:(int)flags;
 
 - (void) addBlendablesToArray:(NSMutableArray *)array;
 - (void) addElementsToArray:(NSMutableArray *)array;
@@ -115,7 +115,7 @@ typedef enum {
 - (BOOL) canInspectProperty:(NSString*)property;
 - (void) propertyChanged:(NSString*)property;
 - (void) propertiesChanged:(NSSet*)property;
-- (id) pathPainterAtPoint:(CGPoint)pt;
+- (id) pathPainterAtPoint:(CGPoint) pt;
 - (BOOL) hasFill;
 
 - (BOOL) needsToSaveGState:(float)scale;

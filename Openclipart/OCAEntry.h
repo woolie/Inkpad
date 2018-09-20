@@ -18,9 +18,9 @@
 @property (nonatomic) NSUInteger ID;
 @property (nonatomic) NSUInteger favorites;
 @property (nonatomic) NSUInteger downloads;
-@property (nonatomic) NSString* sVGURL;
+@property (nonatomic) NSString* svgURL;
 @property (nonatomic) NSString* thumbURL;
 
-+ (OCAEntry *) openClipArtEntryWithDictionary:(NSDictionary*)dict;
++ (OCAEntry*) openClipArtEntryWithDictionary:(NSDictionary*)dict;
 
 @end

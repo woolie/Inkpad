@@ -19,7 +19,7 @@
 	return @"rotate.png";
 }
 
-- (CGAffineTransform) computeTransform:(CGPoint)pt pivot:(CGPoint)pivot constrain:(WDToolFlags)flags
+- (CGAffineTransform) computeTransform:(CGPoint) pt pivot:(CGPoint)pivot constrain:(WDToolFlags)flags
 {
 	CGPoint delta = WDSubtractPoints(self.initialEvent.location, pivot);
 	double offsetAngle = atan2(delta.y, delta.x);

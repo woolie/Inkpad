@@ -1210,7 +1210,7 @@
 	[self.drawingController.propertyManager updateUserDefaults];
 }
 
-- (void) viewWillDisappear:(BOOL)animated
+- (void) viewWillDisappear:(BOOL) animated
 {
 	[self hidePopovers];
 	
@@ -1218,7 +1218,7 @@
 	[WDToolManager sharedInstance].activeTool = ([WDToolManager sharedInstance].tools)[0];
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL) animated
 {
 	if (canvas_.drawing) {
 		return;

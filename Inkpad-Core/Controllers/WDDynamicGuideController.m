@@ -159,7 +159,7 @@ const float kDynamicGuideSnappingTolerance = 10.0f;
 
 #pragma mark - Finding Snapped Guides
 
-- (NSArray*) snappedGuidesForPoint:(CGPoint)pt
+- (NSArray*) snappedGuidesForPoint:(CGPoint) pt
 {
 	NSMutableArray *snapped = [NSMutableArray array];
 	
@@ -214,7 +214,7 @@ const float kDynamicGuideSnappingTolerance = 10.0f;
 
 #pragma mark - Calculating Offsets
 
-- (CGPoint) adjustedPointForGuides:(CGPoint)pt viewScale:(float)viewScale
+- (CGPoint) adjustedPointForGuides:(CGPoint) pt viewScale:(float)viewScale
 {
 	double	  hDelta, vDelta;
 	double	  tolerance = (kDynamicGuideSnappingTolerance / viewScale);

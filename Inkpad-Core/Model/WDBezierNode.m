@@ -38,12 +38,12 @@ NSString* WDPointArrayKey = @"WDPointArrayKey";
 @synthesize outPoint = outPoint_;
 @synthesize selected = selected_;
 
-+ (WDBezierNode*) bezierNodeWithAnchorPoint:(CGPoint)pt
++ (WDBezierNode*) bezierNodeWithAnchorPoint:(CGPoint) pt
 {
 	return [[WDBezierNode alloc] initWithAnchorPoint:pt];
 }
 
-+ (WDBezierNode*) bezierNodeWithInPoint:(CGPoint)inPoint anchorPoint:(CGPoint)pt outPoint:(CGPoint)outPoint
++ (WDBezierNode*) bezierNodeWithInPoint:(CGPoint)inPoint anchorPoint:(CGPoint) pt outPoint:(CGPoint)outPoint
 {
 	return [[WDBezierNode alloc] initWithInPoint:inPoint anchorPoint:pt outPoint:outPoint];
 }
@@ -60,7 +60,7 @@ NSString* WDPointArrayKey = @"WDPointArrayKey";
 	return node;
 }
 
-- (instancetype) initWithAnchorPoint:(CGPoint)pt
+- (instancetype) initWithAnchorPoint:(CGPoint) pt
 {
 	self = [super init];
 	
@@ -73,7 +73,7 @@ NSString* WDPointArrayKey = @"WDPointArrayKey";
 	return self;
 }
 
-- (instancetype) initWithInPoint:(CGPoint)inPoint anchorPoint:(CGPoint)pt outPoint:(CGPoint)outPoint
+- (instancetype) initWithInPoint:(CGPoint)inPoint anchorPoint:(CGPoint) pt outPoint:(CGPoint)outPoint
 {
 	self = [super init];
 	
@@ -176,7 +176,7 @@ NSString* WDPointArrayKey = @"WDPointArrayKey";
 	return !WDCollinear(inPoint_, anchorPoint_, outPoint_);
 }
 
-- (WDBezierNode*) transform:(CGAffineTransform)transform
+- (WDBezierNode*) transform:(CGAffineTransform) transform
 {
 	CGPoint tXIn = CGPointApplyAffineTransform(inPoint_, transform);
 	CGPoint tXAnchor = CGPointApplyAffineTransform(anchorPoint_, transform);
@@ -187,7 +187,7 @@ NSString* WDPointArrayKey = @"WDPointArrayKey";
 	return transformed;
 }
 
-- (WDBezierNode*) setInPoint:(CGPoint)pt reflectionMode:(WDBezierNodeReflectionMode)reflectionMode
+- (WDBezierNode*) setInPoint:(CGPoint) pt reflectionMode:(WDBezierNodeReflectionMode)reflectionMode
 {
 	CGPoint flippedPoint = WDAddPoints(anchorPoint_, WDSubtractPoints(anchorPoint_, pt));
 	// special case when closing a path
@@ -221,7 +221,7 @@ NSString* WDPointArrayKey = @"WDPointArrayKey";
 	}
 }
 
-- (WDBezierNode*) moveControlHandle:(WDPickResultType)pointToTransform toPoint:(CGPoint)pt reflectionMode:(WDBezierNodeReflectionMode)reflectionMode
+- (WDBezierNode*) moveControlHandle:(WDPickResultType)pointToTransform toPoint:(CGPoint) pt reflectionMode:(WDBezierNodeReflectionMode)reflectionMode
 {
 	CGPoint	 inPoint = inPoint_, outPoint = outPoint_;
 	
@@ -290,7 +290,7 @@ NSString* WDPointArrayKey = @"WDPointArrayKey";
 
 @implementation WDBezierNode (GLRendering)
 
-- (void) drawGLWithViewTransform:(CGAffineTransform)transform color:(UIColor *)color mode:(WDBezierNodeRenderMode)mode
+- (void) drawGLWithViewTransform:(CGAffineTransform) transform color:(UIColor *)color mode:(WDBezierNodeRenderMode)mode
 {
 	CGPoint anchor, inPoint, outPoint;
 	

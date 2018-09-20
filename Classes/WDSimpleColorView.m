@@ -22,7 +22,7 @@
 	[self setNeedsDisplay];
 }
 
-- (void) drawRect:(CGRect)rect
+- (void) drawRect:(CGRect) rect
 {
 	[color_ set];
 	UIRectFill(self.bounds);

@@ -60,7 +60,7 @@
 	[self setNeedsDisplay];
 }
 
-- (void)drawRect:(CGRect)rect
+- (void)drawRect:(CGRect) rect
 {
 	CGContextRef	ctx = UIGraphicsGetCurrentContext();
 	CGRect		  bounds = CGRectInset([self bounds], 2, 2);
@@ -79,7 +79,7 @@
 	CGContextFillEllipseInRect(ctx, bounds);
 }
 
-- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {
+- (BOOL)pointInside:(CGPoint) point withEvent:(UIEvent *)event {
 	return NO;
 }
 

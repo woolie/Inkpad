@@ -345,7 +345,7 @@ NSString* WDAlphaKey = @"WDAlphaKey";
 	}
 }
 
-- (void) drawSwatchInRect:(CGRect)rect
+- (void) drawSwatchInRect:(CGRect) rect
 {
 	CGContextRef ctx = UIGraphicsGetCurrentContext();
 	WDDrawTransparencyDiamondInRect(ctx, rect);
@@ -354,7 +354,7 @@ NSString* WDAlphaKey = @"WDAlphaKey";
 	CGContextFillRect(ctx, rect);
 }
 
-- (void) drawEyedropperSwatchInRect:(CGRect)rect
+- (void) drawEyedropperSwatchInRect:(CGRect) rect
 {
 	[self drawSwatchInRect:rect];
 }

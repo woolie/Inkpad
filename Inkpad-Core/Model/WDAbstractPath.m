@@ -56,7 +56,7 @@ NSString* WDFillRuleKey = @"WDFillRuleKey";
 	return NULL;
 }
 
-- (BOOL) containsPoint:(CGPoint)pt
+- (BOOL) containsPoint:(CGPoint) pt
 {
 	return CGPathContainsPoint(self.pathRef, NULL, pt, false);
 }

@@ -69,7 +69,7 @@ NSString* WDShapeToolSpiralDecay = @"WDShapeToolSpiralDecay";
 	[[NSUserDefaults standardUserDefaults] setValue:@(shapeMode_) forKey:WDDefaultShapeTool];
 }
 
-- (WDPath *) pathWithPoint:(CGPoint)pt constrain:(BOOL)constrain
+- (WDPath *) pathWithPoint:(CGPoint) pt constrain:(BOOL)constrain
 {
 	CGPoint initialPoint = self.initialEvent.snappedLocation;
 	

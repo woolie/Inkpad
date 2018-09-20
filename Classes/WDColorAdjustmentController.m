@@ -70,7 +70,7 @@
 	 ];
 }
 
-- (void) dismissAnimated:(BOOL)animated
+- (void) dismissAnimated:(BOOL) animated
 {
 	[blockingView_ removeFromSuperview];
 	blockingView_ = nil;
@@ -179,7 +179,7 @@
 	[self.view addParallaxEffect];
 }
 
-- (void) constrainOriginToSuperview:(CGPoint)origin animated:(BOOL)animated
+- (void) constrainOriginToSuperview:(CGPoint)origin animated:(BOOL) animated
 {
 	CGRect frame = self.view.frame;
 	
@@ -201,7 +201,7 @@
 	}
 }
 
-- (void) bringOnScreenAnimated:(BOOL)animated
+- (void) bringOnScreenAnimated:(BOOL) animated
 {
 	if (CGRectContainsRect(self.view.superview.bounds, self.view.frame)) {
 		return;

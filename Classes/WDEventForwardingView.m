@@ -24,7 +24,7 @@
 	self.backgroundColor = nil;
 }
 
-- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
+- (UIView *)hitTest:(CGPoint) point withEvent:(UIEvent *)event
 {
 	UIView *view = [super hitTest:point withEvent:event];
 	

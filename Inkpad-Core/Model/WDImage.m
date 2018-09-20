@@ -130,12 +130,12 @@ NSString* WDImageDataKey = @"WDImageDataKey";
 	return pathRef_;
 }
 
-- (BOOL) containsPoint:(CGPoint)pt
+- (BOOL) containsPoint:(CGPoint) pt
 {
 	return CGPathContainsPoint(self.pathRef, NULL, pt, 0);
 }
 
-- (BOOL) intersectsRect:(CGRect)rect
+- (BOOL) intersectsRect:(CGRect) rect
 {
 	CGPoint	 ul, ur, lr, ll;
 	
@@ -191,7 +191,7 @@ NSString* WDImageDataKey = @"WDImageDataKey";
 	}
 }
 
-- (void) setTransform:(CGAffineTransform)transform
+- (void) setTransform:(CGAffineTransform) transform
 {
 	[self cacheDirtyBounds];
 	
@@ -205,27 +205,27 @@ NSString* WDImageDataKey = @"WDImageDataKey";
 	[self postDirtyBoundsChange];
 }
 
-- (NSSet*) transform:(CGAffineTransform)transform
+- (NSSet*) transform:(CGAffineTransform) transform
 {
 	self.transform = CGAffineTransformConcat(transform_, transform);
 	return nil;
 }
 
-- (void) drawOpenGLAnchorsWithViewTransform:(CGAffineTransform)transform
+- (void) drawOpenGLAnchorsWithViewTransform:(CGAffineTransform) transform
 {
 	for (int i = 0; i < 4; i++) {
 		[self drawOpenGLAnchorAtPoint:CGPointApplyAffineTransform(corner_[i], transform_) transform:transform selected:YES];
 	}
 }
 
-- (void) drawOpenGLHandlesWithTransform:(CGAffineTransform)transform viewTransform:(CGAffineTransform)viewTransform
+- (void) drawOpenGLHandlesWithTransform:(CGAffineTransform) transform viewTransform:(CGAffineTransform)viewTransform
 {
 	for (int i = 0; i < 4; i++) {
 		[self drawOpenGLAnchorAtPoint:CGPointApplyAffineTransform(corner_[i], transform_) transform:viewTransform selected:YES];
 	}
 }
 
-- (void) drawOpenGLHighlightWithTransform:(CGAffineTransform)transform viewTransform:(CGAffineTransform)viewTransform
+- (void) drawOpenGLHighlightWithTransform:(CGAffineTransform) transform viewTransform:(CGAffineTransform)viewTransform
 {
 	CGAffineTransform   tX;
 	CGPoint			 ul, ur, lr, ll;
@@ -256,7 +256,7 @@ NSString* WDImageDataKey = @"WDImageDataKey";
 	WDGLLineFromPointToPoint(ll, ur);
 }
 
-- (WDPickResult *) hitResultForPoint:(CGPoint)point viewScale:(float)viewScale snapFlags:(int)flags
+- (WDPickResult *) hitResultForPoint:(CGPoint) point viewScale:(float)viewScale snapFlags:(int)flags
 {
 	WDPickResult		*result = [WDPickResult pickResult];
 	CGRect			  pointRect = WDRectFromPoint(point, kNodeSelectionTolerance / viewScale, kNodeSelectionTolerance / viewScale);
@@ -284,7 +284,7 @@ NSString* WDImageDataKey = @"WDImageDataKey";
 	return result;
 }
 
-- (WDPickResult *) snappedPoint:(CGPoint)point viewScale:(float)viewScale snapFlags:(int)flags
+- (WDPickResult *) snappedPoint:(CGPoint) point viewScale:(float)viewScale snapFlags:(int)flags
 {
 	WDPickResult		*result = [WDPickResult pickResult];
 	CGRect			  pointRect = WDRectFromPoint(point, kNodeSelectionTolerance / viewScale, kNodeSelectionTolerance / viewScale);
@@ -304,7 +304,7 @@ NSString* WDImageDataKey = @"WDImageDataKey";
 	return result;
 }
 
-- (id) pathPainterAtPoint:(CGPoint)pt
+- (id) pathPainterAtPoint:(CGPoint) pt
 {
 	if (!CGPathContainsPoint(self.pathRef, NULL, pt, true)) {
 		return nil;

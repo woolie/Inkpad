@@ -15,6 +15,6 @@
 	CGAffineTransform   transform_;
 }
 
-- (CGAffineTransform) computeTransform:(CGPoint)pt pivot:(CGPoint)pivot constrain:(WDToolFlags)flags;
+- (CGAffineTransform) computeTransform:(CGPoint) pt pivot:(CGPoint)pivot constrain:(WDToolFlags)flags;
 
 @end

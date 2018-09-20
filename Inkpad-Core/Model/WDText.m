@@ -242,12 +242,12 @@ NSString* WDAlignmentKey = @"WDAlignmentKey";
 	}
 }
 
-- (BOOL) containsPoint:(CGPoint)pt
+- (BOOL) containsPoint:(CGPoint) pt
 {
 	return CGPathContainsPoint(self.pathRef, NULL, pt, 0);
 }
 
-- (BOOL) intersectsRect:(CGRect)rect
+- (BOOL) intersectsRect:(CGRect) rect
 {
 	CGPoint	 ul, ur, lr, ll;
 	CGRect	  naturalBounds = self.naturalBounds;
@@ -572,12 +572,12 @@ NSString* WDAlignmentKey = @"WDAlignmentKey";
 	return nil;
 }
 
-- (void) setTransformQuiet:(CGAffineTransform)transform
+- (void) setTransformQuiet:(CGAffineTransform) transform
 {
 	_transform = transform;
 }
 
-- (void) setTransform:(CGAffineTransform)transform
+- (void) setTransform:(CGAffineTransform) transform
 {
 	[self cacheDirtyBounds];
 	
@@ -588,7 +588,7 @@ NSString* WDAlignmentKey = @"WDAlignmentKey";
 	[self invalidatePreservingAttributedString:YES];
 }
 
-- (NSSet*) transform:(CGAffineTransform)transform
+- (NSSet*) transform:(CGAffineTransform) transform
 {
 	[super transform:transform];
 	self.transform = CGAffineTransformConcat(_transform, transform);
@@ -603,7 +603,7 @@ NSString* WDAlignmentKey = @"WDAlignmentKey";
 	}
 }
 
-- (void) drawOpenGLHighlightWithTransform:(CGAffineTransform)transform viewTransform:(CGAffineTransform)viewTransform
+- (void) drawOpenGLHighlightWithTransform:(CGAffineTransform) transform viewTransform:(CGAffineTransform)viewTransform
 {
 	CGAffineTransform   tX;
 	CGPoint			 ul, ur, lr, ll;
@@ -636,7 +636,7 @@ NSString* WDAlignmentKey = @"WDAlignmentKey";
 	}
 }
 
-- (void) drawOpenGLAnchorsWithViewTransform:(CGAffineTransform)transform
+- (void) drawOpenGLAnchorsWithViewTransform:(CGAffineTransform) transform
 {
 	CGPoint left, right;
 	
@@ -650,7 +650,7 @@ NSString* WDAlignmentKey = @"WDAlignmentKey";
 	[self drawOpenGLAnchorAtPoint:right transform:transform selected:YES];
 }
 
-- (void) drawOpenGLHandlesWithTransform:(CGAffineTransform)transform viewTransform:(CGAffineTransform)viewTransform
+- (void) drawOpenGLHandlesWithTransform:(CGAffineTransform) transform viewTransform:(CGAffineTransform)viewTransform
 {
 	CGPoint left, right;
 	
@@ -664,7 +664,7 @@ NSString* WDAlignmentKey = @"WDAlignmentKey";
 	[self drawOpenGLAnchorAtPoint:right transform:viewTransform selected:NO];
 }
 
-- (WDPickResult *) snapEdges:(CGPoint)point viewScale:(float)viewScale
+- (WDPickResult *) snapEdges:(CGPoint) point viewScale:(float)viewScale
 {
 	WDPickResult		*result = [WDPickResult pickResult];
 	WDBezierSegment	 segment;
@@ -693,7 +693,7 @@ NSString* WDAlignmentKey = @"WDAlignmentKey";
 	return result;
 }
 
-- (WDPickResult *) hitResultForPoint:(CGPoint)point viewScale:(float)viewScale snapFlags:(int)flags
+- (WDPickResult *) hitResultForPoint:(CGPoint) point viewScale:(float)viewScale snapFlags:(int)flags
 {
 	WDPickResult		*result = [WDPickResult pickResult];
 	CGRect			  pointRect = WDRectFromPoint(point, kNodeSelectionTolerance / viewScale, kNodeSelectionTolerance / viewScale);
@@ -765,7 +765,7 @@ NSString* WDAlignmentKey = @"WDAlignmentKey";
 	return result;
 }
 
-- (void) moveHandle:(NSUInteger)handle toPoint:(CGPoint)pt
+- (void) moveHandle:(NSUInteger)handle toPoint:(CGPoint) pt
 {
 	CGPoint			 left = CGPointMake(0, CGRectGetHeight(self.naturalBounds) / 2);
 	CGPoint			 right = CGPointMake(_width, CGRectGetHeight(self.naturalBounds) / 2);
@@ -1023,7 +1023,7 @@ NSString* WDAlignmentKey = @"WDAlignmentKey";
 	return [paths copy];
 }
 
-- (void) drawOpenGLTextOutlinesWithTransform:(CGAffineTransform)transform viewTransform:(CGAffineTransform)viewTransform
+- (void) drawOpenGLTextOutlinesWithTransform:(CGAffineTransform) transform viewTransform:(CGAffineTransform)viewTransform
 {
 	[self.layer.highlightColor openGLSet];
 	

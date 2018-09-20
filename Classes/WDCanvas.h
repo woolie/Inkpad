@@ -26,40 +26,22 @@
 
 @interface WDCanvas : UIView
 {
-	WDSelectionView*		_selectionView;
-	WDEraserPreviewView*	_eraserPreview;
-	
 	BOOL					_controlGesture;
 	BOOL					_moved;
-	BOOL					_transforming;
-	BOOL					_transformingNode;
-	BOOL					_showingPivot;
-	CGAffineTransform		_selectionTransform;
-	CGPoint					_pivot;
 	UIColor*				_isolationColor;
-	
-	NSValue*				_marquee;
-	WDPath*					_shapeUnderConstruction;
-	WDPath*					_eraserPath;
 	
 	// managing the view scale and visible area
 	float					_trueViewScale;
-	float					_viewScale;
-	CGAffineTransform		_transform;
 	CGPoint					_userSpacePivot;
 	CGPoint					_deviceSpacePivot;
 	CGPoint					_oldDeviceSpacePivot;
 	
 	// adornments
 	UIImageView*			_pivotView;
-	WDEyedropper*		 	_eyedropper;
-	
+
 	// rulers
-	WDRulerView*			_horizontalRuler;
-	WDRulerView*			_verticalRuler;
 	WDRulerCornerView*	  	_cornerView;
 	
-	WDPalette*				_toolPalette;
 	UIButton*				_deleteButton; // pseudo delete tool
 	CGPoint				 	_cachedCenter;
 	

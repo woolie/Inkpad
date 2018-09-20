@@ -63,7 +63,7 @@ NSString* WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
 		self.clearsContextBeforeDrawing = YES;
 	
 		_selectionTransform = CGAffineTransformIdentity;
-		_transform = CGAffineTransformIdentity;
+		_canvasTransform = CGAffineTransformIdentity;
 	
 		self.backgroundColor = [UIColor whiteColor];
 	
@@ -78,7 +78,7 @@ NSString* WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
 
 - (void) registerInvalidateNotifications:(NSArray*)array
 {
-	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+	NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
 
 	for (NSString* name in array)
 	{
@@ -89,14 +89,14 @@ NSString* WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
 	}
 }
 
-- (void) setDrawing:(WDDrawing *)drawing
+- (void) setDrawing:(WDDrawing*) drawing
 {
 	if (_drawing == drawing)
 	{
 		return;
 	}
 	
-	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+	NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
 	
 	if (_drawing)
 	{
@@ -109,7 +109,7 @@ NSString* WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
 	_drawing = drawing;
 	
 	// register for notifications
-	NSArray *invalidations = @[WDElementChanged,
+	NSArray* invalidations = @[WDElementChanged,
 								  WDDrawingChangedNotification,
 								  WDLayersReorderedNotification,
 								  WDLayerAddedNotification, 
@@ -148,17 +148,17 @@ NSString* WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
 	[self scaleDocumentToFit];
 }
 
-- (WDDrawingController *) drawingController
+- (WDDrawingController*) drawingController
 {
 	return _controller.drawingController;
 }
 
-- (void) drawingDimensionsChanged:(NSNotification *)aNotification
+- (void) drawingDimensionsChanged:(NSNotification*) aNotification
 {
 	[self scaleDocumentToFit];
 }
 
-- (void) unitsChanged:(NSNotification *)aNotification
+- (void) unitsChanged:(NSNotification*) aNotification
 {
 	_horizontalRuler.units = _drawing.units;
 	_verticalRuler.units = _drawing.units;
@@ -166,7 +166,7 @@ NSString* WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
 	[_controller updateTitle];
 }
 
-- (void) gridSpacingChanged:(NSNotification *)aNotification
+- (void) gridSpacingChanged:(NSNotification*) aNotification
 {
 	[self setNeedsDisplay];
 }
@@ -352,7 +352,7 @@ NSString* WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
 - (CGRect) visibleRect
 {
 	CGRect				rect = self.bounds;
-	CGAffineTransform	invert = _transform;
+	CGAffineTransform	invert = _canvasTransform;
 
 	invert = CGAffineTransformInvert(invert);
 	rect = CGRectApplyAffineTransform(rect, invert);
@@ -373,7 +373,7 @@ NSString* WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
 - (float) effectiveBackgroundGray
 {
 	// opaque version of the background gray blended over white
-	return [self backgroundGrayLevel] * [self backgroundOpacity] + (1.0f - [self backgroundOpacity]);
+	return self.backgroundGrayLevel * self.backgroundOpacity + (1.0f - self.backgroundOpacity);
 }
 
 - (void) drawDocumentBorder:(CGContextRef)ctx
@@ -391,7 +391,7 @@ NSString* WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
 	CGContextEOFillPath(ctx);
 	
 	CGContextSetRGBStrokeColor(ctx, 0, 0, 0, 1);
-	CGContextSetLineWidth(ctx, 1.0f / (_viewScale * [UIScreen mainScreen].scale));
+	CGContextSetLineWidth(ctx, 1.0f / (_viewScale * UIScreen.mainScreen.scale));
 	CGContextStrokeRect(ctx, docBounds);
 }	
 
@@ -498,7 +498,7 @@ NSString* WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
 	BOOL			outlineMode = _drawing.outlineMode;
 	
 #ifdef WD_DEBUG
-	NSDate		  *date = [NSDate date];
+	NSDate*			date = [NSDate date];
 #endif
 	
 	if (DEBUG_DIRTY_RECTS)
@@ -508,12 +508,12 @@ NSString* WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
 	}
 	
 	// map the clip rect back into document space
-	CGAffineTransform   invert = _transform;
+	CGAffineTransform   invert = _canvasTransform;
 	invert = CGAffineTransformInvert(invert);
 	rect = CGRectApplyAffineTransform(rect, invert);
 	
 	CGContextSaveGState(ctx);
-	CGContextConcatCTM(ctx, _transform);
+	CGContextConcatCTM(ctx, _canvasTransform);
 
 	if (_drawing.showGrid && !drawingIsolatedLayer)
 	{
@@ -526,7 +526,7 @@ NSString* WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
 		CGContextSetLineWidth(ctx, self.thinWidth);
 	}
 	
-	WDLayer *activeLayer = _drawing.activeLayer;
+	WDLayer* activeLayer = _drawing.activeLayer;
 	
 	if (!_controlGesture)
 	{
@@ -538,7 +538,7 @@ NSString* WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
 			CGContextBeginTransparencyLayer(ctx, NULL);
 		}
 
-		for (WDLayer *layer in _drawing.layers){
+		for (WDLayer* layer in _drawing.layers){
 			if (layer.hidden || (drawingIsolatedLayer && (layer == activeLayer)))
 			{
 				continue;
@@ -623,9 +623,9 @@ NSString* WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
 
 - (void) rebuildViewTransform_
 {	
-	_transform = CGAffineTransformMakeTranslation(_deviceSpacePivot.x, _deviceSpacePivot.y);
-	_transform = CGAffineTransformScale(_transform, _viewScale, _viewScale);
-	_transform = CGAffineTransformTranslate(_transform, -_userSpacePivot.x, -_userSpacePivot.y);
+	_canvasTransform = CGAffineTransformMakeTranslation(_deviceSpacePivot.x, _deviceSpacePivot.y);
+	_canvasTransform = CGAffineTransformScale(_canvasTransform, _viewScale, _viewScale);
+	_canvasTransform = CGAffineTransformTranslate(_canvasTransform, -_userSpacePivot.x, -_userSpacePivot.y);
 	
 	[_horizontalRuler setNeedsDisplay];
 	[_verticalRuler setNeedsDisplay];
@@ -634,7 +634,7 @@ NSString* WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
 	
 	if (_pivotView)
 	{
-		_pivotView.sharpCenter = CGPointApplyAffineTransform(_pivot, _transform);
+		_pivotView.sharpCenter = CGPointApplyAffineTransform(_pivot, _canvasTransform);
 	}
 }
 
@@ -686,18 +686,18 @@ NSString* WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
 	[self rebuildViewTransform_];
 }
 
-/*
- * called from within touchesMoved:withEvent:
- */
-- (void) gestureMovedWithEvent:(UIEvent *)event
+//
+// called from within touchesMoved:withEvent:
+//
+- (void) gestureMovedWithEvent:(UIEvent*) event
 {
-	UIView  *superview = self.superview;
-	NSSet   *touches = event.allTouches;
+	UIView* superview = self.superview;
+	NSSet*	touches = event.allTouches;
 	
 	if ([touches count] == 1)
 	{
 		// with 1 finger down, pan only
-		UITouch *touch = [touches anyObject];
+		UITouch* touch = [touches anyObject];
 		
 		CGPoint delta = WDSubtractPoints([touch locationInView:superview], [touch previousLocationInView:superview]);
 		[self offsetByDelta:delta];
@@ -705,9 +705,9 @@ NSString* WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
 		return;
 	}
 	
-	NSArray *allTouches = [touches allObjects];
-	UITouch *first = allTouches[0];
-	UITouch *second = allTouches[1];
+	NSArray* allTouches = [touches allObjects];
+	UITouch* first = allTouches[0];
+	UITouch* second = allTouches[1];
 	
 	// compute the scaling
 	double oldDistance = WDDistance([first previousLocationInView:superview], [second previousLocationInView:superview]);
@@ -723,19 +723,19 @@ NSString* WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
 
 - (CGRect) convertRectToView:(CGRect) rect
 {
-	return CGRectApplyAffineTransform(rect, _transform);
+	return CGRectApplyAffineTransform(rect, _canvasTransform);
 }
 
 - (CGPoint) convertPointToDocumentSpace:(CGPoint) pt
 {
-	CGAffineTransform invert = _transform;
+	CGAffineTransform invert = _canvasTransform;
 	invert = CGAffineTransformInvert(invert);
 	return CGPointApplyAffineTransform(pt, invert); 
 }
 		  
 - (CGPoint) convertPointFromDocumentSpace:(CGPoint) pt
 {
-	return CGPointApplyAffineTransform(pt, _transform);
+	return CGPointApplyAffineTransform(pt, _canvasTransform);
 }
 
 - (BOOL) canSendTouchToActiveTool
@@ -798,7 +798,7 @@ NSString* WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
 		UITouch* second = allTouches[1];
 		
 		_deviceSpacePivot = WDAveragePoints([first locationInView:self], [second locationInView:self]);
-		CGAffineTransform invert = _transform;
+		CGAffineTransform invert = _canvasTransform;
 		invert = CGAffineTransformInvert(invert);
 		_userSpacePivot = CGPointApplyAffineTransform(_deviceSpacePivot, invert);
 	}
@@ -832,11 +832,12 @@ NSString* WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
 	}
 }
 
-- (void) touchesEnded:(NSSet*)touches withEvent:(UIEvent *)event
+- (void) touchesEnded:(NSSet*) touches
+			withEvent:(UIEvent*) event
 {
 	BOOL allTouchesAreEnding = YES;
 	
-	for (UITouch *touch in event.allTouches)
+	for (UITouch* touch in event.allTouches)
 	{
 		if (touch.phase != UITouchPhaseEnded && touch.phase != UITouchPhaseCancelled)
 		{
@@ -866,7 +867,8 @@ NSString* WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
 	}
 }
 	
-- (void)touchesCancelled:(NSSet*)touches withEvent:(UIEvent *)event
+- (void) touchesCancelled:(NSSet*) touches
+			    withEvent:(UIEvent*) event
 {
 	[self touchesEnded:touches withEvent:event];
 }
@@ -914,7 +916,7 @@ NSString* WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
 		return;
 	}
 	
-	WDToolView *tools = [[WDToolView alloc] initWithTools:[WDToolManager sharedInstance].tools];
+	WDToolView* tools = [[WDToolView alloc] initWithTools:[WDToolManager sharedInstance].tools];
 	tools.canvas = self;
 	
 	CGRect frame = tools.frame;
@@ -922,16 +924,16 @@ NSString* WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
 	float bottom = CGRectGetHeight(tools.frame);
 	
 	// create a base view for all the palette elements
-	UIView *paletteView = [[UIView alloc] initWithFrame:frame];
+	UIView* paletteView = [[UIView alloc] initWithFrame:frame];
 	[paletteView addSubview:tools];
 	
 	// add a separator
-	WDEtchedLine *line = [[WDEtchedLine alloc] initWithFrame:CGRectMake(2, bottom + 1, CGRectGetWidth(frame) - 4, 2)];
+	WDEtchedLine* line = [[WDEtchedLine alloc] initWithFrame:CGRectMake(2, bottom + 1, CGRectGetWidth(frame) - 4, 2)];
 	[paletteView addSubview:line];
 	
 	// add a "delete" buttton
 	_deleteButton = [UIButton buttonWithType:UIButtonTypeCustom];
-	UIImage *icon = [[UIImage imageNamed:@"trash.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+	UIImage* icon = [[UIImage imageNamed:@"trash.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
 	_deleteButton.frame = CGRectMake(0, bottom + 3, [WDToolButton dimension], [WDToolButton dimension]);
 	[_deleteButton setImage:icon forState:UIControlStateNormal];
 	_deleteButton.tintColor = [UIColor colorWithRed:(166.0f / 255.0f) green:(51.0f / 255.0f) blue:(51.0 / 255.0f) alpha:1.0f];
@@ -956,7 +958,7 @@ NSString* WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
 	_transforming = transforming;
 }
 
-- (void) selectionChanged:(NSNotification *)aNotification
+- (void) selectionChanged:(NSNotification*) aNotification
 {
 	_deleteButton.enabled = (self.drawingController.selectedObjects.count > 0) ? YES : NO;
 	
@@ -964,7 +966,7 @@ NSString* WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
 	[self invalidateSelectionView];
 }
 
-- (void) invalidateFromNotification:(NSNotification *)aNotification
+- (void) invalidateFromNotification:(NSNotification*) aNotification
 {
 	NSValue*	rectValue = [aNotification userInfo][@"rect"];
 	NSArray*	rects = [aNotification userInfo][@"rects"];
@@ -987,7 +989,7 @@ NSString* WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
 	}
 	else if (rects)
 	{
-		for (NSValue *rectValue in rects)
+		for (NSValue* rectValue in rects)
 		{
 			dirtyRect = [rectValue CGRectValue];
 			
@@ -1023,7 +1025,7 @@ NSString* WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
 		[self insertSubview:_pivotView atIndex:0];
 	}
 	
-	_pivotView.sharpCenter = CGPointApplyAffineTransform(pivot, _transform);
+	_pivotView.sharpCenter = CGPointApplyAffineTransform(pivot, _canvasTransform);
 }
 
 - (void) setShowsPivot:(BOOL)showsPivot
@@ -1056,7 +1058,7 @@ NSString* WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
 	_toolOptionsView.sharpCenter = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMaxY(self.bounds) - (CGRectGetHeight(_toolOptionsView.frame) / 2) - 15);
 }
 
-- (void) setToolOptionsView:(UIView *)toolOptionsView
+- (void) setToolOptionsView:(UIView*) toolOptionsView
 {
 	[_toolOptionsView removeFromSuperview];
 	
@@ -1145,21 +1147,21 @@ NSString* WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
 	[_toolPalette bringOnScreen];
 }
 
-- (void) keyboardWillShow:(NSNotification *)aNotification
+- (void) keyboardWillShow:(NSNotification*) aNotification
 {
-	NSValue *endFrame = [aNotification userInfo][UIKeyboardFrameEndUserInfoKey];
+	NSValue* endFrame = [aNotification userInfo][UIKeyboardFrameEndUserInfoKey];
 	CGRect frame = [endFrame CGRectValue];
 	
 	frame = [self convertRect:frame fromView:nil];
 	
 	if (self.drawingController.selectedObjects.count == 1)
 	{
-		WDElement *selectedObject = [self.drawingController.selectedObjects anyObject];
+		WDElement* selectedObject = [self.drawingController.selectedObjects anyObject];
 		
 		if ([selectedObject hasEditableText])
 		{
 			CGPoint top = WDCenterOfRect(selectedObject.bounds);
-			top = CGPointApplyAffineTransform(top, _transform);
+			top = CGPointApplyAffineTransform(top, _canvasTransform);
 			
 			if (top.y > CGRectGetMinY(frame))
 			{
@@ -1186,7 +1188,7 @@ NSString* WDCanvasBeganTrackingTouches = @"WDCanvasBeganTrackingTouches";
 	}
 }
 
-- (void) hideMessage:(NSTimer *)timer
+- (void) hideMessage:(NSTimer*) timer
 {
 	[self nixMessageLabel];
 }

@@ -18,56 +18,56 @@
 
 @interface WDLayer : NSObject <NSCoding, NSCopying>
 
-@property (nonatomic, readonly) NSMutableArray *elements;
-@property (nonatomic, strong) UIColor *highlightColor;
-@property (nonatomic, weak) WDDrawing *drawing;
-@property (nonatomic, strong) NSString *name;
+@property (nonatomic, readonly) NSMutableArray<WDElement*>* elements;
+@property (nonatomic, strong) UIColor* highlightColor;
+@property (nonatomic, weak) WDDrawing* drawing;
+@property (nonatomic, strong) NSString* name;
 @property (nonatomic, assign) BOOL visible;
 @property (nonatomic, assign) BOOL hidden;
 @property (nonatomic, assign) BOOL locked;
 @property (nonatomic, assign) float opacity;
 @property (nonatomic, readonly) BOOL editable;
 @property (nonatomic, readonly) CGRect styleBounds;
-@property (weak, nonatomic, readonly) UIImage *thumbnail;
+@property (weak, nonatomic, readonly) UIImage* thumbnail;
 @property (nonatomic, readonly) BOOL isSuppressingNotifications;
 
-+ (WDLayer *) layer;
++ (instancetype) layer;
 
-- (instancetype) initWithElements:(NSMutableArray *)elements;
+- (instancetype) initWithElements:(NSMutableArray<WDElement*>*) elements;
 - (void) awakeFromEncoding;
 
-- (void) renderInContext:(CGContextRef)ctx clipRect:(CGRect)clip metaData:(WDRenderingMetaData)metaData;
+- (void) renderInContext:(CGContextRef) ctx clipRect:(CGRect) clip metaData:(WDRenderingMetaData) metaData;
 
-- (void) addObject:(id)obj;
-- (void) addObjects:(NSArray *)objects;
-- (void) removeObject:(id)obj;
-- (void) insertObject:(WDElement *)element above:(WDElement *)above;
+- (void) addObject:(WDElement*) obj;
+- (void) addObjects:(NSArray<WDElement*>*) objects;
+- (void) removeObject:(WDElement*) obj;
+- (void) insertObject:(WDElement*) element above:(WDElement*) above;
 
-- (void) addElementsToArray:(NSMutableArray *)elements;
+- (void) addElementsToArray:(NSMutableArray*) elements;
 
-- (void) sendBackward:(NSSet *)elements;
-- (void) sendToBack:(NSArray *)sortedElements;
-- (void) bringForward:(NSSet *)sortedElements;
-- (void) bringToFront:(NSArray *)sortedElements;
+- (void) sendBackward:(NSSet*) elements;
+- (void) sendToBack:(NSArray*) sortedElements;
+- (void) bringForward:(NSSet*) sortedElements;
+- (void) bringToFront:(NSArray*) sortedElements;
 
 - (void) invalidateThumbnail;
 
 // draw the layer contents scaled to fit within bounds
-- (UIImage *) previewInRect:(CGRect)bounds;
+- (UIImage*) previewInRect:(CGRect)bounds;
 
 - (void) toggleLocked;
 - (void) toggleVisibility;
 
-- (WDXMLElement *) SVGElement;
+- (WDXMLElement*) SVGElement;
 
 @end
 
 // notifications
-extern NSString *WDLayerVisibilityChanged;
-extern NSString *WDLayerLockedStatusChanged;
-extern NSString *WDLayerOpacityChanged;
-extern NSString *WDLayerContentsChangedNotification;
-extern NSString *WDLayerThumbnailChangedNotification;
-extern NSString *WDLayerNameChanged;
+extern NSString* const WDLayerVisibilityChanged;
+extern NSString* const WDLayerLockedStatusChanged;
+extern NSString* const WDLayerOpacityChanged;
+extern NSString* const WDLayerContentsChangedNotification;
+extern NSString* const WDLayerThumbnailChangedNotification;
+extern NSString* const WDLayerNameChanged;
 
 

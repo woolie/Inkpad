@@ -12,46 +12,46 @@
 #import "WDTool.h"
 
 enum {
-    WDShapeRectangle = 0,
-    WDShapeOval,
-    WDShapeStar,
-    WDShapePolygon,
-    WDShapeLine,
-    WDShapeSpiral
+	WDShapeRectangle = 0,
+	WDShapeOval,
+	WDShapeStar,
+	WDShapePolygon,
+	WDShapeLine,
+	WDShapeSpiral
 };
 
 @interface WDShapeTool : WDTool {
-    int                 shapeMode_;
-    
+	int				 shapeMode_;
+	
 #if TARGET_OS_IPHONE
-    IBOutlet UIView     *optionsView_;
-    IBOutlet UILabel    *optionsTitle_;
-    IBOutlet UILabel    *optionsValue_;
-    IBOutlet UISlider   *optionsSlider_;
-    IBOutlet UIButton   *increment_;
-    IBOutlet UIButton   *decrement_;
+	IBOutlet UIView	 *optionsView_;
+	IBOutlet UILabel	*optionsTitle_;
+	IBOutlet UILabel	*optionsValue_;
+	IBOutlet UISlider   *optionsSlider_;
+	IBOutlet UIButton   *increment_;
+	IBOutlet UIButton   *decrement_;
 #endif
-    
-    // polygon support
-    int                 numPolygonPoints_;
-    
-    // rect support
-    float               rectCornerRadius_;
-    
-    // star support
-    int                 numStarPoints_;
-    float               starInnerRadiusRatio_;
-    float               lastStarRadius_;
-    
-    // spiral support
-    int                 decay_;
+	
+	// polygon support
+	int				 numPolygonPoints_;
+	
+	// rect support
+	float			   rectCornerRadius_;
+	
+	// star support
+	int				 numStarPoints_;
+	float			   starInnerRadiusRatio_;
+	float			   lastStarRadius_;
+	
+	// spiral support
+	int				 decay_;
 }
 
 @property (nonatomic, assign) int shapeMode;
 
-- (IBAction) increment:(id)sender;
-- (IBAction) decrement:(id)sender;
-- (IBAction) takeFinalSliderValueFrom:(id)sender;
-- (IBAction) takeSliderValueFrom:(id)sender;
+- (IBAction) increment:(id) sender;
+- (IBAction) decrement:(id) sender;
+- (IBAction) takeFinalSliderValueFrom:(id) sender;
+- (IBAction) takeSliderValueFrom:(id) sender;
 
 @end

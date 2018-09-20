@@ -9,10 +9,10 @@
 @interface UIImage (Resize)
 
 - (UIImage *)resizedImage:(CGSize)newSize
-     interpolationQuality:(CGInterpolationQuality)quality;
+	 interpolationQuality:(CGInterpolationQuality)quality;
 
 - (UIImage *)resizedImageWithContentMode:(UIViewContentMode)contentMode
-                                  bounds:(CGSize)bounds
-                    interpolationQuality:(CGInterpolationQuality)quality;
+								  bounds:(CGSize)bounds
+					interpolationQuality:(CGInterpolationQuality)quality;
 
 @end

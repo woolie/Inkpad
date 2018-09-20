@@ -13,81 +13,81 @@
 #import "WDText.h"
 #import "WDCanvasController.h"
 
-#define kEditingTextSize    24
+#define kEditingTextSize	24
 
 @implementation WDTextController
 
 @synthesize editingObject = editingObject_;
 @synthesize canvasController = canvasController_;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (instancetype) initWithNibName:(NSString*)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    
-    if (!self) {
-        return nil;
-    }
-    
-    return self;
+	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+	
+	if (!self) {
+		return nil;
+	}
+	
+	return self;
 }
  
-- (NSString *) text
+- (NSString*) text
 {
-    return text_.text;
+	return text_.text;
 }
 
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
-    // we want the undo to be an atomic operation
-    [editingObject_ cacheOriginalText];
+	// we want the undo to be an atomic operation
+	[editingObject_ cacheOriginalText];
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
-    [editingObject_ registerUndoWithCachedText];
+	[editingObject_ registerUndoWithCachedText];
 }
 
 - (void)textViewDidChange:(UITextView *)textView
 {
-    editingObject_.text = textView.text;
+	editingObject_.text = textView.text;
 }
 
 - (void) viewWillAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
-    [text_ becomeFirstResponder];
+	[super viewWillAppear:animated];
+	[text_ becomeFirstResponder];
 }
 
-- (void) configureWithTextObject:(WDText *)text
+- (void) configureWithTextObject:(WDText*)text
 {
-    text_.text = text.text;
-    
-    UIFont  *font = [UIFont fontWithName:text.fontName size:kEditingTextSize];
+	text_.text = text.text;
+	
+	UIFont  *font = [UIFont fontWithName:text.fontName size:kEditingTextSize];
 
-    if (!font) {
-        // must be a user installed font
-        font = [UIFont systemFontOfSize:kEditingTextSize];
-    }
-    
-    text_.font = font;
+	if (!font) {
+		// must be a user installed font
+		font = [UIFont systemFontOfSize:kEditingTextSize];
+	}
+	
+	text_.font = font;
 }
 
 - (void) selectAll
 {
-    [text_ selectAll:self];
-    [UIMenuController sharedMenuController].menuVisible = NO;
+	[text_ selectAll:self];
+	[UIMenuController sharedMenuController].menuVisible = NO;
 }
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
-    
-    text_.delegate = self;
-    if (self.editingObject) {
-        [self configureWithTextObject:self.editingObject];
-    }
-    
-    self.preferredContentSize = self.view.frame.size;
+	[super viewDidLoad];
+	
+	text_.delegate = self;
+	if (self.editingObject) {
+		[self configureWithTextObject:self.editingObject];
+	}
+	
+	self.preferredContentSize = self.view.frame.size;
 }
 
 

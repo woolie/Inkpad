@@ -29,53 +29,53 @@
 @class WDText;
 
 enum {
-    kAddToPhotos = 0,
-    kCopyDrawing,
-    kDuplicateDrawing,
-    kPrintDrawing,
-    kEmailDrawing
+	kAddToPhotos = 0,
+	kCopyDrawing,
+	kDuplicateDrawing,
+	kPrintDrawing,
+	kEmailDrawing
 };
 
 @interface WDCanvasController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate,
-                                                    UIPopoverControllerDelegate, UIDocumentInteractionControllerDelegate>
+													UIPopoverControllerDelegate, UIDocumentInteractionControllerDelegate>
 {
-    WDDocument          *document_;
-    WDCanvas            *canvas_;
-    NSArray             *editingItems_;
-    
-    UIBarButtonItem     *albumItem_;
-    UIBarButtonItem     *zoomToFitItem_;
-    UIBarButtonItem     *gearItem_;
-    UIBarButtonItem     *actionItem_;
-    
-    UIBarButtonItem     *undoItem_;
-    UIBarButtonItem     *redoItem_;
-    UIBarButtonItem     *colorItem_;
-    UIBarButtonItem     *layerItem_;
-    
-    WDShadowWell        *shadowWell_;
-    WDColorWell         *fillWell_;
-    WDColorWell         *strokeWell_;
-    
-    WDMenu              *objectMenu_;
-    WDMenu              *arrangeMenu_;
-    WDMenu              *pathMenu_;
-    WDMenu              *colorMenu_;
-    WDMenu              *actionMenu_;
-    WDMenu              *visibleMenu_; // pointer to currently active menu
-    
-    UIPopoverController *popoverController_;
-    
-    WDSwatchController  *swatchController_;
-    WDStrokeController  *strokeController_;
-    WDFillController    *fillController_;
-    WDShadowController  *shadowController_;
-    WDLayerController   *layerController_;
-    
-    WDHueSaturationController   *hueController_;
-    WDColorBalanceController   *balanceController_;
+	WDDocument		  *document_;
+	WDCanvas			*canvas_;
+	NSArray			 *editingItems_;
+	
+	UIBarButtonItem	 *albumItem_;
+	UIBarButtonItem	 *zoomToFitItem_;
+	UIBarButtonItem	 *gearItem_;
+	UIBarButtonItem	 *actionItem_;
+	
+	UIBarButtonItem	 *undoItem_;
+	UIBarButtonItem	 *redoItem_;
+	UIBarButtonItem	 *colorItem_;
+	UIBarButtonItem	 *layerItem_;
+	
+	WDShadowWell		*shadowWell_;
+	WDColorWell		 *fillWell_;
+	WDColorWell		 *strokeWell_;
+	
+	WDMenu			  *objectMenu_;
+	WDMenu			  *arrangeMenu_;
+	WDMenu			  *pathMenu_;
+	WDMenu			  *colorMenu_;
+	WDMenu			  *actionMenu_;
+	WDMenu			  *visibleMenu_; // pointer to currently active menu
+	
+	UIPopoverController *popoverController_;
+	
+	WDSwatchController  *swatchController_;
+	WDStrokeController  *strokeController_;
+	WDFillController	*fillController_;
+	WDShadowController  *shadowController_;
+	WDLayerController   *layerController_;
+	
+	WDHueSaturationController   *hueController_;
+	WDColorBalanceController   *balanceController_;
 
-    NSURL *exportFileUrl;
+	NSURL *exportFileUrl;
 }
 
 @property (nonatomic, strong) WDDocument *document;
@@ -88,13 +88,13 @@ enum {
 - (void) hidePopovers;
 
 - (BOOL) shouldDismissPopoverForClassController:(Class)controllerClass insideNavController:(BOOL)insideNav;
-- (UIPopoverController *) runPopoverWithController:(UIViewController *)controller from:(id)sender;
+- (UIPopoverController *) runPopoverWithController:(UIViewController *)controller from:(id) sender;
 
 - (void) validateMenuItem:(WDMenuItem *)item;
 - (void) validateVisibleMenuItems;
 - (void) validateColorMenu;
 
-- (void) editTextObject:(WDText *)text selectAll:(BOOL)selectAll;
+- (void) editTextObject:(WDText*)text selectAll:(BOOL)selectAll;
 - (void) undoStatusDidChange:(NSNotification *)aNotification;
 
 @end

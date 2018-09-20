@@ -13,8 +13,8 @@
 #import "WDPathPainter.h"
 
 typedef enum {
-    kWDLinearGradient,
-    kWDRadialGradient
+	kWDLinearGradient,
+	kWDRadialGradient
 } WDGradientType;
 
 @class WDColor;
@@ -23,7 +23,7 @@ typedef enum {
 @class WDXMLElement;
 
 @interface WDGradient : NSObject <NSCopying, NSCoding, WDPathPainter> {
-    CGGradientRef       gradientRef_; // for rendering
+	CGGradientRef	   gradientRef_; // for rendering
 }
 
 @property (nonatomic, readonly) WDGradientType type;
@@ -32,13 +32,13 @@ typedef enum {
 + (WDGradient *) randomGradient;
 + (WDGradient *) defaultGradient;
 + (WDGradient *) gradientWithStart:(WDColor *)start andEnd:(WDColor*)end;
-+ (WDGradient *) gradientWithType:(WDGradientType)type stops:(NSArray *)stops;
-- (instancetype) initWithType:(WDGradientType)type stops:(NSArray *)stops;
++ (WDGradient *) gradientWithType:(WDGradientType)type stops:(NSArray*)stops;
+- (instancetype) initWithType:(WDGradientType)type stops:(NSArray*)stops;
 
 - (WDGradient *) gradientByReversing;
 - (WDGradient *) gradientByDistributingEvenly;
 
-- (WDGradient *) gradientWithStops:(NSArray *)stops;
+- (WDGradient *) gradientWithStops:(NSArray*)stops;
 - (WDGradient *) gradientWithType:(WDGradientType)type;
 - (WDGradient *) gradientWithStop:(WDGradientStop *)stop substitutedForStop:(WDGradientStop *)replace;
 - (WDGradient *) gradientByRemovingStop:(WDGradientStop *)stop;
@@ -52,6 +52,6 @@ typedef enum {
 - (CGGradientRef) gradientRef;
 - (void) drawSwatchInRect:(CGRect)rect;
 
-- (WDXMLElement *) SVGElementWithID:(NSString *)unique fillTransform:(WDFillTransform *)fT;
+- (WDXMLElement *) SVGElementWithID:(NSString*)unique fillTransform:(WDFillTransform *)fT;
 
 @end

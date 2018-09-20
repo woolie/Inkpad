@@ -110,7 +110,7 @@ BOOL WDRenderingMetaDataOutlineOnly(WDRenderingMetaData metaData)
 	return self;
 }
 
-- (instancetype) initWithSize:(CGSize)size andUnits:(NSString *)units
+- (instancetype) initWithSize:(CGSize)size andUnits:(NSString*)units
 {
 	self = [super init];
 
@@ -157,7 +157,7 @@ BOOL WDRenderingMetaDataOutlineOnly(WDRenderingMetaData metaData)
 	return self;
 }
 
-- (instancetype) initWithImage:(UIImage *) image imageName:(NSString *) imageName
+- (instancetype) initWithImage:(UIImage *) image imageName:(NSString*) imageName
 {
 	self = [self initWithSize:image.size andUnits:@"Pixels"];
 
@@ -268,7 +268,7 @@ BOOL WDRenderingMetaDataOutlineOnly(WDRenderingMetaData metaData)
 #pragma mark - Drawing Attributes
 
 // return all the elements in the drawing
-- (NSArray *) allElements
+- (NSArray*) allElements
 {
 	NSMutableArray *elements = [[NSMutableArray alloc] init];
 
@@ -445,7 +445,7 @@ BOOL WDRenderingMetaDataOutlineOnly(WDRenderingMetaData metaData)
 	}
 }
 
-- (NSString *) uniqueLayerName
+- (NSString*) uniqueLayerName
 {
 	NSMutableSet* layerNames = [NSMutableSet set];
 
@@ -635,7 +635,7 @@ BOOL WDRenderingMetaDataOutlineOnly(WDRenderingMetaData metaData)
 //
 // Used for copying an image of the selection to the clipboard
 //
-+ (UIImage *) imageForElements:(NSArray *)elements scale:(float)scaleFactor
++ (UIImage *) imageForElements:(NSArray*)elements scale:(float)scaleFactor
 {
 	CGRect contentBounds = CGRectNull;
 	for (WDElement *element in elements) {
@@ -830,7 +830,7 @@ BOOL WDRenderingMetaDataOutlineOnly(WDRenderingMetaData metaData)
 
 #pragma mark - Settings
 
-- (void) setSetting:(NSString *)name value:(NSString *)value
+- (void) setSetting:(NSString*)name value:(NSString*)value
 {
 	if ([name hasPrefix:@"WD"])
 	{
@@ -966,12 +966,12 @@ BOOL WDRenderingMetaDataOutlineOnly(WDRenderingMetaData metaData)
 	[self.document markChanged];
 }
 
-- (NSString *) units
+- (NSString*) units
 {
 	return _settings[WDUnits];
 }
 
-- (void) setUnits:(NSString *) units
+- (void) setUnits:(NSString*) units
 {
 	_settings[WDUnits] = units;
 	[[NSNotificationCenter defaultCenter] postNotificationName:WDUnitsChangedNotification object:self];

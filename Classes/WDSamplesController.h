@@ -22,5 +22,5 @@
 
 @protocol WDSamplesControllerDelegate <NSObject>
 @optional
-- (void) samplesController:(WDSamplesController *)controller didSelectURLs:(NSArray *)sampleURLs;
+- (void) samplesController:(WDSamplesController *)controller didSelectURLs:(NSArray*)sampleURLs;
 @end

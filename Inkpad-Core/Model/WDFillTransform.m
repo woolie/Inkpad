@@ -16,9 +16,9 @@
 
 #import "WDFillTransform.h"
 
-NSString *WDFillTransformStartKey = @"WDFillTransformStartKey";
-NSString *WDFillTransformEndKey = @"WDFillTransformEndKey";
-NSString *WDFillTransformTransformKey = @"WDFillTransformTransformKey";
+NSString* WDFillTransformStartKey = @"WDFillTransformStartKey";
+NSString* WDFillTransformEndKey = @"WDFillTransformEndKey";
+NSString* WDFillTransformTransformKey = @"WDFillTransformTransformKey";
 
 @implementation WDFillTransform
 
@@ -28,106 +28,106 @@ NSString *WDFillTransformTransformKey = @"WDFillTransformTransformKey";
 
 + (WDFillTransform *) fillTransformWithRect:(CGRect)rect centered:(BOOL)centered
 {
-    float   startX = centered ? CGRectGetMidX(rect) : CGRectGetMinX(rect);
-    CGPoint start = CGPointMake(startX, CGRectGetMidY(rect));
-    CGPoint end = CGPointMake(CGRectGetMaxX(rect), CGRectGetMidY(rect));
-    
-    WDFillTransform *fT = [[WDFillTransform alloc] initWithTransform:CGAffineTransformIdentity start:start end:end];
+	float   startX = centered ? CGRectGetMidX(rect) : CGRectGetMinX(rect);
+	CGPoint start = CGPointMake(startX, CGRectGetMidY(rect));
+	CGPoint end = CGPointMake(CGRectGetMaxX(rect), CGRectGetMidY(rect));
+	
+	WDFillTransform *fT = [[WDFillTransform alloc] initWithTransform:CGAffineTransformIdentity start:start end:end];
 
-    return fT;
+	return fT;
 }
 
 - (instancetype) initWithTransform:(CGAffineTransform)transform start:(CGPoint)start end:(CGPoint)end
 {
-    self = [super init];
-    
-    if (!self) {
-        return nil;
-    }
-    
-    transform_ = transform;
-    start_ = start;
-    end_ = end;
-    
-    return self;
+	self = [super init];
+	
+	if (!self) {
+		return nil;
+	}
+	
+	transform_ = transform;
+	start_ = start;
+	end_ = end;
+	
+	return self;
 }
 
-- (void)encodeWithCoder:(NSCoder *)coder
+- (void) encodeWithCoder:(NSCoder*) coder
 {
-    [coder encodeCGPoint:start_ forKey:WDFillTransformStartKey];
-    [coder encodeCGPoint:end_ forKey:WDFillTransformEndKey];
-    [coder encodeCGAffineTransform:transform_ forKey:WDFillTransformTransformKey];
+	[coder encodeCGPoint:start_ forKey:WDFillTransformStartKey];
+	[coder encodeCGPoint:end_ forKey:WDFillTransformEndKey];
+	[coder encodeCGAffineTransform:transform_ forKey:WDFillTransformTransformKey];
 }
 
-- (id)initWithCoder:(NSCoder *)coder
+- (instancetype) initWithCoder:(NSCoder*) coder
 {
-    self = [super init];
-    
-    start_ = [coder decodeCGPointForKey:WDFillTransformStartKey];
-    end_ = [coder decodeCGPointForKey:WDFillTransformEndKey];
-    transform_ = [coder decodeCGAffineTransformForKey:WDFillTransformTransformKey];
+	self = [super init];
+	
+	start_ = [coder decodeCGPointForKey:WDFillTransformStartKey];
+	end_ = [coder decodeCGPointForKey:WDFillTransformEndKey];
+	transform_ = [coder decodeCGAffineTransformForKey:WDFillTransformTransformKey];
 
-    return self; 
+	return self; 
 }
 
 - (BOOL) isDefaultInRect:(CGRect)rect centered:(BOOL)centered
 {
-    return [self isEqual:[WDFillTransform fillTransformWithRect:rect centered:centered]];
+	return [self isEqual:[WDFillTransform fillTransformWithRect:rect centered:centered]];
 }
 
 - (BOOL) isEqual:(WDFillTransform *)fillTransform
 {
-    if (fillTransform == self) {
-        return YES;
-    }
-    
-    if (!fillTransform || ![fillTransform isKindOfClass:[WDFillTransform class]]) {
-        return NO;
-    }
-    
-    return (CGPointEqualToPoint(start_, fillTransform.start) &&
-            CGPointEqualToPoint(end_, fillTransform.end) &&
-            CGAffineTransformEqualToTransform(self.transform, fillTransform.transform));
+	if (fillTransform == self) {
+		return YES;
+	}
+	
+	if (!fillTransform || ![fillTransform isKindOfClass:[WDFillTransform class]]) {
+		return NO;
+	}
+	
+	return (CGPointEqualToPoint(start_, fillTransform.start) &&
+			CGPointEqualToPoint(end_, fillTransform.end) &&
+			CGAffineTransformEqualToTransform(self.transform, fillTransform.transform));
 }
 
 - (WDFillTransform *) transform:(CGAffineTransform)transform
 {
-    CGAffineTransform modified = CGAffineTransformConcat(transform_, transform);
-    WDFillTransform *new = [[WDFillTransform alloc] initWithTransform:modified start:start_ end:end_];
-    return new;
+	CGAffineTransform modified = CGAffineTransformConcat(transform_, transform);
+	WDFillTransform *new = [[WDFillTransform alloc] initWithTransform:modified start:start_ end:end_];
+	return new;
 }
 
 - (WDFillTransform *) transformWithTransformedStart:(CGPoint)start
 {   
-    CGAffineTransform inverted = CGAffineTransformInvert(transform_);
-    start = CGPointApplyAffineTransform(start, inverted);
-    
-    WDFillTransform *new = [[WDFillTransform alloc] initWithTransform:transform_ start:start end:end_];
-    return new;
+	CGAffineTransform inverted = CGAffineTransformInvert(transform_);
+	start = CGPointApplyAffineTransform(start, inverted);
+	
+	WDFillTransform *new = [[WDFillTransform alloc] initWithTransform:transform_ start:start end:end_];
+	return new;
 }
 
 - (WDFillTransform *) transformWithTransformedEnd:(CGPoint)end
 {   
-    CGAffineTransform inverted = CGAffineTransformInvert(transform_);
-    end = CGPointApplyAffineTransform(end, inverted);
-    
-    WDFillTransform *new = [[WDFillTransform alloc] initWithTransform:transform_ start:start_ end:end];
-    return new;
+	CGAffineTransform inverted = CGAffineTransformInvert(transform_);
+	end = CGPointApplyAffineTransform(end, inverted);
+	
+	WDFillTransform *new = [[WDFillTransform alloc] initWithTransform:transform_ start:start_ end:end];
+	return new;
 }
 
 - (CGPoint) transformedStart
 {
-    return CGPointApplyAffineTransform(start_, transform_);
+	return CGPointApplyAffineTransform(start_, transform_);
 }
 
 - (CGPoint) transformedEnd
 {
-    return CGPointApplyAffineTransform(end_, transform_);
+	return CGPointApplyAffineTransform(end_, transform_);
 }
 
 - (id) copyWithZone:(NSZone *)zone
 {
-    return self;
+	return self;
 }
 
 @end

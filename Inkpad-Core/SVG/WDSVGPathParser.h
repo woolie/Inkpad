@@ -16,13 +16,13 @@
 @protocol WDErrorReporter;
 
 @interface WDSVGPathParser : NSObject {
-    id<WDErrorReporter> reporter_;
-    CGMutablePathRef    path_;
-    CGPoint             lastCurveControl_;
-    CGPoint             lastQuadCurveControl_;
+	id<WDErrorReporter> reporter_;
+	CGMutablePathRef	path_;
+	CGPoint			 lastCurveControl_;
+	CGPoint			 lastQuadCurveControl_;
 }
 
 - (instancetype) initWithErrorReporter:(id<WDErrorReporter>)reporter;
-- (CGPathRef) parse:(NSString *)source;
+- (CGPathRef) parse:(NSString*)source;
 
 @end

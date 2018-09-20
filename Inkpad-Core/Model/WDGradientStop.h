@@ -16,7 +16,7 @@
 
 @interface WDGradientStop : NSObject <NSCoding, NSCopying>
 
-@property (nonatomic, readonly) float ratio;    // [0.0 - 1.0]
+@property (nonatomic, readonly) float ratio;	// [0.0 - 1.0]
 @property (nonatomic, readonly) WDColor *color; // can include transparency
 
 + (WDGradientStop *) stopWithColor:(WDColor *)color andRatio:(float)ratio;

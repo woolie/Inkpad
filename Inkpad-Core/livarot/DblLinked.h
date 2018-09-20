@@ -23,15 +23,15 @@ public:
 	DblLinked(void);
 	~DblLinked(void);
 
-	void         MakeNew(void);
-	void         MakeDelete(void);
+	void		 MakeNew(void);
+	void		 MakeDelete(void);
 
-	void         InsertOnLeft(DblLinked* of);
-	void         InsertOnRight(DblLinked* of);
-	void         InsertBetween(DblLinked* l,DblLinked* r);
-	void         Extract(void);
+	void		 InsertOnLeft(DblLinked* of);
+	void		 InsertOnRight(DblLinked* of);
+	void		 InsertBetween(DblLinked* l,DblLinked* r);
+	void		 Extract(void);
 
-	void        Relocate(DblLinked* to);
+	void		Relocate(DblLinked* to);
 };
 
 #endif

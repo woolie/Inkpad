@@ -17,47 +17,47 @@
 
 @implementation WDAddAnchorTool
 
-- (NSString *) iconName
+- (NSString*) iconName
 {
-    return @"add_anchor.png";
+	return @"add_anchor.png";
 }
 
 - (void) beginWithEvent:(WDEvent *)event inCanvas:(WDCanvas *)canvas
 {
-    WDPickResult *result = [canvas.drawingController snappedPoint:event.location
-                                                        viewScale:canvas.viewScale
-                                                        snapFlags:(kWDSnapEdges | kWDSnapNodes)];
+	WDPickResult *result = [canvas.drawingController snappedPoint:event.location
+														viewScale:canvas.viewScale
+														snapFlags:(kWDSnapEdges | kWDSnapNodes)];
 
-    if (!result.snapped || ![result.element isKindOfClass:[WDPath class]]) {
-        return;
-    }
-    
-    WDDrawingController *dc = canvas.drawingController;
-    WDPath              *path = (WDPath *) result.element;
-    
-    if (result.type == kWDEdge) {
-        if ([dc singleSelection] != path) {
-            // we want this path to be the exclusive selection
-            [dc selectNone:nil];
-            [dc selectObject:result.element];
-        }
-        
-        WDBezierNode *newestNode = [path addAnchorAtPoint:result.snappedPoint viewScale:canvas.viewScale];
-        [dc selectNode:newestNode];
-    }
-    
-    if (result.type == kWDAnchorPoint) {
-        if ([dc isSelected:path]) {
-            [dc deselectAllNodes];
-            [dc selectNode:result.node];
-            
-            [path deleteAnchor:result.node];
-        } else {
-            // just select the path and do nothing
-            [dc selectNone:nil];
-            [dc selectObject:result.element];
-        }
-    }
+	if (!result.snapped || ![result.element isKindOfClass:[WDPath class]]) {
+		return;
+	}
+	
+	WDDrawingController *dc = canvas.drawingController;
+	WDPath			  *path = (WDPath *) result.element;
+	
+	if (result.type == kWDEdge) {
+		if ([dc singleSelection] != path) {
+			// we want this path to be the exclusive selection
+			[dc selectNone:nil];
+			[dc selectObject:result.element];
+		}
+		
+		WDBezierNode *newestNode = [path addAnchorAtPoint:result.snappedPoint viewScale:canvas.viewScale];
+		[dc selectNode:newestNode];
+	}
+	
+	if (result.type == kWDAnchorPoint) {
+		if ([dc isSelected:path]) {
+			[dc deselectAllNodes];
+			[dc selectNode:result.node];
+			
+			[path deleteAnchor:result.node];
+		} else {
+			// just select the path and do nothing
+			[dc selectNone:nil];
+			[dc selectObject:result.element];
+		}
+	}
 }
 
 @end

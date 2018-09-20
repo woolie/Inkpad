@@ -22,18 +22,18 @@
 #endif
 
 typedef enum {
-    WDAlignLeft,
-    WDAlignCenter,
-    WDAlignRight,
-    WDAlignTop,
-    WDAlignMiddle,
-    WDAlignBottom
+	WDAlignLeft,
+	WDAlignCenter,
+	WDAlignRight,
+	WDAlignTop,
+	WDAlignMiddle,
+	WDAlignBottom
 } WDAlignment;
 
 typedef enum {
-    WDColorAdjustStroke = 1 << 0,
-    WDColorAdjustFill   = 1 << 1,
-    WDColorAdjustShadow = 1 << 2
+	WDColorAdjustStroke = 1 << 0,
+	WDColorAdjustFill   = 1 << 1,
+	WDColorAdjustShadow = 1 << 2
 } WDColorAdjustmentScope;
 
 @class WDGroup;
@@ -44,7 +44,7 @@ typedef enum {
 @class WDXMLElement;
 
 @interface WDElement : NSObject <NSCoding, NSCopying> {
-    CGRect      _dirtyBounds;
+	CGRect	  _dirtyBounds;
 }
 
 @property (nonatomic, weak) WDLayer *layer;
@@ -109,12 +109,12 @@ typedef enum {
 - (void) addSVGOpacityAndShadowAttributes:(WDXMLElement *)element;
 
 // inspection
-- (void) setValue:(id)value forProperty:(NSString *)property propertyManager:(WDPropertyManager *)propertyManager;
-- (id) valueForProperty:(NSString *)property;
-- (NSSet *) inspectableProperties;
-- (BOOL) canInspectProperty:(NSString *)property;
-- (void) propertyChanged:(NSString *)property;
-- (void) propertiesChanged:(NSSet *)property;
+- (void) setValue:(id)value forProperty:(NSString*)property propertyManager:(WDPropertyManager *)propertyManager;
+- (id) valueForProperty:(NSString*)property;
+- (NSSet*) inspectableProperties;
+- (BOOL) canInspectProperty:(NSString*)property;
+- (void) propertyChanged:(NSString*)property;
+- (void) propertiesChanged:(NSSet*)property;
 - (id) pathPainterAtPoint:(CGPoint)pt;
 - (BOOL) hasFill;
 

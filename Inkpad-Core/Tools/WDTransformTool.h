@@ -12,7 +12,7 @@
 #import "WDTool.h"
 
 @interface WDTransformTool : WDTool {
-    CGAffineTransform   transform_;
+	CGAffineTransform   transform_;
 }
 
 - (CGAffineTransform) computeTransform:(CGPoint)pt pivot:(CGPoint)pivot constrain:(WDToolFlags)flags;

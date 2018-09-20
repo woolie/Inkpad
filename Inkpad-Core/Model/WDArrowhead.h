@@ -19,7 +19,7 @@
 @property (nonatomic, readonly) CGRect bounds;
 @property (nonatomic, readonly) float insetLength;
 
-+ (NSDictionary *) arrowheads;
++ (NSDictionary*) arrowheads;
 
 + (WDArrowhead *) arrowheadWithPath:(CGPathRef)pathRef attachment:(CGPoint)attach;
 + (WDArrowhead *) arrowheadWithPath:(CGPathRef)pathRef attachment:(CGPoint)attach capAdjustment:(CGPoint)adjustment;

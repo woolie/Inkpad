@@ -14,13 +14,13 @@
 
 @implementation DBMetadata (Additions)
 
-- (NSString *)description 
+- (NSString*)description 
 {	
 	return [NSString stringWithFormat:@"%@ - %@",
-            NSStringFromClass([self class]), [[self dictionaryRepresentation] descriptionWithLocale:nil indent:0]];
+			NSStringFromClass([self class]), [[self dictionaryRepresentation] descriptionWithLocale:nil indent:0]];
 }
 
-- (NSDictionary *)dictionaryRepresentation 
+- (NSDictionary*)dictionaryRepresentation 
 {
 	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
 	NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];

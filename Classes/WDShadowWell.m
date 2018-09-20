@@ -20,64 +20,64 @@
 @synthesize shadow = shadow_;
 @synthesize opacity = opacity_;
 
-- (id)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
-    
-    if (!self) {
-        return nil;
+- (instancetype) initWithFrame:(CGRect)frame {
+	self = [super initWithFrame:frame];
+	
+	if (!self) {
+		return nil;
 	}
-    
+	
 	return self;
 }
 
 - (void) setOpacity:(float)opacity
 {
-    if (opacity_ == opacity) {
-        return;
-    }
-    
-    opacity_ = opacity;
-    [self setNeedsDisplay];
+	if (opacity_ == opacity) {
+		return;
+	}
+	
+	opacity_ = opacity;
+	[self setNeedsDisplay];
 }
 
 - (void) setShadow:(WDShadow *)shadow
 {
-    if ([shadow_ isEqual:shadow]) {
-        return;
-    }
-    
-    shadow_ = shadow;
-    
-    [self setNeedsDisplay];
+	if ([shadow_ isEqual:shadow]) {
+		return;
+	}
+	
+	shadow_ = shadow;
+	
+	[self setNeedsDisplay];
 }
 
 - (void)drawRect:(CGRect)rect
 {
-    CGContextRef    ctx = UIGraphicsGetCurrentContext();
-    CGRect          bounds = [self bounds];
-    
-    if (barButtonItem_) {
-        int inset = ceil((CGRectGetHeight(bounds) - CGRectGetWidth(bounds)) / 2);
-        bounds = CGRectInset(bounds, 0, inset);
-    }
-    
-    WDDrawCheckersInRect(ctx, bounds, 7);
-    
-    CGContextSaveGState(ctx);
-    CGContextSetAlpha(ctx, opacity_);
-    
-    if (shadow_) {
-        float x = cos(shadow_.angle) * 3;
-        float y = sin(shadow_.angle) * 3;
-        
-        CGContextSetShadowWithColor(ctx, CGSizeMake(x,y), 2, shadow_.color.CGColor);
-    }
-    
-    [[UIColor whiteColor] set];
-    CGContextSetLineWidth(ctx, 6);
-    CGContextStrokeEllipseInRect(ctx, CGRectInset(bounds, 7, 7));
-    
-    CGContextRestoreGState(ctx);
+	CGContextRef	ctx = UIGraphicsGetCurrentContext();
+	CGRect		  bounds = [self bounds];
+	
+	if (barButtonItem_) {
+		int inset = ceil((CGRectGetHeight(bounds) - CGRectGetWidth(bounds)) / 2);
+		bounds = CGRectInset(bounds, 0, inset);
+	}
+	
+	WDDrawCheckersInRect(ctx, bounds, 7);
+	
+	CGContextSaveGState(ctx);
+	CGContextSetAlpha(ctx, opacity_);
+	
+	if (shadow_) {
+		float x = cos(shadow_.angle) * 3;
+		float y = sin(shadow_.angle) * 3;
+		
+		CGContextSetShadowWithColor(ctx, CGSizeMake(x,y), 2, shadow_.color.CGColor);
+	}
+	
+	[[UIColor whiteColor] set];
+	CGContextSetLineWidth(ctx, 6);
+	CGContextStrokeEllipseInRect(ctx, CGRectInset(bounds, 7, 7));
+	
+	CGContextRestoreGState(ctx);
 }
 
 @end

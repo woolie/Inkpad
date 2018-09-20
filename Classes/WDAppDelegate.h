@@ -21,5 +21,5 @@
 
 @end
 
-extern NSString *WDDropboxWasUnlinkedNotification;
+extern NSString* WDDropboxWasUnlinkedNotification;
 

@@ -15,14 +15,14 @@
 @interface WDUserFont : NSObject
 
 @property (nonatomic, assign) CTFontRef fontRef;
-@property (nonatomic, strong) NSString *filepath;
-@property (nonatomic, strong) NSString *fullName;
-@property (nonatomic, strong) NSString *familyName;
-@property (nonatomic, strong) NSString *displayName;
+@property (nonatomic, strong) NSString*filepath;
+@property (nonatomic, strong) NSString*fullName;
+@property (nonatomic, strong) NSString*familyName;
+@property (nonatomic, strong) NSString* displayName;
 @property (nonatomic, strong) NSData *digest;
 
-+ (WDUserFont *) userFontWithFilename:(NSString *)filename;
-- (instancetype) initWithFilename:(NSString *)filename;
++ (WDUserFont *) userFontWithFilename:(NSString*)filename;
+- (instancetype) initWithFilename:(NSString*)filename;
 - (CTFontRef) newFontRefForSize:(float)size;
 
 @end

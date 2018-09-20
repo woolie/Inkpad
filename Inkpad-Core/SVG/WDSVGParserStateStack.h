@@ -16,7 +16,7 @@
 
 @protocol WDErrorReporter
 
-- (void) reportError:(NSString *)message, ...;
+- (void) reportError:(NSString*)message, ...;
 - (int) errorCount;
 - (void) reportMemoryWarning;
 - (BOOL) memoryWarning;
@@ -24,9 +24,9 @@
 @end
 
 @interface WDSVGParserStateStack : NSObject <WDErrorReporter> {
-    int                 errorCount_;
-    BOOL                memoryWarning_;
-    NSMutableArray      *stack_;
+	int				 errorCount_;
+	BOOL				memoryWarning_;
+	NSMutableArray	  *stack_;
 }
 
 @property (weak, nonatomic, readonly) NSMutableArray *group;
@@ -44,24 +44,24 @@
 - (float) viewHeight;
 - (float) viewRadius;
 
-- (NSString *) style:(NSString *)name;
-- (NSString *) attribute:(NSString *)name;
-- (NSString *) attribute:(NSString *)name withDefault:(NSString *)deft;
-- (float) coordinate:(NSString *)key withBound:(float)bound andDefault:(float)deft;
-- (float) coordinate:(NSString *)key withBound:(float)bound;
-- (float) lengthFromString:(NSString *)source withBound:(float)bound andDefault:(float)deft;
-- (float) length:(NSString *)key withBound:(float)bound andDefault:(float)deft;
-- (float) length:(NSString *)key withBound:(float)bound;
-- (NSArray *) numberList:(NSString *)key;
-- (NSArray *) coordinateList:(NSString *)key;
-- (NSArray *) lengthList:(NSString *)key withBound:(float)bound;
-- (CGPoint) x:(NSString *)xKey y:(NSString *)yKey withDefault:(CGPoint)deft;
-- (CGPoint) x:(NSString *)xKey y:(NSString *)yKey;
+- (NSString*) style:(NSString*)name;
+- (NSString*) attribute:(NSString*)name;
+- (NSString*) attribute:(NSString*)name withDefault:(NSString*)deft;
+- (float) coordinate:(NSString*)key withBound:(float)bound andDefault:(float)deft;
+- (float) coordinate:(NSString*)key withBound:(float)bound;
+- (float) lengthFromString:(NSString*)source withBound:(float)bound andDefault:(float)deft;
+- (float) length:(NSString*)key withBound:(float)bound andDefault:(float)deft;
+- (float) length:(NSString*)key withBound:(float)bound;
+- (NSArray*) numberList:(NSString*)key;
+- (NSArray*) coordinateList:(NSString*)key;
+- (NSArray*) lengthList:(NSString*)key withBound:(float)bound;
+- (CGPoint) x:(NSString*)xKey y:(NSString*)yKey withDefault:(CGPoint)deft;
+- (CGPoint) x:(NSString*)xKey y:(NSString*)yKey;
 
-- (CGSize) width:(NSString *)widthKey height:(NSString *)heightKey;
-- (CGRect) x:(NSString *)xKey y:(NSString *)yKey width:(NSString *)widthKey height:(NSString *)heightKey withDefault:(CGRect)deft;
-- (CGRect) x:(NSString *)xKey y:(NSString *)yKey width:(NSString *)widthKey height:(NSString *)heightKey;
-- (NSString *) idFromIRI:(NSString *)key;
-- (NSString *) idFromFuncIRI:(NSString *)key;
+- (CGSize) width:(NSString*)widthKey height:(NSString*)heightKey;
+- (CGRect) x:(NSString*)xKey y:(NSString*)yKey width:(NSString*)widthKey height:(NSString*)heightKey withDefault:(CGRect)deft;
+- (CGRect) x:(NSString*)xKey y:(NSString*)yKey width:(NSString*)widthKey height:(NSString*)heightKey;
+- (NSString*) idFromIRI:(NSString*)key;
+- (NSString*) idFromFuncIRI:(NSString*)key;
 
 @end

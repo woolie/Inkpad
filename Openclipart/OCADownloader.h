@@ -20,13 +20,13 @@
 
 @interface OCADownloader : NSObject <NSURLConnectionDataDelegate>
 
-@property (nonatomic, readonly) NSString *urlString;
+@property (nonatomic, readonly) NSString*urlString;
 @property (nonatomic) NSMutableData *data;
 @property (nonatomic) id info;
 @property (nonatomic, weak) id<OCADownloaderDelegate> delegate;
 
-+ (OCADownloader *) downloaderWithURL:(NSString *)urlString delegate:(id<OCADownloaderDelegate>)delegate;
-+ (OCADownloader *) downloaderWithURL:(NSString *)urlString delegate:(id<OCADownloaderDelegate>)delegate info:(id)info;
++ (OCADownloader *) downloaderWithURL:(NSString*)urlString delegate:(id<OCADownloaderDelegate>)delegate;
++ (OCADownloader *) downloaderWithURL:(NSString*)urlString delegate:(id<OCADownloaderDelegate>)delegate info:(id)info;
 - (void) cancel;
 
 @end

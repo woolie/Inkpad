@@ -13,9 +13,9 @@
 
 
 @interface WDMenu : UIControl {
-    NSMutableArray          *rects_;
-    NSMutableArray          *items_;
-    BOOL                    visible_;
+	NSMutableArray		  *rects_;
+	NSMutableArray		  *items_;
+	BOOL					visible_;
 }
 
 @property (nonatomic, assign) int indexOfSelectedItem;
@@ -25,7 +25,7 @@
 @property (nonatomic, weak) UIPopoverController *popover;
 @property (nonatomic, weak) id delegate;
 
-- (instancetype) initWithItems:(NSArray *)items;
+- (instancetype) initWithItems:(NSArray*)items;
 - (void) dismiss;
 
 @end

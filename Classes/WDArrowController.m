@@ -20,82 +20,82 @@
 
 @synthesize drawingController = drawingController_;
 
-- (instancetype) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (instancetype) initWithNibName:(NSString*)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    
-    if (!self) {
-        return nil;
-    }
-    
-    self.title = NSLocalizedString(@"Arrowheads", @"Arrowheads");
-    
-    UIBarButtonItem *swap = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Swap", @"Swap")
-                                                             style:UIBarButtonItemStylePlain
-                                                            target:self
-                                                            action:@selector(swapArrowheads:)];
-    self.navigationItem.rightBarButtonItem = swap;
-    
-    return self;
+	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+	
+	if (!self) {
+		return nil;
+	}
+	
+	self.title = NSLocalizedString(@"Arrowheads", @"Arrowheads");
+	
+	UIBarButtonItem *swap = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Swap", @"Swap")
+															 style:UIBarButtonItemStylePlain
+															target:self
+															action:@selector(swapArrowheads:)];
+	self.navigationItem.rightBarButtonItem = swap;
+	
+	return self;
 }
 
 - (void) dealloc
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (NSArray *) arrows
+- (NSArray*) arrows
 {
-    return @[WDStrokeArrowNone, @"arrow1", @"arrow2", @"arrow3",
-             @"T shape", @"closed circle", @"closed square",
-             @"closed diamond", @"open circle", @"open square", @"open diamond"];
+	return @[WDStrokeArrowNone, @"arrow1", @"arrow2", @"arrow3",
+			 @"T shape", @"closed circle", @"closed square",
+			 @"closed diamond", @"open circle", @"open square", @"open diamond"];
 }
 
-- (void) swapArrowheads:(id)sender
+- (void) swapArrowheads:(id) sender
 {
-    WDStrokeStyle *strokeStyle = [drawingController_.propertyManager defaultStrokeStyle];
-    
-    NSString *start = strokeStyle.startArrow;
-    NSString *end = strokeStyle.endArrow;
-    
-    [drawingController_ setValue:end forProperty:WDStartArrowProperty];
-    [drawingController_ setValue:start forProperty:WDEndArrowProperty];
+	WDStrokeStyle *strokeStyle = [drawingController_.propertyManager defaultStrokeStyle];
+	
+	NSString* start = strokeStyle.startArrow;
+	NSString*end = strokeStyle.endArrow;
+	
+	[drawingController_ setValue:end forProperty:WDStartArrowProperty];
+	[drawingController_ setValue:start forProperty:WDEndArrowProperty];
 }
 
 - (void) loadView
 {
-    CGRect frame = CGRectZero;
-    frame.size = self.preferredContentSize;
-    
-    self.tableView = [[UITableView alloc] initWithFrame:frame];
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.allowsSelection = NO;
-    self.tableView.rowHeight = 46;
+	CGRect frame = CGRectZero;
+	frame.size = self.preferredContentSize;
+	
+	self.tableView = [[UITableView alloc] initWithFrame:frame];
+	self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+	self.tableView.allowsSelection = NO;
+	self.tableView.rowHeight = 46;
 }
 
 - (NSInteger)tableView:(UITableView *)table numberOfRowsInSection:(NSInteger)section
 {
-    return [self arrows].count;
+	return [self arrows].count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString        *cellIdentifier = @"cellID";
-    WDArrowheadCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    NSString        *arrowID = [self arrows][indexPath.row];
-    WDStrokeStyle   *strokeStyle = [drawingController_.propertyManager defaultStrokeStyle];
-    
-    if (cell == nil) {
-        UITableViewCellStyle cellStyle = UITableViewCellStyleDefault;
-        cell = [[WDArrowheadCell alloc] initWithStyle:cellStyle reuseIdentifier:cellIdentifier];
-        cell.drawingController = self.drawingController;
-    }
-    
-    cell.arrowhead = arrowID;
-    cell.startArrowButton.selected = [strokeStyle.startArrow isEqualToString:arrowID];
-    cell.endArrowButton.selected = [strokeStyle.endArrow isEqualToString:arrowID];
-    
-    return cell;
+	NSString		*cellIdentifier = @"cellID";
+	WDArrowheadCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+	NSString		*arrowID = [self arrows][indexPath.row];
+	WDStrokeStyle   *strokeStyle = [drawingController_.propertyManager defaultStrokeStyle];
+	
+	if (cell == nil) {
+		UITableViewCellStyle cellStyle = UITableViewCellStyleDefault;
+		cell = [[WDArrowheadCell alloc] initWithStyle:cellStyle reuseIdentifier:cellIdentifier];
+		cell.drawingController = self.drawingController;
+	}
+	
+	cell.arrowhead = arrowID;
+	cell.startArrowButton.selected = [strokeStyle.startArrow isEqualToString:arrowID];
+	cell.endArrowButton.selected = [strokeStyle.endArrow isEqualToString:arrowID];
+	
+	return cell;
 }
 
 @end

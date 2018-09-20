@@ -13,7 +13,7 @@
 
 @interface NSArray (WDAdditions)
 
-- (NSArray *) map:(id (^)(id obj))fn;
-- (NSArray *) filter:(BOOL (^)(id obj))predicate;
+- (NSArray*) map:(id (^)(id obj))fn;
+- (NSArray*) filter:(BOOL (^)(id obj))predicate;
 
 @end

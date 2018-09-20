@@ -14,16 +14,16 @@
 @class WDDrawing;
 
 @interface WDSettingsController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate> {
-    IBOutlet UITableView    *table_;
-    NSArray                 *configuration_;
-    UITextField             *gridSpacing_;
-    UITableViewCell         *unitsCell_;
-    NSNumberFormatter       *formatter_;
+	IBOutlet UITableView	*table_;
+	NSArray				 *configuration_;
+	UITextField			 *gridSpacing_;
+	UITableViewCell		 *unitsCell_;
+	NSNumberFormatter	   *formatter_;
 }
 
 @property (nonatomic, weak) WDDrawing *drawing;
 
-- (NSString *) dimensionsString;
+- (NSString*) dimensionsString;
 
 @end
 

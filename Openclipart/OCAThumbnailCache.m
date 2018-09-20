@@ -12,9 +12,9 @@
 #import "OCAThumbnailCache.h"
 
 @interface OCAThumbnailCache () {
-    NSCache             *thumbnailCache_;
-    NSMutableSet        *downloaders_;
-    NSMutableDictionary *urlToReceiverMap_;
+	NSCache			 *thumbnailCache_;
+	NSMutableSet		*downloaders_;
+	NSMutableDictionary *urlToReceiverMap_;
 }
 @end
 
@@ -22,82 +22,82 @@
 
 + (OCAThumbnailCache *) sharedInstance
 {
-    static OCAThumbnailCache *loader_ = nil;
-    
-    if (!loader_) {
-        loader_ = [[OCAThumbnailCache alloc] init];
-    }
-    
-    return loader_;
+	static OCAThumbnailCache *loader_ = nil;
+	
+	if (!loader_) {
+		loader_ = [[OCAThumbnailCache alloc] init];
+	}
+	
+	return loader_;
 }
 
 - (instancetype) init
 {
-    self = [super init];
-    
-    if (!self) {
-        return nil;
-    }
-    
-    thumbnailCache_ = [[NSCache alloc] init];
-    urlToReceiverMap_ = [NSMutableDictionary dictionary];
-    downloaders_ = [NSMutableSet set];
-    
-    return self;
+	self = [super init];
+	
+	if (!self) {
+		return nil;
+	}
+	
+	thumbnailCache_ = [[NSCache alloc] init];
+	urlToReceiverMap_ = [NSMutableDictionary dictionary];
+	downloaders_ = [NSMutableSet set];
+	
+	return self;
 }
 
 - (void) takeDataFromDownloader:(OCADownloader *)downloader
 {
-    NSString *key = downloader.urlString;
-    [thumbnailCache_ setObject:downloader.data forKey:key];
+	NSString* key = downloader.urlString;
+	[thumbnailCache_ setObject:downloader.data forKey:key];
 
-    id<WDOpenClipArtThumbnailReceiver> receiver = [urlToReceiverMap_ objectForKey:key];
-    if (receiver) {
-        [receiver setThumbnail:[UIImage imageWithData:downloader.data]];
-        [urlToReceiverMap_ removeObjectForKey:key];
-    }
+	id<WDOpenClipArtThumbnailReceiver> receiver = [urlToReceiverMap_ objectForKey:key];
+	if (receiver) {
+		[receiver setThumbnail:[UIImage imageWithData:downloader.data]];
+		[urlToReceiverMap_ removeObjectForKey:key];
+	}
 
-    [downloaders_ removeObject:downloader];
+	[downloaders_ removeObject:downloader];
 }
 
-- (BOOL) alreadyDownloading:(NSString *)urlString
+- (BOOL) alreadyDownloading:(NSString*)urlString
 {
-    for (OCADownloader *dl in downloaders_) {
-        if ([dl.urlString isEqualToString:urlString]) {
-            return YES;
-        }
-    }
-    
-    return NO;
+	for (OCADownloader *dl in downloaders_) {
+		if ([dl.urlString isEqualToString:urlString]) {
+			return YES;
+		}
+	}
+	
+	return NO;
 }
 
-- (void) registerForThumbnail:(id<WDOpenClipArtThumbnailReceiver>)receiver url:(NSString *)thumbURL
+- (void) registerForThumbnail:(id<WDOpenClipArtThumbnailReceiver>)receiver url:(NSString*)thumbURL
 {
-    NSData *imageData = [thumbnailCache_ objectForKey:thumbURL];
-    
-    if (imageData) {
-        [receiver setThumbnail:[UIImage imageWithData:imageData]];
-        return;
-    }
-    
-    // start downloading the data
-    if (![self alreadyDownloading:thumbURL]) {
-        OCADownloader *downloader = [OCADownloader downloaderWithURL:thumbURL delegate:self];
-        [downloaders_ addObject:downloader];
-    }
-    
-    if ([[urlToReceiverMap_ allValues] containsObject:receiver]) {
-        // need to remove the previous mapping, since it's now out of date
-        for (NSString *key in [urlToReceiverMap_ allKeys]) {
-            if ([urlToReceiverMap_ objectForKey:key] == receiver) {
-                [urlToReceiverMap_ removeObjectForKey:key];
-                break;
-            }
-        }
-    }
-    
-    // register the object
-    [urlToReceiverMap_ setObject:receiver forKey:thumbURL];
+	NSData *imageData = [thumbnailCache_ objectForKey:thumbURL];
+	
+	if (imageData) {
+		[receiver setThumbnail:[UIImage imageWithData:imageData]];
+		return;
+	}
+	
+	// start downloading the data
+	if (![self alreadyDownloading:thumbURL]) {
+		OCADownloader *downloader = [OCADownloader downloaderWithURL:thumbURL delegate:self];
+		[downloaders_ addObject:downloader];
+	}
+	
+	if ([[urlToReceiverMap_ allValues] containsObject:receiver]) {
+		// need to remove the previous mapping, since it's now out of date
+		for (NSString* key in [urlToReceiverMap_ allKeys]) {
+			if ([urlToReceiverMap_ objectForKey:key] == receiver) {
+				[urlToReceiverMap_ removeObjectForKey:key];
+				break;
+			}
+		}
+	}
+	
+	// register the object
+	[urlToReceiverMap_ setObject:receiver forKey:thumbURL];
 }
 
 @end

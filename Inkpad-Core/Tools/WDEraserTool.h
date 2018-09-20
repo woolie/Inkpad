@@ -14,14 +14,14 @@
 @class WDPath;
 
 @interface WDEraserTool : WDTool {
-    WDPath              *tempPath_;
-    NSUInteger          eraserSize_;
-    
+	WDPath			  *tempPath_;
+	NSUInteger		  eraserSize_;
+	
 #if TARGET_OS_IPHONE
-    IBOutlet UIView     *optionsView_;
-    IBOutlet UILabel    *optionsTitle_;
-    IBOutlet UILabel    *optionsValue_;
-    IBOutlet UISlider   *optionsSlider_;
+	IBOutlet UIView	 *optionsView_;
+	IBOutlet UILabel	*optionsTitle_;
+	IBOutlet UILabel	*optionsValue_;
+	IBOutlet UISlider   *optionsSlider_;
 #endif
 }
 

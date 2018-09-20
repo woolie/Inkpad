@@ -15,15 +15,15 @@
 @class WDLayerCell;
 
 @interface WDLayerController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate> {
-    IBOutlet UITableView        *layerTable_;
-    UITextField                 *activeField_;
-    
-    UISlider                    *opacitySlider_;
-    UILabel                     *opacityLabel_;
-    UIButton                    *decrementButton_;
-    UIButton                    *incrementButton_;
-    
-    NSArray                     *toolbarItems_;
+	IBOutlet UITableView		*layerTable_;
+	UITextField				 *activeField_;
+	
+	UISlider					*opacitySlider_;
+	UILabel					 *opacityLabel_;
+	UIButton					*decrementButton_;
+	UIButton					*incrementButton_;
+	
+	NSArray					 *toolbarItems_;
 }
 
 @property (nonatomic, weak) WDDrawing *drawing;

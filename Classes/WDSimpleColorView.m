@@ -18,14 +18,14 @@
 
 - (void) setColor:(UIColor *)color
 {
-    color_ = color;
-    [self setNeedsDisplay];
+	color_ = color;
+	[self setNeedsDisplay];
 }
 
 - (void) drawRect:(CGRect)rect
 {
-    [color_ set];
-    UIRectFill(self.bounds);
+	[color_ set];
+	UIRectFill(self.bounds);
 }
 
 @end

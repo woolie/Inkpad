@@ -13,32 +13,32 @@
 #import "WDTextRenderer.h"
 
 typedef enum {
-    kWDTextPathAlignmentBaseline,
-    kWDTextPathAlignmentCentered, // currently unsupported
-    kWDTextPathAlignmentVertical  // currently unsupported
+	kWDTextPathAlignmentBaseline,
+	kWDTextPathAlignmentCentered, // currently unsupported
+	kWDTextPathAlignmentVertical  // currently unsupported
 } WDTextPathAlignment;
 
 @interface WDTextPath : WDPath <NSCoding, NSCopying, WDTextRenderer> {
-    NSString                *text_;
-    NSString                *fontName_;
-    float                   fontSize_;
-    WDTextPathAlignment     alignment_;
-    float                   startOffset_;
-    CGAffineTransform       transform_;
-    
-    CTFontRef               fontRef_;
-    BOOL                    needsLayout_;
-    NSMutableArray          *glyphs_;
-    BOOL                    overflow_;
-    
-    CGRect                  styleBounds_;
-    
-    NSString                *cachedText_;
-    NSNumber                *cachedStartOffset_;
+	NSString				*text_;
+	NSString				*fontName_;
+	float				   fontSize_;
+	WDTextPathAlignment	 alignment_;
+	float				   startOffset_;
+	CGAffineTransform	   transform_;
+	
+	CTFontRef			   fontRef_;
+	BOOL					needsLayout_;
+	NSMutableArray		  *glyphs_;
+	BOOL					overflow_;
+	
+	CGRect				  styleBounds_;
+	
+	NSString				*cachedText_;
+	NSNumber				*cachedStartOffset_;
 }
 
-@property (nonatomic, strong) NSString *text;
-@property (nonatomic, strong) NSString *fontName;
+@property (nonatomic, strong) NSString* text;
+@property (nonatomic, strong) NSString*fontName;
 @property (nonatomic, assign) float fontSize;
 @property (nonatomic, readonly) CTFontRef fontRef;
 
@@ -49,7 +49,7 @@ typedef enum {
 
 + (WDTextPath *) textPathWithPath:(WDPath *)path;
 
-- (void) setFontName:(NSString *)fontName;
+- (void) setFontName:(NSString*)fontName;
 - (void) setFontSize:(float)fontSize;
 
 - (void) moveStartKnobToNearestPoint:(CGPoint)pt;

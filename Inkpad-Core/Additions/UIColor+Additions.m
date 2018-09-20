@@ -21,33 +21,33 @@
 
 + (UIColor *) randomColor:(BOOL)includeAlpha
 {
-    float components[4];
-    
-    for (int i = 0; i < 4; i++) {
-        components[i] = WDRandomFloat();
-    }
+	float components[4];
+	
+	for (int i = 0; i < 4; i++) {
+		components[i] = WDRandomFloat();
+	}
 
-    float alpha = (includeAlpha ? components[3] : 1.0f);
-    alpha = 0.5 + (alpha * 0.5);
-    
-    return [UIColor colorWithRed:components[0] green:components[1] blue:components[2] alpha:alpha];
+	float alpha = (includeAlpha ? components[3] : 1.0f);
+	alpha = 0.5 + (alpha * 0.5);
+	
+	return [UIColor colorWithRed:components[0] green:components[1] blue:components[2] alpha:alpha];
 }
 
 + (UIColor *) saturatedRandomColor
 {
-    return [UIColor colorWithHue:WDRandomFloat() saturation:0.7f brightness:0.75f alpha:1.0];
+	return [UIColor colorWithHue:WDRandomFloat() saturation:0.7f brightness:0.75f alpha:1.0];
 }
 
 - (void) openGLSet
 {
-    CGFloat w, r, g, b, a;
-    
-    if ([self getRed:&r green:&g blue:&b alpha:&a]) {
-        glColor4f(r, g, b, a);
-    } else {
-        [self getWhite:&w alpha:&a];
-        glColor4f(w, w, w, a);
-    }
+	CGFloat w, r, g, b, a;
+	
+	if ([self getRed:&r green:&g blue:&b alpha:&a]) {
+		glColor4f(r, g, b, a);
+	} else {
+		[self getWhite:&w alpha:&a];
+		glColor4f(w, w, w, a);
+	}
 }
 
 @end

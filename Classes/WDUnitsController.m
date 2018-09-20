@@ -15,13 +15,13 @@
 #import "WDUnitsController.h"
 #import "WDUtilities.h"
 
-NSString *WDCustomDrawingSizeChanged = @"WDCustomDrawingSizeChanged";
+NSString* WDCustomDrawingSizeChanged = @"WDCustomDrawingSizeChanged";
 
 @implementation WDUnitsController
 
 @synthesize drawing = drawing_;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (instancetype) initWithNibName:(NSString*)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
 	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
 
@@ -111,14 +111,14 @@ NSString *WDCustomDrawingSizeChanged = @"WDCustomDrawingSizeChanged";
 		size = CGSizeMake([defaults floatForKey:WDCustomSizeWidth], [defaults floatForKey:WDCustomSizeHeight]);
 	}
 
-	NSString *width = [[self formatter] stringFromNumber:@(size.width / unit.conversionFactor)];
+	NSString*width = [[self formatter] stringFromNumber:@(size.width / unit.conversionFactor)];
 	if (!width_.isEditing)
 	{
 		width_.text = nil;
 	}
 	width_.placeholder = [NSString stringWithFormat:@"%@ %@", width, abbreviation];
 
-	NSString *height = [[self formatter] stringFromNumber:@(size.height / unit.conversionFactor)];
+	NSString*height = [[self formatter] stringFromNumber:@(size.height / unit.conversionFactor)];
 	if (!height_.isEditing)
 	{
 		height_.text = nil;
@@ -156,7 +156,7 @@ NSString *WDCustomDrawingSizeChanged = @"WDCustomDrawingSizeChanged";
 	return 44;
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+- (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
 	if (section == 0)	// dimensions
 	{
@@ -168,7 +168,7 @@ NSString *WDCustomDrawingSizeChanged = @"WDCustomDrawingSizeChanged";
 	}
 }
 
-- (void) widthFieldEdited:(id)sender
+- (void) widthFieldEdited:(id) sender
 {
 	WDRulerUnit *unit = [self units];
 	NSArray	 *components = [width_.text componentsSeparatedByString:@" "];
@@ -193,7 +193,7 @@ NSString *WDCustomDrawingSizeChanged = @"WDCustomDrawingSizeChanged";
 	[self updateDimensionFields];
 }
 
-- (void) heightFieldEdited:(id)sender
+- (void) heightFieldEdited:(id) sender
 {
 	WDRulerUnit *unit = [self units];
 	NSNumber	*newHeight = [[self formatter] numberFromString:height_.text];
@@ -217,7 +217,7 @@ NSString *WDCustomDrawingSizeChanged = @"WDCustomDrawingSizeChanged";
 	[self updateDimensionFields];
 }
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString*)string
 {
 	NSString	*proposed = textField.text;
 	NSNumber	*number = nil;
@@ -248,7 +248,7 @@ NSString *WDCustomDrawingSizeChanged = @"WDCustomDrawingSizeChanged";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	NSString *cellIdentifier = @"cellID";
+	NSString*cellIdentifier = @"cellID";
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
 
 	if (cell == nil)
@@ -272,7 +272,7 @@ NSString *WDCustomDrawingSizeChanged = @"WDCustomDrawingSizeChanged";
 		cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
 		WDRulerUnit *unit = [self units];
-		NSString *abbrev = [WDRulerUnit localizedUnitAbbreviation:unit.abbreviation];
+		NSString*abbrev = [WDRulerUnit localizedUnitAbbreviation:unit.abbreviation];
 
 		if (indexPath.row == 0) // width
 		{
@@ -280,7 +280,7 @@ NSString *WDCustomDrawingSizeChanged = @"WDCustomDrawingSizeChanged";
 			[textField addTarget:self action:@selector(widthFieldEdited:) forControlEvents:(UIControlEventEditingDidEnd | UIControlEventEditingDidEndOnExit)];
 
 			float dimension = (drawing_ ? drawing_.width : [[NSUserDefaults standardUserDefaults] floatForKey:WDCustomSizeWidth]);
-			NSString *width = [[self formatter] stringFromNumber:@(dimension / unit.conversionFactor)];
+			NSString*width = [[self formatter] stringFromNumber:@(dimension / unit.conversionFactor)];
 			width_.placeholder = [NSString stringWithFormat:@"%@ %@", width, abbrev];
 		}
 		else	// height
@@ -289,7 +289,7 @@ NSString *WDCustomDrawingSizeChanged = @"WDCustomDrawingSizeChanged";
 			[textField addTarget:self action:@selector(heightFieldEdited:) forControlEvents:(UIControlEventEditingDidEnd | UIControlEventEditingDidEndOnExit)];
 
 			float dimension = (drawing_ ? drawing_.height : [[NSUserDefaults standardUserDefaults] floatForKey:WDCustomSizeHeight]);
-			NSString *height = [[self formatter] stringFromNumber:@(dimension / unit.conversionFactor)];
+			NSString*height = [[self formatter] stringFromNumber:@(dimension / unit.conversionFactor)];
 			height_.placeholder = [NSString stringWithFormat:@"%@ %@", height, abbrev];
 		}
 	}

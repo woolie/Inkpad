@@ -17,17 +17,17 @@
 @class WDGradientController;
 
 typedef enum {
-    kFillNone,
-    kFillColor,
-    kFillGradient
+	kFillNone,
+	kFillColor,
+	kFillGradient
 } WDFillMode;
 
 @interface WDFillController : UIViewController {
-    WDColorController       *colorController_;
-    WDGradientController    *gradientController_;
-    WDFillMode              fillMode_;
-    UISegmentedControl      *modeSegment_;
-    id<WDPathPainter>       fill_;
+	WDColorController	   *colorController_;
+	WDGradientController	*gradientController_;
+	WDFillMode			  fillMode_;
+	UISegmentedControl	  *modeSegment_;
+	id<WDPathPainter>	   fill_;
 }
 
 @property (nonatomic, weak) WDDrawingController *drawingController;

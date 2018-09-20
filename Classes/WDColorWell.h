@@ -15,8 +15,8 @@
 @class WDGradientStopIndicator;
 
 @interface WDColorWell : UIButton {
-    WDGradientStopIndicator     *gradientStop_;
-    UIView                      *shadowView_;
+	WDGradientStopIndicator	 *gradientStop_;
+	UIView					  *shadowView_;
 }
 
 @property (nonatomic, strong) id<WDPathPainter> painter;

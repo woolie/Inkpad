@@ -15,14 +15,14 @@
 @class WDAbstractPath;
 
 typedef enum {
-    WDPathfinderUnite,
-    WDPathfinderIntersect,
-    WDPathFinderSubtract,
-    WDPathFinderExclude,
-    WDPathFinderDivide
+	WDPathfinderUnite,
+	WDPathfinderIntersect,
+	WDPathFinderSubtract,
+	WDPathFinderExclude,
+	WDPathFinderDivide
 } WDPathfinderOperation;
 
 
 @interface WDPathfinder : NSObject
-+ (WDAbstractPath *) combinePaths:(NSArray *)paths operation:(WDPathfinderOperation)operation;
++ (WDAbstractPath*) combinePaths:(NSArray*)paths operation:(WDPathfinderOperation)operation;
 @end

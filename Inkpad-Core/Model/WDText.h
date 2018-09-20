@@ -23,25 +23,25 @@
 
 @interface WDText : WDStylable <NSCoding, NSCopying, WDTextRenderer>
 {
-    CGMutablePathRef    _pathRef;
-    
-    BOOL                _needsLayout;
-    NSMutableArray*		_glyphs;
-    CGRect              _styleBounds;
-    
-    NSString*			_cachedText;
-    CGAffineTransform   _cachedTransform;
-    float               _cachedWidth;
-    BOOL                _cachingWidth;
-    
-    BOOL                _naturalBoundsDirty;
+	CGMutablePathRef	_pathRef;
+
+	BOOL				_needsLayout;
+	NSMutableArray*		_glyphs;
+	CGRect			  _styleBounds;
+
+	NSString*			_cachedText;
+	CGAffineTransform   _cachedTransform;
+	CGFloat			   _cachedWidth;
+	BOOL				_cachingWidth;
+
+	BOOL				_naturalBoundsDirty;
 }
 
 @property (nonatomic, assign) float width;
-@property (nonatomic, strong) NSString *fontName;
+@property (nonatomic, strong) NSString*fontName;
 @property (nonatomic, assign) float fontSize;
 @property (nonatomic, assign) CGAffineTransform transform;
-@property (nonatomic, strong) NSString *text;
+@property (nonatomic, strong) NSString* text;
 @property (nonatomic, assign) NSTextAlignment alignment;
 @property (nonatomic, readonly) CGRect naturalBounds;
 @property (nonatomic, readonly) CTFontRef fontRef;
@@ -62,9 +62,9 @@
 
 - (void) drawOpenGLTextOutlinesWithTransform:(CGAffineTransform)transform viewTransform:(CGAffineTransform)viewTransform;
 
-- (void) setFontNameQuiet:(NSString *)fontName;
+- (void) setFontNameQuiet:(NSString*)fontName;
 - (void) setFontSizeQuiet:(float)fontSize;
-- (void) setTextQuiet:(NSString *)text;
+- (void) setTextQuiet:(NSString*)text;
 - (void) setTransformQuiet:(CGAffineTransform)transform;
 - (void) setWidthQuiet:(float)width;
 

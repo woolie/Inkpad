@@ -15,17 +15,17 @@
 @class WDColorSlider;
 
 @interface WDColorBalanceController : WDColorAdjustmentController {
-    IBOutlet WDColorSlider      *redSlider_;
-    IBOutlet WDColorSlider      *greenSlider_;
-    IBOutlet WDColorSlider      *blueSlider_;
-    
-    IBOutlet UILabel            *redLabel_;
-    IBOutlet UILabel            *greenLabel_;
-    IBOutlet UILabel            *blueLabel_;
-        
-    float                       redShift_;
-    float                       greenShift_;
-    float                       blueShift_;
+	IBOutlet WDColorSlider	  *redSlider_;
+	IBOutlet WDColorSlider	  *greenSlider_;
+	IBOutlet WDColorSlider	  *blueSlider_;
+	
+	IBOutlet UILabel			*redLabel_;
+	IBOutlet UILabel			*greenLabel_;
+	IBOutlet UILabel			*blueLabel_;
+		
+	float					   redShift_;
+	float					   greenShift_;
+	float					   blueShift_;
 }
 
 @end

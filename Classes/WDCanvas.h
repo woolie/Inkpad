@@ -25,45 +25,45 @@
 @class WDSelectionView;
 
 @interface WDCanvas : UIView {
-    WDSelectionView         *selectionView_;
-    WDEraserPreviewView     *eraserPreview_;
-    
-    BOOL                    controlGesture_;
-    BOOL                    moved_;
-    BOOL                    transforming_;
-    BOOL                    transformingNode_;
-    BOOL                    showingPivot_;
-    CGAffineTransform       selectionTransform_;
-    CGPoint                 pivot_;
-    UIColor                 *isolationColor_;
-    
-    NSValue                 *marquee_;
-    WDPath                  *shapeUnderConstruction_;
-    WDPath                  *eraserPath_;
-    
-    // managing the view scale and visible area
-    float                   trueViewScale_;
-    float                   viewScale_;
-    CGAffineTransform       transform_;
-    CGPoint                 userSpacePivot_;
-    CGPoint                 deviceSpacePivot_;
-    CGPoint                 oldDeviceSpacePivot_;
-    
-    // adornments
-    UIImageView             *pivotView_;
-    WDEyedropper            *eyedropper_;
-    
-    // rulers
-    WDRulerView             *horizontalRuler_;
-    WDRulerView             *verticalRuler_;
-    WDRulerCornerView       *cornerView_;
-    
-    WDPalette               *toolPalette_;
-    UIButton                *deleteButton_; // pseudo delete tool
-    CGPoint                 cachedCenter_;
-    
-    UILabel                 *messageLabel_;
-    NSTimer                 *messageTimer_;
+	WDSelectionView		 *selectionView_;
+	WDEraserPreviewView	 *eraserPreview_;
+	
+	BOOL					controlGesture_;
+	BOOL					moved_;
+	BOOL					transforming_;
+	BOOL					transformingNode_;
+	BOOL					showingPivot_;
+	CGAffineTransform	   selectionTransform_;
+	CGPoint				 pivot_;
+	UIColor				 *isolationColor_;
+	
+	NSValue				 *marquee_;
+	WDPath				  *shapeUnderConstruction_;
+	WDPath				  *eraserPath_;
+	
+	// managing the view scale and visible area
+	float				   trueViewScale_;
+	float				   viewScale_;
+	CGAffineTransform	   transform_;
+	CGPoint				 userSpacePivot_;
+	CGPoint				 deviceSpacePivot_;
+	CGPoint				 oldDeviceSpacePivot_;
+	
+	// adornments
+	UIImageView			 *pivotView_;
+	WDEyedropper			*eyedropper_;
+	
+	// rulers
+	WDRulerView			 *horizontalRuler_;
+	WDRulerView			 *verticalRuler_;
+	WDRulerCornerView	   *cornerView_;
+	
+	WDPalette			   *toolPalette_;
+	UIButton				*deleteButton_; // pseudo delete tool
+	CGPoint				 cachedCenter_;
+	
+	UILabel				 *messageLabel_;
+	NSTimer				 *messageTimer_;
 }
 
 @property (nonatomic, weak) WDDrawing *drawing;
@@ -125,7 +125,7 @@
 - (void) ensureToolPaletteIsOnScreen;
 
 // displaying messages to the user
-- (void) showMessage:(NSString *)message;
+- (void) showMessage:(NSString*)message;
 - (void) nixMessageLabel;
 
 // eyedropper
@@ -141,4 +141,4 @@
 
 @end
 
-extern NSString *WDCanvasBeganTrackingTouches;
+extern NSString* WDCanvasBeganTrackingTouches;

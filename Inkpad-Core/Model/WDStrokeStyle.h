@@ -15,11 +15,11 @@
 @class WDXMLElement;
 
 typedef enum {
-    kStrokeWidthAttribute  = 1 << 0,
-    kStrokeCapAttribute    = 1 << 1,
-    kStrokeJoinAttribute   = 1 << 2,
-    kStrokeColorAttribute  = 1 << 3,
-    kStrokeAllAttributes   = 0xffff
+	kStrokeWidthAttribute  = 1 << 0,
+	kStrokeCapAttribute	= 1 << 1,
+	kStrokeJoinAttribute   = 1 << 2,
+	kStrokeColorAttribute  = 1 << 3,
+	kStrokeAllAttributes   = 0xffff
 } WDStrokeAttributes;
 
 @interface WDStrokeStyle : NSObject <NSCoding, NSCopying>
@@ -29,30 +29,30 @@ typedef enum {
 @property (nonatomic, readonly) CGLineJoin join;
 @property (nonatomic, readonly) WDColor *color;
 @property (nonatomic, readonly) NSArray *dashPattern;
-@property (nonatomic, readonly) NSString *startArrow;
-@property (nonatomic, readonly) NSString *endArrow;
+@property (nonatomic, readonly) NSString* startArrow;
+@property (nonatomic, readonly) NSString*endArrow;
 
 + (WDStrokeStyle *) strokeStyleWithWidth:(float)width
-                                     cap:(CGLineCap)cap
-                                    join:(CGLineJoin)join
-                                   color:(WDColor *)color
-                             dashPattern:(NSArray *)dashPattern;
+									 cap:(CGLineCap)cap
+									join:(CGLineJoin)join
+								   color:(WDColor *)color
+							 dashPattern:(NSArray*)dashPattern;
 
 + (WDStrokeStyle *) strokeStyleWithWidth:(float)width
-                                     cap:(CGLineCap)cap
-                                    join:(CGLineJoin)join
-                                   color:(WDColor *)color
-                             dashPattern:(NSArray *)dashPattern
-                              startArrow:(NSString *)startArrow
-                                endArrow:(NSString *)endArrow;
+									 cap:(CGLineCap)cap
+									join:(CGLineJoin)join
+								   color:(WDColor *)color
+							 dashPattern:(NSArray*)dashPattern
+							  startArrow:(NSString*)startArrow
+								endArrow:(NSString*)endArrow;
 
 - (instancetype) initWithWidth:(float)width
-                 cap:(CGLineCap)cap
-                join:(CGLineJoin)join
-               color:(WDColor *)color
-         dashPattern:(NSArray *)dashPattern
-          startArrow:(NSString *)startArrow
-            endArrow:(NSString *)endArrow;
+				 cap:(CGLineCap)cap
+				join:(CGLineJoin)join
+			   color:(WDColor *)color
+		 dashPattern:(NSArray*)dashPattern
+		  startArrow:(NSString*)startArrow
+			endArrow:(NSString*)endArrow;
 
 - (BOOL) isNullStroke;
 - (BOOL) hasPattern;
@@ -73,4 +73,4 @@ typedef enum {
 
 @end
 
-extern NSString *WDStrokeArrowNone;
+extern NSString* WDStrokeArrowNone;

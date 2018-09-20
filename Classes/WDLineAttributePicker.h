@@ -13,9 +13,9 @@
 #import "WDStrokeStyle.h"
 
 @interface WDLineAttributePicker : UIControl {
-    int                 selectedIndex_;
-    UIButton            *joinButton_[3];
-    UIButton            *capButton_[3];
+	int				 selectedIndex_;
+	UIButton			*joinButton_[3];
+	UIButton			*capButton_[3];
 }
 
 @property (nonatomic, assign) CGLineCap cap;

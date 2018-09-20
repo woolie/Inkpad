@@ -15,41 +15,41 @@
 
 - (instancetype) initWithFrame:(CGRect)frame
 {
-    self = [super initWithFrame:frame];
+	self = [super initWithFrame:frame];
 
-    if (!self) {
-        return nil;
-    }
-    
-    self.backgroundColor = nil;
-    self.opaque = NO;
-    
-    return self;
+	if (!self) {
+		return nil;
+	}
+	
+	self.backgroundColor = nil;
+	self.opaque = NO;
+	
+	return self;
 }
 
 - (void)drawRect:(CGRect)rect
 {
-    CGContextRef ctx = UIGraphicsGetCurrentContext();
-    
-    // draw a 1 pixel line on all displays
-    float strokeWidth = 1.0f / [UIScreen mainScreen].scale;
-    float y = strokeWidth / 2.0f;
-    float x = self.frame.size.width;
-    
-    CGContextSetLineWidth(ctx, strokeWidth);
-    
-    // dark edge
-    [[UIColor colorWithWhite:0.5f alpha:0.5f] set];
-    CGContextMoveToPoint(ctx, 0, y);
-    CGContextAddLineToPoint(ctx, x, y);
-    CGContextStrokePath(ctx);
+	CGContextRef ctx = UIGraphicsGetCurrentContext();
+	
+	// draw a 1 pixel line on all displays
+	float strokeWidth = 1.0f / [UIScreen mainScreen].scale;
+	float y = strokeWidth / 2.0f;
+	float x = self.frame.size.width;
+	
+	CGContextSetLineWidth(ctx, strokeWidth);
+	
+	// dark edge
+	[[UIColor colorWithWhite:0.5f alpha:0.5f] set];
+	CGContextMoveToPoint(ctx, 0, y);
+	CGContextAddLineToPoint(ctx, x, y);
+	CGContextStrokePath(ctx);
 
-    // light edge
-    y += strokeWidth;
-    [[UIColor colorWithWhite:1.0f alpha:0.5f] set];
-    CGContextMoveToPoint(ctx, 0, y);
-    CGContextAddLineToPoint(ctx, x, y);
-    CGContextStrokePath(ctx);
+	// light edge
+	y += strokeWidth;
+	[[UIColor colorWithWhite:1.0f alpha:0.5f] set];
+	CGContextMoveToPoint(ctx, 0, y);
+	CGContextAddLineToPoint(ctx, x, y);
+	CGContextStrokePath(ctx);
 }
 
 @end

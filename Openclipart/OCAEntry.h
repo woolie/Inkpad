@@ -13,14 +13,14 @@
 
 @interface OCAEntry : NSObject
 
-@property (nonatomic) NSString *title;
-@property (nonatomic) NSString *uploader;
+@property (nonatomic) NSString* title;
+@property (nonatomic) NSString*uploader;
 @property (nonatomic) NSUInteger ID;
 @property (nonatomic) NSUInteger favorites;
 @property (nonatomic) NSUInteger downloads;
-@property (nonatomic) NSString *SVGURL;
-@property (nonatomic) NSString *thumbURL;
+@property (nonatomic) NSString* sVGURL;
+@property (nonatomic) NSString* thumbURL;
 
-+ (OCAEntry *) openClipArtEntryWithDictionary:(NSDictionary *)dict;
++ (OCAEntry *) openClipArtEntryWithDictionary:(NSDictionary*)dict;
 
 @end

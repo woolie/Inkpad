@@ -15,17 +15,17 @@
 
 + (UIBarButtonItem *) flexibleItem
 {
-    return [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
-                                                         target:nil action:nil];
+	return [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+														 target:nil action:nil];
 }
 
 + (UIBarButtonItem *) fixedItemWithWidth:(float)width
 {
-    UIBarButtonItem *fixedItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
-                                                                               target:nil action:nil];
-    fixedItem.width = width;
-    
-    return fixedItem;
+	UIBarButtonItem *fixedItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
+																			   target:nil action:nil];
+	fixedItem.width = width;
+	
+	return fixedItem;
 }
 
 @end

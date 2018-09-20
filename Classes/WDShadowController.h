@@ -18,23 +18,23 @@
 @class WDSparkSlider;
 
 @interface WDShadowController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
-    WDColorController       *colorController_;
+	WDColorController	   *colorController_;
 	WDBlendModeController	*blendModeController_;
-    
-    IBOutlet WDSparkSlider  *radius_;
-    IBOutlet WDSparkSlider  *offset_;
-    IBOutlet WDAnglePicker  *angle_;
-    IBOutlet UISlider       *opacitySlider_;
-    IBOutlet UILabel        *opacityLabel_;
-    IBOutlet UISwitch       *shadowSwitch_;
+	
+	IBOutlet WDSparkSlider  *radius_;
+	IBOutlet WDSparkSlider  *offset_;
+	IBOutlet WDAnglePicker  *angle_;
+	IBOutlet UISlider	   *opacitySlider_;
+	IBOutlet UILabel		*opacityLabel_;
+	IBOutlet UISwitch	   *shadowSwitch_;
 	IBOutlet UITableView	*blendModeTableView_;
-    IBOutlet UIButton       *increment;
-    IBOutlet UIButton       *decrement;
+	IBOutlet UIButton	   *increment;
+	IBOutlet UIButton	   *decrement;
 	CGBlendMode				blendMode_;
 }
 
 @property (nonatomic, weak) WDDrawingController *drawingController;
 
-- (IBAction) toggleShadow:(id)sender;
+- (IBAction) toggleShadow:(id) sender;
 
 @end

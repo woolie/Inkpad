@@ -17,22 +17,22 @@ AVLTree::AVLTree(void):DblLinked()
 AVLTree::~AVLTree(void)
 {
 }
-void        AVLTree::MakeNew(void)
+void		AVLTree::MakeNew(void)
 {
 DblLinked::MakeNew();
 	dad=sonL=sonR=NULL;
 	balance=0;
 }
-void        AVLTree::MakeDelete(void)
+void		AVLTree::MakeDelete(void)
 {
 DblLinked::MakeDelete();
 }
-AVLTree*    AVLTree::Leftmost(void)
+AVLTree*	AVLTree::Leftmost(void)
 {
 	return LeftLeaf(NULL,true);
 }
 
-AVLTree*    AVLTree::LeftLeaf(AVLTree* from,bool from_dad)
+AVLTree*	AVLTree::LeftLeaf(AVLTree* from,bool from_dad)
 {
 	if ( from_dad ) {
 		if ( sonL ) {
@@ -61,7 +61,7 @@ AVLTree*    AVLTree::LeftLeaf(AVLTree* from,bool from_dad)
 	}
 	return NULL;
 }
-AVLTree*    AVLTree::RightLeaf(AVLTree* from,bool from_dad)
+AVLTree*	AVLTree::RightLeaf(AVLTree* from,bool from_dad)
 {
 	if ( from_dad ) {
 		if ( sonR ) {
@@ -487,15 +487,15 @@ AVLTree::RestoreBalances(int diff,AVLTree* &racine)
 /*
  * removal
  */
-int             AVLTree::Remove(AVLTree* &racine,bool rebalance)
+int			 AVLTree::Remove(AVLTree* &racine,bool rebalance)
 {
 	AVLTree* startNode=NULL;
-	int      remDiff=0;
+	int	  remDiff=0;
 	int res=Remove(racine,startNode,remDiff);
 	if ( res == avl_no_err &&  rebalance && startNode ) res=startNode->RestoreBalances(remDiff,racine);
 	return res;
 }
-int             AVLTree::Remove(AVLTree* &racine,AVLTree* &startNode,int &diff)
+int			 AVLTree::Remove(AVLTree* &racine,AVLTree* &startNode,int &diff)
 {
 DblLinked::Extract();
 	
@@ -582,13 +582,13 @@ DblLinked::Extract();
 /*
  * insertion
  */
-int             AVLTree::Insert(AVLTree* &racine,int insertType,AVLTree* insertL,AVLTree* insertR,bool rebalance)
+int			 AVLTree::Insert(AVLTree* &racine,int insertType,AVLTree* insertL,AVLTree* insertR,bool rebalance)
 {
 	int res=Insert(racine,insertType,insertL,insertR);
 	if ( res == avl_no_err && rebalance ) res=RestoreBalances((AVLTree*)NULL,racine);
 	return res;
 }
-int             AVLTree::Insert(AVLTree* &racine,int insertType,AVLTree* insertL,AVLTree* insertR)
+int			 AVLTree::Insert(AVLTree* &racine,int insertType,AVLTree* insertL,AVLTree* insertR)
 {
 	if ( racine == NULL ) {
 		racine=this;
@@ -654,7 +654,7 @@ int             AVLTree::Insert(AVLTree* &racine,int insertType,AVLTree* insertL
 	}
 	return avl_no_err;
 }
-void         AVLTree::Relocate(AVLTree* to)
+void		 AVLTree::Relocate(AVLTree* to)
 {
 DblLinked::Relocate(to);
 	if ( dad ) {

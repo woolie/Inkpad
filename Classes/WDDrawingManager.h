@@ -15,53 +15,53 @@
 @class WDDocument;
 
 @interface WDDrawingManager : NSObject {
-    NSMutableArray  *drawingNames_;
+	NSMutableArray  *drawingNames_;
 }
 
 + (WDDrawingManager *) sharedInstance;
 
-+ (NSString *) documentDirectory;
-+ (NSString *) drawingPath;
-+ (BOOL) drawingExists:(NSString *)drawing;
++ (NSString*) documentDirectory;
++ (NSString*) drawingPath;
++ (BOOL) drawingExists:(NSString*)drawing;
 
-- (WDDocument *) createNewDrawingWithSize:(CGSize)size andUnits:(NSString *)units;
+- (WDDocument *) createNewDrawingWithSize:(CGSize)size andUnits:(NSString*)units;
 - (BOOL) createNewDrawingWithImageAtURL:(NSURL *)imageURL;
 - (BOOL) createNewDrawingWithImage:(UIImage *)image;
 
 // these import methods are asynchronous
 - (void) importDrawingAtURL:(NSURL *)url errorBlock:(void (^)(void))errorBlock withCompletionHandler:(void (^)(WDDocument *))completionBlock;
 
-- (WDDocument *) openDocumentWithName:(NSString *)name withCompletionHandler:(void (^)(WDDocument *document))completionHandler;
+- (WDDocument *) openDocumentWithName:(NSString*)name withCompletionHandler:(void (^)(WDDocument *document))completionHandler;
 - (WDDocument *) openDocumentAtIndex:(NSUInteger)ix withCompletionHandler:(void (^)(WDDocument *document))completionHandler;
-- (NSData *) dataForFilename:(NSString *)name;
+- (NSData *) dataForFilename:(NSString*)name;
 - (NSUInteger) numberOfDrawings;
-- (NSArray *) drawingNames;
-- (NSIndexPath *) indexPathForFilename:(NSString *)filename;
+- (NSArray*) drawingNames;
+- (NSIndexPath *) indexPathForFilename:(NSString*)filename;
 
-- (NSString *) fileAtIndex:(NSUInteger)ix;
+- (NSString*) fileAtIndex:(NSUInteger)ix;
 - (WDDocument *) duplicateDrawing:(WDDocument *)document;
 
-- (void) installSamples:(NSArray *)urls;
+- (void) installSamples:(NSArray*)urls;
 
 - (void) deleteDrawing:(WDDocument *)drawing;
 - (void) deleteDrawings:(NSMutableSet *)set;
 
-- (NSString *) uniqueFilenameWithPrefix:(NSString *)prefix extension:(NSString *)extension;
-- (void) renameDrawing:(NSString *)drawing newName:(NSString *)newName;
+- (NSString*) uniqueFilenameWithPrefix:(NSString*)prefix extension:(NSString*)extension;
+- (void) renameDrawing:(NSString*)drawing newName:(NSString*)newName;
 
-- (UIImage *) getThumbnail:(NSString *)name;
+- (UIImage *) getThumbnail:(NSString*)name;
 
 @end
 
-extern NSString *WDSVGFileExtension;
-extern NSString *WDDrawingFileExtension;
-extern NSString *WDDefaultDrawingExtension;
+extern NSString* WDSVGFileExtension;
+extern NSString* WDDrawingFileExtension;
+extern NSString* WDDefaultDrawingExtension;
 
 // notifications
-extern NSString *WDDrawingsDeleted;
-extern NSString *WDDrawingAdded;
-extern NSString *WDDrawingRenamed;
+extern NSString* WDDrawingsDeleted;
+extern NSString* WDDrawingAdded;
+extern NSString* WDDrawingRenamed;
 
-extern NSString *WDDrawingOldFilenameKey;
-extern NSString *WDDrawingNewFilenameKey;
+extern NSString* WDDrawingOldFilenameKey;
+extern NSString* WDDrawingNewFilenameKey;
 

@@ -19,33 +19,33 @@
 
 @synthesize lastWindowLocation = lastWindowLocation_;
 
-- (NSString *) iconName
+- (NSString*) iconName
 {
-    return @"hand.png";
+	return @"hand.png";
 }
 
 #if !TARGET_OS_IPHONE
 
 - (void) mouseDown:(NSEvent *)theEvent inCanvas:(WDCanvas *)canvas
 {
-    [canvas beginGestureMode];
-    lastWindowLocation_ = [theEvent locationInWindow];
+	[canvas beginGestureMode];
+	lastWindowLocation_ = [theEvent locationInWindow];
 }
 
 - (void) mouseDragged:(NSEvent *)theEvent inCanvas:(WDCanvas *)canvas
 {
-    CGPoint delta = WDSubtractPoints([canvas convertPointFromBase:[theEvent locationInWindow]],
-                                     [canvas convertPointFromBase:lastWindowLocation_]);
-    lastWindowLocation_ = [theEvent locationInWindow];
-    
-    CGRect visibleRect = canvas.visibleRect;
-    CGPoint newOrigin = WDSubtractPoints(visibleRect.origin, delta);
-    [canvas scrollPoint:newOrigin];
+	CGPoint delta = WDSubtractPoints([canvas convertPointFromBase:[theEvent locationInWindow]],
+									 [canvas convertPointFromBase:lastWindowLocation_]);
+	lastWindowLocation_ = [theEvent locationInWindow];
+	
+	CGRect visibleRect = canvas.visibleRect;
+	CGPoint newOrigin = WDSubtractPoints(visibleRect.origin, delta);
+	[canvas scrollPoint:newOrigin];
 }
 
 - (void) mouseUp:(NSEvent *)theEvent inCanvas:(WDCanvas *)canvas
 {
-    [canvas endGestureMode];
+	[canvas endGestureMode];
 }
 
 #endif
@@ -53,11 +53,11 @@
 - (void) buttonDoubleTapped
 {
 #if !TARGET_OS_IPHONE
-    WDDocument *doc = [[NSDocumentController sharedDocumentController] currentDocument];
-    
-    if (doc) {
-        [doc.canvas fitInWindow:nil];
-    }
+	WDDocument *doc = [[NSDocumentController sharedDocumentController] currentDocument];
+	
+	if (doc) {
+		[doc.canvas fitInWindow:nil];
+	}
 #endif
 }
 

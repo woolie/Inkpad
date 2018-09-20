@@ -14,8 +14,8 @@
 @protocol WDPathPainter;
 
 @interface WDSwatchCell : UICollectionViewCell {
-    UIView          *highlightView;
-    UIImageView     *selectedIndicator_;
+	UIView		  *highlightView;
+	UIImageView	 *selectedIndicator_;
 }
 
 @property (nonatomic, strong) id<WDPathPainter> swatch;

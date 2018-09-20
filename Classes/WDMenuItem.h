@@ -14,7 +14,7 @@
 
 @interface WDMenuItem : NSObject
 
-@property (nonatomic, readonly) NSString *title;
+@property (nonatomic, readonly) NSString* title;
 @property (nonatomic, readonly) SEL action;
 @property (weak, nonatomic, readonly) id target;
 @property (nonatomic, assign) BOOL enabled;
@@ -25,10 +25,10 @@
 @property (nonatomic, weak) UILabel *label;
 @property (nonatomic, weak) UIImageView *imageView;
 
-- (id)initWithTitle:(NSString *)aString image:(UIImage *)image action:(SEL)aSelector target:(id)target;
+- (instancetype) initWithTitle:(NSString*)aString image:(UIImage *)image action:(SEL)aSelector target:(id)target;
 
-+ (id)itemWithTitle:(NSString *)aString action:(SEL)aSelector target:(id)target;
-+ (id)itemWithTitle:(NSString *)aString image:(UIImage *)image action:(SEL)aSelector target:(id)target;
++ (id)itemWithTitle:(NSString*)aString action:(SEL)aSelector target:(id)target;
++ (id)itemWithTitle:(NSString*)aString image:(UIImage *)image action:(SEL)aSelector target:(id)target;
 
 + (WDMenuItem *)separatorItem;
 

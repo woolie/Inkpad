@@ -16,19 +16,19 @@
 //#include <iostream.h>
 
 typedef struct vec2 {
-	float    x,y;
+	float	x,y;
 } vec2;
 
 typedef struct mat2 {
-	float     xx,xy,yx,yy;
+	float	 xx,xy,yx,yy;
 } mat2;
 
 typedef struct vec2d {
-	double    x,y;
+	double	x,y;
 } vec2d;
 
 typedef struct mat2d {
-	double     xx,xy,yx,yy;
+	double	 xx,xy,yx,yy;
 } mat2d;
 
 #define RotCCW(a) {\

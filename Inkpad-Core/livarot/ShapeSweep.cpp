@@ -10,23 +10,23 @@
 #include "MyMath.h"
 
 
-void              Shape::ResetSweep(void)
+void			  Shape::ResetSweep(void)
 {
 	MakePointData(true);
 	MakeEdgeData(true);
 	MakeSweepSrcData(true);
 }
-void              Shape::CleanupSweep(void)
+void			  Shape::CleanupSweep(void)
 {
 	MakePointData(false);
 	MakeEdgeData(false);
 	MakeSweepSrcData(false);
 }
-void              Shape::ForceToPolygon(void)
+void			  Shape::ForceToPolygon(void)
 {
 	type=shape_polygon;
 }
-int               Shape::Reoriente(Shape* a)
+int			   Shape::Reoriente(Shape* a)
 {
 	Reset(0,0);
 	if ( a->nbPt <= 1 || a->nbAr <= 1 ) return 0;
@@ -111,7 +111,7 @@ int               Shape::Reoriente(Shape* a)
 	type=shape_polygon;
 	return 0;
 }
-int               Shape::ConvertToShape(Shape* a,FillRule directed,bool invert)
+int			   Shape::ConvertToShape(Shape* a,FillRule directed,bool invert)
 {
 	Reset(0,0);
 	if ( a->nbPt <= 1 || a->nbAr <= 1 ) return 0;
@@ -173,15 +173,15 @@ SweepEvent::CreateQueue(sEvts,a->nbAr);
 	chgts=NULL;
 	nbChgt=maxChgt=0;
 	
-	float        lastChange=a->pData[0].ry-1.0;
-	int          lastChgtPt=0;
-	int          edgeHead=-1;
-	Shape*       shapeHead=NULL;
+	float		lastChange=a->pData[0].ry-1.0;
+	int		  lastChgtPt=0;
+	int		  edgeHead=-1;
+	Shape*	   shapeHead=NULL;
 	
 	iData=NULL;
 	nbInc=maxInc=0;
 	
-	int    curAPt=0;
+	int	curAPt=0;
 	
 	while ( curAPt < a->nbPt || sEvts.nbEvt > 0 ) {
 /*		if ( nbPt > 0 && pts[nbPt-1].y >= 250.4 && pts[nbPt-1].y <= 250.6 ) {
@@ -199,13 +199,13 @@ SweepEvent::CreateQueue(sEvts,a->nbAr);
 		}*/
 //		cout << endl << endl;
 		
-		float         ptX,ptY;
-		float         ptL,ptR;
-		SweepTree*    intersL=NULL;
-		SweepTree*    intersR=NULL;
-		int           nPt=-1;
-		Shape*        ptSh=NULL;
-		bool          isIntersection=false;
+		float		 ptX,ptY;
+		float		 ptL,ptR;
+		SweepTree*	intersL=NULL;
+		SweepTree*	intersR=NULL;
+		int		   nPt=-1;
+		Shape*		ptSh=NULL;
+		bool		  isIntersection=false;
 		if ( SweepEvent::PeekInQueue(intersL,intersR,ptX,ptY,ptL,ptR,sEvts) ) {
 			if ( a->pData[curAPt].pending > 0 || ( a->pData[curAPt].ry > ptY || ( a->pData[curAPt].ry == ptY && a->pData[curAPt].rx > ptX ) ) ) {
 SweepEvent::ExtractFromQueue(intersL,intersR,ptX,ptY,ptL,ptR,sEvts);
@@ -231,7 +231,7 @@ SweepEvent::ExtractFromQueue(intersL,intersR,ptX,ptY,ptL,ptR,sEvts);
 		
 		float   rPtX=Round(ptX);
 		float   rPtY=Round(ptY);
-		int     lastPointNo=-1;
+		int	 lastPointNo=-1;
 		lastPointNo=AddPoint(rPtX,rPtY);
 		pData[lastPointNo].rx=rPtX;
 		pData[lastPointNo].ry=rPtY;
@@ -242,14 +242,14 @@ SweepEvent::ExtractFromQueue(intersL,intersR,ptX,ptY,ptL,ptR,sEvts);
 			for (int i=lastChgtPt;i<lastI;i++) {
 				if ( pData[i].askForWindingS ) {
 					Shape* windS=pData[i].askForWindingS;
-					int    windB=pData[i].askForWindingB;
+					int	windB=pData[i].askForWindingB;
 					pData[i].nextLinkedPoint=windS->swsData[windB].firstLinkedPoint;
 					windS->swsData[windB].firstLinkedPoint=i;
 				}
 			}
 			
 			Shape* curSh=shapeHead;
-			int    curBo=edgeHead;
+			int	curBo=edgeHead;
 			while ( curSh ) {
 				curSh->swsData[curBo].leftRnd=pData[curSh->swsData[curBo].leftRnd].newInd;
 				curSh->swsData[curBo].rightRnd=pData[curSh->swsData[curBo].rightRnd].newInd;
@@ -307,10 +307,10 @@ SweepEvent::ExtractFromQueue(intersL,intersR,ptX,ptY,ptL,ptR,sEvts);
 			TesteIntersection(intersL,true,false);
 			TesteIntersection(intersR,false,false);
 		} else {
-			int    cb;
+			int	cb;
 
-			int    nbUp=0,nbDn=0;
-			int    upNo=-1,dnNo=-1;
+			int	nbUp=0,nbDn=0;
+			int	upNo=-1,dnNo=-1;
 			cb=ptSh->pts[nPt].firstA;
 			while ( cb >= 0 && cb < ptSh->nbAr ) {
 				if ( ( ptSh->aretes[cb].st < ptSh->aretes[cb].en && nPt == ptSh->aretes[cb].en ) || ( ptSh->aretes[cb].st > ptSh->aretes[cb].en && nPt == ptSh->aretes[cb].st ) ) {
@@ -344,7 +344,7 @@ SweepEvent::ExtractFromQueue(intersL,intersR,ptX,ptY,ptL,ptR,sEvts);
 								AddChgt(lastPointNo,lastChgtPt,shapeHead,edgeHead,1,node->src,node->bord,NULL,-1);
 								ptSh->swsData[cb].misc=NULL;
 
-								int     onLeftB=-1,onRightB=-1;
+								int	 onLeftB=-1,onRightB=-1;
 								Shape*  onLeftS=NULL;
 								Shape*  onRightS=NULL;
 								if ( node->leftElem ) {
@@ -452,14 +452,14 @@ SweepEvent::ExtractFromQueue(intersL,intersR,ptX,ptY,ptL,ptR,sEvts);
 		for (int i=lastChgtPt;i<lastI;i++) {
 			if ( pData[i].askForWindingS ) {
 				Shape* windS=pData[i].askForWindingS;
-				int    windB=pData[i].askForWindingB;
+				int	windB=pData[i].askForWindingB;
 				pData[i].nextLinkedPoint=windS->swsData[windB].firstLinkedPoint;
 				windS->swsData[windB].firstLinkedPoint=i;
 			}
 		}
 		
 		Shape* curSh=shapeHead;
-		int    curBo=edgeHead;
+		int	curBo=edgeHead;
 		while ( curSh ) {
 			curSh->swsData[curBo].leftRnd=pData[curSh->swsData[curBo].leftRnd].newInd;
 			curSh->swsData[curBo].rightRnd=pData[curSh->swsData[curBo].rightRnd].newInd;
@@ -635,7 +635,7 @@ SweepEvent::DestroyQueue(sEvts);
 	return 0;
 }
 
-int               Shape::Booleen(Shape* a,Shape* b,BooleanOp mod)
+int			   Shape::Booleen(Shape* a,Shape* b,BooleanOp mod)
 {
 	if ( a == b || a == NULL || b == NULL ) return shape_input_err;
 	Reset(0,0);
@@ -713,7 +713,7 @@ SweepEvent::CreateQueue(sEvts,a->nbAr+b->nbAr);
 			b->eData[i].siEd=-b->eData[i].siEd;
 			b->eData[i].coEd=-b->eData[i].coEd;
 		}
-    
+	
 		b->swsData[i].misc=NULL;
 		b->swsData[i].firstLinkedPoint=-1;
 		b->swsData[i].stPt=b->swsData[i].enPt=-1;
@@ -730,16 +730,16 @@ SweepEvent::CreateQueue(sEvts,a->nbAr+b->nbAr);
 	chgts=NULL;
 	nbChgt=maxChgt=0;
 
-	float        lastChange=(a->pData[0].ry<b->pData[0].ry)?a->pData[0].ry-1.0:b->pData[0].ry-1.0;
-	int          lastChgtPt=0;
-	int          edgeHead=-1;
-	Shape*       shapeHead=NULL;
+	float		lastChange=(a->pData[0].ry<b->pData[0].ry)?a->pData[0].ry-1.0:b->pData[0].ry-1.0;
+	int		  lastChgtPt=0;
+	int		  edgeHead=-1;
+	Shape*	   shapeHead=NULL;
 	
 	iData=NULL;
 	nbInc=maxInc=0;
 
-	int    curAPt=0;
-	int    curBPt=0;
+	int	curAPt=0;
+	int	curBPt=0;
 	
 	while ( curAPt < a->nbPt || curBPt < b->nbPt || sEvts.nbEvt > 0 ) {
 /*		for (int i=0;i<sEvts.nbEvt;i++) {
@@ -755,13 +755,13 @@ SweepEvent::CreateQueue(sEvts,a->nbAr+b->nbAr);
 		}
 		printf("\n");*/
 		
-		float         ptX,ptY;
-		float         ptL,ptR;
-		SweepTree*    intersL=NULL;
-		SweepTree*    intersR=NULL;
-		int           nPt=-1;
-		Shape*        ptSh=NULL;
-		bool          isIntersection=false;
+		float		 ptX,ptY;
+		float		 ptL,ptR;
+		SweepTree*	intersL=NULL;
+		SweepTree*	intersR=NULL;
+		int		   nPt=-1;
+		Shape*		ptSh=NULL;
+		bool		  isIntersection=false;
 		
 		if ( SweepEvent::PeekInQueue(intersL,intersR,ptX,ptY,ptL,ptR,sEvts) ) {
 			if ( curAPt < a->nbPt ) {
@@ -842,7 +842,7 @@ SweepEvent::ExtractFromQueue(intersL,intersR,ptX,ptY,ptL,ptR,sEvts);
 
 		float   rPtX=Round(ptX);
 		float   rPtY=Round(ptY);
-		int     lastPointNo=-1;
+		int	 lastPointNo=-1;
 		lastPointNo=AddPoint(rPtX,rPtY);
 		pData[lastPointNo].rx=rPtX;
 		pData[lastPointNo].ry=rPtY;
@@ -853,14 +853,14 @@ SweepEvent::ExtractFromQueue(intersL,intersR,ptX,ptY,ptL,ptR,sEvts);
 			for (int i=lastChgtPt;i<lastI;i++) {
 				if ( pData[i].askForWindingS ) {
 					Shape* windS=pData[i].askForWindingS;
-					int    windB=pData[i].askForWindingB;
+					int	windB=pData[i].askForWindingB;
 					pData[i].nextLinkedPoint=windS->swsData[windB].firstLinkedPoint;
 					windS->swsData[windB].firstLinkedPoint=i;
 				}
 			}
 
 			Shape* curSh=shapeHead;
-			int    curBo=edgeHead;
+			int	curBo=edgeHead;
 			while ( curSh ) {
 				curSh->swsData[curBo].leftRnd=pData[curSh->swsData[curBo].leftRnd].newInd;
 				curSh->swsData[curBo].rightRnd=pData[curSh->swsData[curBo].rightRnd].newInd;
@@ -919,10 +919,10 @@ SweepEvent::ExtractFromQueue(intersL,intersR,ptX,ptY,ptL,ptR,sEvts);
 			TesteIntersection(intersL,true,true);
 			TesteIntersection(intersR,false,true);
 		} else {
-			int    cb;
+			int	cb;
 			
-			int    nbUp=0,nbDn=0;
-			int    upNo=-1,dnNo=-1;
+			int	nbUp=0,nbDn=0;
+			int	upNo=-1,dnNo=-1;
 			cb=ptSh->pts[nPt].firstA;
 			while ( cb >= 0 && cb < ptSh->nbAr ) {
 				if ( ( ptSh->aretes[cb].st < ptSh->aretes[cb].en && nPt == ptSh->aretes[cb].en ) || ( ptSh->aretes[cb].st > ptSh->aretes[cb].en && nPt == ptSh->aretes[cb].st ) ) {
@@ -958,7 +958,7 @@ SweepEvent::ExtractFromQueue(intersL,intersR,ptX,ptY,ptL,ptR,sEvts);
 								AddChgt(lastPointNo,lastChgtPt,shapeHead,edgeHead,1,node->src,node->bord,NULL,-1);
 								ptSh->swsData[cb].misc=NULL;
 
-								int     onLeftB=-1,onRightB=-1;
+								int	 onLeftB=-1,onRightB=-1;
 								Shape*  onLeftS=NULL;
 								Shape*  onRightS=NULL;
 								if ( node->leftElem ) {
@@ -1075,14 +1075,14 @@ SweepEvent::ExtractFromQueue(intersL,intersR,ptX,ptY,ptL,ptR,sEvts);
 		for (int i=lastChgtPt;i<lastI;i++) {
 			if ( pData[i].askForWindingS ) {
 				Shape* windS=pData[i].askForWindingS;
-				int    windB=pData[i].askForWindingB;
+				int	windB=pData[i].askForWindingB;
 				pData[i].nextLinkedPoint=windS->swsData[windB].firstLinkedPoint;
 				windS->swsData[windB].firstLinkedPoint=i;
 			}
 		}
 		
 		Shape* curSh=shapeHead;
-		int    curBo=edgeHead;
+		int	curBo=edgeHead;
 		while ( curSh ) {
 			curSh->swsData[curBo].leftRnd=pData[curSh->swsData[curBo].leftRnd].newInd;
 			curSh->swsData[curBo].rightRnd=pData[curSh->swsData[curBo].rightRnd].newInd;
@@ -1228,7 +1228,7 @@ SweepEvent::DestroyQueue(sEvts);
 	return 0;
 }
 
-void            Shape::TesteIntersection(SweepTree* t,bool onLeft,bool onlyDiff)
+void			Shape::TesteIntersection(SweepTree* t,bool onLeft,bool onlyDiff)
 {
 	if ( onLeft ) {
 		SweepTree* tL=static_cast <SweepTree*> (t->leftElem);
@@ -1248,7 +1248,7 @@ void            Shape::TesteIntersection(SweepTree* t,bool onLeft,bool onlyDiff)
 		}
 	}
 }
-bool            Shape::TesteIntersection(SweepTree* iL,SweepTree* iR,float &atx,float &aty,float &atL,float &atR,bool onlyDiff)
+bool			Shape::TesteIntersection(SweepTree* iL,SweepTree* iR,float &atx,float &aty,float &atL,float &atR,bool onlyDiff)
 {
 	int   lSt=iL->src->aretes[iL->bord].st,lEn=iL->src->aretes[iL->bord].en;
 	int   rSt=iR->src->aretes[iR->bord].st,rEn=iR->src->aretes[iR->bord].en;
@@ -1486,7 +1486,7 @@ bool            Shape::TesteIntersection(SweepTree* iL,SweepTree* iR,float &atx,
 	return true;
 }
 
-int               Shape::PushIncidence(Shape* a,int cb,int pt,float theta)
+int			   Shape::PushIncidence(Shape* a,int cb,int pt,float theta)
 {
 	if ( theta < 0 || theta > 1 ) return -1;
 
@@ -1501,7 +1501,7 @@ int               Shape::PushIncidence(Shape* a,int cb,int pt,float theta)
 	a->swsData[cb].firstLinkedPoint=n;
 	return n;
 }
-int               Shape::CreateIncidence(Shape* a,int no,int nPt)
+int			   Shape::CreateIncidence(Shape* a,int no,int nPt)
 {
 	vec2d  adir,diff;
 	adir.x=a->eData[no].rdx;
@@ -1512,7 +1512,7 @@ int               Shape::CreateIncidence(Shape* a,int no,int nPt)
 	t*=a->eData[no].ilength;
 	return PushIncidence(a,no,nPt,t);
 }
-int               Shape::Winding(int nPt)
+int			   Shape::Winding(int nPt)
 {
 	int   askTo=pData[nPt].askForWindingB;
 	if ( askTo < 0 ) return 0;
@@ -1523,7 +1523,7 @@ int               Shape::Winding(int nPt)
 	}
 	return 0;
 }
-int               Shape::Winding(float px,float py)
+int			   Shape::Winding(float px,float py)
 {
 	int lr=0,ll=0,rr=0;
 	
@@ -1577,7 +1577,7 @@ int               Shape::Winding(float px,float py)
 	}
 	return lr+(ll+rr)/2;
 }
-int              Shape::AssemblePoints(int st,int en)
+int			  Shape::AssemblePoints(int st,int en)
 {
 	if ( en > st ) {
 		for (int i=st;i<en;i++) pData[i].oldInd=i;
@@ -1621,7 +1621,7 @@ int              Shape::AssemblePoints(int st,int en)
 	}
 	return en;
 }
-void              Shape::AssemblePoints(Shape* a)
+void			  Shape::AssemblePoints(Shape* a)
 {
 	if ( nbPt > 0 ) {
 		int lastI=AssemblePoints(0,nbPt);
@@ -1635,7 +1635,7 @@ void              Shape::AssemblePoints(Shape* a)
 		nbPt=lastI;
 	}
 }
-void              Shape::AssembleAretes(void)
+void			  Shape::AssembleAretes(void)
 {
 	for (int i=0;i<nbPt;i++) {
 		if ( pts[i].dI+pts[i].dO == 2 ) {
@@ -1752,7 +1752,7 @@ void              Shape::AssembleAretes(void)
 		}
 	}
 }
-void         Shape::GetWindings(Shape* a,Shape* b,BooleanOp mod,bool brutal)
+void		 Shape::GetWindings(Shape* a,Shape* b,BooleanOp mod,bool brutal)
 {
 	// preparation du parcours
 	for (int i=0;i<nbAr;i++) {
@@ -1776,7 +1776,7 @@ void         Shape::GetWindings(Shape* a,Shape* b,BooleanOp mod,bool brutal)
 			}
 			lastPtUsed=fi+1;
 			if ( fi < nbPt ) {
-				int      bestB=pts[fi].firstA;
+				int	  bestB=pts[fi].firstA;
 				if ( bestB >= 0 ) {
 					startBord=bestB;
 					if ( fi == 0 ) {
@@ -1788,17 +1788,17 @@ void         Shape::GetWindings(Shape* a,Shape* b,BooleanOp mod,bool brutal)
 							outsideW=Winding(fi);
 						}
 					}
-          if ( pts[fi].dI+pts[fi].dO == 1 ) {
-            if ( fi == aretes[startBord].en ) {
-              if ( eData[startBord].weight == 0 ) {
-                // on se contente d'inverser
-                Inverse(startBord);
-              } else {
-                // on passe le askForWinding (sinon ca va rester startBord)
-                pData[aretes[startBord].st].askForWindingB=pData[aretes[startBord].en].askForWindingB;
-              }
-            }
-          }
+		  if ( pts[fi].dI+pts[fi].dO == 1 ) {
+			if ( fi == aretes[startBord].en ) {
+			  if ( eData[startBord].weight == 0 ) {
+				// on se contente d'inverser
+				Inverse(startBord);
+			  } else {
+				// on passe le askForWinding (sinon ca va rester startBord)
+				pData[aretes[startBord].st].askForWindingB=pData[aretes[startBord].en].askForWindingB;
+			  }
+			}
+		  }
 					if ( aretes[startBord].en == fi ) outsideW+=eData[startBord].weight;
 				}
 			}
@@ -1809,7 +1809,7 @@ void         Shape::GetWindings(Shape* a,Shape* b,BooleanOp mod,bool brutal)
 			swdData[startBord].leW=outsideW;
 			swdData[startBord].riW=outsideW-eData[startBord].weight;
 //						printf("part de %d\n",startBord);
-			int    curBord=startBord;
+			int	curBord=startBord;
 			bool   curDir=true;
 			swdData[curBord].precParc=-1;
 			swdData[curBord].suivParc=-1;
@@ -1864,7 +1864,7 @@ void         Shape::GetWindings(Shape* a,Shape* b,BooleanOp mod,bool brutal)
 	} while ( lastPtUsed < nbPt );
 //	fflush(stdout);
 }
-bool              Shape::TesteIntersection(Shape* ils,Shape* irs,int ilb,int irb,float &atx,float &aty,float &atL,float &atR,bool onlyDiff)
+bool			  Shape::TesteIntersection(Shape* ils,Shape* irs,int ilb,int irb,float &atx,float &aty,float &atL,float &atR,bool onlyDiff)
 {
 	int   lSt=ils->aretes[ilb].st,lEn=ils->aretes[ilb].en;
 	int   rSt=irs->aretes[irb].st,rEn=irs->aretes[irb].en;
@@ -1967,7 +1967,7 @@ bool              Shape::TesteIntersection(Shape* ils,Shape* irs,int ilb,int irb
 		double  sDot,eDot;
 		double  ths=0,the=1;
 		vec2d   thst,then;
-		int     sSens=0,eSens=0;
+		int	 sSens=0,eSens=0;
 		thst.x=ils->pData[lSt].rx;
 		thst.y=ils->pData[lSt].ry;
 		then.x=ils->pData[lEn].rx;
@@ -1985,7 +1985,7 @@ bool              Shape::TesteIntersection(Shape* ils,Shape* irs,int ilb,int irb
 		while ( the-ths > 0.000000001 ) {
 			double  nth=(ths+the)/2;
 			vec2d   nthp;
-			int     nSens;
+			int	 nSens;
 			nthp.x=nth*ils->pData[lEn].rx+(1-nth)*ils->pData[lSt].rx;
 			nthp.y=nth*ils->pData[lEn].ry+(1-nth)*ils->pData[lSt].ry;
 
@@ -2045,7 +2045,7 @@ bool              Shape::TesteIntersection(Shape* ils,Shape* irs,int ilb,int irb
 	
 	return true;
 }
-bool              Shape::TesteAdjacency(Shape* a,int no,float atx,float aty,int nPt,bool push)
+bool			  Shape::TesteAdjacency(Shape* a,int no,float atx,float aty,int nPt,bool push)
 {
 	if ( nPt == a->swsData[no].stPt || nPt == a->swsData[no].enPt ) return false;
 
@@ -2077,7 +2077,7 @@ bool              Shape::TesteAdjacency(Shape* a,int no,float atx,float aty,int 
 		diff4.x=diff.x-rad;
 		diff4.y=diff.y+rad;
 		double  di1,di2;
-		bool    adjacent=false;
+		bool	adjacent=false;
 		di1=Dot(adir,diff1);
 		di2=Dot(adir,diff3);
 		if ( ( di1 < 0 && di2 > 0 ) || ( di1 > 0 && di2 < 0 ) ) {
@@ -2119,14 +2119,14 @@ bool              Shape::TesteAdjacency(Shape* a,int no,float atx,float aty,int 
 	}*/
 	return false;
 }
-void              Shape::CheckAdjacencies(int lastPointNo,int lastChgtPt,Shape *shapeHead,int edgeHead)
+void			  Shape::CheckAdjacencies(int lastPointNo,int lastChgtPt,Shape *shapeHead,int edgeHead)
 {
 	for (int cCh=0;cCh<nbChgt;cCh++) {
 		int   chLeN=chgts[cCh].ptNo;
 		int   chRiN=chgts[cCh].ptNo;
 		if ( chgts[cCh].src ) {
 			Shape* lS=chgts[cCh].src;
-			int    lB=chgts[cCh].bord;
+			int	lB=chgts[cCh].bord;
 			int   lftN=lS->swsData[lB].leftRnd;
 			int   rgtN=lS->swsData[lB].rightRnd;
 			if ( lftN < chLeN ) chLeN=lftN;
@@ -2143,7 +2143,7 @@ void              Shape::CheckAdjacencies(int lastPointNo,int lastChgtPt,Shape *
 		}
 		if ( chgts[cCh].osrc ) {
 			Shape* rS=chgts[cCh].osrc;
-			int    rB=chgts[cCh].obord;
+			int	rB=chgts[cCh].obord;
 			int   lftN=rS->swsData[rB].leftRnd;
 			int   rgtN=rS->swsData[rB].rightRnd;
 			if ( lftN < chLeN ) chLeN=lftN;
@@ -2161,7 +2161,7 @@ void              Shape::CheckAdjacencies(int lastPointNo,int lastChgtPt,Shape *
 		if ( chgts[cCh].lSrc ) {
 			if ( chgts[cCh].lSrc->swsData[chgts[cCh].lBrd].leftRnd < lastChgtPt ) {
 				Shape* nSrc=chgts[cCh].lSrc;
-				int    nBrd=chgts[cCh].lBrd/*,nNo=chgts[cCh].ptNo*/;
+				int	nBrd=chgts[cCh].lBrd/*,nNo=chgts[cCh].ptNo*/;
 				bool hit;
 				
 				do {
@@ -2205,7 +2205,7 @@ void              Shape::CheckAdjacencies(int lastPointNo,int lastChgtPt,Shape *
 		if ( chgts[cCh].rSrc ) {
 			if ( chgts[cCh].rSrc->swsData[chgts[cCh].rBrd].leftRnd < lastChgtPt ) {
 				Shape* nSrc=chgts[cCh].rSrc;
-				int    nBrd=chgts[cCh].rBrd/*,nNo=chgts[cCh].ptNo*/;
+				int	nBrd=chgts[cCh].rBrd/*,nNo=chgts[cCh].ptNo*/;
 				bool hit;
 				do {
 					hit=false;
@@ -2247,7 +2247,7 @@ void              Shape::CheckAdjacencies(int lastPointNo,int lastChgtPt,Shape *
 	}
 }
 
-void              Shape::AddChgt(int lastPointNo,int lastChgtPt,Shape* &shapeHead,int &edgeHead,int type,Shape* lS,int lB,Shape* rS,int rB)
+void			  Shape::AddChgt(int lastPointNo,int lastChgtPt,Shape* &shapeHead,int &edgeHead,int type,Shape* lS,int lB,Shape* rS,int rB)
 {
 	if ( nbChgt >= maxChgt ) {
 		maxChgt=2*nbChgt+1;
@@ -2328,7 +2328,7 @@ void              Shape::AddChgt(int lastPointNo,int lastChgtPt,Shape* &shapeHea
 		}
 	}
 }
-void              Shape::Validate(void)
+void			  Shape::Validate(void)
 {
 	for (int i=0;i<nbPt;i++) {
 		pData[i].rx=pts[i].x;
@@ -2349,13 +2349,13 @@ void              Shape::Validate(void)
 	fflush(stdout);
 }
 
-void              Shape::CheckEdges(int lastPointNo,int lastChgtPt,Shape* a,Shape* b,BooleanOp mod)
+void			  Shape::CheckEdges(int lastPointNo,int lastChgtPt,Shape* a,Shape* b,BooleanOp mod)
 {
 
 	for (int cCh=0;cCh<nbChgt;cCh++) {
 		if ( chgts[cCh].type == 0 ) {
 			Shape* lS=chgts[cCh].src;
-			int    lB=chgts[cCh].bord;
+			int	lB=chgts[cCh].bord;
 			lS->swsData[lB].curPoint=chgts[cCh].ptNo;
 		}
 	}
@@ -2364,17 +2364,17 @@ void              Shape::CheckEdges(int lastPointNo,int lastChgtPt,Shape* a,Shap
 //		int   chRiN=chgts[cCh].ptNo;
 		if ( chgts[cCh].src) {
 			Shape* lS=chgts[cCh].src;
-			int    lB=chgts[cCh].bord;
+			int	lB=chgts[cCh].bord;
 			Avance(lastPointNo,lastChgtPt,lS,lB,a,b,mod);
 		}
 		if ( chgts[cCh].osrc ) {
 			Shape* rS=chgts[cCh].osrc;
-			int    rB=chgts[cCh].obord;
+			int	rB=chgts[cCh].obord;
 			Avance(lastPointNo,lastChgtPt,rS,rB,a,b,mod);
 		}
 		if ( chgts[cCh].lSrc ) {
 			Shape* nSrc=chgts[cCh].lSrc;
-			int    nBrd=chgts[cCh].lBrd;
+			int	nBrd=chgts[cCh].lBrd;
 			while ( nSrc->swsData[nBrd].leftRnd >= lastChgtPt /*&& nSrc->swsData[nBrd].doneTo < lastChgtPt*/ ) {
 				Avance(lastPointNo,lastChgtPt,nSrc,nBrd,a,b,mod);
 
@@ -2388,7 +2388,7 @@ void              Shape::CheckEdges(int lastPointNo,int lastChgtPt,Shape* a,Shap
 		}
 		if ( chgts[cCh].rSrc ) {
 			Shape* nSrc=chgts[cCh].rSrc;
-			int    nBrd=chgts[cCh].rBrd;
+			int	nBrd=chgts[cCh].rBrd;
 			while ( nSrc->swsData[nBrd].rightRnd >= lastChgtPt /*&& nSrc->swsData[nBrd].doneTo < lastChgtPt*/ ) {
 				Avance(lastPointNo,lastChgtPt,nSrc,nBrd,a,b,mod);
 
@@ -2403,10 +2403,10 @@ void              Shape::CheckEdges(int lastPointNo,int lastChgtPt,Shape* a,Shap
 	}
 }
 
-void              Shape::Avance(int lastPointNo,int lastChgtPt,Shape* lS,int lB,Shape* a,Shape* b,BooleanOp mod)
+void			  Shape::Avance(int lastPointNo,int lastChgtPt,Shape* lS,int lB,Shape* a,Shape* b,BooleanOp mod)
 {
 	float   dd=HalfRound(1);
-	bool    avoidDiag=false;
+	bool	avoidDiag=false;
 //	if ( lastChgtPt > 0 && pts[lastChgtPt-1].y+dd == pts[lastChgtPt].y ) avoidDiag=true;
 
 	bool   direct=true;
@@ -2414,7 +2414,7 @@ void              Shape::Avance(int lastPointNo,int lastChgtPt,Shape* lS,int lB,
 	int   lftN=lS->swsData[lB].leftRnd;
 	int   rgtN=lS->swsData[lB].rightRnd;
 	if ( lS->swsData[lB].doneTo < lastChgtPt ) {
-		int    lp=lS->swsData[lB].curPoint;
+		int	lp=lS->swsData[lB].curPoint;
 		if ( lp >= 0 && pts[lp].y+dd == pts[lastChgtPt].y ) avoidDiag=true;
 		if ( lS->eData[lB].rdy == 0 ) {
 			// tjs de gauche a droite et pas de diagonale
@@ -2498,7 +2498,7 @@ void              Shape::Avance(int lastPointNo,int lastChgtPt,Shape* lS,int lB,
 	}
 	lS->swsData[lB].doneTo=lastPointNo-1;
 }
-void              Shape::DoEdgeTo(Shape* iS,int iB,int iTo,bool direct,bool sens)
+void			  Shape::DoEdgeTo(Shape* iS,int iB,int iTo,bool direct,bool sens)
 {
 	int   lp=iS->swsData[iB].curPoint;
 	int   ne=-1;

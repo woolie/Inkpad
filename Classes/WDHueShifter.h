@@ -26,14 +26,14 @@
 @end
 
 @interface WDHueShifter : UIControl {
-    CGImageRef      offsetHueImage_;
-    CGImageRef      hueImage_;
-    float           value_;
-    float           initialValue_;
-    CGPoint         initialPt_;
-    
-    WDHueIndicator  *indicator_;
-    
+	CGImageRef	  offsetHueImage_;
+	CGImageRef	  hueImage_;
+	float		   value_;
+	float		   initialValue_;
+	CGPoint		 initialPt_;
+	
+	WDHueIndicator  *indicator_;
+	
 }
 
 @property (nonatomic, assign) float floatValue;

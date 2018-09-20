@@ -18,7 +18,7 @@
 @protocol WDPathPainter <NSObject>
 
 @required
-- (void) paintPath:(WDAbstractPath *)path inContext:(CGContextRef)ctx;
+- (void) paintPath:(WDAbstractPath*)path inContext:(CGContextRef)ctx;
 - (BOOL) transformable;
 - (BOOL) wantsCenteredFillTransform;
 - (BOOL) canPaintStroke;

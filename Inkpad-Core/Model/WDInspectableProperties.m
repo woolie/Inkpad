@@ -12,30 +12,30 @@
 #import "WDInspectableProperties.h"
 
 
-NSString *WDFontNameProperty = @"WDFontNameProperty";
-NSString *WDFontSizeProperty = @"WDFontSizeProperty";
-NSString *WDTextAlignmentProperty = @"WDTextAlignmentProperty";
+NSString* WDFontNameProperty = @"WDFontNameProperty";
+NSString* WDFontSizeProperty = @"WDFontSizeProperty";
+NSString* WDTextAlignmentProperty = @"WDTextAlignmentProperty";
 
-NSString *WDOpacityProperty = @"WDOpacityProperty";
-NSString *WDBlendModeProperty = @"WDBlendModeProperty";
+NSString* WDOpacityProperty = @"WDOpacityProperty";
+NSString* WDBlendModeProperty = @"WDBlendModeProperty";
 
-NSString *WDShadowVisibleProperty = @"WDShadowVisibleProperty";
-NSString *WDShadowColorProperty = @"WDShadowColorProperty";
-NSString *WDShadowRadiusProperty = @"WDShadowRadiusProperty";
-NSString *WDShadowAngleProperty = @"WDShadowAngleProperty";
-NSString *WDShadowOffsetProperty = @"WDShadowOffsetProperty";
+NSString* WDShadowVisibleProperty = @"WDShadowVisibleProperty";
+NSString* WDShadowColorProperty = @"WDShadowColorProperty";
+NSString* WDShadowRadiusProperty = @"WDShadowRadiusProperty";
+NSString* WDShadowAngleProperty = @"WDShadowAngleProperty";
+NSString* WDShadowOffsetProperty = @"WDShadowOffsetProperty";
 
-NSString *WDFillProperty = @"WDFillProperty";
-NSString *WDFillRuleProperty = @"WDFillRuleProperty";
-NSString *WDFillColorProperty = @"WDFillColorProperty";
-NSString *WDFillGradientProperty = @"WDFillGradientProperty";
-NSString *WDFillModeProperty = @"WDFillModeProperty";
+NSString* WDFillProperty = @"WDFillProperty";
+NSString* WDFillRuleProperty = @"WDFillRuleProperty";
+NSString* WDFillColorProperty = @"WDFillColorProperty";
+NSString* WDFillGradientProperty = @"WDFillGradientProperty";
+NSString* WDFillModeProperty = @"WDFillModeProperty";
 
-NSString *WDStrokeColorProperty = @"WDStrokeColorProperty";
-NSString *WDStrokeCapProperty = @"WDStrokeCapProperty";
-NSString *WDStrokeJoinProperty = @"WDStrokeJoinProperty";
-NSString *WDStrokeWidthProperty = @"WDStrokeWidthProperty";
-NSString *WDStrokeVisibleProperty = @"WDStrokeVisibleProperty";
-NSString *WDStrokeDashPatternProperty = @"WDStrokeDashPatternProperty";
-NSString *WDStartArrowProperty = @"WDStartArrowProperty";
-NSString *WDEndArrowProperty = @"WDEndArrowProperty";
+NSString* WDStrokeColorProperty = @"WDStrokeColorProperty";
+NSString* WDStrokeCapProperty = @"WDStrokeCapProperty";
+NSString* WDStrokeJoinProperty = @"WDStrokeJoinProperty";
+NSString* WDStrokeWidthProperty = @"WDStrokeWidthProperty";
+NSString* WDStrokeVisibleProperty = @"WDStrokeVisibleProperty";
+NSString* WDStrokeDashPatternProperty = @"WDStrokeDashPatternProperty";
+NSString* WDStartArrowProperty = @"WDStartArrowProperty";
+NSString* WDEndArrowProperty = @"WDEndArrowProperty";

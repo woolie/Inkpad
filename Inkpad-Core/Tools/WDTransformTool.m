@@ -16,49 +16,49 @@
 @implementation WDTransformTool
 
 - (BOOL) needsPivot {
-    return YES;
+	return YES;
 }
 
 - (CGAffineTransform) computeTransform:(CGPoint)pt pivot:(CGPoint)pivot constrain:(WDToolFlags)flags
 {
-    return CGAffineTransformIdentity;
+	return CGAffineTransformIdentity;
 }
 
 - (void) beginWithEvent:(WDEvent *)event inCanvas:(WDCanvas *)canvas
 {
-    // reset the transform
-    transform_ = CGAffineTransformIdentity;
+	// reset the transform
+	transform_ = CGAffineTransformIdentity;
 }
 
 - (void) moveWithEvent:(WDEvent *)event inCanvas:(WDCanvas *)canvas
 {
-    canvas.transforming = YES;
-    
-    // transform selected
-    transform_ = [self computeTransform:event.snappedLocation pivot:canvas.pivot constrain:self.flags];
-    [canvas transformSelection:transform_];
+	canvas.transforming = YES;
+	
+	// transform selected
+	transform_ = [self computeTransform:event.snappedLocation pivot:canvas.pivot constrain:self.flags];
+	[canvas transformSelection:transform_];
 }
 
 - (void) endWithEvent:(WDEvent *)event inCanvas:(WDCanvas *)canvas
 {
-    if (self.moved) {
-        // apply the transform to the drawing
-        [canvas.drawingController transformSelection:transform_];
-        [canvas transformSelection:CGAffineTransformIdentity];
-        canvas.transforming = NO;
-    } else {
-        canvas.pivot = event.snappedLocation;
-    }
-    
-    transform_ = CGAffineTransformIdentity;
+	if (self.moved) {
+		// apply the transform to the drawing
+		[canvas.drawingController transformSelection:transform_];
+		[canvas transformSelection:CGAffineTransformIdentity];
+		canvas.transforming = NO;
+	} else {
+		canvas.pivot = event.snappedLocation;
+	}
+	
+	transform_ = CGAffineTransformIdentity;
 }
 
 - (void) flagsChangedInCanvas:(WDCanvas *)canvas
 {
-    if (self.moved) {
-        transform_ = [self computeTransform:self.previousEvent.snappedLocation pivot:canvas.pivot constrain:self.flags];
-        [canvas transformSelection:transform_];
-    }
+	if (self.moved) {
+		transform_ = [self computeTransform:self.previousEvent.snappedLocation pivot:canvas.pivot constrain:self.flags];
+		[canvas transformSelection:transform_];
+	}
 }
 
 @end

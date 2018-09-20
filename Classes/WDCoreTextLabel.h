@@ -15,6 +15,6 @@
 @interface WDCoreTextLabel : UIView
 
 @property (nonatomic, assign) CTFontRef fontRef;
-@property (nonatomic, strong) NSString *text;
+@property (nonatomic, strong) NSString* text;
 
 @end

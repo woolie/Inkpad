@@ -18,137 +18,137 @@
 #import "WDPath.h"
 #import "WDUtilities.h"
 
-NSString *WDEraserToolSize = @"WDEraserToolSize";
+NSString* WDEraserToolSize = @"WDEraserToolSize";
 
 #define kMaxError   5.0f
 
 @implementation WDEraserTool
 
-- (NSString *) iconName
+- (NSString*) iconName
 {
-    return @"eraser.png";
+	return @"eraser.png";
 }
 
 - (instancetype) init
 {
-    self = [super init];
-    
-    if (!self) {
-        return nil;
-    }
-    
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    eraserSize_ = [defaults floatForKey:WDEraserToolSize];
-    if (eraserSize_ == 0.0f) {
-        eraserSize_ = 20.0f;
-    }
+	self = [super init];
+	
+	if (!self) {
+		return nil;
+	}
+	
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	eraserSize_ = [defaults floatForKey:WDEraserToolSize];
+	if (eraserSize_ == 0.0f) {
+		eraserSize_ = 20.0f;
+	}
 
-    return self;
+	return self;
 }
 
 - (void) beginWithEvent:(WDEvent *)theEvent inCanvas:(WDCanvas *)canvas
 {
-    tempPath_ = [[WDPath alloc] initWithNode:[WDBezierNode bezierNodeWithAnchorPoint:theEvent.location]];
-    
-    tempPath_.strokeStyle = [WDStrokeStyle strokeStyleWithWidth:eraserSize_ cap:kCGLineCapRound
-                                                           join:kCGLineJoinRound
-                                                          color:[WDColor colorWithWhite:0.9f alpha:0.85f]
-                                                    dashPattern:nil];
-    canvas.eraserPath = tempPath_;
+	tempPath_ = [[WDPath alloc] initWithNode:[WDBezierNode bezierNodeWithAnchorPoint:theEvent.location]];
+	
+	tempPath_.strokeStyle = [WDStrokeStyle strokeStyleWithWidth:eraserSize_ cap:kCGLineCapRound
+														   join:kCGLineJoinRound
+														  color:[WDColor colorWithWhite:0.9f alpha:0.85f]
+													dashPattern:nil];
+	canvas.eraserPath = tempPath_;
 }
 
 - (void) moveWithEvent:(WDEvent *)theEvent inCanvas:(WDCanvas *)canvas
 {
-    if (WDDistance(theEvent.location, [tempPath_ lastNode].anchorPoint) < (3.0f / canvas.viewScale)) {
-        return;
-    }
-    
-    [tempPath_.nodes addObject:[WDBezierNode bezierNodeWithAnchorPoint:theEvent.location]];
-    [tempPath_ invalidatePath];
-    canvas.eraserPath = tempPath_;
-    
-    [canvas invalidateSelectionView];
+	if (WDDistance(theEvent.location, [tempPath_ lastNode].anchorPoint) < (3.0f / canvas.viewScale)) {
+		return;
+	}
+	
+	[tempPath_.nodes addObject:[WDBezierNode bezierNodeWithAnchorPoint:theEvent.location]];
+	[tempPath_ invalidatePath];
+	canvas.eraserPath = tempPath_;
+	
+	[canvas invalidateSelectionView];
 }
 
 - (void) endWithEvent:(WDEvent *)theEvent inCanvas:(WDCanvas *)canvas
 {
-    canvas.eraserPath = nil;
-    
-    if (tempPath_ && tempPath_.nodes.count > 1) {
-        NSMutableArray *points = [NSMutableArray array];
-        for (WDBezierNode *node in tempPath_.nodes) {
-            [points addObject:[NSValue valueWithCGPoint:node.anchorPoint]];
-        }
-        
-        WDPath *smoothPath = [WDCurveFit smoothPathForPoints:points error:(kMaxError / canvas.viewScale) attemptToClose:NO];
-        
-        if (smoothPath) {
-            smoothPath.strokeStyle = [WDStrokeStyle strokeStyleWithWidth:eraserSize_
-                                                                     cap:kCGLineCapRound
-                                                                    join:kCGLineJoinRound
-                                                                   color:[WDColor blackColor]
-                                                             dashPattern:nil];
-            WDAbstractPath *erasePath = [smoothPath outlineStroke];
-            
-            [canvas.drawingController eraseWithPath:erasePath];
-        }
-    }
-    
-    tempPath_ = nil;
+	canvas.eraserPath = nil;
+	
+	if (tempPath_ && tempPath_.nodes.count > 1) {
+		NSMutableArray *points = [NSMutableArray array];
+		for (WDBezierNode *node in tempPath_.nodes) {
+			[points addObject:[NSValue valueWithCGPoint:node.anchorPoint]];
+		}
+		
+		WDPath *smoothPath = [WDCurveFit smoothPathForPoints:points error:(kMaxError / canvas.viewScale) attemptToClose:NO];
+		
+		if (smoothPath) {
+			smoothPath.strokeStyle = [WDStrokeStyle strokeStyleWithWidth:eraserSize_
+																	 cap:kCGLineCapRound
+																	join:kCGLineJoinRound
+																   color:[WDColor blackColor]
+															 dashPattern:nil];
+			WDAbstractPath *erasePath = [smoothPath outlineStroke];
+			
+			[canvas.drawingController eraseWithPath:erasePath];
+		}
+	}
+	
+	tempPath_ = nil;
 }
 
 #if TARGET_OS_IPHONE
 
 - (void) updateOptionsSettings
 {
-    optionsValue_.text = [NSString stringWithFormat:@"%lu", (unsigned long)eraserSize_];
-    optionsSlider_.value = eraserSize_;
+	optionsValue_.text = [NSString stringWithFormat:@"%lu", (unsigned long)eraserSize_];
+	optionsSlider_.value = eraserSize_;
 }
 
-- (void) takeFinalSliderValueFrom:(id)sender
+- (void) takeFinalSliderValueFrom:(id) sender
 {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    eraserSize_ = optionsSlider_.value;
-    [defaults setInteger:eraserSize_ forKey:WDEraserToolSize];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	
+	eraserSize_ = optionsSlider_.value;
+	[defaults setInteger:eraserSize_ forKey:WDEraserToolSize];
 
-    [self updateOptionsSettings];
+	[self updateOptionsSettings];
 }
 
-- (void) takeSliderValueFrom:(id)sender
+- (void) takeSliderValueFrom:(id) sender
 {
-    eraserSize_ = optionsSlider_.value;
-    [self updateOptionsSettings];
+	eraserSize_ = optionsSlider_.value;
+	[self updateOptionsSettings];
 }
 
-- (IBAction)increment:(id)sender
+- (IBAction)increment:(id) sender
 {
-    optionsSlider_.value = optionsSlider_.value + 1;
-    [optionsSlider_ sendActionsForControlEvents:UIControlEventTouchUpInside];
+	optionsSlider_.value = optionsSlider_.value + 1;
+	[optionsSlider_ sendActionsForControlEvents:UIControlEventTouchUpInside];
 }
 
-- (IBAction)decrement:(id)sender
+- (IBAction)decrement:(id) sender
 {
-    optionsSlider_.value = optionsSlider_.value - 1;
-    [optionsSlider_ sendActionsForControlEvents:UIControlEventTouchUpInside];
+	optionsSlider_.value = optionsSlider_.value - 1;
+	[optionsSlider_ sendActionsForControlEvents:UIControlEventTouchUpInside];
 }
 
 - (UIView *) optionsView
 {
-    if (!optionsView_) {
-        [[NSBundle mainBundle] loadNibNamed:@"ShapeOptions" owner:self options:nil];
-        [self configureOptionsView:optionsView_];
-        
-        optionsSlider_.minimumValue = 1;
-        optionsSlider_.maximumValue = 100;
-        optionsSlider_.exclusiveTouch = YES;
-        
-        optionsTitle_.text = NSLocalizedString(@"Eraser Size", @"Eraser Size");
-    }
-    
-    [self updateOptionsSettings];
-    
-    return optionsView_;
+	if (!optionsView_) {
+		[[NSBundle mainBundle] loadNibNamed:@"ShapeOptions" owner:self options:nil];
+		[self configureOptionsView:optionsView_];
+		
+		optionsSlider_.minimumValue = 1;
+		optionsSlider_.maximumValue = 100;
+		optionsSlider_.exclusiveTouch = YES;
+		
+		optionsTitle_.text = NSLocalizedString(@"Eraser Size", @"Eraser Size");
+	}
+	
+	[self updateOptionsSettings];
+	
+	return optionsView_;
 }
 
 #endif

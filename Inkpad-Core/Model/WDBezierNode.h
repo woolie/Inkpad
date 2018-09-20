@@ -17,22 +17,22 @@
 #endif
 
 typedef enum {
-    WDReflect,
-    WDIndependent,
-    WDReflectIndependent
+	WDReflect,
+	WDIndependent,
+	WDReflectIndependent
 } WDBezierNodeReflectionMode;
 
 typedef enum {
-    kWDBezierNodeRenderOpen,
-    kWDBezierNodeRenderClosed,
-    kWDBezierNodeRenderSelected
+	kWDBezierNodeRenderOpen,
+	kWDBezierNodeRenderClosed,
+	kWDBezierNodeRenderSelected
 } WDBezierNodeRenderMode;
 
 @interface WDBezierNode : NSObject <NSCoding, NSCopying> {
-    CGPoint     inPoint_;
-    CGPoint     anchorPoint_;
-    CGPoint     outPoint_;
-    BOOL        selected_;
+	CGPoint	 inPoint_;
+	CGPoint	 anchorPoint_;
+	CGPoint	 outPoint_;
+	BOOL		selected_;
 }
 
 @property (nonatomic, readonly) CGPoint inPoint;
@@ -48,21 +48,21 @@ typedef enum {
 // some helper state... not strictly part of the model, but makes many operations simpler
 @property (nonatomic, assign) BOOL selected;
 
-+ (WDBezierNode *) bezierNodeWithAnchorPoint:(CGPoint)pt;
-+ (WDBezierNode *) bezierNodeWithInPoint:(CGPoint)inPoint anchorPoint:(CGPoint)pt outPoint:(CGPoint)outPoint;
++ (WDBezierNode*) bezierNodeWithAnchorPoint:(CGPoint)pt;
++ (WDBezierNode*) bezierNodeWithInPoint:(CGPoint)inPoint anchorPoint:(CGPoint)pt outPoint:(CGPoint)outPoint;
 
 - (instancetype) initWithAnchorPoint:(CGPoint)pt;
 - (instancetype) initWithInPoint:(CGPoint)inPoint anchorPoint:(CGPoint)pt outPoint:(CGPoint)outPoint;
 
-- (WDBezierNode *) transform:(CGAffineTransform)transform;
-- (WDBezierNode *) chopHandles;
-- (WDBezierNode *) chopOutHandle;
-- (WDBezierNode *) chopInHandle;
+- (WDBezierNode*) transform:(CGAffineTransform)transform;
+- (WDBezierNode*) chopHandles;
+- (WDBezierNode*) chopOutHandle;
+- (WDBezierNode*) chopInHandle;
 
-- (WDBezierNode *) setInPoint:(CGPoint)pt reflectionMode:(WDBezierNodeReflectionMode)reflectionMode;
-- (WDBezierNode *) moveControlHandle:(WDPickResultType)pointToTransform toPoint:(CGPoint)pt reflectionMode:(WDBezierNodeReflectionMode)reflectionMode;
+- (WDBezierNode*) setInPoint:(CGPoint)pt reflectionMode:(WDBezierNodeReflectionMode)reflectionMode;
+- (WDBezierNode*) moveControlHandle:(WDPickResultType)pointToTransform toPoint:(CGPoint)pt reflectionMode:(WDBezierNodeReflectionMode)reflectionMode;
 
-- (WDBezierNode *) flippedNode;
+- (WDBezierNode*) flippedNode;
 
 - (void) getInPoint:(CGPoint *)inPoint anchorPoint:(CGPoint *)anchorPoint outPoint:(CGPoint *)outPoint selected:(BOOL *)selected;
 

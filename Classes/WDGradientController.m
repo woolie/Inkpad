@@ -26,93 +26,93 @@
 @synthesize colorController = colorController_;
 @synthesize inactive = inactive_;
 
-- (IBAction) takeGradientTypeFrom:(id)sender
+- (IBAction) takeGradientTypeFrom:(id) sender
 {
-    if (gradient_.type == kWDRadialGradient) {
-        [self setGradient:[gradient_ gradientWithType:kWDLinearGradient]];
-    } else {
-        [self setGradient:[gradient_ gradientWithType:kWDRadialGradient]];
-    }
-    
-    [[UIApplication sharedApplication] sendAction:action_ to:target_ from:self forEvent:nil];
+	if (gradient_.type == kWDRadialGradient) {
+		[self setGradient:[gradient_ gradientWithType:kWDLinearGradient]];
+	} else {
+		[self setGradient:[gradient_ gradientWithType:kWDRadialGradient]];
+	}
+	
+	[[UIApplication sharedApplication] sendAction:action_ to:target_ from:self forEvent:nil];
 }
 
 - (void) setGradient:(WDGradient *)gradient
 {
-    gradient_ = gradient;
-    
-    [colorWell_ setPainter:gradient_];
-    [gradientEditor_ setGradient:gradient_];
-    
-    if (gradient_.type == kWDLinearGradient) {
-        [typeButton_ setImage:[UIImage imageNamed:@"linear.png"] forState:UIControlStateNormal];
-    } else {
-        [typeButton_ setImage:[UIImage imageNamed:@"radial.png"] forState:UIControlStateNormal];
-    }
+	gradient_ = gradient;
+	
+	[colorWell_ setPainter:gradient_];
+	[gradientEditor_ setGradient:gradient_];
+	
+	if (gradient_.type == kWDLinearGradient) {
+		[typeButton_ setImage:[UIImage imageNamed:@"linear.png"] forState:UIControlStateNormal];
+	} else {
+		[typeButton_ setImage:[UIImage imageNamed:@"radial.png"] forState:UIControlStateNormal];
+	}
 }
 
-- (IBAction) takeGradientStopsFrom:(id)sender
+- (IBAction) takeGradientStopsFrom:(id) sender
 {
-    WDGradientEditor *editor = (WDGradientEditor *) sender;
-    
-    self.gradient = [self.gradient gradientWithStops:[editor stops]];
-    
-    [[UIApplication sharedApplication] sendAction:action_ to:target_ from:self forEvent:nil];
+	WDGradientEditor *editor = (WDGradientEditor *) sender;
+	
+	self.gradient = [self.gradient gradientWithStops:[editor stops]];
+	
+	[[UIApplication sharedApplication] sendAction:action_ to:target_ from:self forEvent:nil];
 }
-    
+	
 - (void) setColor:(WDColor *)color
 {
-    [gradientEditor_ setColor:color];
+	[gradientEditor_ setColor:color];
 }
 
 - (void) colorSelected:(WDColor *)color
 {
-    [colorController_ setColor:color];
+	[colorController_ setColor:color];
 }
 
 - (void) setInactive:(BOOL)inactive
 {
-    if (inactive_ == inactive) {
-        return;
-    }
-    
-    inactive_ = inactive;
-    gradientEditor_.inactive = inactive;
+	if (inactive_ == inactive) {
+		return;
+	}
+	
+	inactive_ = inactive;
+	gradientEditor_.inactive = inactive;
 }
 
-- (void) reverseGradient:(id)sender
+- (void) reverseGradient:(id) sender
 {
-    self.gradient = [self.gradient gradientByReversing];
-    [[UIApplication sharedApplication] sendAction:action_ to:target_ from:self forEvent:nil];
+	self.gradient = [self.gradient gradientByReversing];
+	[[UIApplication sharedApplication] sendAction:action_ to:target_ from:self forEvent:nil];
 }
 
-- (void) distributeGradientStops:(id)sender
+- (void) distributeGradientStops:(id) sender
 {
-    self.gradient = [self.gradient gradientByDistributingEvenly];
-    [[UIApplication sharedApplication] sendAction:action_ to:target_ from:self forEvent:nil];
+	self.gradient = [self.gradient gradientByDistributingEvenly];
+	[[UIApplication sharedApplication] sendAction:action_ to:target_ from:self forEvent:nil];
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (instancetype) initWithNibName:(NSString*)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    
-    if (!self) {
-        return nil;
-    }
-    
-    self.gradient = [WDGradient defaultGradient];
-    
-    return self;
+	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+	
+	if (!self) {
+		return nil;
+	}
+	
+	self.gradient = [WDGradient defaultGradient];
+	
+	return self;
 }
 
 - (void)viewDidLoad
-{    
-    [super viewDidLoad];
-    
-    self.view.backgroundColor = nil;
-    self.view.opaque = NO;
-    
-    gradientEditor_.controller = self;
+{	
+	[super viewDidLoad];
+	
+	self.view.backgroundColor = nil;
+	self.view.opaque = NO;
+	
+	gradientEditor_.controller = self;
 }
 
 @end

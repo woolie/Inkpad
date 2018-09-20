@@ -14,9 +14,9 @@
 
 @interface NSString (WDAdditions)
 
-- (NSString *) stringByUnescapingEntities;
-- (NSString *) stringByEscapingEntities;
-- (NSString *) stringByEscapingEntitiesAndWhitespace;
+- (NSString*) stringByUnescapingEntities;
+- (NSString*) stringByEscapingEntities;
+- (NSString*) stringByEscapingEntitiesAndWhitespace;
 
 - (CGSize) sizeWithCTFont:(CTFontRef)fontRef constrainedToSize:(CGSize)constraint;
 

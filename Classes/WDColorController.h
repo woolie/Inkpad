@@ -16,27 +16,27 @@
 @class WDColor;
 
 typedef enum {
-    WDColorSpaceRGB,
-    WDColorSpaceHSB,
+	WDColorSpaceRGB,
+	WDColorSpaceHSB,
 } WDColorSpace;
 
 @interface WDColorController : UIViewController {
-    IBOutlet WDColorSlider      *component0Slider_;
-    IBOutlet WDColorSlider      *component1Slider_;
-    IBOutlet WDColorSlider      *component2Slider_;
-    IBOutlet WDColorSlider      *alphaSlider_;
-    
-    IBOutlet UILabel            *component0Name_;
-    IBOutlet UILabel            *component1Name_;
-    
-    IBOutlet UILabel            *component0Value_;
-    IBOutlet UILabel            *component1Value_;
-    IBOutlet UILabel            *component2Value_;
-    IBOutlet UILabel            *alphaValue_;
-    
-    IBOutlet UIButton           *colorSpaceButton_;
-    
-    WDColorSpace                 colorSpace_;
+	IBOutlet WDColorSlider	  *component0Slider_;
+	IBOutlet WDColorSlider	  *component1Slider_;
+	IBOutlet WDColorSlider	  *component2Slider_;
+	IBOutlet WDColorSlider	  *alphaSlider_;
+	
+	IBOutlet UILabel			*component0Name_;
+	IBOutlet UILabel			*component1Name_;
+	
+	IBOutlet UILabel			*component0Value_;
+	IBOutlet UILabel			*component1Value_;
+	IBOutlet UILabel			*component2Value_;
+	IBOutlet UILabel			*alphaValue_;
+	
+	IBOutlet UIButton		   *colorSpaceButton_;
+	
+	WDColorSpace				 colorSpace_;
 }
 
 @property (nonatomic, strong) WDColor *color;
@@ -44,8 +44,8 @@ typedef enum {
 @property (nonatomic, assign) SEL action;
 @property (weak, nonatomic, readonly) WDColorWell *colorWell;
 
-- (IBAction) takeColorSpaceFrom:(id)sender;
+- (IBAction) takeColorSpaceFrom:(id) sender;
 
 @end
 
-extern NSString *WDColorSpaceDefault;
+extern NSString* WDColorSpaceDefault;

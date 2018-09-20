@@ -12,8 +12,8 @@
 #import <UIKit/UIKit.h>
 
 typedef enum {
-    WDHorizontalRuler,
-    WDVerticalRuler
+	WDHorizontalRuler,
+	WDVerticalRuler
 } WDRulerOrientation;
 
 extern const int kWDRulerThickness;
@@ -23,19 +23,19 @@ extern const int kWDRulerThickness;
 @end
 
 @interface WDRulerView : UIView {
-    // computed values
-    float               unitDistance_;
-    float               markDistance_;
-    int                 marksToMidMark_;
-    int                 marksToBigMark_;
-    int                 marksBetweenLabels_;
+	// computed values
+	float			   unitDistance_;
+	float			   markDistance_;
+	int				 marksToMidMark_;
+	int				 marksToBigMark_;
+	int				 marksBetweenLabels_;
 }
 
 @property (nonatomic, assign) WDRulerOrientation orientation;
 @property (nonatomic, assign) CGFloat ruleThickness;
 @property (nonatomic, weak) UIView *clientView;
-@property (nonatomic, strong) NSString *units;
-@property (nonatomic, strong) NSString *labelFormat;
+@property (nonatomic, strong) NSString*units;
+@property (nonatomic, strong) NSString*labelFormat;
 
 @end
 
@@ -43,13 +43,13 @@ extern const int kWDRulerThickness;
 
 - (void) computeMarkValues;
 
-+ (void)registerUnitWithName:(NSString *)unitName
-                abbreviation:(NSString *)abbreviation
++ (void)registerUnitWithName:(NSString*)unitName
+				abbreviation:(NSString*)abbreviation
 unitToPointsConversionFactor:(CGFloat)conversionFactor
-                 stepUpCycle:(NSArray *)stepUpCycle
-               stepDownCycle:(NSArray *)stepDownCycle;
+				 stepUpCycle:(NSArray*)stepUpCycle
+			   stepDownCycle:(NSArray*)stepDownCycle;
 
-+ (NSDictionary *) rulerUnits;
++ (NSDictionary*) rulerUnits;
 
 @end
 

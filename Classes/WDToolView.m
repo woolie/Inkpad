@@ -18,59 +18,59 @@
 @synthesize tools = tools_;
 @synthesize owner, canvas;
 
-- (instancetype) initWithTools:(NSArray *)tools
+- (instancetype) initWithTools:(NSArray*)tools
 {
-    CGRect frame = CGRectMake(0, 0, [WDToolButton dimension], [WDToolButton dimension] * tools.count);
-    
-    self = [super initWithFrame:frame];
-    
-    if (!self) {
-        return nil;
-    }
-    
-    self.opaque = NO;
-    self.backgroundColor = nil;
-    
-    self.tools = tools;
-            
-    return self;
+	CGRect frame = CGRectMake(0, 0, [WDToolButton dimension], [WDToolButton dimension] * tools.count);
+	
+	self = [super initWithFrame:frame];
+	
+	if (!self) {
+		return nil;
+	}
+	
+	self.opaque = NO;
+	self.backgroundColor = nil;
+	
+	self.tools = tools;
+			
+	return self;
 }
 
-- (void) chooseTool:(id)sender
+- (void) chooseTool:(id) sender
 {
-    if (self.owner) {
-        [self.owner didChooseTool:self];
-    }
-    
-    [WDToolManager sharedInstance].activeTool = ((WDToolButton *)sender).tool;
+	if (self.owner) {
+		[self.owner didChooseTool:self];
+	}
+	
+	[WDToolManager sharedInstance].activeTool = ((WDToolButton *)sender).tool;
 }
 
-- (void) setTools:(NSArray *)tools
+- (void) setTools:(NSArray*)tools
 {
-    tools_ = tools;
+	tools_ = tools;
 
-    // build tool buttons
-    CGRect buttonRect = CGRectMake(0, 0, [WDToolButton dimension], [WDToolButton dimension]);
-    
-    for (id tool in tools_) {
-        WDToolButton *button = [WDToolButton buttonWithType:UIButtonTypeCustom];
-        
-        if ([tool isKindOfClass:[NSArray class]]) {
-            button.tools = tool;
-        } else {
-            button.tool = tool;
-        }
-        
-        button.frame = buttonRect;
-        [button addTarget:self action:@selector(chooseTool:) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:button];
-        
-        if (tool == [WDToolManager sharedInstance].activeTool) {
-            button.selected = YES;
-        }
-        
-        buttonRect = CGRectOffset(buttonRect, 0, [WDToolButton dimension]);
-    }
+	// build tool buttons
+	CGRect buttonRect = CGRectMake(0, 0, [WDToolButton dimension], [WDToolButton dimension]);
+	
+	for (id tool in tools_) {
+		WDToolButton *button = [WDToolButton buttonWithType:UIButtonTypeCustom];
+		
+		if ([tool isKindOfClass:[NSArray class]]) {
+			button.tools = tool;
+		} else {
+			button.tool = tool;
+		}
+		
+		button.frame = buttonRect;
+		[button addTarget:self action:@selector(chooseTool:) forControlEvents:UIControlEventTouchUpInside];
+		[self addSubview:button];
+		
+		if (tool == [WDToolManager sharedInstance].activeTool) {
+			button.selected = YES;
+		}
+		
+		buttonRect = CGRectOffset(buttonRect, 0, [WDToolButton dimension]);
+	}
 }
 
 @end

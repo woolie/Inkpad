@@ -15,7 +15,7 @@
 @class OCAEntry;
 
 @interface OCAViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate,
-                                                        UISearchBarDelegate, OCADownloaderDelegate>
+														UISearchBarDelegate, OCADownloaderDelegate>
 
 @property (nonatomic) IBOutlet UICollectionView *collectionView;
 @property (nonatomic) IBOutlet UISearchBar *searchBar;
@@ -23,6 +23,6 @@
 @property (nonatomic, getter=isVisible) BOOL visible;
 
 - (void) setImportTarget:(id)target action:(SEL)action;
-- (void) setActionTitle:(NSString *)title;
+- (void) setActionTitle:(NSString*)title;
 
 @end

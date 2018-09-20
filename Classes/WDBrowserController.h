@@ -30,45 +30,45 @@
 @class OCAViewController;
 
 @interface WDBrowserController : UICollectionViewController <UIActionSheetDelegate,
-                                                             UIPopoverControllerDelegate,
-                                                             DBRestClientDelegate,
-                                                             MFMailComposeViewControllerDelegate,
-                                                             WDImportControllerDelegate,
-                                                             WDSamplesControllerDelegate,
-                                                             UINavigationControllerDelegate,
-                                                             UIImagePickerControllerDelegate,
-                                                             OCADownloaderDelegate>
+															 UIPopoverControllerDelegate,
+															 DBRestClientDelegate,
+															 MFMailComposeViewControllerDelegate,
+															 WDImportControllerDelegate,
+															 WDSamplesControllerDelegate,
+															 UINavigationControllerDelegate,
+															 UIImagePickerControllerDelegate,
+															 OCADownloaderDelegate>
 {
-    NSMutableArray          *toolbarItems_;
-    UIBarButtonItem         *emailItem_;
-    UIBarButtonItem         *dropboxExportItem_;
-    UIActivityIndicatorView *activityIndicator_;
-    UIBarButtonItem         *activityItem_;
-    UIBarButtonItem         *deleteItem_;
-    UIActionSheet           *deleteSheet_;
-    
-    NSMutableSet            *selectedDrawings_;
-    
-    UIPopoverController     *popoverController_;
-    WDPageSizeController    *pageSizeController_;
-    WDExportController      *exportController_;
+	NSMutableArray		  *toolbarItems_;
+	UIBarButtonItem		 *emailItem_;
+	UIBarButtonItem		 *dropboxExportItem_;
+	UIActivityIndicatorView *activityIndicator_;
+	UIBarButtonItem		 *activityItem_;
+	UIBarButtonItem		 *deleteItem_;
+	UIActionSheet		   *deleteSheet_;
+	
+	NSMutableSet			*selectedDrawings_;
+	
+	UIPopoverController	 *popoverController_;
+	WDPageSizeController	*pageSizeController_;
+	WDExportController	  *exportController_;
 	WDImportController		*importController_;
-    UIImagePickerController *pickerController_;
-    WDFontLibraryController *fontLibraryController_;
-    WDSamplesController     *samplesController_;
-    WDActivityController    *activityController_;
-    OCAViewController       *openClipArtController_;
-    
-    DBRestClient            *restClient_;
-    NSMutableSet            *filesBeingUploaded_;
-    WDActivityManager       *activities_;
+	UIImagePickerController *pickerController_;
+	WDFontLibraryController *fontLibraryController_;
+	WDSamplesController	 *samplesController_;
+	WDActivityController	*activityController_;
+	OCAViewController	   *openClipArtController_;
+	
+	DBRestClient			*restClient_;
+	NSMutableSet			*filesBeingUploaded_;
+	WDActivityManager	   *activities_;
 
-    WDBlockingView          *blockingView_;
-    WDThumbnailView         *editingThumbnail_;
-    
-    BOOL                    everLoaded_;
-    
-    NSMutableSet            *downloaders_; // for downloading open clip art
+	WDBlockingView		  *blockingView_;
+	WDThumbnailView		 *editingThumbnail_;
+	
+	BOOL					everLoaded_;
+	
+	NSMutableSet			*downloaders_; // for downloading open clip art
 }
 
 - (void) startEditingDrawing:(WDDocument *)drawing;
